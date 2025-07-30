@@ -182,3 +182,13 @@ img {
         height: 120px;
     }
 }
+ .footer {
+  background-color: #9b59b6;
+  text-align: center;
+  padding: 20px 0;
+}
+
+.footer-logo {
+  max-width: 250px;
+  height: auto;
+}
