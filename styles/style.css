@@ -1,0 +1,21 @@
+:root{
+    --color-paleta1: #6C40D1;
+    --color-paleta2: #FC6DAB;
+    --color-paleta3: #F4F4F9;
+    --color-paleta4: #17B890;
+    --color-paleta5: #34252F;
+}
+
+h1{
+    color: var(--color-paleta1);    
+}
+h2{
+    color: var(--color-paleta2);
+}
+h3{
+    color: var(--color-paleta3);
+    text-shadow: #6C40D1;
+}
+p{
+    color: var(--color-paleta4);
+}
