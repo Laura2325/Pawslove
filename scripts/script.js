@@ -4,5 +4,5 @@ ScrollReveal().reveal('.valor1, .valor2, .valor3, .valor4, .valor5, .mision, .vi
     origin: 'bottom',
     duration: 1000,
     easing: 'ease-in-out',
-    reset: true // para que se repita si haces scroll hacia arriba
+    reset: true 
 });
