@@ -1,11 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&display=swap');
 
 :root {
-    --primary-color: #2c3e50;
-    --secondary-color: #3498db; /* Color azul */
-    --accent-color: #e74c3e;
+    --primary-color: #6c40d1;
+    --secondary-color: #fc6dab;
+    --accent-color: #17b890;
     --light-color: #ecf0f1;
-    --dark-color: #2c3e50;
+    --dark-color: #34252f;
     --spacing: 1rem;
     --border-radius: 24px;
     --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -54,17 +54,10 @@ body {
     border-top: 4px solid var(--secondary-color);
 }
 
-.valor1 img, .valor2 img, .valor3 img, .valor4 img, .valor5 img {
-    width: 100%; /* Asegura que las imágenes sean responsivas */
-    border-radius: var(--border-radius);
-    margin-bottom: 1rem;
-}
-
-.vali
 
 .titulo_2 {
     font-size: 1.5rem;
-    margin-bottom: 0.5rem;
+    margin: 1rem 0 1rem;
     color: var(--primary-color);
 }
 
@@ -79,4 +72,30 @@ body {
         flex-direction: column;
         align-items: center;
     }
+}
+
+.seccion {
+    text-align: center; 
+}
+
+.contenedor-secciones {
+    display: flex; /* Usamos flexbox para alinear en fila */
+    justify-content: space-around; /* Espaciado entre las secciones */
+    align-items: flex-start; /* Alineación superior */
+    flex-wrap: wrap; /* Permite que las secciones se ajusten a diferentes pantallas */
+}
+
+.mision, .vision, .mensaje {
+    flex: 1; /* Cada sección ocupa el mismo espacio */
+    margin: 10px; /* Espaciado entre secciones */
+    max-width: 30%; /* Ancho máximo para cada sección */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Sombra para un efecto visual */
+    padding: 15px; /* Espaciado interno */
+    background-color: #f9f9f9; /* Color de fondo */
+    border-radius: 5px; /* Bordes redondeados */
+}
+
+.image-mision img, .image-vision img, .image-mensaje img {
+    max-width: 100%; /* Asegura que la imagen no exceda el contenedor */
+    height: auto; /* Mantiene la proporción de la imagen */
 }
