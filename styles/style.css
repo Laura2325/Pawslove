@@ -1,214 +1,82 @@
 @import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&display=swap');
 
-:root{
-    --color-paleta1: #6C40D1;
-    --color-paleta2: #FC6DAB;
-    --color-paleta3: #F4F4F9;
-    --color-paleta4: #17B890;
-    --color-paleta5: #34252F;
-    --font-titulos: "Fredoka-One", sans-serif;
-    --font-subtitulos: sans-serif;
-    --font-parrafos: sans-serif;
+:root {
+    --primary-color: #2c3e50;
+    --secondary-color: #3498db; /* Color azul */
+    --accent-color: #e74c3e;
+    --light-color: #ecf0f1;
+    --dark-color: #2c3e50;
+    --spacing: 1rem;
+    --border-radius: 24px;
+    --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-h1{
+* {
     margin: 0;
     padding: 0;
-    font-family: var(--font-titulos);
-    line-height: 1.6;
-    color: var(--color-paleta5)  
+    box-sizing: border-box;
 }
 
-/*h2{
-    margin: 0;
-    padding: 0;
-    font-family: "Fredoka-One", sans-serif;
-    line-height: 1.6;
-    color: var(--color-paleta5)  
-}*/
-
-h3{
-    margin: 0;
-    padding: 0;
-    font-family: var(--font-titulos);
-    line-height: 1.6;
-    color: var(--color-paleta5)  
-}
-/*p{
-    margin: 0;
-    padding: 0;
-    font-family: "Fredoka-One", sans-serif;
-    line-height: 1.6;
-    color: var(--color-paleta5)  
-}*/
-
-img {
-    
-    max-width: 100%; 
-    height: auto;
-    display: block; 
-    border-radius: 24px;
-    margin: 0 auto 20px; 
-    box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+body {
+    font-family: 'Fredoka';
+    background-color: #f8f9fa;
+    color: var(--dark-color);
 }
 
-#valores {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
-    margin-bottom: 20px;
+.content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+    text-align: center;
 }
 
-#valores2 {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 20px;
-    margin-bottom: 20px;
+.titulo_1 {
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+    color: var(--primary-color);
 }
 
-.valor1, .valor2, .valor3 {
-    padding: 20px;
-    background-color: var(--color-paleta1);
-    color: #ffffff;
-    border-radius: 24px;
-    transition: transform 0.3s ease;
-    font-family: var(--font-titulos);
-    grid-auto-rows: 2;
-    justify-items: center;
+.seccion, .seccion2 {
+    display: flex; /* Organiza los elementos en una fila*/
+    justify-content: center; /* Centra los elementos de la fila*/
+    flex-wrap: wrap; /* Ayuda a que los elementos sean responsive al ajustarlos en otra fila*/
+    gap: 2rem;
+    margin-bottom: 3rem;
+}
 
+.valor1, .valor2, .valor3, .valor4, .valor5 {
+    background-color: white;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    padding: 1.5rem;
+    max-width: 300px;
+    flex: 1 1 300px; /* Permite que las tarjetas se ajusten */
+    border-top: 4px solid var(--secondary-color);
 }
 
 .valor1 img, .valor2 img, .valor3 img, .valor4 img, .valor5 img {
-    width: 150px;
-    height: 150px;
-    object-fit: cover;
-    border-radius: 50%; 
-    margin-bottom: 20px;
-    border: 3px solid var(--color-paleta4)
+    width: 100%; /* Asegura que las imágenes sean responsivas */
+    border-radius: var(--border-radius);
+    margin-bottom: 1rem;
 }
 
-.valor4, .valor5{
-    padding: 20px;
-    background-color: var(--color-paleta1);
-    color: #ffffff;
-    border-radius: 24px;
-    transition: transform 0.3s ease;
-    font-family: var(--font-titulos);
-    grid-auto-rows: 3;
-    justify-items: center;
-    justify-self: center
+.vali
+
+.titulo_2 {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+    color: var(--primary-color);
 }
 
-.valor1:hover, .valor2:hover, .valor3:hover, .valor4:hover, .valor5:hover {
-    transform: translateY(-5px); 
-    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+.parrafo {
+    color: #666;
+    font-size: 1rem;
 }
 
-#mision_vision{
-    display: flex;
-    flex-wrap: wrap; 
-    justify-content: space-between;
-}
-
-.mision{
-    flex: 1 1 300px; 
-    margin: 10px;
-    padding: 20px;
-    background-color: var(); 
-    border-radius: 5px;
-}
-
-.vision{
-    display: grid;
-    text-align: center;
-    padding: 30px;
-    background-color: var(--color-paleta3);
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr))
-}
-
-.mensaje{
-    display: grid;
-    text-align: center;
-    padding: 30px;
-    background-color: var(--color-paleta3);
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr))
-}
-
-#equipo{
-    display: grid;
-    gap: 24px;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr))
-}
-
-.persona {
-    text-align: center;
-    padding: 20px;
-    background-color: white;
-    border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-    transition: all 0.3s ease;
-}
-
-.persona:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-}
-
-.persona img {
-    width: 150px;
-    height: 150px;
-    object-fit: cover;
-    border-radius: 50%; 
-    margin-bottom: 20px;
-    border: 3px solid var(--color-paleta4);
-}
-
+/* Responsividad */
 @media (max-width: 768px) {
-    .titulo_1 {
-        font-size: 1.7rem; 
+    .seccion, .seccion2 {
+        flex-direction: column;
+        align-items: center;
     }
-    
-    .titulo_2 {
-        font-size: 1.3rem;
-    }
-    
-    #mision_vision {
-        flex-direction: column; 
-    }
-    
-    .mision, .vision, .mensaje {
-        margin: 10px 0; 
-    }
-}
-
-@media (max-width: 480px) {
-    .content {
-        width: 95%;     }
-    
-    .titulo_1 {
-        font-size: 1.5rem;
-    }
-    
-    .seccion {
-        padding: 15px; 
-    }
-    
-    #valores, #equipo {
-        grid-template-columns: 1fr; 
-    }
-    
-    .persona img {
-        width: 120px;
-        height: 120px;
-    }
-}
- .footer {
-  background-color: #9b59b6;
-  text-align: center;
-  padding: 20px 0;
-}
-
-.footer-logo {
-  max-width: 250px;
-  height: auto;
 }
