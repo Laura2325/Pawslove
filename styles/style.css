@@ -83,6 +83,7 @@ body {
     justify-content: space-around; /* Espaciado entre las secciones */
     align-items: flex-start; /* Alineación superior */
     flex-wrap: wrap; /* Permite que las secciones se ajusten a diferentes pantallas */
+    
 }
 
 .mision, .vision, .mensaje {
@@ -92,10 +93,42 @@ body {
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Sombra para un efecto visual */
     padding: 15px; /* Espaciado interno */
     background-color: #f9f9f9; /* Color de fondo */
-    border-radius: 5px; /* Bordes redondeados */
+    border-radius: 24px; /* Bordes redondeados */
+    border-top: 4px var(--secondary-color);
 }
 
-.image-mision img, .image-vision img, .image-mensaje img {
+.image-mision svg, .image-vision svg, .image-mensaje svg {
     max-width: 100%; /* Asegura que la imagen no exceda el contenedor */
     height: auto; /* Mantiene la proporción de la imagen */
+    margin: 25px;
 }
+
+
+
+
+/* Estilo para cada persona */
+.persona {
+    display: inline-block; /* Permitir que los elementos se alineen en línea */
+    width: 250px; /* Ancho fijo para cada tarjeta */
+    margin: 20px; /* Espacio alrededor de cada tarjeta */
+    padding: 20px; /* Espacio interno */
+    background-color: #fff; /* Fondo blanco para las tarjetas */
+    border-radius: 10px; /* Bordes redondeados */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Sombra suave */
+    transition: transform 0.3s; /* Transición suave para el efecto hover */
+}
+
+/* Efecto hover para las tarjetas */
+.persona:hover {
+    transform: translateY(-5px); /* Levantar la tarjeta al pasar el mouse */
+}
+
+/* Estilo para las imágenes */
+.persona img {
+    width: 100%; /* Imagen ocupa todo el ancho de la tarjeta */
+    height: auto; /* Mantener la proporción de la imagen */
+    border-radius: 10px; /* Bordes redondeados para la imagen */
+}
+
+
+
