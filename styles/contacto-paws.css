@@ -1,0 +1,199 @@
+body {
+    font-family: 'Poppins', sans-serif;
+    line-height: 1.6;
+    background-color: #f8f4e8;
+    color: #3a3a3a;
+    margin: 0;
+    padding: 20px;
+    background-image: url('../images/paw-pattern.png');
+    background-repeat: repeat;
+    background-attachment: fixed;
+}
+
+.container {
+    max-width: 800px;
+    margin: 30px auto;
+    background: #ffffff;
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.1);
+    border: 2px solid #ff9a8b;
+}
+
+h1 {
+    color: #ff6b6b;
+    text-align: center;
+    margin-bottom: 25px;
+    font-size: 2.2rem;
+    position: relative;
+    padding-bottom: 15px;
+}
+
+h1::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100px;
+    height: 4px;
+    background: linear-gradient(90deg, #ff6b6b, #ff8e8e);
+    border-radius: 2px;
+}
+
+/* Selector de perfil */
+.seleccion-perfil {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 40px;
+    flex-wrap: wrap;
+}
+
+.boton-perfil {
+    padding: 12px 25px;
+    border: none;
+    border-radius: 30px;
+    background-color: #e8e8e8;
+    color: #555;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    font-size: 1rem;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.boton-perfil.active {
+    background: linear-gradient(135deg, #ff6b6b, #ff8e8e);
+    color: white;
+    box-shadow: 0 4px 10px rgba(255, 107, 107, 0.3);
+}
+
+.boton-perfil:hover:not(.active) {
+    background-color: #dcdcdc;
+    transform: translateY(-2px);
+}
+
+/* Formulario */
+.grupo-formulario {
+    margin-bottom: 25px;
+    position: relative;
+}
+
+.grupo-formulario label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: #555;
+}
+
+.grupo-formulario input,
+.grupo-formulario select,
+.grupo-formulario textarea {
+    width: 100%;
+    padding: 12px 15px;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    font-size: 1rem;
+    box-sizing: border-box;
+    transition: border-color 0.3s;
+    background-color: #f9f9f9;
+}
+
+.grupo-formulario input:focus,
+.grupo-formulario select:focus,
+.grupo-formulario textarea:focus {
+    border-color: #ff6b6b;
+    outline: none;
+    background-color: #fff;
+    box-shadow: 0 0 0 3px rgba(255, 107, 107, 0.1);
+}
+
+.grupo-formulario textarea {
+    resize: vertical;
+    min-height: 120px;
+}
+
+/* Checkbox */
+.checkbox {
+    margin: 25px 0;
+}
+
+.checkbox-opciones {
+    display: flex;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+.checkbox-opciones input {
+    width: auto;
+    margin-right: 10px;
+    accent-color: #ff6b6b;
+}
+
+.checkbox-opciones label {
+    font-weight: normal;
+    cursor: pointer;
+    margin-bottom: 0;
+}
+
+/* Botón de envío */
+.submit-btn {
+    width: 100%;
+    padding: 15px;
+    background: linear-gradient(135deg, #ff6b6b, #ff8e8e);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 20px;
+    box-shadow: 0 4px 10px rgba(255, 107, 107, 0.3);
+}
+
+.submit-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(255, 107, 107, 0.4);
+    background: linear-gradient(135deg, #ff5e5e, #ff8282);
+}
+
+/* Estilos para select personalizado */
+.grupo-formulario select {
+    appearance: none;
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 15px center;
+    background-size: 15px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .container {
+        padding: 25px;
+    }
+    
+    .seleccion-perfil {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .boton-perfil {
+        width: 100%;
+    }
+    
+    h1 {
+        font-size: 1.8rem;
+    }
+}
+
+/* Animaciones */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.adoptante, .perfil-seccion {
+    animation: fadeIn 0.5s ease-out;
+}
