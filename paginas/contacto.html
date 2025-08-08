@@ -3,10 +3,154 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pawslove</title>
-    <link rel="stylesheet" href="../styles/style.css">
+    <title>Contacto - Pawslove</title>
+    <link rel="stylesheet" href="../styles/contacto-paws.css">
 </head>
 <body>
+    <div class="container">
+        <h1>¡Únete a nuestra causa! 🐶</h1>
+        <p>Selecciona tu perfil para mostrarte el formulario adecuado.</p>
 
+        <!-- Menú de selección de perfil -->
+        <div class="seleccion-perfil">
+            <button class="boton-perfil active" data-profile="adoptante">Adoptante</button>
+            <button class="boton-perfil" data-profile="voluntario">Voluntario</button>
+            <button class="boton-perfil" data-profile="donador">Donador/Patrocinador</button>
+        </div>
+
+        <!-- Formulario (dinámico según perfil) -->
+        <form id="formulario-contacto" action="https://formspree.io/f/mkgzpdnn" method="POST">
+            <!-- Campos comunes a todos los perfiles -->
+            <div class="grupo-formulario">
+                <label for="nombre">Nombre completo</label>
+                <input type="text" id="nombre" name="nombre" required>
+            </div>
+
+            <div class="grupo-formulario">
+                <label for="email">Correo electrónico</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+
+            <div class="grupo-formulario">
+                <label for="telefono">Teléfono *</label>
+                <input type="tel" id="telefono" name="telefono" required>
+            </div>
+
+            <!-- Secciones dinámicas por perfil -->
+            <!-- Adoptante -->
+            <div class="adoptante" id="adoptante-section">
+                <div class="grupo-formulario">
+                    <label for="interes-adopcion">¿Qué tipo de perrito buscas? *</label>
+                    <select id="interes-adopcion" name="interes_adopcion" required>
+                        <option value="" disabled selected>Selecciona</option>
+                        <option value="cachorro">Cachorro</option>
+                        <option value="adulto">Adulto</option>
+                        <option value="especial">Necesidades especiales</option>
+                        <option value="sin-preferencia">Sin preferencia</option>
+                    </select>
+                </div>
+
+                <div class="grupo-formulario">
+                    <label for="experiencia">Describe tu experiencia previa con mascotas *</label>
+                    <textarea id="experiencia" name="experiencia" required></textarea>
+                </div>
+
+                <div class="grupo-formulario">
+                    <label for="vivienda">Tipo de vivienda *</label>
+                    <select id="vivienda" name="vivienda" required>
+                        <option value="" disabled selected>Selecciona</option>
+                        <option value="casa">Casa con patio</option>
+                        <option value="departamento">Departamento</option>
+                        <option value="otro">Otro</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Voluntario -->
+            <div class="perfil-seccion hidden" id="voluntario-section">
+                <div class="grupo-formulario">
+                    <label for="habilidades">Habilidades o áreas de interés *</label>
+                    <textarea id="habilidades" name="habilidades" placeholder="Ej: Cuidado de animales, veterinaria, redes sociales..."></textarea>
+                </div>
+
+                <div class="grupo-formulario">
+                    <label for="disponibilidad">Disponibilidad semanal *</label>
+                    <select id="disponibilidad" name="disponibilidad" required>
+                        <option value="" disabled selected>Selecciona</option>
+                        <option value="1-2">1-2 horas</option>
+                        <option value="3-5">3-5 horas</option>
+                        <option value="6+">6+ horas</option>
+                    </select>
+                </div>
+
+                <div class="checkbox">
+                    <label>Actividades de interés:</label>
+                    <div class="checkbox-opciones">
+                        <input type="checkbox" id="actividad-cuidado" name="actividad" value="cuidado">
+                        <label for="actividad-cuidado">Cuidado directo de perros</label>
+                    </div>
+                    <div class="checkbox-opciones">
+                        <input type="checkbox" id="actividad-eventos" name="actividad" value="eventos">
+                        <label for="actividad-eventos">Organización de eventos</label>
+                    </div>
+                    <div class="checkbox-opciones">
+                        <input type="checkbox" id="actividad-administrativo" name="actividad" value="administrativo">
+                        <label for="actividad-administrativo">Tareas administrativas</label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Donador/Patrocinador -->
+            <div class="perfil-seccion hidden" id="donador-section">
+                <div class="grupo-formulario">
+                    <label for="tipo-apoyo">Tipo de apoyo *</label>
+                    <select id="tipo-apoyo" name="tipo_apoyo" required>
+                        <option value="" disabled selected>Selecciona</option>
+                        <option value="monetario">Donación monetaria</option>
+                        <option value="especie">Donación en especie (alimento, medicinas, etc.)</option>
+                        <option value="patrocinio">Patrocinio corporativo</option>
+                    </select>
+                </div>
+
+                <div class="grupo-formulario">
+                    <label for="detalles-apoyo">Detalles del apoyo *</label>
+                    <textarea id="detalles-apoyo" name="detalles_apoyo" required placeholder="Ej: Monto aproximado, tipo de alimento, frecuencia..."></textarea>
+                </div>
+
+                <div class="grupo-formulario">
+                    <label for="empresa">Nombre de la empresa (opcional)</label>
+                    <input type="text" id="empresa" name="empresa">
+                </div>
+
+                <div class="checkbox">
+                    <div class="checkbox-opciones">
+                        <input type="checkbox" id="recibo-fiscal" name="recibo_fiscal">
+                        <label for="recibo-fiscal">Requiero recibo fiscal deducible</label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Campos finales comunes -->
+            <div class="grupo-formulario">
+                <label for="mensaje">Mensaje adicional</label>
+                <textarea id="mensaje" name="mensaje"></textarea>
+            </div>
+
+            <div class="checkbox">
+                <div class="checkbox-opciones">
+                    <input type="checkbox" id="privacidad" name="privacidad" required>
+                    <label for="privacidad">Acepto la <a href="#" target="_blank">política de privacidad</a> *</label>
+                </div>
+                <div class="checkbox-opciones">
+                    <input type="checkbox" id="newsletter" name="newsletter">
+                    <label for="newsletter">Deseo recibir newsletter</label>
+                </div>
+            </div>
+
+            <button type="submit" class="submit-btn">Enviar solicitud</button>
+        </form>
+    </div>
+
+    <script src="script.js"></script>
 </body>
 </html>
