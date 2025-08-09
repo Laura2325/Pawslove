@@ -304,3 +304,14 @@ p {
 @keyframes trazoTick {
   to { stroke-dashoffset: 0; }
 }
+
+/* Video en el fondo */
+#video-fondo {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -2;
+}
