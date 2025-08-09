@@ -10,20 +10,3 @@ ScrollReveal().reveal(
   }
 );
 
-// Cambiar entre formularios
-document.querySelectorAll(".perfil-btn").forEach((button) => {
-  button.addEventListener("click", () => {
-    // Remover clase 'active' de todos los botones y formularios
-    document
-      .querySelectorAll(".perfil-btn")
-      .forEach((btn) => btn.classList.remove("active"));
-    document
-      .querySelectorAll(".form-section")
-      .forEach((form) => form.classList.remove("active"));
-
-    // Agregar 'active' al botón y formulario seleccionado
-    button.classList.add("active");
-    const targetForm = button.getAttribute("data-target");
-    document.getElementById(`form-${targetForm}`).classList.add("active");
-  });
-});
