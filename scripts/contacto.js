@@ -1,52 +1,112 @@
 document.addEventListener('DOMContentLoaded', function() {
-  // Selección de elementos
+  console.log('contacto.js cargado');
+
   const profileButtons = document.querySelectorAll('.boton-perfil');
   const formSections = {
     adoptante: document.getElementById('adoptante-section'),
     voluntario: document.getElementById('voluntario-section'),
     donador: document.getElementById('donador-section')
   };
+  const formulario = document.getElementById('formulario-contacto');
 
-  // Función para cambiar de perfil
+  // Cambia estado visual y habilita/deshabilita inputs dentro de cada sección
   function changeProfile(profile) {
-    // Actualizar botones activos
     profileButtons.forEach(btn => {
-      btn.classList.toggle('active', btn.dataset.profile === profile);
+      const isActive = btn.dataset.profile === profile;
+      btn.classList.toggle('active', isActive);
+      btn.setAttribute('aria-pressed', isActive);
     });
 
-    // Mostrar/ocultar secciones
     Object.entries(formSections).forEach(([key, section]) => {
-      section.classList.toggle('hidden', key !== profile);
+      const isActive = key === profile;
+      // setea string "false"/"true" para coincidir con los selectores CSS
+      section.setAttribute('aria-hidden', String(!isActive));
+      // habilita inputs del perfil activo y deshabilita los demás
+      section.querySelectorAll('input, select, textarea, button').forEach(el => {
+        // Nota: no tocar el botón de submit porque está fuera de las secciones
+        el.disabled = !isActive;
+      });
     });
   }
 
-  // Event listeners para los botones
+  // listeners botones perfil
   profileButtons.forEach(button => {
     button.addEventListener('click', function() {
       changeProfile(this.dataset.profile);
     });
   });
 
-  // Inicialización - Mostrar solo adoptante al cargar
+  // init
   changeProfile('adoptante');
-});
 
-//Funcionalidad para remitir información capturada a Formspree
-const $form = document.querySelector('#form');
-    $form.addEventListener('submit', handleSumit);
-    async function handleSumit(event) {
-        event.preventDefault();
-        const form = new FormData(this);
-        const response = await fetch(this.action, {
-            method:this.method,
-            body: form,
-            headers: {
-                'Aceept': 'application/json'
-            }
-        })
-        if(response.ok){
-            this.reset();
-            alert('Gracias')
-        }
+  // Envío del formulario (con fallback JSON -> FormData)
+  formulario.addEventListener('submit', async function(e) {
+    e.preventDefault();
+
+    const submitBtn = this.querySelector('.submit-btn');
+    const originalText = submitBtn.textContent;
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Enviando...';
+
+    // Validación nativa limitada solo sobre campos habilitados
+    if (!this.checkValidity()) {
+      this.reportValidity();
+      submitBtn.disabled = false;
+      submitBtn.textContent = originalText;
+      return;
     }
 
+    // Construir FormData
+    const formData = new FormData(this);
+
+    // Convertir FormData a objeto JSON conservando arrays (checkboxes con mismo name)
+    const data = {};
+    for (const [key, value] of formData.entries()) {
+      if (Object.prototype.hasOwnProperty.call(data, key)) {
+        if (Array.isArray(data[key])) data[key].push(value);
+        else data[key] = [data[key], value];
+      } else {
+        data[key] = value;
+      }
+    }
+
+    console.log('Intentando enviar payload JSON:', data);
+
+    try {
+      // Intento 1: JSON
+      let response = await fetch(this.action, {
+        method: 'POST',
+        headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+      });
+
+      // Si no es ok, probar fallback con FormData (multipart/form-data)
+      if (!response.ok) {
+        console.warn('Intento JSON falló con status', response.status, '— intentando fallback con FormData');
+        response = await fetch(this.action, {
+          method: 'POST',
+          headers: { 'Accept': 'application/json' },
+          body: formData
+        });
+      }
+
+      if (response.ok) {
+        // parseo (si viene JSON)
+        try { console.log('Respuesta OK:', await response.json()); } catch (err) { console.log('Respuesta OK (no JSON)'); }
+        this.reset();
+        changeProfile('adoptante'); // volver al perfil por defecto
+        alert('¡Formulario enviado con éxito! Gracias por tu apoyo.');
+      } else {
+        const text = await response.text();
+        console.error('Respuesta de error:', response.status, text);
+        alert('Hubo un problema en el envío. Revisa la consola y la pestaña Network.');
+      }
+    } catch (err) {
+      console.error('Error de red / CORS / endpoint:', err);
+      alert('No se pudo contactar el servidor de envío. Revisa la consola (posible CORS o endpoint incorrecto).');
+    } finally {
+      submitBtn.disabled = false;
+      submitBtn.textContent = originalText;
+    }
+  });
+});

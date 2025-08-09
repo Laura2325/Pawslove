@@ -11,11 +11,32 @@
     --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-/* Estilos Base */
+/* Sistema de visualización seguro para Formspree */
+.perfil-seccion[aria-hidden="true"] {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
 
+.perfil-seccion[aria-hidden="false"] {
+    position: static;
+    width: auto;
+    height: auto;
+    overflow: visible;
+    clip: auto;
+    white-space: normal;
+    animation: fadeIn 0.5s ease;
+}
 
+/* Estilos base */
 body {
-    font-family: 'Fredoka';
+    font-family: 'Fredoka', sans-serif;
     line-height: 1.6;
     color: var(--dark-color);
     background-color: var(--light-color);
@@ -23,22 +44,22 @@ body {
     margin: 0;
 }
 
-.imagen {
-    height: 100px;
-    display: flex;
-    justify-content: center;
-    margin-top: 20px;
-    margin-bottom: 60px;
-}
-
 .container {
     max-width: 1000px;
     margin: 3rem auto;
     padding: 50px;
     background: white;
-    border-radius: 24px;
+    border-radius: var(--border-radius);
     box-shadow: var(--box-shadow);
 }
+
+.logo {
+    display: flex;
+    justify-content: center;
+    margin-top: 25px;
+    margin-bottom: 60px;
+}
+
 
 h1 {
     color: var(--primary-color);
@@ -129,18 +150,6 @@ p {
     resize: vertical;
 }
 
-/* Secciones de perfil */
-.perfil-seccion {
-    margin-top: 1.5rem;
-    padding-top: 1.5rem;
-    border-top: 2px dashed var(--accent-color);
-    animation: fadeIn 0.5s ease;
-}
-
-.hidden {
-    display: none !important;
-}
-
 /* Checkboxes */
 .checkbox {
     display: flex;
@@ -172,7 +181,7 @@ p {
     border-radius: var(--border-radius);
     cursor: pointer;
     transition: all 0.3s ease;
-    margin-top: 1rem; 
+    margin-top: 1rem;
     box-shadow: var(--box-shadow);
     width: 100%;
 }
@@ -205,4 +214,3 @@ p {
         padding: 1.5rem;
     }
 }
-
