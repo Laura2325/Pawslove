@@ -1,0 +1,166 @@
+/* --- IMPORTACIONES Y VARIABLES GLOBALES --- */
+
+/* Importa la fuente 'Fredoka' desde Google Fonts para ser usada en todo el sitio. */
+@import url("https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&display=swap");
+
+/* Define variables CSS (Custom Properties) en el scope raíz para un fácil mantenimiento del tema. */
+:root {
+    --primary-color: #6c40d1;
+    --secondary-color: #fc6dab;
+    --accent-color: #17b890;
+    --light-color: #ecf0f1;
+    --dark-color: #34252f;
+    --spacing: 1rem;
+    --border-radius: 24px;
+    --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* --- RESETEO GLOBAL Y ESTILOS BASE --- */
+
+/* Reseteo universal para eliminar márgenes y paddings por defecto de los navegadores. */
+/* box-sizing: border-box hace que el padding y el borde se incluyan en el ancho/alto total del elemento. */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Estilos base para el cuerpo del documento. */
+body {
+    font-family: 'Fredoka';
+    background-color: var(--primary-color);    
+}
+
+/* --- ESTILOS DE LA BARRA DE NAVEGACIÓN (ESCRITORIO) --- */
+
+nav {
+    height: fit-content;
+    background-color: var(--light-color);
+    display: flex;
+    align-items: center;
+    justify-content: center; /* Centra el bloque de enlaces/logo en escritorio */
+    padding: 1rem;
+    padding-inline: 3em;
+    border-radius: 30px;
+    position: relative;
+}
+
+/* Estilo para el logo principal que aparece dentro de los enlaces en escritorio y en el menú móvil. */
+#logoNav {
+    max-width: 100%;
+    width: 30px;
+    height: auto;
+    display: block;
+}
+
+/* El logo para la vista móvil (cuando el menú está cerrado) se oculta por defecto en escritorio. */
+#logoNavMovil {
+    display: none;
+}
+
+/* Contenedor para los enlaces de navegación. Usa Flexbox para alinearlos. */
+.enlaces {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+/* Estilos para cada enlace individual de la navegación. */
+.navLink {
+    margin: 10px;
+    color: var(--primary-color);     
+    text-decoration: none;    
+    letter-spacing: clamp(-1px, 0.5vw, 3px);    
+}
+
+/* Estilo para el botón de perfil de usuario. */
+.perfil-toggle{
+    width: 50px;
+    height: 50px;        
+    border-style: none;    
+    padding: 5px;
+    background-color: var(--accent-color);
+    border-radius: 50%;
+}
+
+/* El botón de hamburguesa se oculta por defecto en pantallas grandes. */
+.nav-toggle {
+    display: none;
+}
+
+/* --- MEDIA QUERIES PARA DISEÑO RESPONSIVO --- */
+
+/* En pantallas de 700px o menos, se oculta el botón de perfil. */
+@media (max-width: 700px) {
+    .perfil-toggle{
+        display: none;
+    }
+}
+
+/* En pantallas de 500px o menos, se aplican los estilos para la vista móvil. */
+@media (max-width: 500px) {
+    /* Ajusta la barra de navegación para la vista móvil. */
+    nav {
+        padding-inline: 1.5em;        
+        flex-wrap: wrap; /* Permite que el menú se coloque debajo */        
+    }
+    
+    /* Muestra el logo específico para móvil cuando el menú está cerrado. */
+    #logoNavMovil {
+        display: block;
+        width: 30px;
+        height: auto;        
+    }
+
+    /* Muestra y estiliza el botón de hamburguesa. */
+    .nav-toggle {
+        display: block;
+        background: transparent;
+        border: none;
+        cursor: pointer;
+        padding: 0.5rem; /* No se necesita 'order' */
+        z-index: 1001;        
+        display: flex;
+        align-items: center;
+        justify-content: center;        
+    }
+
+    /* Estilo para el ícono dentro del botón de hamburguesa. */
+    .nav-toggle .material-symbols-outlined {
+        font-size: 36px;
+        color: var(--primary-color);
+        transition: transform 0.3s ease;
+    }
+
+    /* Lógica del menú desplegable:
+       - Por defecto, el contenedor de enlaces está colapsado (max-height: 0) y su contenido desbordado, oculto.
+       - Se añade una transición suave para la propiedad max-height y padding. */
+    .enlaces {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        order: 3; /* Se asegura que el menú desplegado vaya al final */
+        width: 100%;
+        overflow: hidden; /* Oculta el contenido que se desborda */
+        max-height: 0; /* Lo colapsa por defecto */
+        transition: max-height 0.4s ease, padding 0.4s ease; /* Animamos la altura y el padding */
+    }
+
+    /* ESTADO ABIERTO: Cuando el nav tiene la clase '.menu-abierto' (añadida por JS)... */
+    nav.menu-abierto .enlaces {
+        max-height: 400px; /* ...se expande la altura máxima para mostrar el contenido. */
+        padding: 1rem 0;        /* Añade espacio */
+    }
+
+    /* Cuando el menú está abierto, se oculta el logo de la barra superior para evitar duplicados. */
+    nav.menu-abierto #logoNavMovil {
+        display: none;
+        margin-inline: auto;
+    }
+
+    /* Cuando el menú está abierto, se cambia el orden del logo principal para posicionarlo.
+       En este caso, 'order: 7' lo mueve al final de la lista de elementos con orden 0. */
+    nav.menu-abierto #logoNav {
+        order: 7; /* Posiciona la img al final de la lista */
+    }
+}
