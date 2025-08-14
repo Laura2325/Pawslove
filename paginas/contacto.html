@@ -1,59 +1,132 @@
 <!DOCTYPE html>
 <html lang="es">
-  <>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Contacto - Pawslove</title>
-    <link rel="stylesheet" href="../styles/contacto-paws.css" />
-    <link rel="stylesheet" href="../styles/navbar.css" />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&display=swap"
-      rel="stylesheet"
-    />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contacto - Pawslove</title>
+  <link rel="stylesheet" href="../styles/contacto-paws.css" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="../tailwind.config.js"></script>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&display=swap"
+    rel="stylesheet"
+  />
 
+  <body>
+    <div>
+      <!-- Navbar -->
+      <nav
+        class="bg-white shadow-md rounded-[24px] mx-4 my-3 px-4 py-2 flex items-center justify-between"
+      >
+        <!-- Logo -->
+        <div class="flex items-center space-x-2">
+          <img
+            src="../assets/img/marca/Isotipo_2.svg"
+            alt="Logo"
+            class="h-10 w-10"
+          />
+        </div>
 
-<body>
-  <nav class="navbar navbar-expand-lg shadow-sm rounded-pill p-3" style="background-color: white;">
-  <div class="container">
-    <!-- Logo -->
-    <a class="navbar-brand" href="../index.html">
-      <img src="../assets/img/marca/Isotipo_2.svg" alt="Logo Pawslove" height="50">
-    </a>
+        <!-- Menú Desktop -->
+        <div class="hidden md:flex items-center space-x-6 font-bold">
+          <a href="#" class="hover:text-purple-600">Inicio</a>
+          <a href="#" class="hover:text-purple-600">Tienda</a>
+          <a
+            href="#"
+            class="bg-pink-500 text-white px-4 py-2 rounded-[24px] hover:bg-pink-600 transition"
+            >Adoptar</a
+          >
+          <a
+            href="#"
+            class="bg-purple-600 text-white px-4 py-2 rounded-[24px] hover:bg-purple-700 transition"
+            >Donar</a
+          >
+          <a href="#" class="hover:text-purple-600">Contáctanos</a>
+          <img
+            src="../assets/img/nosotros/love.jpg"
+            alt="Perfil"
+            class="h-10 w-10 rounded-full border"
+          />
+        </div>
 
-    <!-- Botón Hamburguesa -->
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menuNav" aria-controls="menuNav" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
+        <!-- Botón Hamburguesa -->
+        <div class="md:hidden flex items-center">
+          <button id="menu-btn" class="focus:outline-none">
+            <!-- Icono Hamburguesa -->
+            <svg
+              id="hamburger-icon"
+              class="w-8 h-8 text-gray-800"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              viewBox="0 0 24 24"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="M4 6h16M4 12h16M4 18h16"></path>
+            </svg>
+            <!-- Icono Cerrar -->
+            <svg
+              id="close-icon"
+              class="w-8 h-8 text-gray-800 hidden"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              viewBox="0 0 24 24"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="M6 18L18 6M6 6l12 12"></path>
+            </svg>
+          </button>
+        </div>
+      </nav>
 
-    <!-- Menú -->
-    <div class="collapse navbar-collapse justify-content-end" id="menuNav">
-      <ul class="navbar-nav fw-bold">
-        <li class="nav-item">
-          <a class="nav-link" href="../paginas/nosotros.html">Nosotros</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link btn-adoptar text-white px-3 rounded-pill" href="#">Adopta</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Tienda</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link btn-donar text-white px-3 rounded-pill" href="../paginas/donaciones.html">Donar</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link active" href="../paginas/contacto.html">Contacto</a>
-        </li>
-      </ul>
+      <!-- Menú Móvil -->
+      <div
+        id="mobile-menu"
+        class="overflow-hidden transition-all duration-500 ease-in-out max-h-0 opacity-0 bg-white mx-4 rounded-[24px] mt-2 font-bold"
+      >
+        <div class="flex flex-col px-6 py-6 space-y-6">
+          <!-- Perfil -->
+          <div class="flex flex-col items-center space-y-2">
+            <img
+              src="https://via.placeholder.com/80"
+              alt="Perfil"
+              class="h-20 w-20 rounded-full border"
+            />
+            <span class="text-gray-700">Usuario</span>
+          </div>
+
+          <!-- Links -->
+          <div class="flex flex-col items-center space-y-4">
+            <a href="#" class="hover:text-purple-600">Inicio</a>
+            <a href="#" class="hover:text-purple-600">Tienda</a>
+            <a href="#" class="hover:text-purple-600">Contáctanos</a>
+          </div>
+
+          <!-- Botones -->
+          <div class="flex flex-col items-center space-y-4 pt-4 border-t">
+            <a
+              href="#"
+              class="bg-pink-500 text-white px-6 py-3 rounded-[24px] hover:bg-pink-600 transition w-full text-center"
+              >Adoptar</a
+            >
+            <a
+              href="#"
+              class="bg-purple-600 text-white px-6 py-3 rounded-[24px] hover:bg-purple-700 transition w-full text-center"
+              >Donar</a
+            >
+          </div>
+        </div>
+      </div>
     </div>
-  </div>
-</nav>
 
-<!-- Video de fondo -->
+    <!-- Video de fondo -->
     <video autoplay muted loop id="video-fondo">
       <source src="../assets/img/nosotros/video-fondo.mp4" type="video/mp4" />
       Tu navegador no soporta videos en HTML5.
     </video>
- 
+
     <!-- Capa de degradado -->
     <div class="overlay-degradado"></div>
 
@@ -270,7 +343,7 @@
       </div>
     </div>
 
-    <script src="../scripts/contacto.js"></script>x}
+    <script src="../scripts/contacto.js"></script>
     <script src="../js/menu.js"></script>
   </body>
 </html>

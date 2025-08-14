@@ -22,13 +22,13 @@ body {
 
 .navbar .nav-link:hover {
   background-color: var(--primary-color);
-  color: white !important;
+  color: white 
 }
 
 /* Activo */
 .navbar .nav-link.active {
   background-color: var(--primary-color);
-  color: white !important;
+  color: rgb(69, 36, 255) 
 }
 
 /* Botones especiales */
