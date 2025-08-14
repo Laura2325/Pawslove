@@ -4,7 +4,10 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Pawslove Foundation</title>
+
     <link rel="stylesheet" href="../styles/style.css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="../tailwind.config.js"></script>
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
@@ -12,6 +15,115 @@
   </head>
 
   <body>
+    <div class="bg-gray-100">
+      <!-- Navbar -->
+      <nav
+        class="bg-white shadow-md rounded-[24px] mx-4 my-3 px-4 py-2 flex items-center justify-between"
+      >
+        <!-- Logo -->
+        <div class="flex items-center space-x-2">
+          <img
+            src="../assets/img/marca/Isotipo_2.svg"
+            alt="Logo"
+            class="h-10 w-10"
+          />
+        </div>
+
+        <!-- Menú Desktop -->
+        <div class="hidden md:flex items-center space-x-6 font-bold">
+          <a href="#" class="hover:text-purple-600">Inicio</a>
+          <a href="#" class="hover:text-purple-600">Tienda</a>
+          <a
+            href="#"
+            class="bg-pink-500 text-white px-4 py-2 rounded-[24px] hover:bg-pink-600 transition"
+            >Adoptar</a
+          >
+          <a
+            href="#"
+            class="bg-purple-600 text-white px-4 py-2 rounded-[24px] hover:bg-purple-700 transition"
+            >Donar</a
+          >
+          <a href="#" class="hover:text-purple-600">Contáctanos</a>
+          <img
+            src="../assets/img/nosotros/love.jpg"
+            alt="Perfil"
+            class="h-10 w-10 rounded-full border"
+          />
+        </div>
+
+        <!-- Botón Hamburguesa -->
+        <div class="md:hidden flex items-center">
+          <button id="menu-btn" class="focus:outline-none">
+            <!-- Icono Hamburguesa -->
+            <svg
+              id="hamburger-icon"
+              class="w-8 h-8 text-gray-800"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              viewBox="0 0 24 24"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="M4 6h16M4 12h16M4 18h16"></path>
+            </svg>
+            <!-- Icono Cerrar -->
+            <svg
+              id="close-icon"
+              class="w-8 h-8 text-gray-800 hidden"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              viewBox="0 0 24 24"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="M6 18L18 6M6 6l12 12"></path>
+            </svg>
+          </button>
+        </div>
+      </nav>
+
+      <!-- Menú Móvil -->
+      <div
+        id="mobile-menu"
+        class="overflow-hidden transition-all duration-500 ease-in-out max-h-0 opacity-0 bg-white mx-4 rounded-[24px] mt-2 font-bold"
+      >
+        <div class="flex flex-col px-6 py-6 space-y-6">
+          <!-- Perfil -->
+          <div class="flex flex-col items-center space-y-2">
+            <img
+              src="https://via.placeholder.com/80"
+              alt="Perfil"
+              class="h-20 w-20 rounded-full border"
+            />
+            <span class="text-gray-700">Usuario</span>
+          </div>
+
+          <!-- Links -->
+          <div class="flex flex-col items-center space-y-4">
+            <a href="#" class="hover:text-purple-600">Inicio</a>
+            <a href="#" class="hover:text-purple-600">Tienda</a>
+            <a href="#" class="hover:text-purple-600">Contáctanos</a>
+          </div>
+
+          <!-- Botones -->
+          <div class="flex flex-col items-center space-y-4 pt-4 border-t">
+            <a
+              href="#"
+              class="bg-pink-500 text-white px-6 py-3 rounded-[24px] hover:bg-pink-600 transition w-full text-center"
+              >Adoptar</a
+            >
+            <a
+              href="#"
+              class="bg-purple-600 text-white px-6 py-3 rounded-[24px] hover:bg-purple-700 transition w-full text-center"
+              >Donar</a
+            >
+          </div>
+        </div>
+      </div>
+    </div>
+
     <main class="content">
       <h1 class="titulo_1">Nuestros Valores</h1>
 
@@ -200,32 +312,39 @@
           <img src="../assets/img/nosotros/Alejo.png" alt="foto_" />
           <h2 class="titulo_2">Alejo Palma</h2>
           <p class="parrafo">
-            Estrategico y con proposito, busca el continuo desarrollo de la fundación para impactar a más vidas personas y animales.
+            Estrategico y con proposito, busca el continuo desarrollo de la
+            fundación para impactar a más vidas personas y animales.
           </p>
         </div>
         <div class="persona">
           <img src="../assets/img/nosotros/Lau.png" alt="foto_" />
           <h2 class="titulo_2">Lau Lozada</h2>
           <p class="parrafo">
-            Da grandes ideas y dispuesta a alcanzar cada perrito y gatito para que tengan una nueva oportunidad.
+            Da grandes ideas y dispuesta a alcanzar cada perrito y gatito para
+            que tengan una nueva oportunidad.
           </p>
         </div>
         <div class="persona">
           <img src="../assets/img/nosotros/Danirl.png" alt="foto_" />
           <h2 class="titulo_2">Daniel Zamora</h2>
           <p class="parrafo">
-            Ingenioso y tranquilo es una persona que unifica y seguro apoyará a encontrar el nuevo integrante de tu familia.
+            Ingenioso y tranquilo es una persona que unifica y seguro apoyará a
+            encontrar el nuevo integrante de tu familia.
           </p>
         </div>
         <div class="persona">
           <img src="../assets/img/nosotros/Andres.png" alt="foto_" />
           <h2 class="titulo_2">Andrés Vanegas</h2>
           <p class="parrafo">
-            Funge como un gran apoyo para el equipo y es una persona resolutivo, seguro te brindará la solución adecuada a lo que buscas.          </p>
+            Funge como un gran apoyo para el equipo y es una persona resolutivo,
+            seguro te brindará la solución adecuada a lo que buscas.
+          </p>
         </div>
       </section>
     </main>
+
     <script src="https://unpkg.com/scrollreveal"></script>
     <script src="../scripts/script.js"></script>
+    <script src="../js/menu.js"></script>
   </body>
 </html>
