@@ -42,7 +42,7 @@ nav {
     padding: 1rem;
     padding-inline: 3em;
     border-radius: 30px;
-    position: relative;
+    position: relative;    
 }
 
 /* Estilo para el logo principal que aparece dentro de los enlaces en escritorio y en el menú móvil. */
@@ -71,6 +71,7 @@ nav {
     color: var(--primary-color);     
     text-decoration: none;    
     letter-spacing: clamp(-1px, 0.5vw, 3px);    
+    font-size: clamp(1rem, 1.5vw, 3.125rem);    
 }
 
 /* Estilo para el botón de perfil de usuario. */
