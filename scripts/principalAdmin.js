@@ -67,6 +67,8 @@ document.addEventListener('DOMContentLoaded', () => {
      * La lista de órdenes a mostrar.
      */
     function mostrarTabla(ordenes) {
+        //Selector de la tabla a afectar
+        const tabla = document.querySelector();
         // Paso clave: Vaciamos el contenido actual de la tabla para evitar duplicados
         // cada vez que llamamos a la función.
         tablaBody.innerHTML = '';
