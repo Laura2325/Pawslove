@@ -116,14 +116,14 @@
 
           <!-- Formulario para agregar pedidos -->
           <h2 class="text-lg font-bold px-4 pt-5">Agregar Pedido</h2>
-          <div class="p-4 flex flex-wrap gap-2">
+          <form id="agregarOrdenform" class="p-4 flex flex-wrap gap-2">
             <input id="id" placeholder="Order ID" class="border p-2 rounded" />
             <input id="usuario" placeholder="Customer" class="border p-2 rounded" />
             <input id="fecha" type="date" class="border p-2 rounded" />
             <input id="estado" placeholder="Status" class="border p-2 rounded" />
             <input id="total" placeholder="Total" class="border p-2 rounded" />
-            <button id="btnAgregar" class="bg-green-500 text-white px-4 py-2 rounded">Agregar</button>
-          </div>
+            <button type="submit" id="btnAgregar" class="bg-green-500 text-white px-4 py-2 rounded">Agregar</button>
+          </form>
 
         </div>
       </div>

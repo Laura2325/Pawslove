@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Administrador de Productos</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f6f9f7;
+      margin: 0;
+      padding: 20px;
+    }
+    h1 {
+      text-align: center;
+    }
+    .form-container {
+      background: white;
+      padding: 15px;
+      border-radius: 10px;
+      margin-bottom: 20px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+    input, select, button {
+      margin: 5px;
+      padding: 8px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+    }
+    button {
+      cursor: pointer;
+      background: #4CAF50;
+      color: white;
+      border: none;
+    }
+    button:hover {
+      background: #45a049;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: white;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+    th, td {
+      padding: 12px;
+      text-align: center;
+      border-bottom: 1px solid #ddd;
+    }
+    th {
+      background: #e9f5ee;
+    }
+    .activo {
+      color: green;
+      font-weight: bold;
+    }
+    .inactivo {
+      color: red;
+      font-weight: bold;
+    }
+    .acciones button {
+      margin: 0 5px;
+      padding: 6px 10px;
+      border-radius: 5px;
+    }
+    .editar {
+      background: #ffa500;
+    }
+    .eliminar {
+      background: #e74c3c;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Administrador de Productos</h1>
+
+  <!-- Formulario -->
+  <div class="form-container">
+    <input type="text" id="producto" placeholder="Producto">
+    <select id="categoria">
+      <option value="Juguetes">Juguetes</option>
+      <option value="Comida">Comida</option>
+      <option value="Accesorios">Accesorios</option>
+    </select>
+    <input type="number" id="stock" placeholder="Stock">
+    <input type="number" id="precio" placeholder="Precio">
+    <select id="estado">
+      <option value="Activo">Activo</option>
+      <option value="Inactivo">Inactivo</option>
+    </select>
+    <button onclick="agregarProducto()">Agregar Producto</button>
+  </div>
+
+  <!-- Tabla -->
+  <table>
+    <thead>
+      <tr>
+        <th>Producto</th>
+        <th>Categoría</th>
+        <th>Stock</th>
+        <th>Precio</th>
+        <th>Estado</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody id="tabla-productos"></tbody>
+  </table>
+
+  <script>
+    let productos = JSON.parse(localStorage.getItem("productos")) || [];
+
+    function mostrarProductos() {
+      let tabla = document.getElementById("tabla-productos");
+      tabla.innerHTML = "";
+      productos.forEach((p, index) => {
+        tabla.innerHTML += `
+          <tr>
+            <td>${p.producto}</td>
+            <td>${p.categoria}</td>
+            <td>${p.stock}</td>
+            <td>$${p.precio}</td>
+            <td class="${p.estado === 'Activo' ? 'activo' : 'inactivo'}">${p.estado}</td>
+            <td class="acciones">
+              <button class="editar" onclick="editarProducto(${index})">Editar</button>
+              <button class="eliminar" onclick="eliminarProducto(${index})">Eliminar</button>
+            </td>
+          </tr>
+        `;
+      });
+    }
+
+    function agregarProducto() {
+      let producto = document.getElementById("producto").value;
+      let categoria = document.getElementById("categoria").value;
+      let stock = document.getElementById("stock").value;
+      let precio = document.getElementById("precio").value;
+      let estado = document.getElementById("estado").value;
+
+      if(producto && stock && precio){
+        productos.push({ producto, categoria, stock, precio, estado });
+        localStorage.setItem("productos", JSON.stringify(productos));
+        mostrarProductos();
+      } else {
+        alert("Por favor llena todos los campos obligatorios.");
+      }
+    }
+
+    function eliminarProducto(index) {
+      productos.splice(index, 1);
+      localStorage.setItem("productos", JSON.stringify(productos));
+      mostrarProductos();
+    }
+
+    function editarProducto(index) {
+      let p = productos[index];
+      document.getElementById("producto").value = p.producto;
+      document.getElementById("categoria").value = p.categoria;
+      document.getElementById("stock").value = p.stock;
+      document.getElementById("precio").value = p.precio;
+      document.getElementById("estado").value = p.estado;
+
+      eliminarProducto(index);
+    }
+
+    window.onload = mostrarProductos;
+  </script>
+
+</body>
+</html>
