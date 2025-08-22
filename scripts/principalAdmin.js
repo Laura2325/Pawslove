@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const tablaBody = document.getElementById('contenedorOrdenes');
     const btnAgregar = document.getElementById('btnAgregar');
-    const form = document.getElementById('agregarOrdenForm');
+    const form = document.getElementById('agregarOrdenForm');    
     const customerInput = document.getElementById('usuario');
     const dateInput = document.getElementById('fecha');
     const statusInput = document.getElementById('estado');
@@ -39,7 +39,9 @@ document.addEventListener('DOMContentLoaded', () => {
         tablaBody.innerHTML = '';
 
         ordenes.forEach(orden => {
+            // Se crea un nuevo elemento <tr> (fila de tabla) en memoria.
             const fila = document.createElement('tr');
+            fila.className = 'border-b border-[#d1e6d9]';
             fila.className = 'border-b border-[#d1e6d9]';
 
             fila.innerHTML = `
@@ -47,6 +49,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 <td class="px-4 py-3 text-[#0e1a13] text-sm font-medium leading-normal">${orden.usuario}</td>
                 <td class="px-4 py-3 text-[#0e1a13] text-sm font-medium leading-normal">${orden.fecha}</td>
                 <td class="px-4 py-3 text-[#0e1a13] text-sm font-medium leading-normal">${orden.estado}</td>
+                <td class="px-4 py-3 text-[#0e1a13] text-sm font-medium leading-normal">
+                    ${orden.total.toLocaleString('es-CO', { style: 'currency', currency: 'COP' })}
+                </td>
                 <td class="px-4 py-3 text-[#0e1a13] text-sm font-medium leading-normal">
                     ${orden.total.toLocaleString('es-CO', { style: 'currency', currency: 'COP' })}
                 </td>
@@ -71,10 +76,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const nuevaOrden = {
             id: nuevoId,
+            id: nuevoId,
             usuario: customerInput.value || 'N/A',
             fecha: dateInput.value || new Date().toISOString().split('T')[0],
             estado: statusInput.value || 'Pendiente',
-            total: parseFloat(totalInput.value) || 0 // Se convierte el valor a número.
+            total: parseFloat(totalInput.value) || 0 // Se convierte el valor a número.            
         };
 
         ordenesActuales.push(nuevaOrden);
