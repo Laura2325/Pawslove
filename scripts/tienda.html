@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nuestra Tienda</title>
+    <!-- Incluimos Tailwind CSS desde su CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100">
+
+    <div class="container mx-auto p-8">
+        <h1 class="text-4xl font-bold text-center text-gray-800 mb-8">Productos Destacados</h1>
+
+        <!-- 
+          Este es el contenedor donde nuestro script inyectará las tarjetas de productos.
+          Usamos clases de Tailwind para crear una grilla responsive.
+        -->
+        <div id="contenedor-productos" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- Las tarjetas de productos se insertarán aquí dinámicamente -->
+        </div>
+    </div>
+
+    <!-- 
+      IMPORTANTE:
+      1. Primero cargamos el script que GUARDA los productos.
+      2. Luego cargamos el script que LEE y PINTA los productos.
+      El atributo 'type="module"' es crucial para que 'import' y 'export' funcionen.
+    -->
+    <script type="module" src="productos.js"></script>
+    <script type="module" src="tienda.js"></script>
+
+</body>
+</html>
