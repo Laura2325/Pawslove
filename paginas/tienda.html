@@ -2,382 +2,462 @@
 <html lang="es">
 
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tienda para Mascotas</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap" rel="stylesheet">
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     colors: {
-                        primary: "#6c40d1",
-                        secondary: "#fc6dab",
-                        accent: "#17b890",
-                        light: "#ecf0f1",
-                        dark: "#34252f",
+                        primary: '#6c40d1',
+                        secondary: '#fc6dab',
+                        accent: '#17b890',
+                        light: '#ecf0f1',
+                        dark: '#34252f'
                     },
                     fontFamily: {
-                        fredoka: ["Fredoka One", "cursive"],
+                        fredoka: ['Fredoka One', 'cursive']
                     },
                     borderRadius: {
-                        custom: "24px",
-                    },
-                },
-            },
-        };
+                        'custom': '24px'
+                    }
+                }
+            }
+        }
     </script>
     <style>
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
+        }
+        
+        .gradient-primary {
+            background: linear-gradient(135deg, #6c40d1 0%, #8c66db 100%);
+        }
+        
+        .gradient-secondary {
+            background: linear-gradient(135deg, #fc6dab 0%, #ff8dc0 100%);
+        }
+        
+        .gradient-accent {
+            background: linear-gradient(135deg, #17b890 0%, #2ed1a7 100%);
+        }
+        
+        .gradient-dark {
+            background: linear-gradient(135deg, #34252f 0%, #4a3a45 100%);
+        }
+        
+        .product-card {
+            transition: all 0.3s ease;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+        }
+        
         body {
             background-color: #f5f7fa;
-            background-image: radial-gradient(#d0d7de 1px, transparent 1px),
+            background-image: 
+                radial-gradient(#d0d7de 1px, transparent 1px),
                 radial-gradient(#d0d7de 1px, transparent 1px);
             background-size: 40px 40px;
             background-position: 0 0, 20px 20px;
         }
+        
+        .cart-notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+            opacity: 0;
+            transform: translateY(-20px);
+            transition: all 0.3s ease;
+        }
+        
+        .cart-notification.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .cart-panel {
+            position: fixed;
+            top: 0;
+            right: -400px;
+            width: 380px;
+            height: 100vh;
+            background: white;
+            box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+            transition: right 0.3s ease;
+            z-index: 1000;
+            overflow-y: auto;
+        }
+        
+        .cart-panel.open {
+            right: 0;
+        }
+        
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 999;
+        }
+        
+        .overlay.open {
+            opacity: 1;
+            visibility: visible;
+        }
     </style>
 </head>
-
 <body class="min-h-screen font-sans">
     <!-- Barra de navegación -->
-    <div class="flex justify-center">
-        <nav
-            class="bg-white shadow-md rounded-[24px] my-3 px-6 py-2 flex items-center justify-between max-w-6xl w-full">
-            <!-- Logo -->
-            <div class="flex items-center space-x-2">
-                <img src="../assets/img/marca/Isotipo_2.svg" alt="Logo" class="h-10 w-10" />
-            </div>
+    <!-- Contenedor centrado -->
+<div class="flex justify-center">
+  <nav
+    class="bg-white shadow-md rounded-[24px] my-3 px-6 py-2 flex items-center justify-between max-w-6xl w-full"
+  >
+    <!-- Logo -->
+    <div class="flex items-center space-x-2">
+      <img
+        src="../assets/img/marca/Isotipo_2.svg"
+        alt="Logo"
+        class="h-10 w-10"
+      />
+    </div>
 
-            <!-- Menú Desktop -->
-            <div class="hidden md:flex items-center space-x-6 font-bold">
-                <a href="#" class="hover:text-purple-600">Inicio</a>
-                <a href="#" class="hover:text-purple-600">Tienda</a>
-                <a href="#"
-                    class="bg-pink-500 text-white px-4 py-2 rounded-[24px] hover:bg-pink-600 transition">Adoptar</a>
-                <a href="#"
-                    class="bg-purple-600 text-white px-4 py-2 rounded-[24px] hover:bg-purple-700 transition">Donar</a>
-                <a href="#" class="hover:text-purple-600">Contáctanos</a>
+    <!-- Menú Desktop -->
+    <div class="hidden md:flex items-center space-x-6 font-bold">
+      <a href="#" class="hover:text-purple-600">Inicio</a>
+      <a href="#" class="hover:text-purple-600">Tienda</a>
+      <a
+        href="#"
+        class="bg-pink-500 text-white px-4 py-2 rounded-[24px] hover:bg-pink-600 transition"
+        >Adoptar</a
+      >
+      <a
+        href="#"
+        class="bg-purple-600 text-white px-4 py-2 rounded-[24px] hover:bg-purple-700 transition"
+        >Donar</a
+      >
+      <a href="#" class="hover:text-purple-600">Contáctanos</a>
 
-                <!-- Ícono Carrito -->
-                <button id="cart-btn" class="relative">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-dark hover:text-primary transition"
-                        fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2 9h14l-2-9M10 21h4" />
+      <!-- Ícono Carrito -->
+      <button class="relative">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="h-7 w-7 text-gray-800 hover:text-purple-600 transition"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+          stroke-width="2"
+        >
+          <path
+            d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2 9h14l-2-9M10 21a1 1 0 100-2 1 1 0 000 2zm8 0a1 1 0 100-2 1 1 0 000 2z"
+          />
+        </svg>
+        <!-- Contador opcional -->
+        <span
+          class="absolute -top-2 -right-2 bg-pink-500 text-white text-xs px-1.5 py-0.5 rounded-full"
+          >0</span
+        >
+      </button>
+
+      <!-- Perfil -->
+      <img
+        src="../assets/img/nosotros/love.jpg"
+        alt="Perfil"
+        class="h-10 w-10 rounded-full border"
+      />
+    </div>
+
+    <!-- Botón Hamburguesa -->
+    <div class="md:hidden flex items-center">
+      <button id="menu-btn" class="focus:outline-none">
+        <!-- Icono Hamburguesa -->
+        <svg
+          id="hamburger-icon"
+          class="w-8 h-8 text-gray-800"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          viewBox="0 0 24 24"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <path d="M4 6h16M4 12h16M4 18h16"></path>
+        </svg>
+        <!-- Icono Cerrar -->
+        <svg
+          id="close-icon"
+          class="w-8 h-8 text-gray-800 hidden"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          viewBox="0 0 24 24"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <path d="M6 18L18 6M6 6l12 12"></path>
+        </svg>
+      </button>
+    </div>
+  </nav>
+</div>
+
+
+    <!-- Panel del carrito -->
+    <div class="cart-panel">
+        <div class="p-6">
+            <div class="flex justify-between items-center mb-6">
+                <h2 class="text-2xl font-fredoka text-primary">Tu Carrito</h2>
+                <button id="close-cart" class="text-gray-500 hover:text-gray-700">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" view极速飞艇Box="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
                     </svg>
                 </button>
             </div>
-        </nav>
-    </div>
-
-    <!-- Overlay -->
-    <div id="overlay" class="fixed inset-0 bg-black bg-opacity-50 hidden"></div>
-
-    <!-- Panel del carrito -->
-    <div id="cart-sidebar"
-        class="fixed top-0 right-0 w-80 h-full bg-white shadow-lg transform translate-x-full transition-transform duration-300 ease-in-out z-50 flex flex-col">
-        <!-- Header -->
-        <div class="flex items-center justify-between p-4 border-b">
-            <h2 class="text-lg font-fredoka text-primary">Mi Carrito</h2>
-            <button id="close-cart" class="text-gray-600 hover:text-red-500">✕</button>
-        </div>
-
-        <!-- Lista productos -->
-        <div id="cart-items" class="flex-1 overflow-y-auto p-4 space-y-4"></div>
-
-        <!-- Footer -->
-        <div class="p-4 border-t">
-            <div class="flex justify-between items-center mb-4">
-                <span class="font-medium text-lg">Total:</span>
-                <span id="cart-total" class="font-bold text-xl text-primary">$0</span>
+            
+            <div id="cart-items" class="mb-6">
+                <!-- Los items del carrito se agregarán aquí -->
+                <p class="text-gray-500 text-center py-10">Tu carrito está vacío</p>
             </div>
-            <button id="checkout-btn"
-                class="w-full bg-primary text-white py-2 rounded-custom hover:bg-secondary transition">Finalizar
-                Compra</button>
+            
+            <div class="border-t border-gray-200 pt-4">
+                <div class="flex justify-between items-center mb-4">
+                    <span class="font-medium text-lg">Total:</span>
+                    <span id="cart-total" class="font-bold text-xl text-primary">$0.00</span>
+                </div>
+                <button class="w-full bg-primary text-white py-3 rounded-custom font-medium hover:bg-primary-dark transition-colors text-lg">
+                    Proceder al Pago
+                </button>
+            </div>
         </div>
     </div>
-
-    <!-- Toast -->
-    <div id="toast"
-        class="fixed bottom-5 right-5 bg-green-600 text-white px-4 py-2 rounded-lg shadow-lg opacity-0 transition-opacity duration-500">
-        Producto agregado al carrito
-    </div>
+    
+    <!-- Overlay para el carrito -->
+    <div id="cart-overlay" class="overlay"></div>
 
     <!-- Contenido principal -->
     <main class="container mx-auto py-8 px-4">
         <div class="text-center mb-10">
             <h1 class="text-4xl font-fredoka text-primary mb-3">Tienda para Mascotas</h1>
-            <p class="text-gray-600 max-w-2xl mx-auto">Encuentra los mejores productos para consentir a tu compañero
-                peludo.</p>
+            <p class="text-gray-600 max-w-2xl mx-auto">Encuentra los mejores productos para consentir a tu compañero peludo. Tenemos todo lo que necesitas para su cuidado y diversión.</p>
         </div>
-
+        
         <!-- Grid de productos -->
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-
             <!-- Producto 1 -->
             <div class="product-card bg-white rounded-custom overflow-hidden shadow-md flex flex-col">
-                <!-- Imagen del producto -->
                 <div class="h-48 bg-gradient-to-br from-primary/20 to-primary/10 flex items-center justify-center p-4">
-                    <img src="../assets/img/marca/AlimentoPremiumPerros.png" alt="Alimento Premium para Perros"
-                        class="max-h-full max-w-full object-contain" />
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-20 w-20 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v13m0-13V6a2 2 0 112 2h-2zm0 0V5.5A2.5 2.5 0 109.5 8H12zm-7 4h14M5 12a2 2 0 110-4h14a2 2 0 110 4M5 12极速飞艇v7a2 2 0 002 2h10a极速飞艇2 2 0 002-2v-7" />
+                    </svg>
                 </div>
-
-                <!-- Información del producto -->
                 <div class="p-5 flex-1 flex flex-col">
                     <h3 class="text-xl font-bold text-dark mb-2">Alimento Premium para Perros</h3>
-                    <p class="text-gray-600 mb-4 flex-1">Nutrición completa con vitaminas y minerales.</p>
+                    <p class="text-gray-600 mb-4 flex-1">Nutrición completa con vitaminas y minerales para todas las razas y edades.</p>
                     <div class="flex justify-between items-center mt-auto">
-                        <span class="text-2xl font-bold text-primary">$24.990</span>
-                        <button
-                            class="add-to-cart bg-primary text-white py-2 px-4 rounded-custom font-medium hover:bg-primary-dark transition-colors"
-                            data-id="1" data-name="Alimento Premium para Perros" data-price="24990"
-                            data-image="../assets/img/marca/AlimentoPremiumPerros.png">
+                        <span class="text-2极速飞艇xl font-bold text-primary">$24.99</span>
+                        <button class="add-to-cart bg-primary text-white py-2 px-4 rounded-custom font-medium hover:bg-primary-dark transition-colors" data-id="1" data-name="Alimento Premium para Perros" data-price="24.99">
                             Agregar
                         </button>
                     </div>
                 </div>
             </div>
-
-
+            
             <!-- Producto 2 -->
             <div class="product-card bg-white rounded-custom overflow-hidden shadow-md flex flex-col">
-                <div
-                    class="h-48 bg-gradient-to-br from-secondary/20 to-secondary/10 flex items-center justify-center p-4">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-20 w-20 text-secondary" fill="none"
-                        viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                <div class="h-48 bg-gradient-to-br from-secondary/20 to-secondary/10 flex items-center justify-center p-4">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-20 w-20 text-secondary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap极速飞艇="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                     </svg>
                 </div>
                 <div class="p-5 flex-1 flex flex-col">
                     <h3 class="text-xl font-bold text-dark mb-2">Juguete Interactivo</h3>
-                    <p class="text-gray-600 mb-4 flex-1">Estimula mentalmente a tu mascota.</p>
+                    <p class="text-gray-600 mb-4 flex-1">Juguete dispensador de comida que estimula mentalmente a tu mascota.</p>
                     <div class="flex justify-between items-center mt-auto">
-                        <span class="text-2xl font-bold text-primary">$15.500</span>
-                        <button
-                            class="add-to-cart bg-primary text-white py-2 px-4 rounded-custom font-medium hover:bg-primary-dark transition-colors"
-                            data-id="2" data-name="Juguete Interactivo" data-price="15500">Agregar</button>
+                        <span class="text-2xl font-bold text-primary">$15.50</span>
+                        <button class="add-to-cart bg-primary text-white py-2 px-4 rounded-custom font-medium hover:bg-primary-dark transition-colors" data-id="2" data-name="Juguete Interactivo" data-price="15.50">
+                            Agregar
+                        </button>
                     </div>
                 </div>
             </div>
-
-             <!-- Producto 3 -->
+            
+            <!-- Producto 3 -->
             <div class="product-card bg-white rounded-custom overflow-hidden shadow-md flex flex-col">
                 <div class="h-48 bg-gradient-to-br from-accent/20 to-accent/10 flex items-center justify-center p-4">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-20 w-20 text-accent" fill="none"
-                        viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-20 w-20 text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3极速飞艇v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.极速飞艇714-2.143L13 3z" />
                     </svg>
                 </div>
                 <div class="p-5 flex-1 flex flex-col">
                     <h3 class="text-xl font-bold text-dark mb-2">Cama Comfort Plus</h3>
-                    <p class="text-gray-600 mb-4 flex-1">Cama ortopédica con memory foam.</p>
+                    <p class="text-gray-600 mb-4 flex-1">Cama orthopedic con memory foam para el máximo descanso de tu mascota.</p>
                     <div class="flex justify-between items-center mt-auto">
-                        <span class="text-2xl font-bold text-primary">$45.990</span>
-                        <button
-                            class="add-to-cart bg-primary text-white py-2 px-4 rounded-custom font-medium hover:bg-primary-dark transition-colors"
-                            data-id="3" data-name="Cama Comfort Plus" data-price="45990">Agregar</button>
+                        <span class="text-2xl font-bold text-primary">$45.99</span>
+                        <button class="add-to-cart bg-primary text-white py-2 px-4 rounded-custom font-medium hover:bg-primary-dark transition-colors" data-id="3" data-name="Cama Comfort Plus" data-price="45.99">
+                            Agregar
+                        </button>
                     </div>
                 </div>
             </div>
-
+            
             <!-- Producto 4 -->
             <div class="product-card bg-white rounded-custom overflow-hidden shadow-md flex flex-col">
                 <div class="h-48 bg-gradient-to-br from-primary/20 to-primary/10 flex items-center justify-center p-4">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-20 w-20 text-primary" fill="none"
-                        viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-20 w-20 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                     </svg>
                 </div>
                 <div class="p-5 flex-1 flex flex-col">
                     <h3 class="text-xl font-bold text-dark mb-2">Snacks Saludables</h3>
-                    <p class="text-gray-600 mb-4 flex-1">Ingredientes naturales para entrenamiento.</p>
+                    <p class="text-gray-600 mb-4 flex-1">Snacks naturales para entrenamiento y premios, con ingredientes de calidad.</p>
                     <div class="flex justify-between items-center mt-auto">
-                        <span class="text-2xl font-bold text-primary">$9.990</span>
-                        <button
-                            class="add-to-cart bg-primary text-white py-2 px-4 rounded-custom font-medium hover:bg-primary-dark transition-colors"
-                            data-id="4" data-name="Snacks Saludables" data-price="9990">Agregar</button>
+                        <span class="text-2xl font-bold text-primary">$9.99</span>
+                        <button class="add-to-cart bg-primary text-white py-2 px-4 rounded-custom font-medium hover:bg-primary-dark transition-colors" data-id="4" data-name="Snacks Saludables" data-price="9.99">
+                            Agregar
+                        </button>
                     </div>
                 </div>
             </div>
-
+            
+            <!-- Producto 5 -->
+            <div class="product-card bg-white rounded-custom overflow-hidden shadow-md flex flex-col">
+                <div class="h-48 bg-gradient-to-br from-secondary/20 to-secondary/10 flex items-center justify-center p-4">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-20 w-20 text-secondary" fill="none" viewBox="0 0 24 24" stroke极速飞艇="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5极速飞艇h-.581m0 0a8.003 8.003 0 极速飞艇01-15.357-2m15.357 2H15" />
+                    </svg>
+                </div>
+                <div class="p-5 flex-1 flex flex-col">
+                    <h3 class="text-xl font-bold text-dark mb-2">Correa Retráctil</h3>
+                    <p class="text-gray-600 mb-4 flex-1">Correa de 5 metros con mecanismo suave y seguro para paseos cómodos.</p>
+                    <div class="flex justify-between items-center mt-auto">
+                        <span class="text-2xl font-bold text-primary">$18.75</span>
+                        <button class="add-to-cart bg-primary text-white py-2 px-4 rounded-custom font-medium hover:bg-primary-dark transition-colors" data-id="5极速飞艇" data-name="Correa Retráctil" data-price="18.75">
+                            Agregar
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Producto 6 -->
+            <div class="product-card bg-white rounded-custom overflow-hidden shadow-md flex flex-col">
+                <div class="h-48 bg-gradient-to-br from-accent/20 to-accent/10 flex items-center justify-center p-4">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-20 w-20 text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+                    </svg>
+                </div>
+                <div class="p-5 flex-1 flex flex-col">
+                    <h3 class="text-xl font-bold text-dark mb-2">Comedero Automático</极速飞艇h3>
+                    <p class="text-gray-600 mb-4 flex-1">Programa raciones de comida para tu mascota incluso cuando no estás en casa.</p>
+                    <div class="flex justify-between items-center mt-auto">
+                        <span class="text-2xl font-bold text-primary">$62.50</span>
+                        <button class="add-to-cart bg-primary text-white py-2 px-4 rounded-custom font-medium hover:bg-primary-dark transition-colors" data-id="6" data-name="Comedero Automático" data-price="62.50">
+                            Agregar
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Producto 7 -->
+            <div class="product-card bg-white rounded-custom overflow-hidden shadow-md flex flex-col">
+                <div class="h-48 bg-gradient-to-br from-primary/20 to-primary/10 flex items-center justify-center p-4">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-20 w-20 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z" />
+                    </svg>
+                </div>
+                <div class="p-5 flex-1 flex flex-col">
+                    <h3 class="text-xl font-bold text-dark mb-2">Champú Hidratante</h3>
+                    <p class="text-gray-600 mb-4 flex-1">Formula suave con avena y aloe vera para pieles sensibles. Sin parabenes.</p>
+                    <div class="flex justify-between items-center mt-auto">
+                        <span class="text-2xl font-bold text-primary">$12.99</span>
+                        <button class="add-to-cart bg-primary text-white py-2 px-4 rounded-custom font-medium hover:bg-primary-dark transition-colors" data-id="7" data-name="Champú Hidratante" data-price="12.99">
+                            Agregar
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Producto 8 -->
+            <div class="product-card bg-white rounded-custom overflow-hidden shadow-md flex flex-col">
+                <div class="h-48 bg-gradient-to-br from-secondary/20 to-secondary/10 flex items-center justify-center p-4">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-20 w-20 text-secondary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 12l3-3 3 3 4-极速飞艇4M8 21l4-4 4 4M3 4h18M4 4极速飞艇h16v12a1 1 0 01-1 1H5a1 1 0 01-1-1V4z" />
+                    </svg>
+                </div>
+                <div class="p-5 flex-1 flex flex-col">
+                    <h3 class="text-xl font-bold text-dark mb-2">Transportadora Premium</h3>
+                    <p class="text-gray-600 mb-4 flex-1">Transportadora segura y ventilada para viajes cómodos con tu mascota.</p>
+                    <div class="flex justify-between items-center mt-auto">
+                        <span class="text-2xl font-bold text-primary">$55.00</span>
+                        <button class="add-to-cart bg-primary text-white py-2 px-4 rounded-custom font-medium hover:bg-primary-dark transition-colors" data-id="8" data-name="Transportadora Premium" data-price="55.00">
+                            Agregar
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Producto 9 -->
+            <div class="product-card bg-white rounded-custom overflow-hidden shadow-md flex flex-col">
+                <div class="h-48 bg-gradient-to-br from-accent/20 to-accent/10 flex items-center justify-center p-4">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-20 w-20 text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-4-4H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                    </svg>
+                </div>
+                <div class="p-5 flex-1 flex flex-col">
+                    <h3 class="text-xl font-bold text-dark mb-2">Identificación Personalizada</h3>
+                    <p class="text-gray-极速飞艇600 mb-4 flex-1">Placa grabada con nombre y teléfono para mayor seguridad de tu mascota.</p>
+                    <div class="flex justify-between items-center mt-auto">
+                        <span class="text-2xl font-bold text-primary">$8.50</span>
+                        <button class="add-to-cart bg-primary text-white py-2 px-4 rounded-custom font-medium hover:bg-primary-dark transition-colors" data-id="9" data-name="Identificación Personalizada" data-price="8.50">
+                            Agregar
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Producto 10 -->
+            <div class="product-card bg-white rounded-custom overflow-hidden shadow-md flex flex-col">
+                <div class="h-48 bg-gradient-to-br from-primary/20 to-primary/10 flex items-center justify-center p-4">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-20 w-20 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17极速飞艇h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
+                    </svg>
+                </div>
+                <div class="p-5 flex-1 flex flex-col">
+                    <h3 class="text-xl font-bold text-dark mb-2">Kit de Primeros Auxilios</h3>
+                    <p class="text-gray-600 mb-4 flex-1">Contiene todo lo necesario para atender emergencias básicas de tu mascota.</p>
+                    <div class="flex justify-between items-center mt-auto">
+                        <span class="text-2xl font-bold text-primary">$29.99</span>
+                        <button class="add-to-cart bg-primary text-white py-2 px-4 rounded-custom font-medium hover:bg-primary-dark transition-colors" data-id="10" data-name="Kit de Primeros Auxilios" data-price="29.99">
+                            Agregar
+                        </button>
+                    </div>
+                </div>
+            </div>
         </div>
     </main>
-
-    <!-- Script del carrito -->
-    <script>
-        const cartBtn = document.getElementById("cart-btn");
-        const cartSidebar = document.getElementById("cart-sidebar");
-        const overlay = document.getElementById("overlay");
-        const closeCart = document.getElementById("close-cart");
-        const cartItemsContainer = document.getElementById("cart-items");
-        const totalEl = document.getElementById("cart-total");
-        const checkoutBtn = document.getElementById("checkout-btn");
-        const toast = document.getElementById("toast");
-
-        let cart = JSON.parse(localStorage.getItem("cart")) || [];
-
-        // Abrir/cerrar carrito
-        cartBtn.addEventListener("click", () => {
-            cartSidebar.classList.remove("translate-x-full");
-            overlay.classList.remove("hidden");
-        });
-        closeCart.addEventListener("click", () => {
-            cartSidebar.classList.add("translate-x-full");
-            overlay.classList.add("hidden");
-        });
-        overlay.addEventListener("click", () => {
-            cartSidebar.classList.add("translate-x-full");
-            overlay.classList.add("hidden");
-        });
-
-        // Botón finalizar compra
-        checkoutBtn.addEventListener("click", () => {
-            localStorage.setItem("cart", JSON.stringify(cart));
-            window.location.href = "carrito.html";
-        });
-
-        // Agregar productos
-        document.querySelectorAll(".add-to-cart").forEach((btn) => {
-            btn.addEventListener("click", () => {
-                const id = btn.dataset.id;
-                const name = btn.dataset.name;
-                const price = Number(btn.dataset.price) || 0;
-                const image = btn.dataset.image || "../assets/img/default.png";
-
-                const existing = cart.find((item) => item.id === id);
-                if (existing) {
-                    existing.qty += 1;
-                } else {
-                    cart.push({ id, name, price, image, qty: 1 });
-                }
-
-                renderCart();
-                showToast(name);
-            });
-        });
-
-        // Renderizar carrito
-        function renderCart() {
-            cartItemsContainer.innerHTML = "";
-            let total = 0;
-
-            cart.forEach((item) => {
-                const price = Number(item.price) || 0;
-                const qty = Number(item.qty) || 1;
-                const subtotal = price * qty;
-                total += subtotal;
-
-                const div = document.createElement("div");
-                div.classList.add("bg-light", "rounded-custom", "p-3", "flex", "items-center", "justify-between", "gap-3");
-
-                div.innerHTML = `
-      <img src="${item.image}" alt="${item.name}" class="w-14 h-14 rounded object-cover">
-      <div class="flex-1">
-        <h3 class="font-fredoka text-dark text-sm">${item.name}</h3>
-        <span class="text-xs text-gray-500">Unitario: $${price.toLocaleString("es-CO")}</span><br>
-        <span class="text-primary font-bold text-sm">Subtotal: $${subtotal.toLocaleString("es-CO")}</span>
-      </div>
-      <div class="flex items-center gap-2">
-        <button class="decrease bg-gray-300 px-2 rounded hover:bg-gray-400">-</button>
-        <span class="quantity font-bold">${qty}</span>
-        <button class="increase bg-gray-300 px-2 rounded hover:bg-gray-400">+</button>
-      </div>
-    `;
-
-                // Eventos + y -
-                div.querySelector(".increase").addEventListener("click", () => {
-                    item.qty++;
-                    renderCart();
-                });
-
-                div.querySelector(".decrease").addEventListener("click", () => {
-                    if (item.qty > 1) {
-                        item.qty--;
-                    } else {
-                        cart = cart.filter((p) => p.id !== item.id);
-                    }
-                    renderCart();
-                });
-
-                cartItemsContainer.appendChild(div);
-            });
-
-            totalEl.textContent = "$" + total.toLocaleString("es-CO");
-            localStorage.setItem("cart", JSON.stringify(cart));
-        }
-
-
-        // Mostrar toast
-        function showToast(productName) {
-            toast.textContent = `${productName} agregado al carrito`;
-            toast.classList.remove("opacity-0");
-            toast.classList.add("opacity-100");
-
-            setTimeout(() => {
-                toast.classList.remove("opacity-100");
-                toast.classList.add("opacity-0");
-            }, 2000);
-        }
-
-        // Inicializar
-        renderCart();
-    </script>
-    <footer class="footer">
-  <div class="footer-container">
-<link rel="stylesheet" href="../styles/footer.css">
-
-    <!-- logo + Reds -->
-    <div class="footer-section">
-      <img src="../assets/img/marca/Logo.svg" alt="Logo PawsLove" width="150">
-      <p>Redes Sociales</p>
-      <div class="social-icons">
-        <a href="#"><img src="../assets/iconos/instagram.jpg" alt="Instagram" width="24"></a>
-        <a href="#"><img src="../assets/iconos/tiktok.svg" alt="TikTok" width="24"></a>
-        <a href="#"><img src="../assets/iconos/facebook.svg" alt="Facebook" width="24"></a>
-      </div>
+    
+    <!-- Notificación de producto agregado -->
+    <div id="cart-notification" class="cart-notification glass-effect p-4 rounded-custom flex items-center">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-green-500 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+        </svg>
+        <span id="notification-text" class="text-white font-medium">Producto agregado al carrito</span>
     </div>
-
-    <!-- Contacto -->
-    <div class="footer-section">
-      <h3>Contáctanos</h3>
-      <p>(601) 000 0000</p>
-      <p>Cra 00. 53b Sur</p>
-    </div>
-
-    <!-- Enlaces -->
-    <div class="footer-section">
-      <h3>Enlaces Rápidos</h3>
-      <ul>
-        <li><a href="file:///C:/Users/andre/Desktop/L/Pawslove/index.html">Inicio</a></li>
-        <li><a href="file:///C:/Users/andre/Desktop/L/Pawslove/paginas/adopta.html">Adopta</a></li>
-        <li><a href="file:///C:/Users/andre/Desktop/L/Pawslove/paginas/tienda.html">Tienda</a></li>
-        <li><a href="file:///C:/Users/andre/Desktop/L/Pawslove/paginas/donaciones.html">Donar</a></li>
-      </ul>
-    </div>
-
-    <!-- Donaciones -->
-    <div class="footer-section">
-      <h3>Sobre las Donaciones</h3>
-      <ul>
-        <li><a href="donaciones.html">Términos y Condiciones</a></li>
-        <li><a href="#">Informes</a></li>
-        <li><a href="#">Política de Privacidad</a></li>
-      </ul>
-    </div>
-
-  </div>
-
-  <div class="footer-bottom">
-    <p>© 2025 PawsLove Foundation - Todos los derechos reservados</p>
-  </div>
-</footer>
-
-</body>
-
+    </body>
 </html>
