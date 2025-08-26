@@ -1,12 +1,170 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pawslove</title>
-    <link rel="stylesheet" href="../styles/style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pawslove - Adopciones</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#6c40d1',
+            secondary: '#fc6dab',
+            accent: '#17b890',
+            light: '#ecf0f1',
+            dark: '#34252f'
+          },
+          fontFamily: {
+            fredoka: ['Fredoka One', 'cursive']
+          },
+          borderRadius: {
+            'custom': '24px'
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    .glass-effect {
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
+    }
+    .gradient-primary {
+      background: linear-gradient(135deg, #6c40d1 0%, #8c66db 100%);
+    }
+    .gradient-secondary {
+      background: linear-gradient(135deg, #fc6dab 0%, #ff8dc0 100%);
+    }
+    .gradient-accent {
+      background: linear-gradient(135deg, #17b890 0%, #2ed1a7 100%);
+    }
+    .bento-card {
+      transition: all 0.3s ease;
+    }
+    .bento-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+    }
+    .chip {
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    .chip.active {
+      background: #6c40d1;
+      color: #fff;
+      font-weight: bold;
+    }
+  </style>
 </head>
-<body>
+<body class="bg-light font-sans text-dark">
+
+  <!-- Aquí se carga el navbar -->
+  <div id="navbar"></div>
+
+  <!-- Contenido principal -->
+  <main class="container mx-auto px-6 py-10 flex flex-col md:flex-row gap-10">
     
+    <!-- Filtros -->
+    <aside class="glass-effect rounded-custom p-6 w-full md:w-1/4">
+      <h2 class="text-2xl font-bold text-primary flex items-center gap-2 mb-6">
+        <span>🔍</span> Filtros
+      </h2>
+      
+      <!-- Especie -->
+      <div class="mb-6">
+        <h3 class="font-semibold mb-3 text-dark">Especie</h3>
+        <div class="flex flex-wrap gap-2">
+          <div class="chip px-4 py-2 rounded-full bg-light hover:bg-primary hover:text-white">Perro</div>
+          <div class="chip px-4 py-2 rounded-full bg-light hover:bg-primary hover:text-white">Gato</div>
+        </div>
+      </div>
+
+      <!-- Edad -->
+      <div class="mb-6">
+        <h3 class="font-semibold mb-3 text-dark">Edad</h3>
+        <div class="flex flex-wrap gap-2">
+          <div class="chip px-4 py-2 rounded-full bg-light hover:bg-secondary hover:text-white">Cachorro</div>
+          <div class="chip px-4 py-2 rounded-full bg-light hover:bg-secondary hover:text-white">Adulto</div>
+          <div class="chip px-4 py-2 rounded-full bg-light hover:bg-secondary hover:text-white">Senior</div>
+        </div>
+      </div>
+
+      <!-- Tamaño -->
+      <div class="mb-6">
+        <h3 class="font-semibold mb-3 text-dark">Tamaño</h3>
+        <div class="flex flex-wrap gap-2">
+          <div class="chip px-4 py-2 rounded-full bg-light hover:bg-accent hover:text-white">Pequeño</div>
+          <div class="chip px-4 py-2 rounded-full bg-light hover:bg-accent hover:text-white">Mediano</div>
+          <div class="chip px-4 py-2 rounded-full bg-light hover:bg-accent hover:text-white">Grande</div>
+        </div>
+      </div>
+
+      <!-- Estado -->
+      <div class="mb-6">
+        <h3 class="font-semibold mb-3 text-dark">Estado</h3>
+        <div class="flex flex-wrap gap-2">
+          <div class="chip px-4 py-2 rounded-full bg-light hover:bg-gradient-to-r hover:from-primary hover:to-secondary hover:text-white">Disponible</div>
+          <div class="chip px-4 py-2 rounded-full bg-light hover:bg-gradient-to-r hover:from-dark hover:to-secondary hover:text-white">Adoptado</div>
+        </div>
+      </div>
+
+      <!-- Botón aplicar -->
+      <div class="text-center">
+        <button class="w-full py-3 rounded-custom gradient-primary text-white font-bold shadow-md hover:shadow-lg transition">
+          Aplicar filtros
+        </button>
+      </div>
+    </aside>
+
+    <!-- Lista de mascotas -->
+    <section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 flex-1">
+      <!-- Card mascota -->
+      <div class="bento-card bg-white rounded-custom shadow p-6">
+        <h3 class="text-lg font-semibold text-dark">Luna</h3>
+        <p class="text-sm text-gray-600">2 años · Mediano</p>
+        <span class="inline-block mt-2 px-3 py-1 text-sm rounded-full bg-accent text-white">Disponible</span>
+      </div>
+
+      <div class="bento-card bg-white rounded-custom shadow p-6">
+        <h3 class="text-lg font-semibold text-dark">Max</h3>
+        <p class="text-sm text-gray-600">4 años · Grande</p>
+        <span class="inline-block mt-2 px-3 py-1 text-sm rounded-full bg-secondary text-white">Adoptado</span>
+      </div>
+
+      <div class="bento-card bg-white rounded-custom shadow p-6">
+        <h3 class="text-lg font-semibold text-dark">Bella</h3>
+        <p class="text-sm text-gray-600">5 años · Mediano</p>
+        <span class="inline-block mt-2 px-3 py-1 text-sm rounded-full bg-accent text-white">Disponible</span>
+      </div>
+    </section>
+  </main>
+
+  <!-- Script para cargar el navbar -->
+  <script>
+    fetch("navbar.html")
+      .then(res => res.text())
+      .then(data => {
+        document.getElementById("navbar").innerHTML = data;
+      })
+      .catch(err => console.error("Error cargando navbar:", err));
+
+    // Script para activar chips
+    document.addEventListener("DOMContentLoaded", () => {
+      const chips = document.querySelectorAll(".chip");
+      chips.forEach(chip => {
+        chip.addEventListener("click", () => {
+          chip.classList.toggle("active");
+        });
+      });
+    });
+  </script>
+
 </body>
 </html>
+
