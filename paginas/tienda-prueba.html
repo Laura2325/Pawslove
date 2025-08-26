@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Carrito Sidebar</title>
+
+    <!-- Google Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Montserrat:wght@300;400;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Tailwind -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              primary: "#6c40d1",
+              secondary: "#fc6dab",
+              accent: "#17b890",
+              light: "#ecf0f1",
+              dark: "#34252f",
+            },
+            fontFamily: {
+              fredoka: ["Fredoka One", "cursive"],
+              montserrat: ["Montserrat", "sans-serif"],
+            },
+            borderRadius: {
+              custom: "24px",
+            },
+          },
+        },
+      };
+    </script>
+  </head>
+  <body class="bg-light font-montserrat text-dark">
+    <!-- Navbar simulada -->
+    <header class="flex justify-between items-center p-4 bg-white shadow-md">
+      <h1 class="text-2xl font-fredoka text-primary">Mi Tienda</h1>
+      <!-- Botón carrito -->
+      <button id="cart-btn" class="relative">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="h-8 w-8 text-dark hover:text-primary transition"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+          stroke-width="2"
+        >
+          <path
+            d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2 9h14l-2-9M10 21a1 1 0 100-2 1 1 0 000 2zm8 0a1 1 0 100-2 1 1 0 000 2z"
+          />
+        </svg>
+        <span
+          class="absolute -top-2 -right-2 bg-secondary text-white text-xs px-1.5 py-0.5 rounded-full"
+          >2</span
+        >
+      </button>
+    </header>
+
+    <!-- Overlay -->
+    <div
+      id="overlay"
+      class="fixed inset-0 bg-black bg-opacity-40 hidden"
+    ></div>
+
+    <!-- Sidebar Carrito -->
+    <aside
+      id="cart-sidebar"
+      class="fixed top-0 right-0 h-full w-full sm:w-2/3 md:w-2/5 lg:w-1/3 bg-white shadow-xl transform translate-x-full transition-transform duration-300 z-50 flex flex-col"
+    >
+      <!-- Header Sidebar -->
+      <div
+        class="flex justify-between items-center p-4 border-b border-gray-200"
+      >
+        <h2 class="text-2xl font-fredoka text-primary">Tu Carrito</h2>
+        <button id="close-cart" class="text-dark hover:text-red-500 text-2xl">
+          ✕
+        </button>
+      </div>
+
+      <!-- Lista productos -->
+      <div id="cart-items" class="flex-1 overflow-y-auto p-4 space-y-4">
+        <!-- Producto ejemplo -->
+        <div
+          class="bg-light rounded-custom p-3 flex items-center justify-between"
+          data-price="45000"
+        >
+          <div class="flex items-center gap-3">
+            <img
+              src="https://via.placeholder.com/60"
+              alt="producto"
+              class="w-16 h-16 rounded-custom"
+            />
+            <div>
+              <h3 class="font-fredoka text-dark">Juguete perro</h3>
+              <p class="text-sm text-gray-600">Tamaño mediano</p>
+              <span class="text-primary font-bold unit-price">$45.000</span>
+            </div>
+          </div>
+          <div class="flex items-center gap-2">
+            <button
+              class="decrease bg-gray-300 px-2 rounded hover:bg-gray-400"
+            >
+              -
+            </button>
+            <span class="quantity font-bold">1</span>
+            <button
+              class="increase bg-gray-300 px-2 rounded hover:bg-gray-400"
+            >
+              +
+            </button>
+          </div>
+        </div>
+
+        <div
+          class="bg-light rounded-custom p-3 flex items-center justify-between"
+          data-price="30000"
+        >
+          <div class="flex items-center gap-3">
+            <img
+              src="https://via.placeholder.com/60"
+              alt="producto"
+              class="w-16 h-16 rounded-custom"
+            />
+            <div>
+              <h3 class="font-fredoka text-dark">Collar rojo</h3>
+              <p class="text-sm text-gray-600">Talla M</p>
+              <span class="text-primary font-bold unit-price">$30.000</span>
+            </div>
+          </div>
+          <div class="flex items-center gap-2">
+            <button
+              class="decrease bg-gray-300 px-2 rounded hover:bg-gray-400"
+            >
+              -
+            </button>
+            <span class="quantity font-bold">2</span>
+            <button
+              class="increase bg-gray-300 px-2 rounded hover:bg-gray-400"
+            >
+              +
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Footer Sidebar -->
+      <div class="p-4 border-t border-gray-200 space-y-3">
+        <div
+          class="flex justify-between font-bold text-dark text-lg"
+        >
+          <span>Subtotal:</span>
+          <span id="subtotal">$105.000</span>
+        </div>
+        <button
+          class="w-full bg-gradient-to-r from-primary to-secondary text-white py-3 rounded-custom text-lg hover:opacity-90 transition shadow-md"
+        >
+          Finalizar Compra
+        </button>
+      </div>
+    </aside>
+
+    <script>
+      const cartBtn = document.getElementById("cart-btn");
+      const cartSidebar = document.getElementById("cart-sidebar");
+      const overlay = document.getElementById("overlay");
+      const closeCart = document.getElementById("close-cart");
+      const subtotalEl = document.getElementById("subtotal");
+
+      function updateSubtotal() {
+        let total = 0;
+        document.querySelectorAll("#cart-items > div").forEach((item) => {
+          const price = parseInt(item.dataset.price);
+          const qty = parseInt(item.querySelector(".quantity").innerText);
+          total += price * qty;
+        });
+        subtotalEl.textContent =
+          "$" + total.toLocaleString("es-CO");
+      }
+
+      // Abrir carrito
+      cartBtn.addEventListener("click", () => {
+        cartSidebar.classList.remove("translate-x-full");
+        overlay.classList.remove("hidden");
+      });
+
+      // Cerrar carrito
+      closeCart.addEventListener("click", () => {
+        cartSidebar.classList.add("translate-x-full");
+        overlay.classList.add("hidden");
+      });
+
+      overlay.addEventListener("click", () => {
+        cartSidebar.classList.add("translate-x-full");
+        overlay.classList.add("hidden");
+      });
+
+      // Control de cantidades
+      document.querySelectorAll(".increase").forEach((btn) => {
+        btn.addEventListener("click", (e) => {
+          const qtyEl = e.target.parentElement.querySelector(".quantity");
+          qtyEl.innerText = parseInt(qtyEl.innerText) + 1;
+          updateSubtotal();
+        });
+      });
+
+      document.querySelectorAll(".decrease").forEach((btn) => {
+        btn.addEventListener("click", (e) => {
+          const qtyEl = e.target.parentElement.querySelector(".quantity");
+          let newQty = parseInt(qtyEl.innerText) - 1;
+          if (newQty > 0) {
+            qtyEl.innerText = newQty;
+            updateSubtotal();
+          }
+        });
+      });
+
+      // Inicializar subtotal
+      updateSubtotal();
+    </script>
+    <footer class="footer">
+  <div class="footer-container">
+<link rel="stylesheet" href="../styles/footer.css">
+
+    <!-- logo + Reds -->
+    <div class="footer-section">
+      <img src="../assets/img/marca/Logo.svg" alt="Logo PawsLove" width="150">
+      <p>Redes Sociales</p>
+      <div class="social-icons">
+        <a href="#"><img src="../assets/iconos/instagram.jpg" alt="Instagram" width="24"></a>
+        <a href="#"><img src="../assets/iconos/tiktok.svg" alt="TikTok" width="24"></a>
+        <a href="#"><img src="../assets/iconos/facebook.svg" alt="Facebook" width="24"></a>
+      </div>
+    </div>
+
+    <!-- Contacto -->
+    <div class="footer-section">
+      <h3>Contáctanos</h3>
+      <p>(601) 000 0000</p>
+      <p>Cra 00. 53b Sur</p>
+    </div>
+
+    <!-- Enlaces -->
+    <div class="footer-section">
+      <h3>Enlaces Rápidos</h3>
+      <ul>
+        <li><a href="file:///C:/Users/andre/Desktop/L/Pawslove/index.html">Inicio</a></li>
+        <li><a href="file:///C:/Users/andre/Desktop/L/Pawslove/paginas/adopta.html">Adopta</a></li>
+        <li><a href="file:///C:/Users/andre/Desktop/L/Pawslove/paginas/tienda.html">Tienda</a></li>
+        <li><a href="file:///C:/Users/andre/Desktop/L/Pawslove/paginas/donaciones.html">Donar</a></li>
+      </ul>
+    </div>
+
+    <!-- Donaciones -->
+    <div class="footer-section">
+      <h3>Sobre las Donaciones</h3>
+      <ul>
+        <li><a href="donaciones.html">Términos y Condiciones</a></li>
+        <li><a href="#">Informes</a></li>
+        <li><a href="#">Política de Privacidad</a></li>
+      </ul>
+    </div>
+
+  </div>
+
+  <div class="footer-bottom">
+    <p>© 2025 PawsLove Foundation - Todos los derechos reservados</p>
+  </div>
+</footer>
+
+  </body>
+</html>
