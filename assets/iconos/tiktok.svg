@@ -1,3 +1,15 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-tiktok" viewBox="0 0 16 16">
-  <path d="M9 0h1.98c.144.715.54 1.617 1.235 2.512C12.895 3.389 13.797 4 15 4v2c-1.753 0-3.07-.814-4-1.829V11a5 5 0 1 1-5-5v2a3 3 0 1 0 3 3z"/>
+<svg width="256" height="256" viewBox="0 0 256 256" xmlns="http://www.w3.org/2000/svg">
+  <!-- Fondo lavanda + borde -->
+  <rect x="8" y="8" width="240" height="240" rx="44" fill="#EEDBFF" stroke="#7B2CBF" stroke-width="10"></rect>
+  <!-- Nota musical “estilo TikTok” minimal -->
+  <g fill="none" stroke="#7B2CBF" stroke-width="16" stroke-linecap="round" stroke-linejoin="round">
+    <!-- Cuerpo/asta -->
+    <path d="M140 60 v88"></path>
+    <!-- Cabeza principal -->
+    <circle cx="104" cy="168" r="28" fill="none"></circle>
+    <!-- Brazo hacia la derecha (para dar la sensación del logotipo) -->
+    <path d="M140 104 c14 16 30 24 48 24"></path>
+    <!-- Cabeza secundaria (eco del logo) -->
+    <circle cx="188" cy="156" r="20" fill="none"></circle>
+  </g>
 </svg>
