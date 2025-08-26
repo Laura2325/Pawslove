@@ -1,12 +1,276 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pawslove</title>
-    <link rel="stylesheet" href="../styles/style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Carrito de Compras</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap" rel="stylesheet"/>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: "#6c40d1",
+            secondary: "#fc6dab",
+            accent: "#17b890",
+            light: "#f5f7fa",
+            dark: "#34252f",
+          },
+          fontFamily: {
+            fredoka: ["Fredoka One", "cursive"],
+          },
+          borderRadius: {
+            custom: "20px",
+          },
+          boxShadow: {
+            soft: "0 6px 24px rgba(0,0,0,0.08)",
+          }
+        },
+      },
+    };
+  </script>
+  <style>
+    body{
+      background-color:#f5f7fa;
+      background-image: radial-gradient(#d0d7de 1px, transparent 1px),
+                       radial-gradient(#d0d7de 1px, transparent 1px);
+      background-size:40px 40px; background-position:0 0, 20px 20px;
+    }
+  </style>
 </head>
-<body>
-    
+<body class="min-h-screen">
+  <!-- Navbar compacta (no full-width) -->
+  <div class="flex justify-center">
+    <nav class="bg-white/90 backdrop-blur rounded-[24px] shadow-soft my-4 px-5 py-3 w-full max-w-6xl flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <img src="../assets/img/marca/Isotipo_2.svg" alt="Logo" class="h-10 w-10"/>
+        
+      </div>
+      <div class="flex items-center gap-4">
+        <a href="tienda.html" class="text-dark hover:text-primary font-medium">Seguir comprando</a>
+        <a href="#" class="hidden md:inline-block bg-secondary text-white px-4 py-2 rounded-custom hover:bg-pink-500 transition">Ayuda</a>
+      </div>
+    </nav>
+  </div>
+
+  <!-- Contenido -->
+  <main class="max-w-6xl mx-auto px-4 pb-16">
+    <!-- Título -->
+    <header class="mt-4 mb-6">
+      <h1 class="text-3xl font-fredoka text-primary">Carrito de compras</h1>
+      <p class="text-gray-600">Revisa tus productos y finaliza tu compra.</p>
+    </header>
+
+    <!-- Grid principal: productos (2 col) + resumen (1 col) -->
+    <section class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+      <!-- Lista de productos -->
+      <div class="lg:col-span-2 space-y-4" id="cart-items">
+        <!-- Items generados por JS -->
+      </div>
+
+      <!-- Resumen de pago -->
+      <aside class="lg:col-span-1">
+        <div class="bg-white rounded-[20px] shadow-soft p-5 sticky top-6">
+          <h2 class="text-xl font-fredoka text-dark mb-4">Resumen</h2>
+
+          <!-- Línea: subtotal -->
+          <div class="flex items-center justify-between py-2">
+            <span class="text-gray-600">Subtotal</span>
+            <span id="summary-subtotal" class="font-semibold">$0</span>
+          </div>
+          <!-- Línea: IVA -->
+          <div class="flex items-center justify-between py-2">
+            <span class="text-gray-600">IVA (19%)</span>
+            <span id="summary-tax" class="font-semibold">$0</span>
+          </div>
+          <!-- Línea: envío -->
+          <div class="flex items-center justify-between py-2">
+            <span class="text-gray-600">Envío</span>
+            <span id="summary-shipping" class="font-semibold">$0</span>
+          </div>
+
+          <div class="border-t my-3"></div>
+
+          <!-- Total -->
+          <div class="flex items-center justify-between py-2">
+            <span class="text-lg font-bold">Total</span>
+            <span id="summary-total" class="text-xl font-extrabold text-primary">$0</span>
+          </div>
+
+          <!-- Nota envío -->
+          <p id="shipping-note" class="text-xs text-gray-500 mt-1"></p>
+
+          <!-- Acciones -->
+          <div class="mt-6 space-y-2">
+            <button id="checkout-btn" class="w-full bg-primary text-white py-3 rounded-custom hover:bg-secondary transition">Finalizar compra</button>
+            <a href="tienda.html" class="block text-center w-full bg-white border border-gray-200 text-dark py-3 rounded-custom hover:bg-gray-50 transition">
+              Seguir comprando
+            </a>
+          </div>
+        </div>
+      </aside>
+    </section>
+  </main>
+
+  <!-- Template item (para clon) -->
+  <template id="item-template">
+    <div class="bg-white rounded-[16px] shadow-soft p-4 flex items-center gap-4">
+      <img class="item-image w-20 h-20 rounded-lg object-cover border" src="../assets/img/default.png" alt="Producto"/>
+      <div class="flex-1 min-w-0">
+        <h3 class="item-name font-semibold text-dark truncate">Nombre del producto</h3>
+        <div class="text-sm text-gray-500">Unitario: <span class="item-unit"></span></div>
+        <div class="text-sm text-gray-500">Subtotal: <span class="item-subtotal text-primary font-bold"></span></div>
+      </div>
+      <div class="flex items-center gap-2">
+        <button class="btn-decrease w-8 h-8 rounded border hover:bg-gray-50">-</button>
+        <span class="item-qty w-6 text-center font-semibold">1</span>
+        <button class="btn-increase w-8 h-8 rounded border hover:bg-gray-50">+</button>
+      </div>
+      <button class="btn-remove ml-2 text-red-500 hover:text-red-600" title="Quitar">
+        <!-- ícono basurero -->
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6M9 7h6m-7 0a1 1 0 001-1V5a1 1 0 011-1h4a1 1 0 011 1v1a1 1 0 001 1m-7 0h8"/>
+        </svg>
+      </button>
+    </div>
+  </template>
+
+  <script>
+    // ===== Configuración de negocio (cámbialas si quieres) =====
+    const IVA_RATE = 0.19;                             // 19% IVA
+    const SHIPPING_BASE = 9900;                        // Envío estándar
+    const FREE_SHIPPING_THRESHOLD = 120000;            // Envío gratis desde
+
+    // ===== Utilidades =====
+    const fmt = (n) => {
+      const x = Number(n) || 0;
+      try { return "$" + x.toLocaleString("es-CO"); }
+      catch { return "$" + Math.round(x); }
+    };
+
+    // ===== Estado =====
+    let cart = [];
+    const cartEl = document.getElementById("cart-items");
+    const tpl = document.getElementById("item-template");
+
+    const subEl = document.getElementById("summary-subtotal");
+    const taxEl = document.getElementById("summary-tax");
+    const shipEl = document.getElementById("summary-shipping");
+    const totEl = document.getElementById("summary-total");
+    const shipNote = document.getElementById("shipping-note");
+    const checkoutBtn = document.getElementById("checkout-btn");
+
+    // ===== Carga inicial =====
+    function loadCart() {
+      const raw = JSON.parse(localStorage.getItem("cart")) || [];
+      // Saneamos: nos aseguramos de que price y qty sean números
+      cart = raw.map(it => ({
+        id: String(it.id ?? ""),
+        name: String(it.name ?? "Producto"),
+        price: Number(it.price) || 0,
+        qty: Number(it.qty) || 1,
+        image: it.image || "../assets/img/default.png",
+      }));
+    }
+
+    // ===== Render =====
+    function renderCart() {
+      cartEl.innerHTML = "";
+
+      if (cart.length === 0) {
+        cartEl.innerHTML = `
+          <div class="bg-white rounded-[16px] shadow-soft p-8 text-center text-gray-500">
+            Tu carrito está vacío 🐾
+          </div>
+        `;
+        updateSummary();
+        checkoutBtn.classList.add("opacity-60","pointer-events-none");
+        return;
+      }
+      checkoutBtn.classList.remove("opacity-60","pointer-events-none");
+
+      cart.forEach((item, index) => {
+        const node = tpl.content.cloneNode(true);
+        const img = node.querySelector(".item-image");
+        const name = node.querySelector(".item-name");
+        const unit = node.querySelector(".item-unit");
+        const subtotal = node.querySelector(".item-subtotal");
+        const qty = node.querySelector(".item-qty");
+        const btnDec = node.querySelector(".btn-decrease");
+        const btnInc = node.querySelector(".btn-increase");
+        const btnRem = node.querySelector(".btn-remove");
+
+        img.src = item.image;
+        img.alt = item.name;
+        name.textContent = item.name;
+        unit.textContent = fmt(item.price);
+        qty.textContent = item.qty;
+        subtotal.textContent = fmt(item.price * item.qty);
+
+        btnInc.addEventListener("click", () => {
+          item.qty++;
+          persist(); renderCart();
+        });
+        btnDec.addEventListener("click", () => {
+          if (item.qty > 1) { item.qty--; }
+          else { cart.splice(index, 1); }
+          persist(); renderCart();
+        });
+        btnRem.addEventListener("click", () => {
+          cart.splice(index, 1);
+          persist(); renderCart();
+        });
+
+        cartEl.appendChild(node);
+      });
+
+      updateSummary();
+    }
+
+    // ===== Resumen =====
+    function calculate() {
+      const subtotal = cart.reduce((acc, it) => acc + (Number(it.price)||0) * (Number(it.qty)||0), 0);
+      const tax = Math.round(subtotal * IVA_RATE);
+      const shipping = subtotal === 0 ? 0 : (subtotal >= FREE_SHIPPING_THRESHOLD ? 0 : SHIPPING_BASE);
+      const total = subtotal + tax + shipping;
+      return { subtotal, tax, shipping, total };
+    }
+
+    function updateSummary() {
+      const { subtotal, tax, shipping, total } = calculate();
+      subEl.textContent = fmt(subtotal);
+      taxEl.textContent = fmt(tax);
+      shipEl.textContent = fmt(shipping);
+      totEl.textContent = fmt(total);
+
+      if (subtotal >= FREE_SHIPPING_THRESHOLD) {
+        shipNote.textContent = "¡Tienes envío gratis por superar el mínimo!";
+      } else if (subtotal > 0) {
+        const diff = FREE_SHIPPING_THRESHOLD - subtotal;
+        shipNote.textContent = `Te faltan ${fmt(diff)} para obtener envío gratis.`;
+      } else {
+        shipNote.textContent = "";
+      }
+    }
+
+    // ===== Persistencia =====
+    function persist() {
+      localStorage.setItem("cart", JSON.stringify(cart));
+    }
+
+    // ===== Eventos =====
+    checkoutBtn.addEventListener("click", () => {
+      const { total } = calculate();
+      // Aquí podrías redirigir a tu pasarela real:
+      alert("Gracias por tu compra. Total a pagar: " + fmt(total));
+      // window.location.href = "pago.html";
+    });
+
+    // Init
+    loadCart();
+    renderCart();
+  </script>
 </body>
 </html>
