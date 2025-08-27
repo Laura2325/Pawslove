@@ -3,46 +3,47 @@ const formatoMoneda = new Intl.NumberFormat('es-CO', {
     style: 'currency',
     currency: 'COP',
     minimumFractionDigits: 0
-  });
+});
 
 function obtenerProductosDeLocalStorage() {
-  const productosGuardados = localStorage.getItem(pawsloveKey);
-  return productosGuardados ? JSON.parse(productosGuardados) : [];
+    const productosGuardados = localStorage.getItem(pawsloveKey);
+    return productosGuardados ? JSON.parse(productosGuardados) : [];
 }
 
 
 function crearTarjetaProducto(producto) {  
   const imagenSrc = producto.imagen || 'https://via.placeholder.com/300x200.png?text=Pawslove';
-
-  return `
+  return `            
     <div class="product-card bg-white rounded-custom overflow-hidden shadow-md flex flex-col">
       <div class="h-48 bg-light flex items-center justify-center p-4">
-        <img src="${imagenSrc}" alt="Imagen de ${producto.nombre}" class="max-h-full max-w-full object-contain">
+          <img src="${imagenSrc}" alt="Imagen de ${producto.nombre}" class="max-h-full max-w-full object-contain">
       </div>
       <div class="p-5 flex-1 flex flex-col">
-        <h3 class="text-xl font-bold text-dark mb-2">${producto.nombre}</h3>
-        <p class="text-gray-500 text-sm mb-4">Categoría: ${producto.categoria}</p>
-        <div class="flex justify-between items-center mt-auto">
+          <h3 class="text-xl font-bold text-dark mb-2">${producto.nombre}</h3>
+          <p class="text-gray-500 text-sm mb-4">Categoría: ${producto.categoria}</p>
+          <div class="flex justify-between items-center mt-auto">
           <span class="text-2xl font-bold text-primary">${formatoMoneda.format(producto.precio)}</span>
           <button class="add-to-cart bg-secondary text-white py-2 px-4 rounded-custom font-medium hover:opacity-90 transition-opacity" data-id="${producto.id}">
-            Agregar
+              Agregar
           </button>
-        </div>
+          </div>
       </div>
     </div>
   `;
 }
 
-// Se ejecuta cuando el contenido de la página se ha cargado por completo.
 document.addEventListener('DOMContentLoaded', () => {
-  const contenedorProductos = document.getElementById('gridProductos');
-  const productos = obtenerProductosDeLocalStorage();
+    const contenedorProductos = document.getElementById('gridProductos');
+    const todosLosProductos = obtenerProductosDeLocalStorage();
 
-  if (productos.length > 0) {
-    // Generamos el HTML para todos los productos y lo insertamos en el contenedor.
-    contenedorProductos.innerHTML = productos.map(crearTarjetaProducto).join('');
-  }else{
-    contenedorProductos.innerHTML = `
+    // 1. Filtramos para obtener solo los productos con estado 'Activo'.
+    const productosVisibles = todosLosProductos.filter(producto => producto.estado === 'Activo');
+
+    if (productosVisibles.length > 0) {
+        // 2. Mapeamos SOLAMENTE los productos visibles para crear el HTML.
+        contenedorProductos.innerHTML = productosVisibles.map(crearTarjetaProducto).join('');
+    } else {        
+        contenedorProductos.innerHTML = `
   <!-- Producto 1 -->
             <div class="product-card bg-white rounded-custom overflow-hidden shadow-md flex flex-col">
                 <div class="h-48 bg-gradient-to-br from-primary/20 to-primary/10 flex items-center justify-center p-4">
@@ -234,5 +235,5 @@ document.addEventListener('DOMContentLoaded', () => {
                 </div>
             </div>
 `;
-  }
+    }
 });
