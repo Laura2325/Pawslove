@@ -1,5 +1,32 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const USERS_STORAGE_KEY = 'pawsloveUsers'; // Debe ser la misma clave que usaste en registro.js
+    const USERS_STORAGE_KEY = 'pawsloveUsers';
+    function inicializarAdmin() {
+        const usuariosJSON = localStorage.getItem(USERS_STORAGE_KEY);
+        let usuarios = [];
+        if (usuariosJSON) {
+            try {
+                usuarios = JSON.parse(usuariosJSON);
+            } catch (e) {
+                console.error("Error al parsear usuarios desde localStorage", e);
+                usuarios = [];
+            }
+        }
+
+        const adminExists = usuarios.some(user => user.correo === 'admin_pawslove@gmail.com');
+
+        if (!adminExists) {
+            const adminUser = {
+                nombre: 'admin_pawslove',
+                correo: 'admin_pawslove@gmail.com',
+                contraseña: 'admin_pawslove',
+                tipo: 'Administrador Principal'
+            };
+            usuarios.unshift(adminUser);
+            localStorage.setItem(USERS_STORAGE_KEY, JSON.stringify(usuarios));
+        }
+    }
+    
+    inicializarAdmin();
 
     const loginForm = document.getElementById('loginForm');
     if (!loginForm) return; // Salir si el formulario no existe en la página
@@ -24,23 +51,17 @@ document.addEventListener('DOMContentLoaded', () => {
         const usuarios = usuariosJSON ? JSON.parse(usuariosJSON) : [];
 
         // 3. Buscar si el usuario existe y la contraseña coincide
-        const usuarioEncontrado = usuarios.find(user => user.correo === email && user.contraseña === password);
+        const usuarioEncontrado = usuarios.find(user => user.correo === email && user.contraseña === password);        
 
         // 4. Validar el resultado del inicio de sesión
         if (usuarioEncontrado) {
             // ¡Inicio de sesión exitoso!
             alert(`¡Bienvenido de nuevo, ${usuarioEncontrado.nombre}!`);
-            
-            // Opcional: Guardar información del usuario logueado en sessionStorage
-            // sessionStorage es como localStorage, pero se borra al cerrar la pestaña.
-            sessionStorage.setItem('loggedInUser', JSON.stringify(usuarioEncontrado));
-
-            // Opcional: Redirigir al usuario a una página principal o dashboard
-            // window.location.href = 'index.html'; 
+            //Redirigir al usuario a una página principal o dashboard dependiendo el tipo de usuario
+            usuarioEncontrado.tipo == 'Administrador Principal' ? window.location.replace('../paginas_admin/principal.html'):window.location.replace('index.html');
         } else {
             // Error en el inicio de sesión
-            alert('Correo o contraseña incorrectos. Por favor, verifica tus datos.');
-            // Opcional: Limpiar el campo de contraseña para que el usuario reintente
+            alert('Correo o contraseña incorrectos. Por favor, verifica tus datos.');            
             passwordInput.value = '';
         }
     });

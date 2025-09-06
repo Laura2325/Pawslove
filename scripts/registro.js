@@ -44,6 +44,7 @@ document.addEventListener('DOMContentLoaded', () => {
             nombre: nombreUsuario.value.trim(),
             correo: correo.value.trim(),
             contraseña: contraseña.value,
+            tipo: 'Cliente'
         };
 
         usuarios.push(usuario);
