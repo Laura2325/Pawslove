@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin - Gestión de Usuarios | Pawslove</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#6c40d1',
+                        secondary: '#fc6dab',
+                        accent: '#17b890',
+                        light: '#ecf0f1',
+                        dark: '#34252f'
+                    },
+                    fontFamily: {
+                        fredoka: ['Fredoka One', 'cursive']
+                    },
+                    borderRadius: {
+                        'custom': '24px'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .user-row:hover {
+            background-color: #f3f4f6;
+            transform: translateY(-2px);
+            transition: all 0.2s ease;
+        }
+        
+        .status-badge {
+            font-size: 0.75rem;
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+        }
+        
+        .modal {
+            transition: opacity 0.3s ease, transform 0.3s ease;
+        }
+        
+        .modal-hidden {
+            opacity: 0;
+            transform: scale(0.9);
+            pointer-events: none;
+        }
+        
+        .modal-visible {
+            opacity: 1;
+            transform: scale(1);
+        }
+        
+        /* Estilos para la barra lateral */
+        .sidebar {
+            width: 250px;
+            transform: translateX(-250px);
+            transition: transform 0.3s ease;
+        }
+        
+        .sidebar-open {
+            transform: translateX(0);
+        }
+        
+        @media (min-width: 1024px) {
+            .sidebar {
+                transform: translateX(0);
+            }
+            
+            .main-content {
+                margin-left: 250px;
+            }
+        }
+        
+        .overlay {
+            display: none;
+        }
+        
+        @media (max-width: 1023px) {
+            .sidebar-open + .overlay {
+                display: block;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-100 min-h-screen flex">
+    <!-- Sidebar Navigation -->
+    <div class="sidebar fixed inset-y-0 left-0 z-50 bg-primary text-white shadow-lg lg:relative lg:translate-x-0" id="sidebar">
+        <div class="p-4">
+            <h1 class="text-2xl font-fredoka">Pawslove Admin</h1>
+        </div>
+        <nav class="mt-8">
+            <ul>
+                <li class="mb-2">
+                    <a href="#" class="flex items-center px-6 py-3 bg-primary-dark font-semibold">
+                        <i class="fas fa-users w-6"></i>
+                        <span class="ml-3">Usuarios</span>
+                    </a>
+                </li>
+                <li class="mb-2">
+                    <a href="#" class="flex items-center px-6 py-3 text-white hover:bg-primary-dark">
+                        <i class="fas fa-file-alt w-6"></i>
+                        <span class="ml-3">Formularios</span>
+                    </a>
+                </li>
+                <li class="mb-2">
+                    <a href="#" class="flex items-center px-6 py-3 text-white hover:bg-primary-dark">
+                        <i class="fas fa-paw w-6"></i>
+                        <span class="ml-3">Mascotas</span>
+                    </a>
+                </li>
+                <li class="mb-2">
+                    <a href="#" class="flex items-center px-6 py-3 text-white hover:bg-primary-dark">
+                        <i class="fas fa-chart-bar w-6"></i>
+                        <span class="ml-3">Estadísticas</span>
+                    </a>
+                </li>
+                <li class="mb-2">
+                    <a href="#" class="flex items-center px-6 py-3 text-white hover:bg-primary-dark">
+                        <i class="fas fa-cog w-6"></i>
+                        <span class="ml-3">Configuración</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+        <div class="absolute bottom-0 w-full p-4">
+            <button class="w-full bg-white text-primary px-4 py-2 rounded-custom font-semibold hover:bg-gray-100">
+                Cerrar sesión
+            </button>
+        </div>
+    </div>
+
+    <!-- Overlay para móvil -->
+    <div class="overlay fixed inset-0 bg-black bg-opacity-50 z-40" id="overlay"></div>
+
+    <!-- Main Content -->
+    <div class="main-content flex-1 min-w-0">
+        <!-- Header móvil -->
+        <header class="bg-primary text-white shadow-lg lg:hidden">
+            <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+                <button id="menu-toggle" class="text-white">
+                    <i class="fas fa-bars text-xl"></i>
+                </button>
+                <h1 class="text-xl font-fredoka">Pawslove Admin</h1>
+                <div class="w-6"></div> <!-- Espacio para equilibrar -->
+            </div>
+        </header>
+
+        <!-- Contenido principal -->
+        <main class="container mx-auto px-4 py-8">
+            <div class="flex justify-between items-center mb-8">
+                <h2 class="text-3xl font-fredoka text-primary">Gestión de Usuarios</h2>
+                <div class="flex space-x-4">
+                    <div class="relative">
+                        <input type="text" placeholder="Buscar usuarios..." class="pl-10 pr-4 py-2 rounded-custom border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary">
+                        <i class="fas fa-search absolute left-3 top-3 text-gray-400"></i>
+                    </div>
+                    <select class="rounded-custom border border-gray-300 px-4 py-2 focus:outline-none focus:ring-2 focus:ring-primary">
+                        <option>Todos los estados</option>
+                        <option>Pendiente</option>
+                        <option>En revisión</option>
+                        <option>Aprobado</option>
+                        <option>Rechazado</option>
+                    </select>
+                    <button id="refresh-data" class="bg-primary text-white px-4 py-2 rounded-custom hover:bg-purple-800">
+                        <i class="fas fa-sync-alt"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Stats Cards -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8" id="stats-cards">
+                <!-- Las cards se generarán dinámicamente con JavaScript -->
+            </div>
+
+            <!-- Users Table -->
+            <div class="bg-white rounded-custom shadow overflow-hidden">
+                <table class="min-w-full divide-y divide-gray-200">
+                    <thead class="bg-gray-50">
+                        <tr>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Usuario</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Fecha solicitud</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Documento</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Ciudad</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Estado</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody class="bg-white divide-y divide-gray-200" id="users-table-body">
+                        <!-- Los usuarios se generarán dinámicamente con JavaScript -->
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Pagination -->
+            <div class="bg-white px-4 py-3 flex items-center justify-between border-t border-gray-200 rounded-b-custom sm:px-6 mt-4">
+                <div class="hidden sm:flex-1 sm:flex sm:items-center sm:justify-between">
+                    <div>
+                        <p class="text-sm text-gray-700">
+                            Mostrando
+                            <span class="font-medium" id="current-items">0</span>
+                            a
+                            <span class="font-medium" id="total-items">0</span>
+                            de
+                            <span class="font-medium" id="total-users">0</span>
+                            resultados
+                        </p>
+                    </div>
+                    <div>
+                        <nav class="relative z-0 inline-flex rounded-md shadow-sm -space-x-px" aria-label="Pagination">
+                            <a href="#" class="relative inline-flex items-center px-2 py-2 rounded-l-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
+                                <span class="sr-only">Anterior</span>
+                                <i class="fas fa-chevron-left"></i>
+                            </a>
+                            <a href="#" class="relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50">1</a>
+                            <a href="#" class="relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50">2</a>
+                            <a href="#" class="relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50">3</a>
+                            <span class="relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm font-medium text-gray-700">...</span>
+                            <a href="#" class="relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50">10</a>
+                            <a href="#" class="relative inline-flex items-center px-2 py-2 rounded-r-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
+                                <span class="sr-only">Siguiente</span>
+                                <i class="fas fa-chevron-right"></i>
+                            </a>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- User Detail Modal -->
+    <div id="user-detail-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 modal modal-hidden">
+        <div class="bg-white rounded-custom p-6 max-w-4xl w-full mx-4 max-h-screen overflow-y-auto">
+            <div class="flex justify-between items-center mb-6">
+                <h3 class="text-2xl font-fredoka text-primary">Detalles del Usuario</h3>
+                <button id="close-modal" class="text-gray-500 hover:text-gray-700">
+                    <i class="fas fa-times text-xl"></i>
+                </button>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                <div>
+                    <h4 class="text-lg font-semibold mb-4 text-primary">Información Personal</h4>
+                    <div class="space-y-3">
+                        <p><span class="font-semibold">Nombre completo:</span> <span id="detail-nombre">-</span></p>
+                        <p><span class="font-semibold">Email:</span> <span id="detail-email">-</span></p>
+                        <p><span class="font-semibold">Teléfono:</span> <span id="detail-telefono">-</span></p>
+                        <p><span class="font-semibold">Documento:</span> <span id="detail-documento">-</span></p>
+                        <p><span class="font-semibold">Fecha de nacimiento:</span> <span id="detail-fecha-nacimiento">-</span></p>
+                    </div>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-semibold mb-4 text-primary">Dirección</h4>
+                    <div class="space-y-3">
+                        <p><span class="font-semibold">Dirección:</span> <span id="detail-direccion">-</span></p>
+                        <p><span class="font-semibold">Ciudad:</span> <span id="detail-ciudad">-</span></p>
+                        <p><span class="font-semibold">Ocupación:</span> <span id="detail-ocupacion">-</span></p>
+                        <p><span class="font-semibold">Ingresos:</span> <span id="detail-ingresos">-</span></p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mb-6">
+                <h4 class="text-lg font-semibold mb-4 text-primary">Situación de Vivienda</h4>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <p><span class="font-semibold">Tipo de vivienda:</span> <span id="detail-tipo-vivienda">-</span></p>
+                    <p><span class="font-semibold">Permiso mascota:</span> <span id="detail-permiso-mascota">-</span></p>
+                    <p><span class="font-semibold">Espacio exterior:</span> <span id="detail-espacio-exterior">-</span></p>
+                    <p><span class="font-semibold">Espacio seguro:</span> <span id="detail-espacio-seguro">-</span></p>
+                </div>
+            </div>
+            
+            <div class="mb-6">
+                <h4 class="text-lg font-semibold mb-4 text-primary">Experiencia con Mascotas</h4>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <p><span class="font-semibold">Experiencia previa:</span> <span id="detail-experiencia">-</span></p>
+                    <p><span class="font-semibold">Modalidad laboral:</span> <span id="detail-modalidad">-</span></p>
+                    <p><span class="font-semibold">Espacio para mascota:</span> <span id="detail-espacio-mascota">-</span></p>
+                    <p><span class="font-semibold">Tiempo diario:</span> <span id="detail-tiempo">-</span></p>
+                </div>
+            </div>
+            
+            <div class="flex justify-end space-x-4 mt-8">
+                <button class="bg-gray-300 text-gray-700 px-6 py-2 rounded-custom font-semibold hover:bg-gray-400">
+                    Descargar PDF
+                </button>
+                <button class="bg-red-500 text-white px-6 py-2 rounded-custom font-semibold hover:bg-red-600">
+                    Rechazar
+                </button>
+                <button class="bg-green-500 text-white px-6 py-2 rounded-custom font-semibold hover:bg-green-600">
+                    Aprobar
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Datos de ejemplo (en un caso real, estos vendrían de una base de datos)
+        let usersData = [
+            {
+                id: 1,
+                nombre: "María Alejandra González",
+                email: "maria.gonzalez@email.com",
+                telefono: "+57 312 345 6789",
+                documento: "10.234.567 (C.C.)",
+                fechaNacimiento: "15/08/1985",
+                direccion: "Calle 123 # 45 - 67",
+                ciudad: "Medellín",
+                ocupacion: "Ingeniera",
+                ingresos: "3 a 5 SMMLV",
+                tipoVivienda: "Apartamento Propio",
+                permisoMascota: "Sí",
+                espacioExterior: "Sí (Balcón)",
+                espacioSeguro: "Sí",
+                experiencia: "Sí",
+                modalidad: "Mixto",
+                espacioMascota: "Interior de la casa",
+                tiempo: "4 a 6 horas",
+                fechaSolicitud: "15/05/2023",
+                horaSolicitud: "10:24 AM",
+                estado: "Pendiente",
+                iniciales: "MA"
+            },
+            {
+                id: 2,
+                nombre: "Carlos Andrés Rodríguez",
+                email: "carlos.rodriguez@email.com",
+                telefono: "+57 320 987 6543",
+                documento: "98.765.432 (C.C.)",
+                fechaNacimiento: "22/11/1990",
+                direccion: "Carrera 56 # 78 - 90",
+                ciudad: "Bogotá",
+                ocupacion: "Diseñador",
+                ingresos: "3 a 5 SMMLV",
+                tipoVivienda: "Apartamento Alquilado",
+                permisoMascota: "Sí",
+                espacioExterior: "No",
+                espacioSeguro: "Sí",
+                experiencia: "Sí",
+                modalidad: "Remoto",
+                espacioMascota: "Interior de la casa",
+                tiempo: "Más de 6 horas",
+                fechaSolicitud: "14/05/2023",
+                horaSolicitud: "03:45 PM",
+                estado: "Aprobado",
+                iniciales: "CR"
+            }
+        ];
+
+        // Función para obtener datos del formulario de adopción desde localStorage
+        function getFormDataFromLocalStorage() {
+            const savedData = localStorage.getItem('formularioAdopcion');
+            if (savedData) {
+                try {
+                    const formData = JSON.parse(savedData);
+                    
+                    // Crear un nuevo usuario a partir de los datos del formulario
+                    const newUser = {
+                        id: usersData.length + 1,
+                        nombre: formData.nombre || '',
+                        email: formData.email || '',
+                        telefono: formData.telefono || '',
+                        documento: `${formData.numeroDocumento || ''} (${getDocumentType(formData.documentoTipo)})`,
+                        fechaNacimiento: formatDate(formData.fechaNacimiento) || '',
+                        direccion: formData.direccion || '',
+                        ciudad: formData.ciudad || '',
+                        ocupacion: formData.ocupacion || '',
+                        ingresos: getIncomeRange(formData.ingresos) || '',
+                        tipoVivienda: getHousingType(formData.tipoVivienda) || '',
+                        permisoMascota: formData.permisoMascota === 'si' ? 'Sí' : 'No',
+                        espacioExterior: formData.caracteristicasVivienda === 'si' ? 'Sí' : 'No',
+                        espacioSeguro: formData.seguroVivienda === 'si' ? 'Sí' : 'No',
+                        experiencia: formData.experienciaMascotas === 'si' ? 'Sí' : 'No',
+                        modalidad: getWorkModality(formData.modalidadLaboral) || '',
+                        espacioMascota: getPetSpace(formData.espacioMascota) || '',
+                        tiempo: getTimeDedication(formData.tiempoDedicado) || '',
+                        fechaSolicitud: new Date().toLocaleDateString(),
+                        horaSolicitud: new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'}),
+                        estado: "Pendiente",
+                        iniciales: getInitials(formData.nombre)
+                    };
+                    
+                    // Agregar el nuevo usuario a los datos
+                    usersData.unshift(newUser);
+                    
+                    return true;
+                } catch (error) {
+                    console.error('Error al procesar datos del formulario:', error);
+                    return false;
+                }
+            }
+            return false;
+        }
+
+        // Funciones auxiliares para formatear datos
+        function getDocumentType(type) {
+            const types = {
+                'cc': 'C.C.',
+                'ce': 'C.E.',
+                'ti': 'T.I.',
+                'pp': 'Pasaporte'
+            };
+            return types[type] || '';
+        }
+
+        function getIncomeRange(income) {
+            const ranges = {
+                'menos-1-smmlv': 'Menos de 1 SMMLV',
+                '1-3-smmlv': '1 a 3 SMMLV',
+                '3-5-smmlv': '3 a 5 SMMLV',
+                'mas-5-smmlv': 'Más de 5 SMMLV'
+            };
+            return ranges[income] || '';
+        }
+
+        function getHousingType(type) {
+            const types = {
+                'casa': 'Casa Propia',
+                'casa-alquilada': 'Casa Alquilada',
+                'apartamento': 'Apartamento Propio',
+                'apartamento-alquilado': 'Apartamento Alquilado'
+            };
+            return types[type] || '';
+        }
+
+        function getWorkModality(modality) {
+            const modalities = {
+                'presencial': 'Presencial',
+                'remoto': 'Remoto',
+                'mixto': 'Mixto'
+            };
+            return modalities[modality] || '';
+        }
+
+        function getPetSpace(space) {
+            const spaces = {
+                'interior': 'Interior de la casa',
+                'exterior': 'Exterior de la casa',
+                'acceso-libre': 'Acceso Libre',
+                'zona': 'En una zona específica de la Casa'
+            };
+            return spaces[space] || '';
+        }
+
+        function getTimeDedication(time) {
+            const times = {
+                'menos-2-horas': 'Menos de 2 horas',
+                '2-4-horas': '2 a 4 horas',
+                '4-6-horas': '4 a 6 horas',
+                'mas-6-horas': 'Más de 6 horas'
+            };
+            return times[time] || '';
+        }
+
+        function formatDate(dateString) {
+            if (!dateString) return '';
+            const date = new Date(dateString);
+            return date.toLocaleDateString();
+        }
+
+        function getInitials(name) {
+            if (!name) return 'NN';
+            return name.split(' ').map(word => word[0]).join('').toUpperCase().substring(0, 2);
+        }
+
+        // Función para actualizar las cards de estadísticas
+        function updateStatsCards() {
+            const totalUsers = usersData.length;
+            const pendingUsers = usersData.filter(user => user.estado === "Pendiente").length;
+            const approvedUsers = usersData.filter(user => user.estado === "Aprobado").length;
+            const rejectedUsers = usersData.filter(user => user.estado === "Rechazado").length;
+            
+            const statsContainer = document.getElementById('stats-cards');
+            statsContainer.innerHTML = `
+                <div class="bg-white rounded-custom shadow p-6">
+                    <div class="flex justify-between items-center">
+                        <div>
+                            <p class="text-gray-500">Total usuarios</p>
+                            <p class="text-3xl font-bold text-primary">${totalUsers}</p>
+                        </div>
+                        <div class="bg-primary bg-opacity-20 p-3 rounded-full">
+                            <i class="fas fa-users text-primary text-xl"></i>
+                        </div>
+                    </div>
+                    <p class="text-sm text-green-500 mt-2"><i class="fas fa-arrow-up"></i> ${Math.floor(totalUsers/10)}% desde el mes pasado</p>
+                </div>
+                
+                <div class="bg-white rounded-custom shadow p-6">
+                    <div class="flex justify-between items-center">
+                        <div>
+                            <p class="text-gray-500">Pendientes</p>
+                            <p class="text-3xl font-bold text-yellow-500">${pendingUsers}</p>
+                        </div>
+                        <div class="bg-yellow-500 bg-opacity-20 p-3 rounded-full">
+                            <i class="fas fa-clock text-yellow-500 text-xl"></i>
+                        </div>
+                    </div>
+                    <p class="text-sm text-gray-500 mt-2">Esperando revisión</p>
+                </div>
+                
+                <div class="bg-white rounded-custom shadow p-6">
+                    <div class="flex justify-between items-center">
+                        <div>
+                            <p class="text-gray-500">Aprobados</p>
+                            <p class="text-3xl font-bold text-green-500">${approvedUsers}</p>
+                        </div>
+                        <div class="bg-green-500 bg-opacity-20 p-3 rounded-full">
+                            <i class="fas fa-check-circle text-green-500 text-xl"></i>
+                        </div>
+                    </div>
+                    <p class="text-sm text-green-500 mt-2"><i class="fas fa-arrow-up"></i> ${Math.floor(approvedUsers/5)}% desde ayer</p>
+                </div>
+                
+                <div class="bg-white rounded-custom shadow p-6">
+                    <div class="flex justify-between items-center">
+                        <div>
+                            <p class="text-gray-500">Rechazados</p>
+                            <p class="text-3xl font-bold text-red-500">${rejectedUsers}</p>
+                        </div>
+                        <div class="bg-red-500 bg-opacity-20 p-3 rounded-full">
+                            <i class="fas fa-times-circle text-red-500 text-xl"></i>
+                        </div>
+                    </div>
+                    <p class="text-sm text-gray-500 mt-2">No cumplen requisitos</p>
+                </div>
+            `;
+        }
+
+        // Función para actualizar la tabla de usuarios
+        function updateUsersTable() {
+            const tableBody = document.getElementById('users-table-body');
+            tableBody.innerHTML = '';
+            
+            usersData.forEach(user => {
+                const row = document.createElement('tr');
+                row.className = 'user-row';
+                
+                let statusClass = '';
+                if (user.estado === 'Pendiente') statusClass = 'bg-yellow-100 text-yellow-800';
+                if (user.estado === 'Aprobado') statusClass = 'bg-green-100 text-green-800';
+                if (user.estado === 'Rechazado') statusClass = 'bg-red-100 text-red-800';
+                if (user.estado === 'En revisión') statusClass = 'bg-blue-100 text-blue-800';
+                
+                row.innerHTML = `
+                    <td class="px-6 py-4 whitespace-nowrap">
+                        <div class="flex items-center">
+                            <div class="flex-shrink-0 h-10 w-10">
+                                <div class="h-10 w-10 rounded-full bg-primary text-white flex items-center justify-center font-semibold">${user.iniciales}</div>
+                            </div>
+                            <div class="ml-4">
+                                <div class="text-sm font-medium text-gray-900">${user.nombre}</div>
+                                <div class="text-sm text-gray-500">${user.email}</div>
+                            </div>
+                        </div>
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap">
+                        <div class="text-sm text-gray-900">${user.fechaSolicitud}</div>
+                        <div class="text-sm text-gray-500">${user.horaSolicitud}</div>
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                        ${user.documento}
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                        ${user.ciudad}
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap">
+                        <span class="status-badge ${statusClass}">${user.estado}</span>
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                        <button class="text-primary hover:text-purple-800 mr-3 view-details" data-id="${user.id}">
+                            <i class="fas fa-eye"></i>
+                        </button>
+                        <button class="text-green-500 hover:text-green-700 mr-3 approve-user" data-id="${user.id}">
+                            <i class="fas fa-check"></i>
+                        </button>
+                        <button class="text-red-500 hover:text-red-700 reject-user" data-id="${user.id}">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </td>
+                `;
+                
+                tableBody.appendChild(row);
+            });
+            
+            // Actualizar contadores de paginación
+            document.getElementById('current-items').textContent = '1';
+            document.getElementById('total-items').textContent = usersData.length;
+            document.getElementById('total-users').textContent = usersData.length;
+            
+            // Agregar event listeners a los botones
+            document.querySelectorAll('.view-details').forEach(button => {
+                button.addEventListener('click', function() {
+                    const userId = parseInt(this.getAttribute('data-id'));
+                    showUserDetails(userId);
+                });
+            });
+            
+            document.querySelectorAll('.approve-user').forEach(button => {
+                button.addEventListener('click', function() {
+                    const userId = parseInt(this.getAttribute('data-id'));
+                    updateUserStatus(userId, 'Aprobado');
+                });
+            });
+            
+            document.querySelectorAll('.reject-user').forEach(button => {
+                button.addEventListener('click', function() {
+                    const userId = parseInt(this.getAttribute('data-id'));
+                    updateUserStatus(userId, 'Rechazado');
+                });
+            });
+        }
+
+        // Función para mostrar detalles del usuario
+        function showUserDetails(userId) {
+            const user = usersData.find(u => u.id === userId);
+            if (!user) return;
+            
+            // Llenar el modal con los datos del usuario
+            document.getElementById('detail-nombre').textContent = user.nombre;
+            document.getElementById('detail-email').textContent = user.email;
+            document.getElementById('detail-telefono').textContent = user.telefono;
+            document.getElementById('detail-documento').textContent = user.documento;
+            document.getElementById('detail-fecha-nacimiento').textContent = user.fechaNacimiento;
+            document.getElementById('detail-direccion').textContent = user.direccion;
+            document.getElementById('detail-ciudad').textContent = user.ciudad;
+            document.getElementById('detail-ocupacion').textContent = user.ocupacion;
+            document.getElementById('detail-ingresos').textContent = user.ingresos;
+            document.getElementById('detail-tipo-vivienda').textContent = user.tipoVivienda;
+            document.getElementById('detail-permiso-mascota').textContent = user.permisoMascota;
+            document.getElementById('detail-espacio-exterior').textContent = user.espacioExterior;
+            document.getElementById('detail-espacio-seguro').textContent = user.espacioSeguro;
+            document.getElementById('detail-experiencia').textContent = user.experiencia;
+            document.getElementById('detail-modalidad').textContent = user.modalidad;
+            document.getElementById('detail-espacio-mascota').textContent = user.espacioMascota;
+            document.getElementById('detail-tiempo').textContent = user.tiempo;
+            
+            // Mostrar el modal
+            document.getElementById('user-detail-modal').classList.remove('modal-hidden');
+            document.getElementById('user-detail-modal').classList.add('modal-visible');
+        }
+
+        // Función para actualizar el estado de un usuario
+        function updateUserStatus(userId, status) {
+            const userIndex = usersData.findIndex(u => u.id === userId);
+            if (userIndex !== -1) {
+                usersData[userIndex].estado = status;
+                updateStatsCards();
+                updateUsersTable();
+                
+                // Mostrar notificación
+                alert(`Usuario ${status.toLowerCase()} correctamente`);
+            }
+        }
+
+        // Función para cargar y procesar todos los datos
+        function loadAllData() {
+            // Intentar obtener datos del formulario
+            const hasNewData = getFormDataFromLocalStorage();
+            
+            // Actualizar la UI
+            updateStatsCards();
+            updateUsersTable();
+            
+            // Si había datos nuevos, mostrar notificación
+            if (hasNewData) {
+                alert('Nuevos datos de formulario cargados correctamente');
+            }
+        }
+
+        // Configuración de la barra lateral para móviles
+        document.getElementById('menu-toggle').addEventListener('click', function() {
+            document.getElementById('sidebar').classList.toggle('sidebar-open');
+        });
+
+        document.getElementById('overlay').addEventListener('click', function() {
+            document.getElementById('sidebar').classList.remove('sidebar-open');
+        });
+
+        // Cerrar modal
+        document.getElementById('close-modal').addEventListener('click', function() {
+            document.getElementById('user-detail-modal').classList.remove('modal-visible');
+            document.getElementById('user-detail-modal').classList.add('modal-hidden');
+        });
+
+        // Cerrar modal al hacer clic fuera
+        document.getElementById('user-detail-modal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                document.getElementById('user-detail-modal').classList.remove('modal-visible');
+                document.getElementById('user-detail-modal').classList.add('modal-hidden');
+            }
+        });
+
+        // Botón para refrescar datos
+        document.getElementById('refresh-data').addEventListener('click', loadAllData);
+
+        // Inicializar la página
+        document.addEventListener('DOMContentLoaded', function() {
+            loadAllData();
+        });
+    </script>
+</body>
+</html>
