@@ -3,24 +3,310 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pawslove Foundation</title>
-    <link rel="stylesheet" href="../styles/style.css">
+    <title>Pawslove Foundation | Inicio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#6c40d1',
+                        secondary: '#fc6dab',
+                        accent: '#17b890',
+                        light: '#ecf0f1',
+                        dark: '#34252f',
+                    },
+                    borderRadius: {
+                        'nav': '24px',
+                    },
+                    spacing: {
+                        'spacing': '1rem',
+                    },
+                    boxShadow: {
+                        'nav': '0 4px 6px rgba(0, 0, 0, 0.1)',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f9fafb;
+            min-height: 200vh; /* Para permitir hacer scroll */
+        }
+        
+        .nav-hidden {
+            transform: translateY(-100%);
+            transition: transform 0.4s ease-in-out;
+        }
+        
+        .nav-visible {
+            transform: translateY(0);
+            transition: transform 0.4s ease-in-out;
+        }
+        
+        .nav-fixed {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 1000;
+            width: 90%;
+            max-width: 1152px; /* Equivalente a max-w-6xl */
+        }
+        
+        .nav-link {
+            position: relative;
+            padding: 8px 16px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            z-index: 1;
+        }
+        
+        .nav-link::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(108, 64, 209, 0.1); /* primary con opacidad */
+            border-radius: 8px;
+            z-index: -1;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .nav-link:hover::before {
+            opacity: 1;
+        }
+        
+        .mobile-nav-link {
+            position: relative;
+            padding: 12px 16px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            display: block;
+        }
+        
+        .mobile-nav-link::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(108, 64, 209, 0.1);
+            border-radius: 8px;
+            z-index: -1;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .mobile-nav-link:hover::before {
+            opacity: 1;
+        }
+        
+        .hero-content {
+            transition: all 0.5s ease;
+        }
+        
+        .hero-image {
+            transition: all 0.5s ease;
+        }
+        
+        /* Animación para el icono de carrito */
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
+        
+        .cart-icon:hover {
+            animation: bounce 0.5s;
+        }
+        
+        /* Efecto para el botón de donar */
+        .donate-btn {
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(252, 109, 171, 0.3);
+        }
+        
+        .donate-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 8px rgba(252, 109, 171, 0.4);
+        }
+    </style>
 </head>
 <body>
-<nav>
-    <div class = "nav-container">
-        <a class = "logo-nav" href="#"></a>
-        <img src="assets/img/marca/Isotipo.svg" alt="logo">
-    </div>
-    <div class = "nav-page">
-        <a class = "nav-link" href="index.html">Inicio</a>
-        <a class = "nav-link" href="adopta.html">Adopta</a>
-        <a class = "nav-link" href="tienda.html">Tienda</a>
-        <a class = "nav-link" href="nosotros.html">Nosotros</a>
-    </div>
-     <footer class="footer">
-  <img src="./assets/img/marca/Logo_2.svg" alt="Logo Pawslove" class="footer-logo">
-</footer>
+    <!-- Navbar -->
+    <nav id="main-nav" class="bg-white shadow-nav rounded-nav border border-gray-200 nav-fixed nav-hidden">
+        <div class="flex items-center justify-between p-4">
+            <!-- Logo -->
+            <div class="flex items-center space-x-3">
+                <div class="h-12 w-12 bg-primary rounded-full flex items-center justify-center">
+                    <svg src = "../Pawslove/assets/img/marca/Logo_2.svg" class="h-7 w-7 text-white" viewBox="0 0 20 20" fill="currentColor">
+                    </svg>
+                </div>
+            </div>
 
+            <!-- Menú para desktop -->
+            <div class="hidden md:flex items-center space-x-4">
+                <a href="index.html" class="nav-link text-dark font-medium">Inicio</a>
+                <a href="paginas/adopta.html" class="nav-link text-dark font-medium">Adopta</a>
+                <a href="paginas/tienda.html" class="nav-link text-dark font-medium">Tienda</a>
+                <a href="paginas/donaciones.html" class="nav-link text-dark font-medium">Donar</a>
+                <a href="paginas/nosotros.html" class="nav-link text-dark font-medium">Nosotros</a>
+                <button class="donate-btn bg-secondary text-white px-5 py-2.5 rounded-full font-semibold">
+                    Donar
+                </button>
+                <div class="relative cursor-pointer cart-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 text-accent" viewBox="0 0 20 20" fill="currentColor">
+                        <path d="M3 1a1 1 0 000 2h1.22l.305 1.222a.997.997 0 00.01.042l1.358 5.43-.893.892C3.74 11.846 4.632 14 6.414 14H15a1 1 0 000-2H6.414l1-1H14a1 1 0 00.894-.553l3-6A1 1 0 0017 3H6.28l-.31-1.243A1 1 0 005 1H3zM16 16.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zM6.5 18a1.5 1.5 0 100-3 1.5 1.5 0 000 3z" />
+                    </svg>
+                    <span class="absolute -top-2 -right-2 bg-primary text-xs text-white font-bold rounded-full h-5 w-5 flex items-center justify-center">3</span>
+                </div>
+            </div>
+
+            <!-- Botón hamburguesa para mobile -->
+            <button id="menu-toggle" class="md:hidden text-dark focus:outline-none">
+                <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                </svg>
+            </button>
+        </div>
+
+        <!-- Menú mobile (oculto por defecto) -->
+        <div id="mobile-menu" class="hidden md:hidden px-4 pb-4">
+            <a href="index.html" class="mobile-nav-link text-dark font-medium py-3">Inicio</a>
+            <a href="paginas/adopta.html" class="mobile-nav-link text-dark font-medium py-3">Adopta</a>
+            <a href="paginas/tienda.html" class="mobile-nav-link text-dark font-medium py-3">Tienda</a>
+            <a href="paginas/donaciones.html" class="mobile-nav-link text-dark font-medium py-3">Donar</a>
+            <a href="paginas/nosotros.html" class="mobile-nav-link text-dark font-medium py-3">Nosotros</a>
+            <div class="flex items-center justify-between mt-4 pt-4 border-t border-gray-200">
+                <button class="donate-btn bg-secondary text-white px-5 py-2.5 rounded-full font-semibold">
+                    Donar
+                </button>
+                <div class="relative cursor-pointer cart-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 text-accent" viewBox="0 0 20 20" fill="currentColor">
+                        <path d="M3 1a1 1 0 000 2h1.22l.305 1.222a.997.997 0 00.01.042l1.358 5.43-.893.892C3.74 11.846 4.632 14 6.414 14H15a1 1 0 000-2H6.414l1-1H14a1 1 0 00.894-.553l3-6A1 1 0 0017 3H6.28l-.31-1.243A1 1 0 005 1H3zM16 16.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zM6.5 18a1.5 1.5 0 100-3 1.5 1.5 0 000 3z" />
+                    </svg>
+                    <span class="absolute -top-2 -right-2 bg-primary text-xs text-white font-bold rounded-full h-5 w-5 flex items-center justify-center">3</span>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Header/Hero Section -->
+    <header class="relative bg-gradient-to-r from-primary to-secondary text-white pt-28 pb-20 px-4">
+        <div class="max-w-6xl mx-auto flex flex-col md:flex-row items-center">
+            <div class="hero-content md:w-1/2 mb-10 md:mb-0 md:pr-10">
+                <h1 class="text-4xl md:text-5xl font-bold mb-5">Encuentra a tu compañero perfecto</h1>
+                <p class="text-lg md:text-xl mb-7">Adopta una mascota y descubre productos increíbles para consentirla en nuestra tienda.</p>
+                <div class="flex flex-col sm:flex-row gap-4">
+                    <button class="bg-white text-primary font-bold py-3 px-6 rounded-full hover:bg-opacity-90 transition-colors shadow-lg">
+                        Ver mascotas
+                    </button>
+                    <button class="bg-accent text-white font-bold py-3 px-6 rounded-full hover:bg-opacity-90 transition-colors shadow-lg">
+                        Explorar tienda
+                    </button>
+                </div>
+            </div>
+            <div class="hero-image md:w-1/2 flex justify-center">
+                <div class="relative">
+                    <div class="absolute -inset-4 bg-accent rounded-2xl rotate-3 opacity-20"></div>
+                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%236c40d1'%3E%3Cpath d='M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z'/%3E%3C/svg%3E" 
+                         alt="Imagen de mascotas" class="relative rounded-2xl w-full max-w-md h-64 object-cover bg-light">
+                </div>
+            </div>
+        </div>
+        
+        <!-- Elementos decorativos -->
+        <div class="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
+            <div class="absolute top-10% left-5% w-20 h-20 rounded-full bg-white opacity-10"></div>
+            <div class="absolute top-20% right-10% w-16 h-16 rounded-full bg-accent opacity-20"></div>
+            <div class="absolute bottom-15% left-15% w-24 h-24 rounded-full bg-light opacity-10"></div>
+        </div>
+    </header>
+
+    <!-- Sección de características -->
+    <section class="py-16 bg-white">
+        <div class="max-w-6xl mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center text-dark mb-12">¿Por qué elegirnos?</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="text-center p-6 rounded-lg hover:shadow-lg transition-shadow">
+                    <div class="bg-primary bg-opacity-10 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-5">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-primary" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 10-2 0v2H7a1 1 0 100 2h2v2a1 1 0 102 0v-2h2a1 1 0 100-2h-2V7z" clip-rule="evenodd" />
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold text-dark mb-3">Adopción Responsable</h3>
+                    <p class="text-gray-600">Todos nuestros animales están vacunados, esterilizados y con chip identificativo.</p>
+                </div>
+                
+                <div class="text-center p-6 rounded-lg hover:shadow-lg transition-shadow">
+                    <div class="bg-secondary bg-opacity-10 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-5">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-secondary" viewBox="0 0 20 20" fill="currentColor">
+                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold text-dark mb-3">Productos de Calidad</h3>
+                    <p class="text-gray-600">Ofrecemos los mejores productos para el cuidado y entretenimiento de tu mascota.</p>
+                </div>
+                
+                <div class="text-center p-6 rounded-lg hover:shadow-lg transition-shadow">
+                    <div class="bg-accent bg-opacity-10 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-5">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-accent" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M5 2a2 2 0 00-2 2v14l3.5-2 3.5 2 3.5-2 3.5 2V4a2 2 0 00-2-2H5zm4.707 5.707a1 1 0 00-1.414-1.414l-3 3a1 1 0 000 1.414l3 3a1 1 0 001.414-1.414L8.414 10l1.293-1.293zm4 0a1 1 0 010 1.414L11.586 10l1.293 1.293a1 1 0 01-1.414 1.414l-3-3a1 1 0 010-1.414l3-3a1 1 0 011.414 0z" clip-rule="evenodd" />
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold text-dark mb-3">Asesoramiento Expertos</h3>
+                    <p class="text-gray-600">Nuestro equipo te ayudará a elegir la mascota y productos perfectos para ti.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const nav = document.getElementById('main-nav');
+            const menuToggle = document.getElementById('menu-toggle');
+            const mobileMenu = document.getElementById('mobile-menu');
+            let lastScrollY = window.scrollY;
+            
+            // Controlar la visibilidad de la navbar al hacer scroll
+            window.addEventListener('scroll', function() {
+                if (window.scrollY > 100) {
+                    nav.classList.remove('nav-hidden');
+                    nav.classList.add('nav-visible');
+                } else {
+                    nav.classList.remove('nav-visible');
+                    nav.classList.add('nav-hidden');
+                }
+                lastScrollY = window.scrollY;
+            });
+            
+            // Controlar el menú móvil
+            menuToggle.addEventListener('click', function() {
+                mobileMenu.classList.toggle('hidden');
+                
+                // Animación para el icono hamburguesa
+                if (mobileMenu.classList.contains('hidden')) {
+                    menuToggle.innerHTML = '<svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>';
+                } else {
+                    menuToggle.innerHTML = '<svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>';
+                }
+            });
+            
+            // Cerrar menú móvil al hacer clic en un enlace
+            const mobileLinks = mobileMenu.querySelectorAll('a');
+            mobileLinks.forEach(link => {
+                link.addEventListener('click', function() {
+                    mobileMenu.classList.add('hidden');
+                    menuToggle.innerHTML = '<svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>';
+                });
+            });
+        });
+    </script>
 </body>
 </html>
