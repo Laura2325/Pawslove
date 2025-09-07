@@ -1,0 +1,84 @@
+body {
+    font-family: 'Inter', sans-serif;
+}
+
+/* Contenedor de la animación de la huella */
+.pet-paw-container {    
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: none;
+    z-index: 10;
+}
+
+/* Estilos base de la huella, tamaño aumentado */
+.pet-paw {
+    position: relative;
+    width: 200px;
+    /* Tamaño aumentado */
+    height: 200px;
+    /* Tamaño aumentado */
+    transform: scale(0);
+    animation: expandPaw 1s forwards cubic-bezier(0.68, -0.55, 0.27, 1.55);
+}
+
+/* Estilo para las almohadillas */
+.pad {
+    position: absolute;
+    background-color: #6c40d1;
+    border-radius: 50%;
+}
+
+.main-pad {
+    width: 120px;
+    /* Ajuste proporcional */
+    height: 100px;
+    /* Ajuste proporcional */
+    border-radius: 50% 50% 30% 30%;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.toe-pad {
+    width: 60px;
+    /* Ajuste proporcional */
+    height: 60px;
+    /* Ajuste proporcional */
+}
+
+.toe-pad:nth-child(1) {
+    top: 20%;
+    left: 10%;
+    transform: rotate(-25deg);
+}
+
+.toe-pad:nth-child(2) {
+    top: 0;
+    left: 35%;
+    transform: rotate(-5deg);
+}
+
+.toe-pad:nth-child(3) {
+    top: 0;
+    right: 35%;
+    transform: rotate(5deg);
+}
+
+.toe-pad:nth-child(4) {
+    top: 20%;
+    right: 10%;
+    transform: rotate(25deg);
+}
+
+/* Animación de expansión */
+@keyframes expandPaw {
+    0% {
+        transform: scale(0);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}

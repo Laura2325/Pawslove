@@ -1,46 +1,40 @@
 document.addEventListener('DOMContentLoaded', () => {
-            const seleccionTipoUsuario = document.getElementById('seleccionTipoUsuario');
             const contenidoLogin = document.getElementById('contenidoLogin');
             const contenidoRegistro = document.getElementById('contenidoRegistro');
-            
-            const btnUsuario = document.getElementById('btnUsuario');
-            const btnAdmin = document.getElementById('btnAdmin');
             const linkToRegister = document.getElementById('linkToRegister');
             const linkToLogin = document.getElementById('linkToLogin');
-            const closeLogin = document.getElementById('closeLogin');
             const closeRegister = document.getElementById('closeRegister');
-                    
-            const showLogin = () => {
-                seleccionTipoUsuario.classList.add('hidden');
+            const petPawAnimation = document.getElementById('petPawAnimation');
+
+            // Función para mostrar la animación y luego el formulario de registro
+            const mostrarRegistro = (e) => {
+                e.preventDefault();
+                // Oculta el formulario de login y muestra la animación
+                contenidoLogin.classList.add('hidden');
+                petPawAnimation.style.display = 'block';
+
+                // Espera a que la animación termine (1 segundo) para mostrar el formulario de registro
+                setTimeout(() => {
+                    petPawAnimation.style.display = 'none';
+                    contenidoRegistro.classList.remove('hidden');
+                }, 1000); 
+            };
+
+            // Función para mostrar el formulario de login
+            const mostrarLogin = (e) => {
+                e.preventDefault();
                 contenidoRegistro.classList.add('hidden');
                 contenidoLogin.classList.remove('hidden');
             };
-            
-            const showSelection = () => {
-                contenidoLogin.classList.add('hidden');
-                contenidoRegistro.classList.add('hidden');
-                seleccionTipoUsuario.classList.remove('hidden');
-            };
-            
-            const showRegister = () => {
-                contenidoLogin.classList.add('hidden');
-                seleccionTipoUsuario.classList.add('hidden');
-                contenidoRegistro.classList.remove('hidden');
-            };
-                
-            btnUsuario.addEventListener('click', showLogin);
-            btnAdmin.addEventListener('click', showLogin);
-                        
-            linkToRegister.addEventListener('click', (e) => {
-                e.preventDefault();
-                showRegister();
-            });
-            
-            linkToLogin.addEventListener('click', (e) => {
-                e.preventDefault();
-                showLogin();
-            });
-            
-            closeLogin.addEventListener('click', showSelection);
-            closeRegister.addEventListener('click', showLogin);
+
+            // Asignar eventos a los enlaces y botones
+            if (linkToRegister) {
+                linkToRegister.addEventListener('click', mostrarRegistro);
+            }
+            if (linkToLogin) {
+                linkToLogin.addEventListener('click', mostrarLogin);
+            }
+            if (closeRegister) {
+                closeRegister.addEventListener('click', mostrarLogin);
+            }
         });

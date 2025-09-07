@@ -25,7 +25,7 @@ document.addEventListener('DOMContentLoaded', () => {
             localStorage.setItem(USERS_STORAGE_KEY, JSON.stringify(usuarios));
         }
     }
-    
+
     inicializarAdmin();
 
     const loginForm = document.getElementById('loginForm');
@@ -42,7 +42,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // 1. Validación de campos vacíos
         if (!email || !password) {
-            alert('Por favor, ingresa tu correo y contraseña.');
+            Swal.fire({
+                icon: 'warning',
+                title: 'Campos incompletos',
+                text: 'Por favor, ingresa tu correo y contraseña.',
+            });
             return;
         }
 
@@ -51,17 +55,29 @@ document.addEventListener('DOMContentLoaded', () => {
         const usuarios = usuariosJSON ? JSON.parse(usuariosJSON) : [];
 
         // 3. Buscar si el usuario existe y la contraseña coincide
-        const usuarioEncontrado = usuarios.find(user => user.correo === email && user.contraseña === password);        
+        const usuarioEncontrado = usuarios.find(user => user.correo === email && user.contraseña === password);
 
         // 4. Validar el resultado del inicio de sesión
         if (usuarioEncontrado) {
             // ¡Inicio de sesión exitoso!
-            alert(`¡Bienvenido de nuevo, ${usuarioEncontrado.nombre}!`);
-            //Redirigir al usuario a una página principal o dashboard dependiendo el tipo de usuario
-            usuarioEncontrado.tipo == 'Administrador Principal' ? window.location.replace('../paginas_admin/principal.html'):window.location.replace('index.html');
+            Swal.fire({
+                title: "¡Bienvenido, " + usuarioEncontrado.nombre + "!",
+                text: "Serás redirigido en un momento.",
+                icon: "success",
+                timer: 2000, // La alerta se cierra después de 2 segundos
+                showConfirmButton: false,
+                willClose: () => {
+                    //Redirigir al usuario a una página principal o dashboard dependiendo el tipo de usuario
+                    usuarioEncontrado.tipo == 'Administrador Principal' ? window.location.replace('../paginas_admin/principal.html') : window.location.replace('index.html');
+                }
+            });
         } else {
             // Error en el inicio de sesión
-            alert('Correo o contraseña incorrectos. Por favor, verifica tus datos.');            
+            Swal.fire({
+                icon: 'error',
+                title: 'Error de autenticación',
+                text: 'Correo o contraseña incorrectos. Por favor, verifica tus datos.',
+            });
             passwordInput.value = '';
         }
     });
