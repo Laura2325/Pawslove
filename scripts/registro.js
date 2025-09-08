@@ -50,6 +50,13 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
+        // Nueva validación para excluir símbolos que podrían ser problemáticos.
+        const tieneSimbolosProhibidos = /[<>"'&]/.test(contraseña.value);
+        if (tieneSimbolosProhibidos) {
+            alertasRegistro.simbolosNoPermitidos();
+            return;
+        }
+
         if (contraseña.value !== confirmarContraseña.value) {
             alertasRegistro.contrasenasNoCoinciden();
             return;
