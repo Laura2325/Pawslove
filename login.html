@@ -8,7 +8,6 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="stylesheet" href="styles/animacionLogin.css">
     <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <link rel="stylesheet" href="styles/sweetalert2.min.css">
@@ -20,27 +19,21 @@
 </head>
 
 <body class="bg-[#34252f] min-h-screen flex items-center justify-center p-4">
+
     <!-- Contenedor principal para todas las vistas -->
     <div class="bg-[#ecf0f1] rounded-3xl shadow-2xl w-full max-w-md p-8 md:p-10 relative">
-        <!-- Contenedor de la animación de la huella, inicialmente oculto -->
-        <div id="petPawAnimation" class="pet-paw-container">
-            <div class="pet-paw">
-                <!-- Almohadillas de los dedos -->
-                <div class="pad toe-pad"></div>
-                <div class="pad toe-pad"></div>
-                <div class="pad toe-pad"></div>
-                <div class="pad toe-pad"></div>
-                <!-- Almohadilla principal -->
-                <div class="pad main-pad"></div>
-            </div>
-        </div>
 
-        <!-- Vista del formulario de login (visible por defecto) -->
+        <!-- Vista del formulario de login (ahora visible por defecto) -->
         <div id="contenidoLogin">
+            <!-- El botón de retroceso se ha eliminado porque esta es la vista inicial -->
+
             <h2 class="text-4xl md:text-5xl font-extrabold text-[#6c40d1] text-center mb-8 pt-8">
                 Iniciar Sesión
             </h2>
+
+            <!-- Formulario de login -->
             <form id="loginForm">
+                <!-- Campo para el correo electrónico -->
                 <div class="mb-6">
                     <label for="emailLogin" class="block text-[#34252f] text-sm font-semibold mb-2">
                         Correo electrónico
@@ -49,6 +42,8 @@
                         class="w-full px-5 py-3 rounded-xl border border-gray-300 focus:outline-none focus:border-[#fc6dab] transition-all duration-300"
                         required>
                 </div>
+
+                <!-- Campo para la contraseña -->
                 <div class="mb-8">
                     <label for="password" class="block text-[#34252f] text-sm font-semibold mb-2">
                         Contraseña
@@ -57,11 +52,15 @@
                         class="w-full px-5 py-3 rounded-xl border border-gray-300 focus:outline-none focus:border-[#fc6dab] transition-all duration-300"
                         required>
                 </div>
+
+                <!-- Botón de Iniciar Sesión -->
                 <button id="btnIniciarSesion" type="submit"
                     class="w-full bg-[#17b890] text-white font-bold py-4 rounded-xl shadow-lg hover:bg-[#139a7b] transition-all duration-300 transform hover:scale-105 focus:outline-none focus:ring-4 focus:ring-[#17b890] focus:ring-opacity-50">
                     Entrar
                 </button>
             </form>
+
+            <!-- Enlace para recuperar contraseña (pendiente) y registro -->
             <div class="mt-8 text-center text-sm">
                 <a href="#" class="text-[#6c40d1] hover:underline font-semibold transition-colors duration-300">
                     ¿Olvidaste tu contraseña?
@@ -89,6 +88,7 @@
 
             <!-- Formulario de registro -->
             <form id="registroForm">
+                <!-- Campo para el nombre -->
                 <div class="mb-6">
                     <label for="nombreRegistro" class="block text-[#34252f] text-sm font-semibold mb-2">
                         Nombre completo
@@ -97,6 +97,8 @@
                         class="w-full px-5 py-3 rounded-xl border border-gray-300 focus:outline-none focus:border-[#fc6dab] transition-all duration-300"
                         required>
                 </div>
+
+                <!-- Campo para el correo electrónico -->
                 <div class="mb-6">
                     <label for="emailRegistro" class="block text-[#34252f] text-sm font-semibold mb-2">
                         Correo electrónico
@@ -105,7 +107,9 @@
                         class="w-full px-5 py-3 rounded-xl border border-gray-300 focus:outline-none focus:border-[#fc6dab] transition-all duration-300"
                         required>
                 </div>
-                <div class="mb-6">
+
+                <!-- Campo para la contraseña -->
+                <div class="mb-6" id="campoContrasena">
                     <label for="passwordRegistro" class="block text-[#34252f] text-sm font-semibold mb-2">
                         Contraseña
                     </label>
@@ -113,7 +117,10 @@
                         placeholder="Ingresa tu contraseña"
                         class="w-full px-5 py-3 rounded-xl border border-gray-300 focus:outline-none focus:border-[#fc6dab] transition-all duration-300"
                         required>
+                    <p id="passwordLengthError" class="text-red-500 text-xs italic mt-1 h-4"></p>
                 </div>
+
+                <!-- Campo para confirmar la contraseña -->
                 <div class="mb-8">
                     <label for="confirmPassword" class="block text-[#34252f] text-sm font-semibold mb-2">
                         Confirmar contraseña
@@ -122,12 +129,17 @@
                         placeholder="Confirma tu contraseña"
                         class="w-full px-5 py-3 rounded-xl border border-gray-300 focus:outline-none focus:border-[#fc6dab] transition-all duration-300"
                         required>
+                    <p id="passwordMatchError" class="text-red-500 text-xs italic mt-1 h-4"></p>
                 </div>
+
+                <!-- Botón de Registro -->
                 <button id="btnRegistrarse" type="submit"
                     class="w-full bg-[#17b890] text-white font-bold py-4 rounded-xl shadow-lg hover:bg-[#139a7b] transition-all duration-300 transform hover:scale-105 focus:outline-none focus:ring-4 focus:ring-[#17b890] focus:ring-opacity-50">
                     Registrarse
                 </button>
             </form>
+
+            <!-- Enlace para ir al login -->
             <div class="mt-8 text-center text-sm">
                 <p class="text-[#34252f]">
                     ¿Ya tienes una cuenta?
@@ -139,10 +151,9 @@
             </div>
         </div>
     </div>
-
-    <script src="./scripts/formulariosLogin.js"></script>
-    <script src="./scripts/registro.js"></script>
-    <script src="./scripts/login.js"></script>
+    <script src="./scripts/formulariosLogin.js"></script> 
+    <script type="module" src="./scripts/registro.js"></script>
+    <script type="module" src="./scripts/login.js"></script>
 </body>
 
 </html>

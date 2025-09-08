@@ -1,3 +1,5 @@
+import {alertasLogin} from "./sweetalert2.min.js";
+
 document.addEventListener('DOMContentLoaded', () => {
     const USERS_STORAGE_KEY = 'pawsloveUsers';
     function inicializarAdmin() {
@@ -42,11 +44,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // 1. Validación de campos vacíos
         if (!email || !password) {
-            Swal.fire({
-                icon: 'warning',
-                title: 'Campos incompletos',
-                text: 'Por favor, ingresa tu correo y contraseña.',
-            });
+            alertasLogin.loginVacio();
             return;
         }
 
@@ -60,24 +58,12 @@ document.addEventListener('DOMContentLoaded', () => {
         // 4. Validar el resultado del inicio de sesión
         if (usuarioEncontrado) {
             // ¡Inicio de sesión exitoso!
-            Swal.fire({
-                title: "¡Bienvenido, " + usuarioEncontrado.nombre + "!",
-                text: "Serás redirigido en un momento.",
-                icon: "success",
-                timer: 2000, // La alerta se cierra después de 2 segundos
-                showConfirmButton: false,
-                willClose: () => {
-                    //Redirigir al usuario a una página principal o dashboard dependiendo el tipo de usuario
-                    usuarioEncontrado.tipo == 'Administrador Principal' ? window.location.replace('../paginas_admin/principal.html') : window.location.replace('index.html');
-                }
-            });
+            alertasLogin.loginCorrecto(usuarioEncontrado);
+            
         } else {
             // Error en el inicio de sesión
-            Swal.fire({
-                icon: 'error',
-                title: 'Error de autenticación',
-                text: 'Correo o contraseña incorrectos. Por favor, verifica tus datos.',
-            });
+            alertasLogin.loginError();
+            emailInput.value = '';
             passwordInput.value = '';
         }
     });
