@@ -1,3 +1,5 @@
+import { alertasRegistro } from "./sweetalert2.min.js";
+
 document.addEventListener('DOMContentLoaded', () => {
 
     const USERS_STORAGE_KEY = 'pawsloveUsers';
@@ -6,10 +8,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const contraseña = document.getElementById('passwordRegistro');
     const confirmarContraseña = document.getElementById('confirmarPassword');
     const btnRegistrarse = document.getElementById('btnRegistrarse');
+    const passwordLengthError = document.getElementById('passwordLengthError');
+    const passwordMatchError = document.getElementById('passwordMatchError');
 
     // Función para obtener los usuarios existentes del localStorage
     function obtenerUsuarios() {
-        const usuariosJSON = localStorage.getItem(USERS_STORAGE_KEY);        
+        const usuariosJSON = localStorage.getItem(USERS_STORAGE_KEY);
         try {
             return usuariosJSON ? JSON.parse(usuariosJSON) : [];
         } catch (e) {
@@ -17,27 +21,43 @@ document.addEventListener('DOMContentLoaded', () => {
             return [];
         }
     }
-    
+
     function guardarUsuarios(usuarios) {
         localStorage.setItem(USERS_STORAGE_KEY, JSON.stringify(usuarios));
-    }
+    }   
 
     btnRegistrarse.addEventListener('click', (e) => {
         e.preventDefault();
-        
+
         if (!nombreUsuario.value.trim() || !correo.value.trim() || !contraseña.value.trim()) {
-            alert('Todos los campos son obligatorios.');
-            return;
-        }
-        
-        if (contraseña.value !== confirmarContraseña.value) {
-            alert('Las contraseñas no coinciden');
+            alertasRegistro.camposIncompletos();
             return;
         }
 
-        const usuarios = obtenerUsuarios();        
+        if (contraseña.value.length < 8) {
+            alertasRegistro.contrasenaCorta();
+            return;
+        }
+
+        // Validación de la política de contraseñas usando expresiones regulares
+        const tieneMayuscula = /[A-Z]/.test(contraseña.value);
+        const tieneMinuscula = /[a-z]/.test(contraseña.value);
+        const tieneNumero = /[0-9]/.test(contraseña.value);
+        const tieneSimbolo = /[^A-Za-z0-9]/.test(contraseña.value);
+
+        if (!tieneMayuscula || !tieneMinuscula || !tieneNumero || !tieneSimbolo) {
+            alertasRegistro.contrasenaInvalida();
+            return;
+        }
+
+        if (contraseña.value !== confirmarContraseña.value) {
+            alertasRegistro.contrasenasNoCoinciden();
+            return;
+        }
+
+        const usuarios = obtenerUsuarios();
         if (usuarios.some(user => user.correo === correo.value)) {
-            alert('Este correo electrónico ya está registrado.');
+            alertasRegistro.usuarioExistente();
             return;
         }
         const usuario = {
@@ -50,7 +70,9 @@ document.addEventListener('DOMContentLoaded', () => {
         usuarios.push(usuario);
         guardarUsuarios(usuarios);
 
-        alert('¡Registro exitoso!');        
+        alertasRegistro.usuarioRegistrado();
+        const btnClose = document.getElementById('closeRegister');
+        btnClose.click();
     });
 
 });

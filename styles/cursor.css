@@ -1,0 +1,11 @@
+.humo{
+    position: absolute;
+    font-size: 30px;
+    color: #ccc;
+    pointer-events: none;
+    user-select: none;
+    /* Usamos transiciones en lugar de una animación para mayor control desde JS */
+    transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+    /* Centramos el emoji en la posición del cursor */
+    transform: translate(-50%, -50%);
+}
