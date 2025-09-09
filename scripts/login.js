@@ -1,3 +1,5 @@
+import {alertasLogin} from "./sweetalert2.min.js";
+
 document.addEventListener('DOMContentLoaded', () => {
     const USERS_STORAGE_KEY = 'pawsloveUsers';
     function inicializarAdmin() {
@@ -25,7 +27,7 @@ document.addEventListener('DOMContentLoaded', () => {
             localStorage.setItem(USERS_STORAGE_KEY, JSON.stringify(usuarios));
         }
     }
-    
+
     inicializarAdmin();
 
     const loginForm = document.getElementById('loginForm');
@@ -42,7 +44,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // 1. Validación de campos vacíos
         if (!email || !password) {
-            alert('Por favor, ingresa tu correo y contraseña.');
+            alertasLogin.loginVacio();
             return;
         }
 
@@ -51,17 +53,17 @@ document.addEventListener('DOMContentLoaded', () => {
         const usuarios = usuariosJSON ? JSON.parse(usuariosJSON) : [];
 
         // 3. Buscar si el usuario existe y la contraseña coincide
-        const usuarioEncontrado = usuarios.find(user => user.correo === email && user.contraseña === password);        
+        const usuarioEncontrado = usuarios.find(user => user.correo === email && user.contraseña === password);
 
         // 4. Validar el resultado del inicio de sesión
         if (usuarioEncontrado) {
             // ¡Inicio de sesión exitoso!
-            alert(`¡Bienvenido de nuevo, ${usuarioEncontrado.nombre}!`);
-            //Redirigir al usuario a una página principal o dashboard dependiendo el tipo de usuario
-            usuarioEncontrado.tipo == 'Administrador Principal' ? window.location.replace('../paginas_admin/principal.html'):window.location.replace('index.html');
+            alertasLogin.loginCorrecto(usuarioEncontrado);
+            
         } else {
             // Error en el inicio de sesión
-            alert('Correo o contraseña incorrectos. Por favor, verifica tus datos.');            
+            alertasLogin.loginError();
+            emailInput.value = '';
             passwordInput.value = '';
         }
     });

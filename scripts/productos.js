@@ -1,3 +1,5 @@
+import {alertasProductos} from './sweetalert2.min.js';
+
 let productos = JSON.parse(localStorage.getItem("productos")) || [];
 let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
 
@@ -34,7 +36,7 @@ function agregarProducto() {
     localStorage.setItem("productos", JSON.stringify(productos));
     mostrarProductos();
   } else {
-    alert("Por favor llena todos los campos obligatorios.");
+    alertasProductos.camposProductoVacios();
   }
 }
 
