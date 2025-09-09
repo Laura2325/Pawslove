@@ -80,11 +80,11 @@
             </button>
         </div>
 
-        <!-- Mobile menu (independiente del navbar) -->
+        <!-- Mobile menu -->
         <div id="mobile-menu"
             class="absolute top-full left-0 w-full mt-2 max-h-0 overflow-hidden transition-all duration-500 ease-in-out bg-white rounded-2xl shadow-md z-40">
 
-            <!-- Contenido con padding -->
+            <!-- Contenido -->
             <div class="px-6 py-4">
                 <a href="./index.html" class="block py-2 hover:text-primary">Inicio</a>
                 <a href="./paginas/adopta.html" class="block py-2 hover:text-primary">Adopta</a>
@@ -314,7 +314,7 @@
 
             <!-- Carrusel -->
             <div class="swiper mySwiper" data-aos="fade-up" data-aos-delay="200">
-                <div class="swiper-wrapper mt-2">
+                <div class="swiper-wrapper">
                     <!-- Tarjeta 1 -->
                     <div class="swiper-slide">
                         <div class="pet-card bg-white rounded-custom overflow-hidden shadow-lg mx-auto max-w-sm">
@@ -569,6 +569,14 @@
                 mobileMenu.classList.remove('max-h-0');
                 mobileMenu.classList.add('max-h-[400px]');
             } else {
+                mobileMenu.classList.add('max-h-0');
+                mobileMenu.classList.remove('max-h-[400px]');
+            }
+        });
+
+        // 🔑 Cerrar menú al cambiar a escritorio
+        window.addEventListener('resize', () => {
+            if (window.innerWidth >= 768) {
                 mobileMenu.classList.add('max-h-0');
                 mobileMenu.classList.remove('max-h-[400px]');
             }
