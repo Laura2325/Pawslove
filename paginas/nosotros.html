@@ -10,6 +10,12 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="../tailwind.config.js"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+     <!-- Tipografías -->
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Poppins:wght@300;400;500;600&display=swap"
+        rel="stylesheet">
+
+
   <script>
     tailwind.config = {
       theme: {
@@ -94,76 +100,75 @@
     </nav>
 
 
-    <main class="content px-4 md:px-10 lg:px-20 py-16 space-y-20 font-poppins bg-light text-dark">
-      <!-- Nuestros Valores -->
-      <h1 class="titulo_1 text-center font-fredoka text-4xl md:text-5xl text-primary mb-12 mt-12 font-black" data-aos="fade-up">
-        Nuestros Valores
-      </h1>
+<main class="content bg-light">
+  <!-- Nuestros Valores -->
+  <section id="valores" class="px-4 md:px-8 lg:px-20 py-16">
+    <h1 class="text-center font-fredoka text-4xl md:text-5xl text-primary mb-12 font-bold" data-aos="fade-up">
+      Nuestros Valores
+    </h1>
 
-      <section id="valores" class="grid grid-cols-1 md:grid-cols-3 gap-8">
-        <div class="valor1 text-center p-8 bg-white rounded-custom shadow-lg hover:shadow-2xl transition"
-          data-aos="fade-up" data-aos-delay="100">
-          <i class="fas fa-heart text-5xl text-secondary mb-6"></i>
-          <h2 class="titulo_2 text-2xl font-fredoka text-primary mb-4 font-bold">Amor</h2>
-          <p class="parrafo text-base text-dark/80">
-            Creemos que todo animal merece ser amado. Por eso, cada acción que realizamos está cargada de cariño,
-            paciencia y compromiso.
-          </p>
-        </div>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-6 md:gap-8">
+      <!-- Amor -->
+      <div class="bg-white rounded-custom shadow-md p-6 text-center max-w-xl mx-auto hover:shadow-xl hover:border hover:border-secondary transition"
+        data-aos="fade-up" data-aos-delay="100">
+        <i class="fas fa-heart text-4xl text-secondary mb-4"></i>
+        <h2 class="font-fredoka text-xl md:text-2xl text-primary mb-2">Amor</h2>
+        <p class="text-sm md:text-base lg:text-lg text-dark/80">
+          Creemos que todo animal merece ser amado. Cada acción está cargada de cariño, paciencia y compromiso.
+        </p>
+      </div>
 
-        <div class="valor2 text-center p-8 bg-white rounded-custom shadow-lg hover:shadow-2xl transition"
-          data-aos="fade-up" data-aos-delay="200">
-          <i class="fas fa-hands-helping text-5xl text-accent mb-6"></i>
-          <h2 class="titulo_2 text-2xl font-fredoka text-primary mb-4 font-bold">Respeto</h2>
-          <p class="parrafo text-base text-dark/80">
-            Tratamos a todos los seres vivos con dignidad, reconociendo su valor, historia y derecho a una vida libre de
-            maltrato.
-          </p>
-        </div>
+      <!-- Respeto -->
+      <div class="bg-white rounded-custom shadow-md p-6 text-center max-w-xl mx-auto hover:shadow-xl hover:border hover:border-accent transition"
+        data-aos="fade-up" data-aos-delay="200">
+        <i class="fas fa-hands-helping text-4xl text-accent mb-4"></i>
+        <h2 class="font-fredoka text-xl md:text-2xl text-primary mb-2">Respeto</h2>
+        <p class="text-sm md:text-base lg:text-lg text-dark/80">
+          Tratamos a todos los seres vivos con dignidad, reconociendo su valor y derecho a una vida libre de maltrato.
+        </p>
+      </div>
 
-        <div class="valor3 text-center p-8 bg-white rounded-custom shadow-lg hover:shadow-2xl transition"
-          data-aos="fade-up" data-aos-delay="300">
-          <i class="fas fa-users text-5xl text-dark mb-6"></i>
-          <h2 class="titulo_2 text-2xl font-fredoka text-primary mb-4 font-bold">Solidaridad</h2>
-          <p class="parrafo text-base text-dark/80">
-            No estamos solos en esta misión. Nos unimos con personas, familias y voluntarios que, como tú, creen en dar
-            una segunda oportunidad.
-          </p>
-        </div>
-      </section>
+      <!-- Solidaridad -->
+      <div class="bg-white rounded-custom shadow-md p-6 text-center max-w-xl mx-auto hover:shadow-xl hover:border hover:border-primary transition"
+        data-aos="fade-up" data-aos-delay="300">
+        <i class="fas fa-users text-4xl text-primary mb-4"></i>
+        <h2 class="font-fredoka text-xl md:text-2xl text-primary mb-2">Solidaridad</h2>
+        <p class="text-sm md:text-base lg:text-lg text-dark/80">
+          Nos unimos con familias y voluntarios que creen en dar una segunda oportunidad a cada mascota.
+        </p>
+      </div>
 
-      <section id="valores2" class="grid grid-cols-1 md:grid-cols-2 gap-8">
-        <div class="valor4 text-center p-8 bg-white rounded-custom shadow-lg hover:shadow-2xl transition"
-          data-aos="fade-right" data-aos-delay="100">
-          <i class="fas fa-hand-holding-heart text-5xl text-secondary mb-6"></i>
-          <h2 class="titulo_2 text-2xl font-fredoka text-primary mb-4 font-bold">Responsabilidad Social</h2>
-          <p class="parrafo text-base text-dark/80">
-            Entendemos que cuidar de los animales es también cuidar de nuestra sociedad. Promovemos la adopción
-            responsable y la educación para una convivencia armónica.
-          </p>
-        </div>
+      <!-- Responsabilidad Social -->
+      <div class="bg-white rounded-custom shadow-md p-6 text-center max-w-xl mx-auto hover:shadow-xl hover:border hover:border-secondary transition"
+        data-aos="fade-up" data-aos-delay="400">
+        <i class="fas fa-hand-holding-heart text-4xl text-secondary mb-4"></i>
+        <h2 class="font-fredoka text-xl md:text-2xl text-primary mb-2">Responsabilidad Social</h2>
+        <p class="text-sm md:text-base lg:text-lg text-dark/80">
+          Promovemos la adopción responsable y la educación para una convivencia armónica.
+        </p>
+      </div>
 
-        <div class="valor5 text-center p-8 bg-white rounded-custom shadow-lg hover:shadow-2xl transition"
-          data-aos="fade-left" data-aos-delay="200">
-          <i class="fas fa-paw text-5xl text-accent mb-6"></i>
-          <h2 class="titulo_2 text-2xl font-fredoka text-primary mb-4 font-bold">Bienestar Animal</h2>
-          <p class="parrafo text-base text-dark/80">
-            Su salud, seguridad y felicidad son nuestra prioridad. Trabajamos para que cada uno de nuestros peluditos
-            reciba atención médica, alimentación y, sobre todo, un hogar lleno de amor.
-          </p>
-        </div>
-      </section>
+      <!-- Bienestar Animal -->
+      <div class="bg-white rounded-custom shadow-md p-6 text-center max-w-xl mx-auto hover:shadow-xl hover:border hover:border-accent transition"
+        data-aos="fade-up" data-aos-delay="500">
+        <i class="fas fa-paw text-4xl text-accent mb-4"></i>
+        <h2 class="font-fredoka text-xl md:text-2xl text-primary mb-2">Bienestar Animal</h2>
+        <p class="text-sm md:text-base lg:text-lg text-dark/80">
+          Su salud, seguridad y felicidad son nuestra prioridad. Ofrecemos atención médica, alimentación y un hogar lleno de amor.
+        </p>
+      </div>
+    </div>
+  </section>
 
-      <!-- Propósito -->
-      <section id="mision_vision" class="px-4 md:px-10 lg:px-20 py-16">
-  <h1 class="titulo_1 text-center font-fredoka text-4xl md:text-5xl text-primary mb-12 font-bold" data-aos="fade-up">
-    Nuestro Propósito
-  </h1>
+  <!-- Propósito -->
+  <section id="mision_vision" class="px-4 md:px-8 lg:px-20 py-16 bg-white">
+    <h1 class="text-center font-fredoka text-4xl md:text-5xl text-primary mb-12 font-bold" data-aos="fade-up">
+      Nuestro Propósito
+    </h1>
 
-  <div class="contenedor-secciones grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-    
-    <!-- Misión -->
-    <div class="mision text-center p-8 bg-white rounded-custom shadow-lg hover:shadow-2xl transition hover:border-2 hover:border-primary group"
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-6 md:gap-8">
+      <!-- Misión -->
+       <div class="mision text-center p-8 bg-white rounded-custom shadow-lg hover:shadow-2xl transition hover:border-2 hover:border-primary group"
       data-aos="zoom-in" data-aos-delay="100">
       <h2 class="titulo_2 text-2xl font-fredoka text-primary mb-4 font-bold">Misión</h2>
       <div class="image-mision h-20 mb-6 flex items-center justify-center">
@@ -176,21 +181,22 @@
       </p>
     </div>
 
-    <!-- Visión -->
-    <div class="vision text-center p-8 bg-white rounded-custom shadow-lg hover:shadow-2xl transition hover:border-2 hover:border-secondary group"
-      data-aos="zoom-in" data-aos-delay="200">
+      <!-- Visión -->
+       <div class="mision text-center p-8 bg-white rounded-custom shadow-lg hover:shadow-2xl transition hover:border-2 hover:border-secondary group"
+      data-aos="zoom-in" data-aos-delay="100">
       <h2 class="titulo_2 text-2xl font-fredoka text-secondary mb-4 font-bold">Visión</h2>
-      <div class="image-vision h-20 mb-6 flex items-center justify-center">
-        <img src="../assets/img/marca/Vision.svg" alt="vision"
+      <div class="image-mision h-20 mb-6 flex items-center justify-center">
+        <img src="../assets/img/marca/Vision.svg" alt="mision"
           class="w-20 h-20 transition-transform duration-300 group-hover:scale-110 group-hover:ring-4 group-hover:ring-secondary/50 rounded-full">
       </div>
       <p class="parrafo text-base text-dark/80">
-        Queremos ser una plataforma referente en adopción responsable de animales domésticos, en donde cada
+       Queremos ser una plataforma referente en adopción responsable de animales domésticos, en donde cada
         mascota tenga la oportunidad de encontrar un hogar lleno de amor.
       </p>
     </div>
 
-    <!-- Mensaje -->
+
+      <!-- Mensaje -->
     <div class="mensaje text-center p-8 bg-white rounded-custom shadow-lg hover:shadow-2xl transition hover:border-2 hover:border-accent group"
       data-aos="zoom-in" data-aos-delay="300">
       <h2 class="titulo_2 text-2xl font-fredoka text-accent mb-4 font-bold">Mensaje</h2>
@@ -203,55 +209,63 @@
         gatos una nueva vida. Trabajamos con responsabilidad social para proteger su bienestar.
       </p>
     </div>
+    </div>
+  </section>
 
-  </div>
-</section>
+  <!-- Equipo -->
+  <section id="equipo" class="px-4 md:px-8 lg:px-20 py-16 bg-light">
+    <h1 class="text-center font-fredoka text-4xl md:text-5xl text-primary mb-12 font-bold" data-aos="fade-up">
+      Un Equipo con alcance a las estrellas 🌟
+    </h1>
 
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-4 gap-6 md:gap-8">
+      <!-- Persona 1 -->
+      <div class="text-center p-6 bg-white rounded-custom shadow-md hover:shadow-xl hover:border hover:border-secondary transition max-w-sm mx-auto"
+        data-aos="flip-left" data-aos-delay="100">
+        <img src="../assets/img/nosotros/Alejo.png" alt="foto_"
+          class="mx-auto rounded-full shadow-lg w-32 h-32 md:w-36 md:h-36 object-cover border-4 border-primary" />
+        <h2 class="font-fredoka text-lg md:text-xl text-primary mt-4">Alejo Palma</h2>
+        <p class="text-sm md:text-base lg:text-lg text-dark/80">
+          Estratégico y con propósito, busca el continuo desarrollo de la fundación para impactar más vidas.
+        </p>
+      </div>
 
-      <!-- Equipo -->
-      <section id="equipo" class="seccion-equipo">
-        <h1 class="titulo_1 text-center font-fredoka text-4xl md:text-5xl text-primary mb-12 font-bold" data-aos="fade-up">
-          Un Equipo con alcance a las estrellas 🌟
-        </h1>
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-          <div class="persona text-center p-6 bg-white rounded-custom shadow-md hover:shadow-xl transition"
-            data-aos="flip-left" data-aos-delay="100">
-            <img src="../assets/img/nosotros/Alejo.png" alt="foto_"
-              class="mx-auto rounded-full shadow-lg w-40 h-40 object-cover border-4 border-primary" />
-            <h2 class="titulo_2 font-fredoka text-xl text-primary mt-4">Alejo Palma</h2>
-            <p class="parrafo text-dark/80">Estratégico y con propósito, busca el continuo desarrollo de la fundación
-              para impactar a más vidas personas y animales.</p>
-          </div>
+      <!-- Persona 2 -->
+      <div class="text-center p-6 bg-white rounded-custom shadow-md hover:shadow-xl hover:border hover:border-accent transition max-w-sm mx-auto"
+        data-aos="flip-left" data-aos-delay="200">
+        <img src="../assets/img/nosotros/Lau.png" alt="foto_"
+          class="mx-auto rounded-full shadow-lg w-32 h-32 md:w-36 md:h-36 object-cover border-4 border-secondary" />
+        <h2 class="font-fredoka text-lg md:text-xl text-primary mt-4">Lau Lozada</h2>
+        <p class="text-sm md:text-base lg:text-lg text-dark/80">
+          Genera grandes ideas y trabaja para que cada perrito y gatito tengan una nueva oportunidad.
+        </p>
+      </div>
 
-          <div class="persona text-center p-6 bg-white rounded-custom shadow-md hover:shadow-xl transition"
-            data-aos="flip-left" data-aos-delay="200">
-            <img src="../assets/img/nosotros/Lau.png" alt="foto_"
-              class="mx-auto rounded-full shadow-lg w-40 h-40 object-cover border-4 border-secondary" />
-            <h2 class="titulo_2 font-fredoka text-xl text-primary mt-4">Lau Lozada</h2>
-            <p class="parrafo text-dark/80">Da grandes ideas y dispuesta a alcanzar cada perrito y gatito para que
-              tengan una nueva oportunidad.</p>
-          </div>
+      <!-- Persona 3 -->
+      <div class="text-center p-6 bg-white rounded-custom shadow-md hover:shadow-xl hover:border hover:border-primary transition max-w-sm mx-auto"
+        data-aos="flip-left" data-aos-delay="300">
+        <img src="../assets/img/nosotros/Danirl.png" alt="foto_"
+          class="mx-auto rounded-full shadow-lg w-32 h-32 md:w-36 md:h-36 object-cover border-4 border-accent" />
+        <h2 class="font-fredoka text-lg md:text-xl text-primary mt-4">Daniel Zamora</h2>
+        <p class="text-sm md:text-base lg:text-lg text-dark/80">
+          Ingenioso y tranquilo, apoya para encontrar al nuevo integrante ideal de tu familia.
+        </p>
+      </div>
 
-          <div class="persona text-center p-6 bg-white rounded-custom shadow-md hover:shadow-xl transition"
-            data-aos="flip-left" data-aos-delay="300">
-            <img src="../assets/img/nosotros/Danirl.png" alt="foto_"
-              class="mx-auto rounded-full shadow-lg w-40 h-40 object-cover border-4 border-accent" />
-            <h2 class="titulo_2 font-fredoka text-xl text-primary mt-4">Daniel Zamora</h2>
-            <p class="parrafo text-dark/80">Ingenioso y tranquilo es una persona que unifica y seguro apoyará a
-              encontrar el nuevo integrante de tu familia.</p>
-          </div>
+      <!-- Persona 4 -->
+      <div class="text-center p-6 bg-white rounded-custom shadow-md hover:shadow-xl hover:border hover:border-secondary transition max-w-sm mx-auto"
+        data-aos="flip-left" data-aos-delay="400">
+        <img src="../assets/img/nosotros/Andres.png" alt="foto_"
+          class="mx-auto rounded-full shadow-lg w-32 h-32 md:w-36 md:h-36 object-cover border-4 border-primary" />
+        <h2 class="font-fredoka text-lg md:text-xl text-primary mt-4">Andrés Vanegas</h2>
+        <p class="text-sm md:text-base lg:text-lg text-dark/80">
+          Resolutivo y comprometido, te brindará la solución adecuada a lo que buscas.
+        </p>
+      </div>
+    </div>
+  </section>
+</main>
 
-          <div class="persona text-center p-6 bg-white rounded-custom shadow-md hover:shadow-xl transition"
-            data-aos="flip-left" data-aos-delay="400">
-            <img src="../assets/img/nosotros/Andres.png" alt="foto_"
-              class="mx-auto rounded-full shadow-lg w-40 h-40 object-cover border-4 border-dark" />
-            <h2 class="titulo_2 font-fredoka text-xl text-primary mt-4">Andrés Vanegas</h2>
-            <p class="parrafo text-dark/80">Funge como un gran apoyo para el equipo y es una persona resolutivo, seguro
-              te brindará la solución adecuada a lo que buscas.</p>
-          </div>
-        </div>
-      </section>
-    </main>
 
     <footer class="bg-light text-dark">
       <div class="max-w-7xl mx-auto px-6 py-10 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
