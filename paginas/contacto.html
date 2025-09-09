@@ -1,339 +1,236 @@
 <!DOCTYPE html>
 <html lang="es">
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Contacto - Pawslove</title>
-  <link rel="stylesheet" href="../styles/contacto-paws.css" />
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script src="../tailwind.config.js"></script>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&display=swap"
-    rel="stylesheet"
-  />
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Contacto | Pawslove</title>
+<link rel="stylesheet" href="../styles/contacto-paws.css" />
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="../tailwind.config.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&display=swap" rel="stylesheet" />
 
-  <body>
-    <div>
-      <!-- Navbar -->
-      <nav
-        class="bg-white shadow-md rounded-[24px] mx-4 my-3 px-4 py-2 flex items-center justify-between"
-      >
-        <!-- Logo -->
-        <div class="flex items-center space-x-2">
-          <img
-            src="../assets/img/marca/Isotipo_2.svg"
-            alt="Logo"
-            class="h-10 w-10"
-          />
-        </div>
+<body>
 
-        <!-- Menú Desktop -->
-        <div class="hidden md:flex items-center space-x-6 font-bold">
-          <a href="#" class="hover:text-purple-600">Inicio</a>
-          <a href="#" class="hover:text-purple-600">Tienda</a>
-          <a
-            href="#"
-            class="bg-pink-500 text-white px-4 py-2 rounded-[24px] hover:bg-pink-600 transition"
-            >Adoptar</a
-          >
-          <a
-            href="#"
-            class="bg-purple-600 text-white px-4 py-2 rounded-[24px] hover:bg-purple-700 transition"
-            >Donar</a
-          >
-          <a href="#" class="hover:text-purple-600">Contáctanos</a>
-          <img
-            src="../assets/img/nosotros/love.jpg"
-            alt="Perfil"
-            class="h-10 w-10 rounded-full border"
-          />
-        </div>
+  <nav
+    class="fixed top-4 left-1/2 transform -translate-x-1/2 w-[70%] md:w-[60%] bg-white border border-gray-200 shadow-md rounded-full z-50 transition-all duration-300">
+    <div class="flex items-center justify-between px-6 py-3">
 
-        <!-- Botón Hamburguesa -->
-        <div class="md:hidden flex items-center">
-          <button id="menu-btn" class="focus:outline-none">
-            <!-- Icono Hamburguesa -->
-            <svg
-              id="hamburger-icon"
-              class="w-8 h-8 text-gray-800"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              viewBox="0 0 24 24"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            >
-              <path d="M4 6h16M4 12h16M4 18h16"></path>
-            </svg>
-            <!-- Icono Cerrar -->
-            <svg
-              id="close-icon"
-              class="w-8 h-8 text-gray-800 hidden"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              viewBox="0 0 24 24"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            >
-              <path d="M6 18L18 6M6 6l12 12"></path>
-            </svg>
-          </button>
-        </div>
-      </nav>
+      <!-- Logo -->
+      <div class="flex items-center space-x-2">
+        <img src="../assets/img/marca/Isotipo_2.svg" alt="logo" class="h-10 w-10 " />
+      </div>
 
-      <!-- Menú Móvil -->
-      <div
-        id="mobile-menu"
-        class="overflow-hidden transition-all duration-500 ease-in-out max-h-0 opacity-0 bg-white mx-4 rounded-[24px] mt-2 font-bold"
-      >
-        <div class="flex flex-col px-6 py-6 space-y-6">
-          <!-- Perfil -->
-          <div class="flex flex-col items-center space-y-2">
-            <img
-              src="https://via.placeholder.com/80"
-              alt="Perfil"
-              class="h-20 w-20 rounded-full border"
-            />
-            <span class="text-gray-700">Usuario</span>
-          </div>
+      <!-- Menú desktop -->
+      <div class="hidden md:flex items-center space-x-4">
+        <a href="index.html" class="hover:text-primary transition">Inicio</a>
+        <a href="./paginas/adopta.html" class="hover:text-primary transition">Adopta</a>
+        <a href="./paginas/nosotros.html" class="hover:text-primary transition">Nosotros</a>
+        <a href="./paginas/donaciones.html"
+          class="bg-secondary text-white px-4 py-2 rounded-full hover:bg-opacity-90 transition">Donar</a>
+        <a href="./paginas/tienda.html"
+          class="bg-accent text-white px-4 py-2 rounded-full hover:bg-opacity-90 transition">Tienda</a>
+      </div>
 
-          <!-- Links -->
-          <div class="flex flex-col items-center space-y-4">
-            <a href="#" class="hover:text-purple-600">Inicio</a>
-            <a href="#" class="hover:text-purple-600">Tienda</a>
-            <a href="#" class="hover:text-purple-600">Contáctanos</a>
-          </div>
+      <!-- Menú mobile -->
+      <button id="menu-toggle" class="md:hidden text-dark focus:outline-none">
+        <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16">
+          </path>
+        </svg>
+      </button>
+    </div>
 
-          <!-- Botones -->
-          <div class="flex flex-col items-center space-y-4 pt-4 border-t">
-            <a
-              href="#"
-              class="bg-pink-500 text-white px-6 py-3 rounded-[24px] hover:bg-pink-600 transition w-full text-center"
-              >Adoptar</a
-            >
-            <a
-              href="#"
-              class="bg-purple-600 text-white px-6 py-3 rounded-[24px] hover:bg-purple-700 transition w-full text-center"
-              >Donar</a
-            >
-          </div>
+    <!-- Mobile menu -->
+    <div id="mobile-menu"
+      class="absolute top-full left-0 w-full mt-2 max-h-0 overflow-hidden transition-all duration-500 ease-in-out bg-white rounded-2xl shadow-md z-40">
+
+      <!-- Contenido -->
+      <div class="px-6 py-4">
+        <a href="./index.html" class="block py-2 hover:text-primary">Inicio</a>
+        <a href="./paginas/adopta.html" class="block py-2 hover:text-primary">Adopta</a>
+        <a href="./paginas/nosotros.html" class="block py-2 hover:text-primary">Nosotros</a>
+        <div class="flex items-center justify-around mt-4">
+          <a href="./paginas/donaciones.html"
+            class="bg-secondary text-white px-4 py-2 rounded-full hover:bg-opacity-90 transition">
+            Donar
+          </a>
+          <a href="./paginas/tienda.html"
+            class="bg-accent text-white px-4 py-2 rounded-full hover:bg-opacity-90 transition">
+            Tienda
+          </a>
         </div>
       </div>
     </div>
 
+  </nav>
+
+  <div>
     <!-- Video de fondo -->
     <video autoplay muted loop id="video-fondo">
       <source src="../assets/img/nosotros/video-fondo.mp4" type="video/mp4" />
       Tu navegador no soporta videos en HTML5.
     </video>
 
-    <!-- Capa de degradado -->
-    <div class="overlay-degradado"></div>
 
-    <div class="container">
-      <div class="logo">
-        <img src="../assets/img/marca/Logo.svg" alt="LOGO_1" width="350" />
-      </div>
-      <h1>¡Únete a nuestra causa! 🐶</h1>
-      <p>Selecciona tu perfil para mostrarte el formulario adecuado.</p>
+    <div class="flex flex-col items-center justify-center min-h-screen relative right-1 left-1 z-10 px-4 mt-40">
 
-      <!-- Menú de selección de perfil -->
-      <div class="seleccion-perfil">
-        <button
-          class="boton-perfil active"
-          data-profile="adoptante"
-          type="button"
-        >
-          Adoptante
-        </button>
-        <button class="boton-perfil" data-profile="voluntario" type="button">
-          Voluntario
-        </button>
-        <button class="boton-perfil" data-profile="donador" type="button">
-          Donador/Patrocinador
-        </button>
-      </div>
+  <!-- Encabezado -->
+  <div class="w-full max-w-2xl bg-white rounded-2xl shadow-lg p-6 sm:p-8 mb-8 text-center">
+    <img src="../assets/img/marca/Logo.svg" alt="LOGO_1" class="mx-auto w-48 sm:w-64 md:w-72" />
+    <h1 class="text-xl sm:text-2xl font-bold mt-4">¡Únete a nuestra causa! 🐶</h1>
+    <p class="text-gray-600 mt-2 text-sm sm:text-base">Selecciona tu perfil para mostrarte el formulario adecuado.</p>
 
-      <!-- Formulario principal -->
-      <form
-        id="formulario-contacto"
-        action="https://formspree.io/f/mkgzpdnn"
-        method="POST"
-      >
-        <!-- Campos comunes -->
-        <div class="grupo-formulario">
-          <label for="nombre">Nombre completo</label>
-          <input type="text" id="nombre" name="nombre" required />
-        </div>
-
-        <div class="grupo-formulario">
-          <label for="email">Correo electrónico</label>
-          <input type="email" id="email" name="email" required />
-        </div>
-
-        <div class="grupo-formulario">
-          <label for="telefono">Teléfono *</label>
-          <input type="tel" id="telefono" name="telefono" required />
-        </div>
-
-        <!-- Sección Adoptante -->
-        <div class="perfil-seccion" id="adoptante-section" aria-hidden="false">
-          <div class="grupo-formulario">
-            <label for="interes-adopcion">¿Qué tipo de perrito buscas? *</label>
-            <select id="interes-adopcion" name="interes_adopcion" required>
-              <option value="" disabled selected>Selecciona</option>
-              <option value="cachorro">Cachorro</option>
-              <option value="adulto">Adulto</option>
-              <option value="especial">Necesidades especiales</option>
-              <option value="sin-preferencia">Sin preferencia</option>
-            </select>
-          </div>
-
-          <div class="grupo-formulario">
-            <label for="experiencia"
-              >Describe tu experiencia previa con mascotas *</label
-            >
-            <textarea id="experiencia" name="experiencia"></textarea>
-          </div>
-
-          <div class="grupo-formulario">
-            <label for="vivienda">Tipo de vivienda *</label>
-            <select id="vivienda" name="vivienda">
-              <option value="" disabled selected>Selecciona</option>
-              <option value="casa">Casa con patio</option>
-              <option value="departamento">Departamento</option>
-              <option value="otro">Otro</option>
-            </select>
-          </div>
-        </div>
-
-        <!-- Sección Voluntario -->
-        <div class="perfil-seccion" id="voluntario-section" aria-hidden="true">
-          <div class="grupo-formulario">
-            <label for="habilidades">Habilidades o áreas de interés *</label>
-            <textarea
-              id="habilidades"
-              name="habilidades"
-              required
-              placeholder="Ej: Cuidado de animales, veterinaria, redes sociales..."
-            ></textarea>
-          </div>
-
-          <div class="grupo-formulario">
-            <label for="disponibilidad">Disponibilidad semanal *</label>
-            <select id="disponibilidad" name="disponibilidad">
-              <option value="" disabled selected>Selecciona</option>
-              <option value="1-2">1-2 horas</option>
-              <option value="3-5">3-5 horas</option>
-              <option value="6+">6+ horas</option>
-            </select>
-          </div>
-
-          <div class="checkbox">
-            <label>Actividades de interés:</label>
-            <div class="checkbox-opciones">
-              <input
-                type="checkbox"
-                id="actividad-cuidado"
-                name="actividad"
-                value="cuidado"
-              />
-              <label for="actividad-cuidado">Cuidado directo de perros</label>
-            </div>
-            <div class="checkbox-opciones">
-              <input
-                type="checkbox"
-                id="actividad-eventos"
-                name="actividad"
-                value="eventos"
-              />
-              <label for="actividad-eventos">Organización de eventos</label>
-            </div>
-            <div class="checkbox-opciones">
-              <input
-                type="checkbox"
-                id="actividad-administrativo"
-                name="actividad"
-                value="administrativo"
-              />
-              <label for="actividad-administrativo"
-                >Tareas administrativas</label
-              >
-            </div>
-          </div>
-        </div>
-
-        <!-- Sección Donador -->
-        <div class="perfil-seccion" id="donador-section" aria-hidden="true">
-          <div class="grupo-formulario">
-            <label for="tipo-apoyo">Tipo de apoyo *</label>
-            <select id="tipo-apoyo" name="tipo_apoyo">
-              <option value="" disabled selected>Selecciona</option>
-              <option value="monetario">Donación monetaria</option>
-              <option value="especie">
-                Donación en especie (alimento, medicinas, etc.)
-              </option>
-              <option value="patrocinio">Patrocinio corporativo</option>
-            </select>
-          </div>
-
-          <div class="grupo-formulario">
-            <label for="detalles-apoyo">Detalles del apoyo *</label>
-            <textarea
-              id="detalles-apoyo"
-              name="detalles_apoyo"
-              placeholder="Ej: Monto aproximado, tipo de alimento, frecuencia..."
-            ></textarea>
-          </div>
-
-          <div class="grupo-formulario">
-            <label for="empresa">Nombre de la empresa (opcional)</label>
-            <input type="text" id="empresa" name="empresa" />
-          </div>
-
-          <div class="checkbox">
-            <div class="checkbox-opciones">
-              <input type="checkbox" id="recibo-fiscal" name="recibo_fiscal" />
-              <label for="recibo-fiscal"
-                >Requiero recibo fiscal deducible</label
-              >
-            </div>
-          </div>
-        </div>
-
-        <!-- Campos finales comunes -->
-        <div class="grupo-formulario">
-          <label for="mensaje">Mensaje adicional</label>
-          <textarea id="mensaje" name="mensaje"></textarea>
-        </div>
-
-        <div class="checkbox">
-          <div class="checkbox-opciones">
-            <input type="checkbox" id="privacidad" name="privacidad" />
-            <label for="privacidad"
-              >Acepto la
-              <a href="#" target="_blank">política de privacidad</a> *</label
-            >
-          </div>
-          <div class="checkbox-opciones">
-            <input type="checkbox" id="newsletter" name="newsletter" />
-            <label for="newsletter">Deseo recibir newsletter</label>
-          </div>
-        </div>
-
-        <button type="submit" class="submit-btn">Enviar solicitud</button>
-      </form>
+    <!-- Menú de selección de perfil -->
+    <div class="flex flex-wrap justify-center gap-3 mt-4">
+      <button class="boton-perfil active" data-profile="adoptante" type="button">Adoptante</button>
+      <button class="boton-perfil" data-profile="voluntario" type="button">Voluntario</button>
+      <button class="boton-perfil" data-profile="donador" type="button">Donador/Patrocinador</button>
     </div>
+  </div>
+
+  <!-- Formulario principal -->
+  <form id="formulario-contacto" action="https://formspree.io/f/mkgzpdnn" method="POST"
+    class="w-full max-w-2xl bg-white rounded-2xl shadow-lg p-6 sm:p-8 mb-16">
+
+    <!-- Campos comunes -->
+    <div class="grupo-formulario">
+      <label for="nombre">Nombre completo</label>
+      <input type="text" id="nombre" name="nombre" required />
+    </div>
+
+    <div class="grupo-formulario">
+      <label for="email">Correo electrónico</label>
+      <input type="email" id="email" name="email" required />
+    </div>
+
+    <div class="grupo-formulario">
+      <label for="telefono">Teléfono *</label>
+      <input type="tel" id="telefono" name="telefono" required />
+    </div>
+
+    <!-- Sección Adoptante -->
+    <div class="perfil-seccion" id="adoptante-section" aria-hidden="false">
+      <div class="grupo-formulario">
+        <label for="interes-adopcion">¿Qué tipo de perrito buscas? *</label>
+        <select id="interes-adopcion" name="interes_adopcion" required>
+          <option value="" disabled selected>Selecciona</option>
+          <option value="cachorro">Cachorro</option>
+          <option value="adulto">Adulto</option>
+          <option value="especial">Necesidades especiales</option>
+          <option value="sin-preferencia">Sin preferencia</option>
+        </select>
+      </div>
+
+      <div class="grupo-formulario">
+        <label for="experiencia">Describe tu experiencia previa con mascotas *</label>
+        <textarea id="experiencia" name="experiencia"></textarea>
+      </div>
+
+      <div class="grupo-formulario">
+        <label for="vivienda">Tipo de vivienda *</label>
+        <select id="vivienda" name="vivienda">
+          <option value="" disabled selected>Selecciona</option>
+          <option value="casa">Casa con patio</option>
+          <option value="departamento">Departamento</option>
+          <option value="otro">Otro</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Sección Voluntario -->
+    <div class="perfil-seccion" id="voluntario-section" aria-hidden="true">
+      <div class="grupo-formulario">
+        <label for="habilidades">Habilidades o áreas de interés *</label>
+        <textarea id="habilidades" name="habilidades" required
+          placeholder="Ej: Cuidado de animales, veterinaria, redes sociales..."></textarea>
+      </div>
+
+      <div class="grupo-formulario">
+        <label for="disponibilidad">Disponibilidad semanal *</label>
+        <select id="disponibilidad" name="disponibilidad">
+          <option value="" disabled selected>Selecciona</option>
+          <option value="1-2">1-2 horas</option>
+          <option value="3-5">3-5 horas</option>
+          <option value="6+">6+ horas</option>
+        </select>
+      </div>
+
+      <div class="checkbox">
+        <label>Actividades de interés:</label>
+        <div class="checkbox-opciones">
+          <input type="checkbox" id="actividad-cuidado" name="actividad" value="cuidado" />
+          <label for="actividad-cuidado">Cuidado directo de perros</label>
+        </div>
+        <div class="checkbox-opciones">
+          <input type="checkbox" id="actividad-eventos" name="actividad" value="eventos" />
+          <label for="actividad-eventos">Organización de eventos</label>
+        </div>
+        <div class="checkbox-opciones">
+          <input type="checkbox" id="actividad-administrativo" name="actividad" value="administrativo" />
+          <label for="actividad-administrativo">Tareas administrativas</label>
+        </div>
+      </div>
+    </div>
+
+    <!-- Sección Donador -->
+    <div class="perfil-seccion" id="donador-section" aria-hidden="true">
+      <div class="grupo-formulario">
+        <label for="tipo-apoyo">Tipo de apoyo *</label>
+        <select id="tipo-apoyo" name="tipo_apoyo">
+          <option value="" disabled selected>Selecciona</option>
+          <option value="monetario">Donación monetaria</option>
+          <option value="especie">Donación en especie (alimento, medicinas, etc.)</option>
+          <option value="patrocinio">Patrocinio corporativo</option>
+        </select>
+      </div>
+
+      <div class="grupo-formulario">
+        <label for="detalles-apoyo">Detalles del apoyo *</label>
+        <textarea id="detalles-apoyo" name="detalles_apoyo"
+          placeholder="Ej: Monto aproximado, tipo de alimento, frecuencia..."></textarea>
+      </div>
+
+      <div class="grupo-formulario">
+        <label for="empresa">Nombre de la empresa (opcional)</label>
+        <input type="text" id="empresa" name="empresa" />
+      </div>
+
+      <div class="checkbox">
+        <div class="checkbox-opciones">
+          <input type="checkbox" id="recibo-fiscal" name="recibo_fiscal" />
+          <label for="recibo-fiscal">Requiero recibo fiscal deducible</label>
+        </div>
+      </div>
+    </div>
+
+    <!-- Campos finales comunes -->
+    <div class="grupo-formulario">
+      <label for="mensaje">Mensaje adicional</label>
+      <textarea id="mensaje" name="mensaje"></textarea>
+    </div>
+
+    <div class="checkbox">
+      <div class="checkbox-opciones">
+        <input type="checkbox" id="privacidad" name="privacidad" />
+        <label for="privacidad">Acepto la <a href="#" target="_blank">política de privacidad</a> *</label>
+      </div>
+      <div class="checkbox-opciones">
+        <input type="checkbox" id="newsletter" name="newsletter" />
+        <label for="newsletter">Deseo recibir newsletter</label>
+      </div>
+    </div>
+
+    <button type="submit" class="submit-btn w-full mt-4">Enviar solicitud</button>
+  </form>
+</div>
+
 
     <!-- Modal de confirmación -->
     <div id="modalConfirmacion" class="modal">
       <div class="modal-contenido">
         <div class="icono-check">
           <svg class="check" viewBox="0 0 52 52">
-            <path
-              class="check-circulo"
-              d="M26 2C12.317 2 2 12.317 2 26s10.317 24 24 24 24-10.317 24-24S39.683 2 26 2z"
-            />
+            <path class="check-circulo"
+              d="M26 2C12.317 2 2 12.317 2 26s10.317 24 24 24 24-10.317 24-24S39.683 2 26 2z" />
             <path class="check-tick" d="M14 27l7 7 17-17" />
           </svg>
         </div>
@@ -343,57 +240,86 @@
       </div>
     </div>
 
+<footer class="bg-light text-dark">
+        <div class="max-w-7xl mx-auto px-6 py-10 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
+
+            <!-- Logo + Redes -->
+            <div class="flex flex-col items-start space-y-4">
+                <img src="../assets/img/marca/Logo.svg" alt="Logo PawsLove" class="w-36">
+                <p class="font-bold">Redes Sociales</p>
+                <div class="flex space-x-4">
+                    <a href="#"><img src="../assets/iconos/instagram.jpg" alt="Instagram" class="w-6 h-6"></a>
+                    <a href="#"><img src="../assets/iconos/tiktok.svg" alt="TikTok" class="w-6 h-6"></a>
+                    <a href="#"><img src="../assets/iconos/facebook.svg" alt="Facebook" class="w-6 h-6"></a>
+                </div>
+            </div>
+
+            <!-- Contacto -->
+            <div class="flex flex-col items-start">
+                <h3 class="text-lg font-bold mb-3">Contáctanos</h3>
+                <p>(601) 000 0000</p>
+                <p>Cra 00. 53b Sur</p>
+            </div>
+
+            <!-- Enlaces -->
+            <div>
+                <h3 class="text-lg font-bold mb-3">Enlaces Rápidos</h3>
+                <ul class="space-y-2">
+                    <li><a href="../index.html" class="hover:text-primary transition">Inicio</a></li>
+                    <li><a href="../paginas/adopta.html" class="hover:text-primary transition">Adopta</a></li>
+                    <li><a href="../paginas/tienda.html" class="hover:text-primary transition">Tienda</a></li>
+                    <li><a href="../paginas/donaciones.html" class="hover:text-primary transition">Donar</a></li>
+                </ul>
+            </div>
+
+            <!-- Donaciones -->
+            <div>
+                <h3 class="text-lg font-bold mb-3">Sobre las Donaciones</h3>
+                <ul class="space-y-2">
+                    <li><a href="../paginas/donaciones.html" class="hover:text-primary transition">Términos y
+                            Condiciones</a></li>
+                    <li><a href="#" class="hover:text-primary transition">Informes</a></li>
+                    <li><a href="#" class="hover:text-primary transition">Política de Privacidad</a></li>
+                </ul>
+            </div>
+
+        </div>
+
+        <!-- Footer Bottom -->
+        <div class="border-t border-gray-300 text-center py-4 text-sm">
+            <p>© 2025 PawsLove Foundation - Todos los derechos reservados</p>
+        </div>
+    </footer>
+
     <script src="../scripts/contacto.js"></script>
-    <script src="../js/menu.js"></script>
-    <footer class="footer">
-  <div class="footer-container">
-<link rel="stylesheet" href="../styles/footer.css">
+  
+    
 
-    <!-- logo + Reds -->
-    <div class="footer-section">
-      <img src="../assets/img/marca/Logo.svg" alt="Logo PawsLove" width="150">
-      <p>Redes Sociales</p>
-      <div class="social-icons">
-        <a href="#"><img src="../assets/iconos/instagram.jpg" alt="Instagram" width="24"></a>
-        <a href="#"><img src="../assets/iconos/tiktok.svg" alt="TikTok" width="24"></a>
-        <a href="#"><img src="../assets/iconos/facebook.svg" alt="Facebook" width="24"></a>
-      </div>
-    </div>
+    <script>
+      // Menu Movile Toggle
+      const menuToggle = document.getElementById('menu-toggle');
+      const mobileMenu = document.getElementById('mobile-menu');
 
-    <!-- Contacto -->
-    <div class="footer-section">
-      <h3>Contáctanos</h3>
-      <p>(601) 000 0000</p>
-      <p>Cra 00. 53b Sur</p>
-    </div>
+      menuToggle.addEventListener('click', () => {
+        if (mobileMenu.classList.contains('max-h-0')) {
+          mobileMenu.classList.remove('max-h-0');
+          mobileMenu.classList.add('max-h-[400px]');
+        } else {
+          mobileMenu.classList.add('max-h-0');
+          mobileMenu.classList.remove('max-h-[400px]');
+        }
+      });
 
-    <!-- Enlaces -->
-    <div class="footer-section">
-      <h3>Enlaces Rápidos</h3>
-      <ul>
-        <li><a href="file:///C:/Users/andre/Desktop/L/Pawslove/index.html">Inicio</a></li>
-        <li><a href="file:///C:/Users/andre/Desktop/L/Pawslove/paginas/adopta.html">Adopta</a></li>
-        <li><a href="file:///C:/Users/andre/Desktop/L/Pawslove/paginas/tienda.html">Tienda</a></li>
-        <li><a href="file:///C:/Users/andre/Desktop/L/Pawslove/paginas/donaciones.html">Donar</a></li>
-      </ul>
-    </div>
+      // 🔑 Cerrar menú al cambiar a escritorio
+      window.addEventListener('resize', () => {
+        if (window.innerWidth >= 768) {
+          mobileMenu.classList.add('max-h-0');
+          mobileMenu.classList.remove('max-h-[400px]');
+        }
+      });
+    </script>
 
-    <!-- Donaciones -->
-    <div class="footer-section">
-      <h3>Sobre las Donaciones</h3>
-      <ul>
-        <li><a href="donaciones.html">Términos y Condiciones</a></li>
-        <li><a href="#">Informes</a></li>
-        <li><a href="#">Política de Privacidad</a></li>
-      </ul>
-    </div>
 
-  </div>
+</body>
 
-  <div class="footer-bottom">
-    <p>© 2025 PawsLove Foundation - Todos los derechos reservados</p>
-  </div>
-</footer>
-
-  </body>
 </html>
