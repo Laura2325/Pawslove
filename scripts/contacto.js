@@ -65,7 +65,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const data = {};
     for (const [key, value] of formData.entries()) {
       if (Object.prototype.hasOwnProperty.call(data, key)) {
-        if (Array.isArray(data[key])) data[key].push(value);
+        if (Array.isArray(data[key])) data[key].push(value); 
         else data[key] = [data[key], value];
       } else {
         data[key] = value;
