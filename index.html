@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pawslove Foundation | Inicio</title>
-    
+
     <!-- Tailwind -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -45,11 +45,14 @@
         html {
             scroll-behavior: smooth;
         }
-        ::selection{
-            background-color: #17b890;
-            color: white;
-            text-shadow: -1px -1px 20px #000;
-        }        
+
+        @media (max-width: 768px) {
+
+            .swiper-button-prev,
+            .swiper-button-next {
+                display: none !important;
+            }
+        }
     </style>
 </head>
 
@@ -161,8 +164,9 @@
 
             </div>
             <div class="swiper-pagination"></div>
-            <div class="swiper-button-prev"></div>
-            <div class="swiper-button-next"></div>
+            <div class="swiper-button-prev !text-white !w-8 !h-8 md:!w-12 md:!h-12 !left-2 md:!left-6 z-50"></div>
+            <div class="swiper-button-next !text-white !w-8 !h-8 md:!w-12 md:!h-12 !right-2 md:!right-6 z-50"></div>
+
         </div>
     </section>
 
@@ -299,7 +303,7 @@
                 <h3 class="title text-2xl md:text-3xl mb-4">¿Quieres ser parte del cambio?</h3>
                 <p class="text-lg mb-6 max-w-3xl mx-auto">Cada adopción, donación o hora de voluntariado marca la
                     diferencia en la vida de estos animales.</p>
-                <a href="./paginas/nosotros.html"
+                <a href="./paginas/contacto.html"
                     class="bg-secondary hover:bg-pink-500 text-white font-bold py-3 px-8 rounded-custom transition duration-300 transform hover:scale-105">
                     Únete a nosotros
                 </a>
@@ -322,7 +326,7 @@
                 <div class="swiper-wrapper">
                     <!-- Tarjeta 1 -->
                     <div class="swiper-slide">
-                        <div class="pet-card bg-white rounded-custom overflow-hidden shadow-lg mx-auto max-w-sm">
+                        <div class="pet-card bg-white rounded-custom overflow-hidden mx-auto max-w-sm">
                             <div class="relative">
                                 <img src="https://images.unsplash.com/photo-1543466835-00a7907e9de1?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1074&q=80"
                                     alt="Luna - Perrita Labrador" class="w-full h-64 object-cover">
@@ -351,7 +355,7 @@
 
                     <!-- Tarjeta 2 -->
                     <div class="swiper-slide">
-                        <div class="pet-card bg-white rounded-custom overflow-hidden shadow-lg mx-auto max-w-sm">
+                        <div class="pet-card bg-white rounded-custom overflow-hidden mx-auto max-w-sm">
                             <div class="relative">
                                 <img src="https://images.unsplash.com/photo-1533738363-b7f9aef128ce?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=735&q=80"
                                     alt="Simba - Gatito Naranja" class="w-full h-64 object-cover">
@@ -379,7 +383,7 @@
 
                     <!-- Tarjeta 3 -->
                     <div class="swiper-slide">
-                        <div class="pet-card bg-white rounded-custom overflow-hidden shadow-lg mx-auto max-w-sm">
+                        <div class="pet-card bg-white rounded-custom overflow-hidden mx-auto max-w-sm">
                             <div class="relative">
                                 <img src="https://images.unsplash.com/photo-1554692918-08fa0fdc9db3?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80"
                                     alt="Rocky - Perro Pastor Alemán" class="w-full h-64 object-cover">
@@ -407,7 +411,7 @@
 
                     <!-- Tarjeta 4 -->
                     <div class="swiper-slide">
-                        <div class="pet-card bg-white rounded-custom overflow-hidden shadow-lg mx-auto max-w-sm">
+                        <div class="pet-card bg-white rounded-custom overflow-hidden mx-auto max-w-sm">
                             <div class="relative">
                                 <img src="https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1143&q=80"
                                     alt="Mía - Gata Siamesa" class="w-full h-64 object-cover">
@@ -436,7 +440,7 @@
 
                     <!-- Tarjeta 5 -->
                     <div class="swiper-slide">
-                        <div class="pet-card bg-white rounded-custom overflow-hidden shadow-lg mx-auto max-w-sm">
+                        <div class="pet-card bg-white rounded-custom overflow-hidden mx-auto max-w-sm">
                             <div class="relative">
                                 <img src="https://images.unsplash.com/photo-1583337130417-3346a1be7dee?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1064&q=80"
                                     alt="Toby - Cachorro Mixto" class="w-full h-64 object-cover">
@@ -465,7 +469,7 @@
 
                     <!-- Tarjeta 6 -->
                     <div class="swiper-slide">
-                        <div class="pet-card bg-white rounded-custom overflow-hidden shadow-lg mx-auto max-w-sm">
+                        <div class="pet-card bg-white rounded-custom overflow-hidden mx-auto max-w-sm">
                             <div class="relative">
                                 <img src="https://images.unsplash.com/photo-1592194996308-7b43878e84a6?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80"
                                     alt="Cleo - Gatita Bengalí" class="w-full h-64 object-cover">
@@ -511,56 +515,56 @@
     </section>
 
     <!-- Footer  -->
-    <footer class="footer">
-        <div class="footer-container">
-            <link rel="stylesheet" href="./styles/footer.css">
+<footer class="bg-light text-dark">
+        <div class="max-w-7xl mx-auto px-6 py-10 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
 
-            <!-- logo + Reds -->
-            <div class="footer-section">
-                <img src="../assets/img/marca/Logo.svg" alt="Logo PawsLove" width="150">
-                <p>Redes Sociales</p>
-                <div class="social-icons">
-                    <a href="#"><img src="../assets/iconos/instagram.jpg" alt="Instagram" width="24"></a>
-                    <a href="#"><img src="../assets/iconos/tiktok.svg" alt="TikTok" width="24"></a>
-                    <a href="#"><img src="../assets/iconos/facebook.svg" alt="Facebook" width="24"></a>
+            <!-- Logo + Redes -->
+            <div class="flex flex-col items-start space-y-4">
+                <img src="../assets/img/marca/Logo.svg" alt="Logo PawsLove" class="w-36">
+                <p class="font-bold">Redes Sociales</p>
+                <div class="flex space-x-4">
+                    <a href="#"><img src="../assets/iconos/instagram.jpg" alt="Instagram" class="w-6 h-6"></a>
+                    <a href="#"><img src="../assets/iconos/tiktok.svg" alt="TikTok" class="w-6 h-6"></a>
+                    <a href="#"><img src="../assets/iconos/facebook.svg" alt="Facebook" class="w-6 h-6"></a>
                 </div>
             </div>
 
             <!-- Contacto -->
-            <div class="footer-section">
-                <h3>Contáctanos</h3>
+            <div class="flex flex-col items-start">
+                <h3 class="text-lg font-bold mb-3">Contáctanos</h3>
                 <p>(601) 000 0000</p>
                 <p>Cra 00. 53b Sur</p>
             </div>
 
             <!-- Enlaces -->
-            <div class="footer-section">
-                <h3>Enlaces Rápidos</h3>
-                <ul>
-                    <li><a href="file:///C:/Users/andre/Desktop/L/Pawslove/index.html">Inicio</a></li>
-                    <li><a href="file:///C:/Users/andre/Desktop/L/Pawslove/paginas/adopta.html">Adopta</a></li>
-                    <li><a href="file:///C:/Users/andre/Desktop/L/Pawslove/paginas/tienda.html">Tienda</a></li>
-                    <li><a href="file:///C:/Users/andre/Desktop/L/Pawslove/paginas/donaciones.html">Donar</a></li>
+            <div>
+                <h3 class="text-lg font-bold mb-3">Enlaces Rápidos</h3>
+                <ul class="space-y-2">
+                    <li><a href="../index.html" class="hover:text-primary transition">Inicio</a></li>
+                    <li><a href="../paginas/adopta.html" class="hover:text-primary transition">Adopta</a></li>
+                    <li><a href="../paginas/tienda.html" class="hover:text-primary transition">Tienda</a></li>
+                    <li><a href="../paginas/donaciones.html" class="hover:text-primary transition">Donar</a></li>
                 </ul>
             </div>
 
             <!-- Donaciones -->
-            <div class="footer-section">
-                <h3>Sobre las Donaciones</h3>
-                <ul>
-                    <li><a href="donaciones.html">Términos y Condiciones</a></li>
-                    <li><a href="#">Informes</a></li>
-                    <li><a href="#">Política de Privacidad</a></li>
+            <div>
+                <h3 class="text-lg font-bold mb-3">Sobre las Donaciones</h3>
+                <ul class="space-y-2">
+                    <li><a href="../paginas/donaciones.html" class="hover:text-primary transition">Términos y
+                            Condiciones</a></li>
+                    <li><a href="#" class="hover:text-primary transition">Informes</a></li>
+                    <li><a href="#" class="hover:text-primary transition">Política de Privacidad</a></li>
                 </ul>
             </div>
 
         </div>
 
-        <div class="footer-bottom">
+        <!-- Footer Bottom -->
+        <div class="border-t border-gray-300 text-center py-4 text-sm">
             <p>© 2025 PawsLove Foundation - Todos los derechos reservados</p>
         </div>
     </footer>
-
 
     <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
