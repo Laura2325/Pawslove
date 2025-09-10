@@ -42,6 +42,14 @@ function eliminarProducto(identificador) {
 function actualizarProducto(identificador, datosActualizados) {
 }
 
+export const metodosProductos = {
+    obtenerProductos,
+    guardarProductos,
+    agregarProducto,
+    eliminarProducto,
+    actualizarProducto
+}
+
 //* --- Funciones para Carrito ---
 
 /**
