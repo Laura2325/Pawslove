@@ -1,6 +1,6 @@
 const KEY_CARRITO = 'Pawslove_Carrito';
 const KEY_PRODUCTOS = 'Pawslove_Productos';
-const KEY_USUARIOS = 'Pawslove_Usuarios';
+const KEY_USUARIOS = 'pawsloveUsers';
 const KEY_MASCOTAS = 'Pawslove_Mascotas';
 
 //* --- Funciones para Productos ---
@@ -9,8 +9,15 @@ const KEY_MASCOTAS = 'Pawslove_Mascotas';
  * Obtiene todos los productos desde localStorage.
  */
 function obtenerProductos() {
-    let productos = JSON.parse(localStorage.getItem(KEY_PRODUCTOS));
-    return productos;
+    const productosJSON = localStorage.getItem(KEY_PRODUCTOS);
+    try {
+        // Si no hay nada, devuelve un array vacío para evitar errores.
+        return productosJSON ? JSON.parse(productosJSON) : [];
+    } catch (e) {
+        console.error("Error al parsear productos desde localStorage:", e);
+        // En caso de error en el parseo, devuelve un array vacío.
+        return [];
+    }
 }
 
 /**
@@ -106,8 +113,15 @@ function calcularTotalCarrito() {
  * Obtiene todos los usuarios desde localStorage.
  */
 function obtenerUsuarios() {
-    let usuarios = JSON.parse(localStorage.getItem(KEY_USUARIOS));
-    return usuarios;
+    const usuariosJSON = localStorage.getItem(KEY_USUARIOS);
+    try {
+        // Si no hay nada, devuelve un array vacío para evitar errores.
+        return usuariosJSON ? JSON.parse(usuariosJSON) : [];
+    } catch (e) {
+        console.error("Error al parsear usuarios desde localStorage:", e);
+        // En caso de error en el parseo, devuelve un array vacío.
+        return [];
+    }
 }
 
 /**
@@ -115,6 +129,7 @@ function obtenerUsuarios() {
  * @param {Array} usuarios - El array de usuarios a guardar.
  */
 function guardarUsuarios(usuarios) {
+    localStorage.setItem(KEY_USUARIOS, JSON.stringify(usuarios));
 }
 
 /**
@@ -139,14 +154,29 @@ function eliminarUsuario(identificador) {
 function actualizarUsuario(identificador, datosActualizados) {
 }
 
+export const metodosUsuarios = {
+    obtenerUsuarios,
+    guardarUsuarios,
+    agregarUsuario,
+    eliminarUsuario,
+    actualizarUsuario
+};
+
 // --- Funciones para Mascotas ---
 
 /**
  * Obtiene todas las mascotas desde localStorage.
  */
 function obtenerMascotas() {
-    let mascotas = JSON.parse(localStorage.getItem(KEY_MASCOTAS));
-    return mascotas;
+    const mascotasJSON = localStorage.getItem(KEY_MASCOTAS);
+    try {
+        // Si no hay nada, devuelve un array vacío para evitar errores.
+        return mascotasJSON ? JSON.parse(mascotasJSON) : [];
+    } catch (e) {
+        console.error("Error al parsear mascotas desde localStorage:", e);
+        // En caso de error en el parseo, devuelve un array vacío.
+        return [];
+    }
 }
 
 /**

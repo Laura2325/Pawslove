@@ -1,30 +1,13 @@
 import { alertasRegistro } from "./sweetalert2.min.js";
+import { metodosUsuarios } from "./manejoLocalStorage.js";
 
 document.addEventListener('DOMContentLoaded', () => {
 
-    const USERS_STORAGE_KEY = 'pawsloveUsers';
     const nombreUsuario = document.getElementById('nombreRegistro');
     const correo = document.getElementById('emailRegistro');
     const contraseña = document.getElementById('passwordRegistro');
     const confirmarContraseña = document.getElementById('confirmarPassword');
-    const btnRegistrarse = document.getElementById('btnRegistrarse');
-    // const passwordLengthError = document.getElementById('passwordLengthError');
-    // const passwordMatchError = document.getElementById('passwordMatchError');
-
-    // Función para obtener los usuarios existentes del localStorage
-    function obtenerUsuarios() {
-        const usuariosJSON = localStorage.getItem(USERS_STORAGE_KEY);
-        try {
-            return usuariosJSON ? JSON.parse(usuariosJSON) : [];
-        } catch (e) {
-            console.error("Error al parsear usuarios de localStorage", e);
-            return [];
-        }
-    }
-
-    function guardarUsuarios(usuarios) {
-        localStorage.setItem(USERS_STORAGE_KEY, JSON.stringify(usuarios));
-    }   
+    const btnRegistrarse = document.getElementById('btnRegistrarse');    
 
     btnRegistrarse.addEventListener('click', (e) => {
         e.preventDefault();
@@ -62,7 +45,7 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
-        const usuarios = obtenerUsuarios();
+        const usuarios = metodosUsuarios.obtenerUsuarios();
         if (usuarios.some(user => user.correo === correo.value)) {
             alertasRegistro.usuarioExistente();
             return;
@@ -75,7 +58,7 @@ document.addEventListener('DOMContentLoaded', () => {
         };
 
         usuarios.push(usuario);
-        guardarUsuarios(usuarios);
+        metodosUsuarios.guardarUsuarios(usuarios);
 
         alertasRegistro.usuarioRegistrado();
         const btnClose = document.getElementById('closeRegister');
