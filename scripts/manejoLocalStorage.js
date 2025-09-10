@@ -1,12 +1,16 @@
 const KEY_CARRITO = 'Pawslove_Carrito';
 const KEY_PRODUCTOS = 'Pawslove_Productos';
+const KEY_USUARIOS = 'Pawslove_Usuarios';
+const KEY_MASCOTAS = 'Pawslove_Mascotas';
 
-// --- Funciones para Productos ---
+//* --- Funciones para Productos ---
 
 /**
  * Obtiene todos los productos desde localStorage.
  */
 function obtenerProductos() {
+    let productos = JSON.parse(localStorage.getItem(KEY_PRODUCTOS));
+    return productos;
 }
 
 /**
@@ -38,7 +42,15 @@ function eliminarProducto(identificador) {
 function actualizarProducto(identificador, datosActualizados) {
 }
 
-// --- Funciones para Carrito ---
+export const metodosProductos = {
+    obtenerProductos,
+    guardarProductos,
+    agregarProducto,
+    eliminarProducto,
+    actualizarProducto
+}
+
+//* --- Funciones para Carrito ---
 
 /**
  * Obtiene el carrito de compras desde localStorage.
@@ -86,4 +98,82 @@ function vaciarCarrito() {
  * Calcula el total del carrito.
  */
 function calcularTotalCarrito() {
+}
+
+//* --- Funciones para Usuarios ---
+
+/**
+ * Obtiene todos los usuarios desde localStorage.
+ */
+function obtenerUsuarios() {
+    let usuarios = JSON.parse(localStorage.getItem(KEY_USUARIOS));
+    return usuarios;
+}
+
+/**
+ * Guarda el array de usuarios en localStorage.
+ * @param {Array} usuarios - El array de usuarios a guardar.
+ */
+function guardarUsuarios(usuarios) {
+}
+
+/**
+ * Agrega un nuevo usuario a la lista.
+ * @param {Object} nuevoUsuario - El usuario a agregar.
+ */
+function agregarUsuario(nuevoUsuario) {
+}
+
+/**
+ * Elimina un usuario por su identificador (ID o email).
+ * @param {string|number} identificador - El ID o email del usuario a eliminar.
+ */
+function eliminarUsuario(identificador) {
+}
+
+/**
+ * Actualiza un usuario existente.
+ * @param {string|number} identificador - El ID o email del usuario a actualizar.
+ * @param {Object} datosActualizados - Los nuevos datos del usuario.
+ */
+function actualizarUsuario(identificador, datosActualizados) {
+}
+
+// --- Funciones para Mascotas ---
+
+/**
+ * Obtiene todas las mascotas desde localStorage.
+ */
+function obtenerMascotas() {
+    let mascotas = JSON.parse(localStorage.getItem(KEY_MASCOTAS));
+    return mascotas;
+}
+
+/**
+ * Guarda el array de mascotas en localStorage.
+ * @param {Array} mascotas - El array de mascotas a guardar.
+ */
+function guardarMascotas(mascotas) {
+}
+
+/**
+ * Agrega una nueva mascota a la lista.
+ * @param {Object} nuevaMascota - La mascota a agregar.
+ */
+function agregarMascota(nuevaMascota) {
+}
+
+/**
+ * Elimina una mascota por su identificador (ID).
+ * @param {string|number} identificador - El ID de la mascota a eliminar.
+ */
+function eliminarMascota(identificador) {
+}
+
+/**
+ * Actualiza una mascota existente.
+ * @param {string|number} identificador - El ID de la mascota a actualizar.
+ * @param {Object} datosActualizados - Los nuevos datos de la mascota.
+ */
+function actualizarMascota(identificador, datosActualizados) {
 }

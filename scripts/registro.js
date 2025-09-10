@@ -8,8 +8,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const contraseña = document.getElementById('passwordRegistro');
     const confirmarContraseña = document.getElementById('confirmarPassword');
     const btnRegistrarse = document.getElementById('btnRegistrarse');
-    const passwordLengthError = document.getElementById('passwordLengthError');
-    const passwordMatchError = document.getElementById('passwordMatchError');
+    // const passwordLengthError = document.getElementById('passwordLengthError');
+    // const passwordMatchError = document.getElementById('passwordMatchError');
 
     // Función para obtener los usuarios existentes del localStorage
     function obtenerUsuarios() {
