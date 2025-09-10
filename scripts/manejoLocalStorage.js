@@ -109,6 +109,23 @@ function calcularTotalCarrito() {
 
 //* --- Funciones para Usuarios ---
 
+function inicializarAdmin() {
+        let usuarios = metodosUsuarios.obtenerUsuarios();
+
+        const adminExists = usuarios.some(user => user.correo === 'admin_pawslove@gmail.com');
+
+        if (!adminExists) {
+            const adminUser = {
+                nombre: 'admin_pawslove',
+                correo: 'admin_pawslove@gmail.com',
+                contraseña: 'admin_pawslove',
+                tipo: 'Administrador Principal'
+            };
+            usuarios.unshift(adminUser);
+            guardarUsuarios(usuarios);
+        }
+    }
+
 /**
  * Obtiene todos los usuarios desde localStorage.
  */
@@ -137,13 +154,26 @@ function guardarUsuarios(usuarios) {
  * @param {Object} nuevoUsuario - El usuario a agregar.
  */
 function agregarUsuario(nuevoUsuario) {
+    const usuarios = obtenerUsuarios();
+    if (usuarios.some(u => u.correo === nuevoUsuario.correo)) {
+        console.warn(`El usuario con correo ${nuevoUsuario.correo} ya existe.`);
+        return;
+    }
+    usuarios.push(nuevoUsuario);
+    guardarUsuarios(usuarios);
 }
 
 /**
  * Elimina un usuario por su identificador (ID o email).
- * @param {string|number} identificador - El ID o email del usuario a eliminar.
+ * @param {string} email - El email del usuario a eliminar.
  */
-function eliminarUsuario(identificador) {
+function eliminarUsuario(email) {
+    let usuarios = obtenerUsuarios();
+    const usuariosFiltrados = usuarios.filter(usuario => usuario.correo !== email);
+
+    if (usuariosFiltrados.length < usuarios.length) {
+        guardarUsuarios(usuariosFiltrados);
+    }
 }
 
 /**
@@ -155,6 +185,7 @@ function actualizarUsuario(identificador, datosActualizados) {
 }
 
 export const metodosUsuarios = {
+    inicializarAdmin,
     obtenerUsuarios,
     guardarUsuarios,
     agregarUsuario,

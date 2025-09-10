@@ -1,25 +1,8 @@
 import {alertasLogin} from "./sweetalert2.min.js";
 import { metodosUsuarios } from "./manejoLocalStorage.js";
 
-document.addEventListener('DOMContentLoaded', () => {
-    function inicializarAdmin() {
-        let usuarios = metodosUsuarios.obtenerUsuarios();
-
-        const adminExists = usuarios.some(user => user.correo === 'admin_pawslove@gmail.com');
-
-        if (!adminExists) {
-            const adminUser = {
-                nombre: 'admin_pawslove',
-                correo: 'admin_pawslove@gmail.com',
-                contraseña: 'admin_pawslove',
-                tipo: 'Administrador Principal'
-            };
-            usuarios.unshift(adminUser);
-            metodosUsuarios.guardarUsuarios(usuarios);
-        }
-    }
-
-    inicializarAdmin();
+document.addEventListener('DOMContentLoaded', () => {  
+    metodosUsuarios.inicializarAdmin();
 
     const loginForm = document.getElementById('loginForm');
     if (!loginForm) return; // Salir si el formulario no existe en la página
