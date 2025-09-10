@@ -1,26 +1,646 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pawslove Foundation</title>
-    <link rel="stylesheet" href="../styles/style.css">
-</head>
-<body>
-<nav>
-    <div class = "nav-container">
-        <a class = "logo-nav" href="#"></a>
-        <img src="assets/img/Isotipo.svg" alt="logo">
-    </div>
-    <div class = "nav-page">
-        <a class = "nav-link" href="index.html">Inicio</a>
-        <a class = "nav-link" href="adopta.html">Adopta</a>
-        <a class = "nav-link" href="tienda.html">Tienda</a>
-        <a class = "nav-link" href="nosotros.html">Nosotros</a>
-    </div>
-     <footer class="footer">
-  <img src="./assets/img/Logo_2.svg" alt="Logo Pawslove" class="footer-logo">
-</footer>
+    <title>Pawslove Foundation | Inicio</title>
 
+    <!-- Tailwind -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#6c40d1',
+                        secondary: '#fc6dab',
+                        accent: '#17b890',
+                        light: '#ecf0f1',
+                        dark: '#34252f'
+                    },
+                    fontFamily: {
+                        fredoka: ['Fredoka One', 'cursive'],
+                        poppins: ['Poppins', 'sans-serif']
+                    },
+                    borderRadius: {
+                        'custom': '24px'
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Tipografías -->
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Poppins:wght@300;400;500;600&display=swap"
+        rel="stylesheet">
+
+    <!-- Swiper.js -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+
+    <!-- AOS -->
+    <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+
+        @media (max-width: 768px) {
+
+            .swiper-button-prev,
+            .swiper-button-next {
+                display: none !important;
+            }
+        }
+    </style>
+</head>
+
+<body class="bg-light text-dark font-poppins">
+
+    <!-- NAVBAR -->
+    <nav
+        class="fixed top-4 left-1/2 transform -translate-x-1/2 w-[70%] md:w-[60%] bg-white border border-gray-200 shadow-md rounded-full z-50 transition-all duration-300">
+        <div class="flex items-center justify-between px-6 py-3">
+
+            <!-- Logo -->
+            <div class="flex items-center space-x-2">
+                <img src="./assets/img/marca/Isotipo_2.svg" alt="logo" class="h-10 w-10">
+            </div>
+
+            <!-- Menú desktop -->
+            <div class="hidden md:flex items-center space-x-4">
+                <a href="index.html" class="hover:text-primary transition">Inicio</a>
+                <a href="./paginas/adopta.html" class="hover:text-primary transition">Adopta</a>
+                <a href="./paginas/nosotros.html" class="hover:text-primary transition">Nosotros</a>
+                <a href="./paginas/donaciones.html"
+                    class="bg-secondary text-white px-4 py-2 rounded-full hover:bg-opacity-90 transition">Donar</a>
+                <a href="./paginas/tienda.html"
+                    class="bg-accent text-white px-4 py-2 rounded-full hover:bg-opacity-90 transition">Tienda</a>
+            </div>
+
+            <!-- Menú mobile -->
+            <button id="menu-toggle" class="md:hidden text-dark focus:outline-none">
+                <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16">
+                    </path>
+                </svg>
+            </button>
+        </div>
+
+        <!-- Mobile menu -->
+        <div id="mobile-menu"
+            class="absolute top-full left-0 w-full mt-2 max-h-0 overflow-hidden transition-all duration-500 ease-in-out bg-white rounded-2xl shadow-md z-40">
+
+            <!-- Contenido -->
+            <div class="px-6 py-4">
+                <a href="./index.html" class="block py-2 hover:text-primary">Inicio</a>
+                <a href="./paginas/adopta.html" class="block py-2 hover:text-primary">Adopta</a>
+                <a href="./paginas/nosotros.html" class="block py-2 hover:text-primary">Nosotros</a>
+                <div class="flex items-center justify-around mt-4">
+                    <a href="./paginas/donaciones.html"
+                        class="bg-secondary text-white px-4 py-2 rounded-full hover:bg-opacity-90 transition">
+                        Donar
+                    </a>
+                    <a href="./paginas/tienda.html"
+                        class="bg-accent text-white px-4 py-2 rounded-full hover:bg-opacity-90 transition">
+                        Tienda
+                    </a>
+                </div>
+            </div>
+        </div>
+
+    </nav>
+
+    <!-- HERO -->
+    <section id="inicio" class="relative h-screen w-full">
+        <div class="swiper h-full">
+            <div class="swiper-wrapper">
+
+                <!-- Slide 1 -->
+                <div class="swiper-slide relative h-full w-full">
+                    <img src="./assets/img/marca/carrusel-1.jpg" alt="1" class="w-full h-full object-cover">
+                    <div
+                        class="absolute inset-0 bg-black/50 flex flex-col justify-center items-center text-center text-white p-6">
+                        <h1 class="font-fredoka font-bold text-5xl md:text-6xl mb-6" data-aos="fade-up">¡Adopta un amigo
+                            fiel!</h1>
+                        <p class="text-lg md:text-xl mb-8 max-w-2xl" data-aos="fade-up" data-aos-delay="200">Cada perro
+                            merece un hogar lleno de amor. Haz la diferencia hoy.</p>
+                        <a href="#adopcion"
+                            class="bg-accent px-6 py-3 rounded-custom shadow-md hover:scale-110 transition"
+                            data-aos="zoom-in" data-aos-delay="400">Adoptar</a>
+                    </div>
+                </div>
+
+                <!-- Slide 2 -->
+                <div class="swiper-slide relative h-full w-full">
+                    <img src="./assets/img/marca/carrusel-2.jpg" alt="2" class="w-full h-full object-cover">
+                    <div
+                        class="absolute inset-0 bg-black/50 flex flex-col justify-center items-center text-center text-white p-6">
+                        <h1 class="font-fredoka font-bold text-5xl md:text-6xl mb-6" data-aos="fade-up">¡Dales una nueva
+                            vida!</h1>
+                        <p class="text-lg md:text-xl mb-8 max-w-2xl" data-aos="fade-up" data-aos-delay="200">Gatos y
+                            perros esperan un hogar donde recibir cariño y cuidado.</p>
+                        <a href="#adopcion"
+                            class="bg-accent px-6 py-3 rounded-custom shadow-md hover:scale-110 transition"
+                            data-aos="zoom-in" data-aos-delay="400">Adoptar</a>
+                    </div>
+                </div>
+
+                <!-- Slide 3 -->
+                <div class="swiper-slide relative h-full w-full">
+                    <img src="./assets/img/marca/carrusel-3.jpg" alt="3" class="w-full h-full object-cover">
+                    <div
+                        class="absolute inset-0 bg-black/50 flex flex-col justify-center items-center text-center text-white p-6">
+                        <h1 class="font-fredoka font-bold text-5xl md:text-6xl mb-6" data-aos="fade-up">¡Tu nuevo mejor
+                            amigo te espera!</h1>
+                        <p class="text-lg md:text-xl mb-8 max-w-2xl" data-aos="fade-up" data-aos-delay="200">Adoptar es
+                            un acto de amor que transforma vidas, tanto la tuya como la de ellos.</p>
+                        <a href="#adopcion"
+                            class="bg-accent px-6 py-3 rounded-custom shadow-md hover:scale-110 transition"
+                            data-aos="zoom-in" data-aos-delay="400">Adoptar</a>
+                    </div>
+                </div>
+
+            </div>
+            <div class="swiper-pagination"></div>
+            <div class="swiper-button-prev !text-white !w-8 !h-8 md:!w-12 md:!h-12 !left-2 md:!left-6 z-50"></div>
+            <div class="swiper-button-next !text-white !w-8 !h-8 md:!w-12 md:!h-12 !right-2 md:!right-6 z-50"></div>
+
+        </div>
+    </section>
+
+    <!-- POR QUÉ ADOPTAR -->
+    <section id="adopcion" class="py-20 px-6 md:px-20 bg-white text-center">
+        <h2 class="font-fredoka font-bold text-4xl text-primary mb-12" data-aos="fade-up">¿Por qué adoptar y no comprar?
+        </h2>
+        <div class="grid md:grid-cols-3 gap-10 max-w-6xl mx-auto">
+            <div class="p-6 bg-light rounded-custom shadow-md" data-aos="zoom-in" data-aos-delay="100">
+                <h3 class="font-fredoka font-bold text-2xl mb-4">Salvas vidas</h3>
+                <p>Millones de animales esperan en refugios. Adoptar significa darles una segunda oportunidad.</p>
+            </div>
+            <div class="p-6 bg-light rounded-custom shadow-md" data-aos="zoom-in" data-aos-delay="200">
+                <h3 class="font-fredoka font-bold text-2xl mb-4">Combates el abandono</h3>
+                <p>Al adoptar ayudas a disminuir el número de perros y gatos en situación de calle.</p>
+            </div>
+            <div class="p-6 bg-light rounded-custom shadow-md" data-aos="zoom-in" data-aos-delay="300">
+                <h3 class="font-fredoka font-bold text-2xl mb-4">Un amigo incondicional</h3>
+                <p>Los animales rescatados suelen ser agradecidos y entregan un amor sincero.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- CÓMO AYUDAR -->
+    <section id="ayuda" class="py-20 px-6 md:px-20 bg-light">
+        <h2 class="font-fredoka font-bold text-4xl text-primary text-center mb-12" data-aos="fade-up">¿Cómo puedes
+            ayudar?</h2>
+        <div class="grid md:grid-cols-3 gap-10 max-w-6xl mx-auto">
+            <div class="p-6 bg-white rounded-custom shadow-md text-center" data-aos="fade-up" data-aos-delay="100">
+                <h3 class="font-fredoka text-2xl mb-4 text-secondary">Dona</h3>
+                <p>Tu aporte económico se transforma en alimento, vacunas y cuidados médicos.</p>
+            </div>
+            <div class="p-6 bg-white rounded-custom shadow-md text-center" data-aos="fade-up" data-aos-delay="200">
+                <h3 class="font-fredoka text-2xl mb-4 text-accent">Voluntariado</h3>
+                <p>Únete como voluntario para ayudarnos en el cuidado y rescate de los animales.</p>
+            </div>
+            <div class="p-6 bg-white rounded-custom shadow-md text-center" data-aos="fade-up" data-aos-delay="300">
+                <h3 class="font-fredoka text-2xl mb-4 text-primary">Tienda Solidaria</h3>
+                <p>Compra productos en nuestra tienda, todas las ganancias apoyan nuestra misión.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- TESTIMONIOS -->
+    <section id="testimonios" class="py-20 px-6 md:px-20 bg-white text-center">
+        <h2 class="font-fredoka font-bold text-4xl text-primary mb-12" data-aos="fade-up">Testimonios de Adopción</h2>
+        <div class="grid md:grid-cols-3 gap-10 max-w-6xl mx-auto">
+            <div class="p-6 bg-light rounded-custom shadow-md" data-aos="flip-left" data-aos-delay="100">
+                <p>"Adoptar a Luna fue lo mejor que hicimos, ahora nuestra familia está completa."</p>
+                <span class="block mt-4 font-semibold">- Ana & Carlos</span>
+            </div>
+            <div class="p-6 bg-light rounded-custom shadow-md" data-aos="flip-left" data-aos-delay="200">
+                <p>"Max llegó a nuestras vidas lleno de energía, nos cambió para siempre."</p>
+                <span class="block mt-4 font-semibold">- Juan</span>
+            </div>
+            <div class="p-6 bg-light rounded-custom shadow-md" data-aos="flip-left" data-aos-delay="300">
+                <p>"Desde que adoptamos a Mía, nuestras hijas son más felices y responsables."</p>
+                <span class="block mt-4 font-semibold">- Laura</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección de estadísticas -->
+    <section class="py-16 px-4 md:px-8 lg:px-16">
+        <div class="container mx-auto">
+            <!-- Encabezado -->
+            <div class="text-center mb-16" data-aos="fade-up">
+                <h2 class="font-fredoka font-bold text-4xl text-primary mb-12">Nuestro Impacto en Cifras</h2>
+                <p class="text-dark text-lg max-w-3xl mx-auto">En nuestra fundación, cada número representa una vida
+                    transformada. Estos son los resultados de nuestro trabajo hasta la fecha.</p>
+            </div>
+
+            <!-- Grid de estadísticas -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Estadística 1 -->
+                <div class="bg-white rounded-custom p-8 shadow-lg text-center" data-aos="fade-up" data-aos-delay="100">
+                    <div class="text-6xl font-fredoka mb-4 text-dark" id="adoptions-count">0</div>
+                    <h3 class="text-xl font-semibold text-dark mb-2">Adopciones Exitosas</h3>
+                    <p class="text-gray-600">Familias felices que han encontrado a su compañero perfecto</p>
+                    <div class="mt-6">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 mx-auto text-dark" fill="none"
+                            viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M17 14v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5m14 0V9a2 2 0 00-2-2H5a2 2 0 00-2 2v5m14 0V7a2 2 0 00-2-2H5a2 2 0 00-2 2v5m14 0V5a2 2 0 00-2-2H5a2 2 0 00-2 2v5m14 0V3a2 2 0 00-2-2H5a2 2 0 00-2 2v5m14 0V1a2 2 0 00-2-2H5a2 2 0 00-2 2v5m14 0v15" />
+                        </svg>
+                    </div>
+                </div>
+
+                <!-- Estadística 2 -->
+                <div class="bg-white rounded-custom p-8 shadow-lg text-center" data-aos="fade-up" data-aos-delay="200">
+                    <div class="text-6xl font-fredoka mb-4 text-secondary" id="animals-rescued">0</div>
+                    <h3 class="text-xl font-semibold text-dark mb-2">Animales Rescatados</h3>
+                    <p class="text-gray-600">Hemos brindado una segunda oportunidad a estos seres maravillosos</p>
+                    <div class="mt-6">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 mx-auto text-secondary" fill="none"
+                            viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                        </svg>
+                    </div>
+                </div>
+
+                <!-- Estadística 3 -->
+                <div class="bg-white rounded-custom p-8 shadow-lg text-center" data-aos="fade-up" data-aos-delay="300">
+                    <div class="text-6xl font-fredoka mb-4 text-accent" id="volunteers-count">0</div>
+                    <h3 class="text-xl font-semibold text-dark mb-2">Voluntarios Activos</h3>
+                    <p class="text-gray-600">Personas comprometidas que hacen posible nuestra labor diaria</p>
+                    <div class="mt-6">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 mx-auto text-accent" fill="none"
+                            viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+                        </svg>
+                    </div>
+                </div>
+
+                <!-- Estadística 4 -->
+                <div class="bg-white rounded-custom p-8 shadow-lg text-center" data-aos="fade-up" data-aos-delay="400">
+                    <div class="text-6xl font-fredoka mb-4 text-dark" id="years-count">0</div>
+                    <h3 class="text-xl font-semibold text-dark mb-2">Años de Servicio</h3>
+                    <p class="text-gray-600">Trabajando incansablemente por el bienestar de los animales</p>
+                    <div class="mt-6">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 mx-auto text-dark" fill="none"
+                            viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Información adicional -->
+            <div class="mt-16 bg-accent text-white rounded-custom p-8 md:p-12 text-center" data-aos="fade-up">
+                <h3 class="title text-2xl md:text-3xl mb-4">¿Quieres ser parte del cambio?</h3>
+                <p class="text-lg mb-6 max-w-3xl mx-auto">Cada adopción, donación o hora de voluntariado marca la
+                    diferencia en la vida de estos animales.</p>
+                <a href="./paginas/contacto.html"
+                    class="bg-secondary hover:bg-pink-500 text-white font-bold py-3 px-8 rounded-custom transition duration-300 transform hover:scale-105">
+                    Únete a nosotros
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección de carrusel de mascotas -->
+    <section class="py-16 px-4 md:px-8 lg:px-16">
+        <div class="container mx-auto">
+            <!-- Encabezado -->
+            <div class="text-center mb-12" data-aos="fade-up">
+                <h2 class="font-fredoka text-4xl md:text-5xl text-primary mb-4">Nuestros Peludos Esperan un Hogar</h2>
+                <p class="text-dark text-lg max-w-3xl mx-auto">Conoce a estos adorables compañeros que buscan una
+                    familia amorosa. ¿Serás tú su persona especial?</p>
+            </div>
+
+            <!-- Carrusel -->
+            <div class="swiper mySwiper" data-aos="fade-up" data-aos-delay="200">
+                <div class="swiper-wrapper">
+                    <!-- Tarjeta 1 -->
+                    <div class="swiper-slide">
+                        <div class="pet-card bg-white rounded-custom overflow-hidden mx-auto max-w-sm">
+                            <div class="relative">
+                                <img src="https://images.unsplash.com/photo-1543466835-00a7907e9de1?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1074&q=80"
+                                    alt="Luna - Perrita Labrador" class="w-full h-64 object-cover">
+                                <span
+                                    class="absolute top-4 left-4 bg-secondary text-white py-1 px-3 rounded-full text-sm">Perrita</span>
+                            </div>
+                            <div class="p-6">
+                                <div class="flex justify-between items-start">
+                                    <div>
+                                        <h3 class="text-xl font-bold text-dark">Luna</h3>
+                                        <p class="text-accent">Labrador Mix • 2 años</p>
+                                    </div>
+                                    <span class="bg-primary text-white py-1 px-3 rounded-full text-xs">Mediana</span>
+                                </div>
+                                <p class="text-gray-600 my-4">Luna es una perrita juguetona y cariñosa. Le encanta
+                                    correr en el parque y jugar con pelotas. Está esterilizada y con todas sus vacunas
+                                    al día.</p>
+                                <div class="flex items-center justify-between mt-6">
+                                    <span class="text-primary font-bold">Disponible para adopción</span>
+                                    <a href="./paginas/formulario-adopcion.html"
+                                        class="bg-accent hover:bg-green-500 text-white py-2 px-4 rounded-custom transition duration-300">Adopta</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Tarjeta 2 -->
+                    <div class="swiper-slide">
+                        <div class="pet-card bg-white rounded-custom overflow-hidden mx-auto max-w-sm">
+                            <div class="relative">
+                                <img src="https://images.unsplash.com/photo-1533738363-b7f9aef128ce?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=735&q=80"
+                                    alt="Simba - Gatito Naranja" class="w-full h-64 object-cover">
+                                <span
+                                    class="absolute top-4 left-4 bg-secondary text-white py-1 px-3 rounded-full text-sm">Gatito</span>
+                            </div>
+                            <div class="p-6">
+                                <div class="flex justify-between items-start">
+                                    <div>
+                                        <h3 class="text-xl font-bold text-dark">Simba</h3>
+                                        <p class="text-accent">Naranja • 1 año</p>
+                                    </div>
+                                    <span class="bg-primary text-white py-1 px-3 rounded-full text-xs">Pequeño</span>
+                                </div>
+                                <p class="text-gray-600 my-4">Simba es un gatito curioso y afectuoso. Le encanta tomar
+                                    el sol y jugar con juguetes con plumas. Se lleva bien con otros gatos y niños.</p>
+                                <div class="flex items-center justify-between mt-6">
+                                    <span class="text-primary font-bold">Disponible para adopción</span>
+                                    <a href="./paginas/formulario-adopcion.html"
+                                        class="bg-accent hover:bg-green-500 text-white py-2 px-4 rounded-custom transition duration-300">Adopta</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Tarjeta 3 -->
+                    <div class="swiper-slide">
+                        <div class="pet-card bg-white rounded-custom overflow-hidden mx-auto max-w-sm">
+                            <div class="relative">
+                                <img src="https://images.unsplash.com/photo-1554692918-08fa0fdc9db3?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80"
+                                    alt="Rocky - Perro Pastor Alemán" class="w-full h-64 object-cover">
+                                <span
+                                    class="absolute top-4 left-4 bg-secondary text-white py-1 px-3 rounded-full text-sm">Perro</span>
+                            </div>
+                            <div class="p-6">
+                                <div class="flex justify-between items-start">
+                                    <div>
+                                        <h3 class="text-xl font-bold text-dark">Rocky</h3>
+                                        <p class="text-accent">Pastor Alemán • 4 años</p>
+                                    </div>
+                                    <span class="bg-primary text-white py-1 px-3 rounded-full text-xs">Grande</span>
+                                </div>
+                                <p class="text-gray-600 my-4">Rocky es un perro leal e inteligente. Fue rescatado y está
+                                    buscando un hogar con espacio donde pueda correr y jugar. Obediente y cariñoso.</p>
+                                <div class="flex items-center justify-between mt-6">
+                                    <span class="text-primary font-bold">Disponible para adopción</span>
+                                    <a href="./paginas/formulario-adopcion.html"
+                                        class="bg-accent hover:bg-green-500 text-white py-2 px-4 rounded-custom transition duration-300">Adopta</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Tarjeta 4 -->
+                    <div class="swiper-slide">
+                        <div class="pet-card bg-white rounded-custom overflow-hidden mx-auto max-w-sm">
+                            <div class="relative">
+                                <img src="https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1143&q=80"
+                                    alt="Mía - Gata Siamesa" class="w-full h-64 object-cover">
+                                <span
+                                    class="absolute top-4 left-4 bg-secondary text-white py-1 px-3 rounded-full text-sm">Gata</span>
+                            </div>
+                            <div class="p-6">
+                                <div class="flex justify-between items-start">
+                                    <div>
+                                        <h3 class="text-xl font-bold text-dark">Mía</h3>
+                                        <p class="text-accent">Siamesa • 3 años</p>
+                                    </div>
+                                    <span class="bg-primary text-white py-1 px-3 rounded-full text-xs">Mediana</span>
+                                </div>
+                                <p class="text-gray-600 my-4">Mía es una gata elegante y tranquila. Le gusta observar
+                                    desde lugares elevados y recibir mimos en sus términos. Ideal para un hogar calmado.
+                                </p>
+                                <div class="flex items-center justify-between mt-6">
+                                    <span class="text-primary font-bold">Disponible para adopción</span>
+                                    <a href="./paginas/formulario-adopcion.html"
+                                        class="bg-accent hover:bg-green-500 text-white py-2 px-4 rounded-custom transition duration-300">Adopta</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Tarjeta 5 -->
+                    <div class="swiper-slide">
+                        <div class="pet-card bg-white rounded-custom overflow-hidden mx-auto max-w-sm">
+                            <div class="relative">
+                                <img src="https://images.unsplash.com/photo-1583337130417-3346a1be7dee?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1064&q=80"
+                                    alt="Toby - Cachorro Mixto" class="w-full h-64 object-cover">
+                                <span
+                                    class="absolute top-4 left-4 bg-secondary text-white py-1 px-3 rounded-full text-sm">Cachorro</span>
+                            </div>
+                            <div class="p-6">
+                                <div class="flex justify-between items-start">
+                                    <div>
+                                        <h3 class="text-xl font-bold text-dark">Toby</h3>
+                                        <p class="text-accent">Mix • 5 meses</p>
+                                    </div>
+                                    <span class="bg-primary text-white py-1 px-3 rounded-full text-xs">Pequeño</span>
+                                </div>
+                                <p class="text-gray-600 my-4">Toby es un cachorro energético y juguetón. Está en proceso
+                                    de entrenamiento y aprenderá rápido con la familia adecuada. ¡Le encanta explorar!
+                                </p>
+                                <div class="flex items-center justify-between mt-6">
+                                    <span class="text-primary font-bold">Disponible para adopción</span>
+                                    <a href="./paginas/formulario-adopcion.html"
+                                        class="bg-accent hover:bg-green-500 text-white py-2 px-4 rounded-custom transition duration-300">Adopta</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Tarjeta 6 -->
+                    <div class="swiper-slide">
+                        <div class="pet-card bg-white rounded-custom overflow-hidden mx-auto max-w-sm">
+                            <div class="relative">
+                                <img src="https://images.unsplash.com/photo-1592194996308-7b43878e84a6?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80"
+                                    alt="Cleo - Gatita Bengalí" class="w-full h-64 object-cover">
+                                <span
+                                    class="absolute top-4 left-4 bg-secondary text-white py-1 px-3 rounded-full text-sm">Gatita</span>
+                            </div>
+                            <div class="p-6">
+                                <div class="flex justify-between items-start">
+                                    <div>
+                                        <h3 class="text-xl font-bold text-dark">Cleo</h3>
+                                        <p class="text-accent">Bengalí • 2 años</p>
+                                    </div>
+                                    <span class="bg-primary text-white py-1 px-3 rounded-full text-xs">Mediana</span>
+                                </div>
+                                <p class="text-gray-600 my-4">Cleo es una gatita activa y curiosa con un pelaje hermoso.
+                                    Necesita espacio para trepar y jugar. Ideal para dueños experimentados con gatos.
+                                </p>
+                                <div class="flex items-center justify-between mt-6">
+                                    <span class="text-primary font-bold">Disponible para adopción</span>
+                                    <a href="./paginas/formulario-adopcion.html"
+                                        class="bg-accent hover:bg-green-500 text-white py-2 px-4 rounded-custom transition duration-300">Adopta</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="swiper-pagination"></div>
+                <div class="swiper-button-next"></div>
+                <div class="swiper-button-prev"></div>
+            </div>
+
+            <!-- Call to Action -->
+            <div class="mt-16 bg-primary text-white rounded-custom p-8 md:p-12 text-center" data-aos="fade-up">
+                <h3 class="title text-2xl md:text-3xl mb-4">¿Te enamoraste de alguno de nuestros peludos?</h3>
+                <p class="text-lg mb-6 max-w-3xl mx-auto">Completa el formulario de adopción y programa una cita para
+                    conocerlos en persona. El proceso de adopción típicamente toma 3-5 días.</p>
+                <a href="./paginas/formulario-adopcion.html"
+                    class="bg-secondary hover:bg-pink-500 text-white font-bold py-3 px-8 rounded-custom transition duration-300 transform hover:scale-105">
+                    Iniciar proceso de adopción
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer  -->
+<footer class="bg-light text-dark">
+        <div class="max-w-7xl mx-auto px-6 py-10 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
+
+            <!-- Logo + Redes -->
+            <div class="flex flex-col items-start space-y-4">
+                <img src="../assets/img/marca/Logo.svg" alt="Logo PawsLove" class="w-36">
+                <p class="font-bold">Redes Sociales</p>
+                <div class="flex space-x-4">
+                    <a href="#"><img src="../assets/iconos/instagram.jpg" alt="Instagram" class="w-6 h-6"></a>
+                    <a href="#"><img src="../assets/iconos/tiktok.svg" alt="TikTok" class="w-6 h-6"></a>
+                    <a href="#"><img src="../assets/iconos/facebook.svg" alt="Facebook" class="w-6 h-6"></a>
+                </div>
+            </div>
+
+            <!-- Contacto -->
+            <div class="flex flex-col items-start">
+                <h3 class="text-lg font-bold mb-3">Contáctanos</h3>
+                <p>(601) 000 0000</p>
+                <p>Cra 00. 53b Sur</p>
+            </div>
+
+            <!-- Enlaces -->
+            <div>
+                <h3 class="text-lg font-bold mb-3">Enlaces Rápidos</h3>
+                <ul class="space-y-2">
+                    <li><a href="../index.html" class="hover:text-primary transition">Inicio</a></li>
+                    <li><a href="../paginas/adopta.html" class="hover:text-primary transition">Adopta</a></li>
+                    <li><a href="../paginas/tienda.html" class="hover:text-primary transition">Tienda</a></li>
+                    <li><a href="../paginas/donaciones.html" class="hover:text-primary transition">Donar</a></li>
+                </ul>
+            </div>
+
+            <!-- Donaciones -->
+            <div>
+                <h3 class="text-lg font-bold mb-3">Sobre las Donaciones</h3>
+                <ul class="space-y-2">
+                    <li><a href="../paginas/donaciones.html" class="hover:text-primary transition">Términos y
+                            Condiciones</a></li>
+                    <li><a href="#" class="hover:text-primary transition">Informes</a></li>
+                    <li><a href="#" class="hover:text-primary transition">Política de Privacidad</a></li>
+                </ul>
+            </div>
+
+        </div>
+
+        <!-- Footer Bottom -->
+        <div class="border-t border-gray-300 text-center py-4 text-sm">
+            <p>© 2025 PawsLove Foundation - Todos los derechos reservados</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+    <script>
+        // Swiper
+        const swiper = new Swiper('.swiper', {
+            loop: true,
+            autoplay: { delay: 4000, disableOnInteraction: false },
+            pagination: { el: '.swiper-pagination', clickable: true },
+            navigation: { nextEl: '.swiper-button-next', prevEl: '.swiper-button-prev' }
+        });
+
+
+        // Estadísticas animadas
+        document.addEventListener('DOMContentLoaded', function () {
+            AOS.init({
+                duration: 800,
+                once: true,
+                easing: 'ease-in-out'
+            });
+
+            // Animación de contadores
+            const counters = document.querySelectorAll('.text-6xl');
+            const values = [1256, 2843, 178, 8]; // Valores reales para cada contador
+
+            counters.forEach((counter, index) => {
+                let current = 0;
+                const target = values[index];
+                const duration = 2000; // 2 segundos
+                const increment = target / (duration / 16); // 60fps
+
+                const updateCounter = () => {
+                    if (current < target) {
+                        current += increment;
+                        if (current > target) current = target;
+                        counter.textContent = Math.round(current).toLocaleString();
+                        setTimeout(updateCounter, 16);
+                    }
+                };
+
+                // Iniciar contador cuando el elemento es visible
+                const observer = new IntersectionObserver((entries) => {
+                    if (entries[0].isIntersecting) {
+                        updateCounter();
+                        observer.disconnect();
+                    }
+                }, { threshold: 0.5 });
+
+                observer.observe(counter);
+            });
+        });
+
+        // Menu Movile Toggle
+        const menuToggle = document.getElementById('menu-toggle');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        menuToggle.addEventListener('click', () => {
+            if (mobileMenu.classList.contains('max-h-0')) {
+                mobileMenu.classList.remove('max-h-0');
+                mobileMenu.classList.add('max-h-[400px]');
+            } else {
+                mobileMenu.classList.add('max-h-0');
+                mobileMenu.classList.remove('max-h-[400px]');
+            }
+        });
+
+        // 🔑 Cerrar menú al cambiar a escritorio
+        window.addEventListener('resize', () => {
+            if (window.innerWidth >= 768) {
+                mobileMenu.classList.add('max-h-0');
+                mobileMenu.classList.remove('max-h-[400px]');
+            }
+        });
+    </script>
+    </script>
 </body>
+
 </html>

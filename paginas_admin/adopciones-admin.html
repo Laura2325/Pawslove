@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>🐾 Gestión de Adopciones - Pawslove</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#6c40d1',
+            secondary: '#fc6dab',
+            accent: '#17b890',
+            light: '#ecf0f1',
+            dark: '#34252f'
+          },
+          fontFamily: {
+            fredoka: ['Fredoka One', 'cursive']
+          },
+          borderRadius: {
+            'custom': '24px'
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    .sidebar-glass {
+      background: rgba(108, 64, 209, 0.85);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.2);
+    }
+    body {
+      background-color: #f5f7fa;
+      background-image: radial-gradient(#d0d7de 1px, transparent 1px),
+        radial-gradient(#d0d7de 1px, transparent 1px);
+      background-size: 40px 40px;
+      background-position: 0 0, 20px 20px;
+    }
+  </style>
+</head>
+<body class="min-h-screen font-sans flex">
+
+  <!-- 🚀 Sidebar -->
+  <aside class="sidebar-glass text-light w-64 space-y-6 py-7 px-2 absolute inset-y-0 left-0 md:relative transform md:translate-x-0 transition duration-200 ease-in-out z-10">
+    <div class="text-white flex items-center space-x-2 px-4">
+      <span class="text-2xl font-fredoka">Pawslove</span>
+    </div>
+
+    <nav class="space-y-2">
+      <a href="index.html" class="py-3 px-4 rounded flex items-center space-x-3 hover:bg-white/10">Inicio</a>
+      <a href="productos.html" class="py-3 px-4 rounded flex items-center space-x-3 hover:bg-white/10">Productos</a>
+      <a href="adopciones.html" class="py-3 px-4 rounded flex items-center space-x-3 bg-white/20">Adopciones</a>
+      <a href="ordenes.html" class="py-3 px-4 rounded flex items-center space-x-3 hover:bg-white/10">Órdenes</a>
+      <a href="donaciones.html" class="py-3 px-4 rounded flex items-center space-x-3 hover:bg-white/10">Donaciones</a>
+      <a href="usuarios.html" class="py-3 px-4 rounded flex items-center space-x-3 hover:bg-white/10">Usuarios</a>
+    </nav>
+  </aside>
+
+  <!-- 🚀 Contenido principal -->
+  <main class="flex-1 p-6">
+
+    <!-- Header -->
+    <header class="mb-8">
+      <h1 class="text-3xl font-fredoka text-primary flex items-center gap-2">
+        🐾 Gestión de Adopciones
+      </h1>
+      <p class="text-dark/70 mt-1">Encuentra un hogar para cada patita 💜</p>
+    </header>
+
+    <!-- Cards estadísticas -->
+    <section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+      <div class="bg-white rounded-custom shadow p-5 flex items-center gap-3 hover:scale-105 transition">
+        <span class="text-3xl">🐶</span>
+        <div>
+          <p class="text-sm text-dark font-semibold">Total Mascotas</p>
+          <p class="text-2xl font-bold text-primary">24</p>
+        </div>
+      </div>
+      <div class="bg-white rounded-custom shadow p-5 flex items-center gap-3 hover:scale-105 transition">
+        <span class="text-3xl">✅</span>
+        <div>
+          <p class="text-sm text-dark font-semibold">Disponibles</p>
+          <p class="text-2xl font-bold text-accent">12</p>
+        </div>
+      </div>
+      <div class="bg-white rounded-custom shadow p-5 flex items-center gap-3 hover:scale-105 transition">
+        <span class="text-3xl">⏳</span>
+        <div>
+          <p class="text-sm text-dark font-semibold">En proceso</p>
+          <p class="text-2xl font-bold text-yellow-500">6</p>
+        </div>
+      </div>
+      <div class="bg-white rounded-custom shadow p-5 flex items-center gap-3 hover:scale-105 transition">
+        <span class="text-3xl">❤️</span>
+        <div>
+          <p class="text-sm text-dark font-semibold">Adoptados</p>
+          <p class="text-2xl font-bold text-secondary">6</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Botón para abrir modal -->
+    <div class="flex justify-end mb-6">
+      <button id="openModalBtn"
+        class="bg-secondary text-white px-5 py-2 rounded-custom font-bold shadow-md hover:bg-primary transition flex items-center gap-2">
+        🐾 Agregar Mascota
+      </button>
+    </div>
+
+    <!-- Buscador -->
+    <section class="mb-6">
+      <input type="text" id="search" placeholder="Buscar mascotas..."
+        class="w-full p-3 border rounded-custom focus:ring-2 focus:ring-primary outline-none">
+    </section>
+
+    <!-- Tabla de mascotas -->
+    <section class="overflow-x-auto">
+      <table class="w-full bg-white rounded-custom shadow">
+        <thead class="bg-primary text-white">
+          <tr>
+            <th class="p-4 text-left">Foto</th>
+            <th class="p-4 text-left">Nombre</th>
+            <th class="p-4 text-left">Edad</th>
+            <th class="p-4 text-left">Raza</th>
+            <th class="p-4 text-left">Tamaño</th>
+            <th class="p-4 text-left">Estado</th>
+            <th class="p-4 text-center">Acciones</th>
+          </tr>
+        </thead>
+        <tbody id="adoptionTable" class="divide-y divide-light">
+          <!-- Ejemplo de mascota -->
+          <tr class="hover:bg-light/50 transition">
+            <td class="p-4">
+              <img src="https://place-puppy.com/80x80" class="w-16 h-16 rounded-full border-4 border-secondary object-cover" alt="Mascota">
+            </td>
+            <td class="p-4 font-semibold text-dark">Firulais</td>
+            <td class="p-4">2 años</td>
+            <td class="p-4">Labrador</td>
+            <td class="p-4">Mediano</td>
+            <td class="p-4">
+              <span class="px-3 py-1 rounded-full text-sm bg-green-100 text-green-700">Disponible</span>
+            </td>
+            <td class="p-4 flex justify-center gap-2">
+              <button class="bg-yellow-400 text-white px-3 py-1 rounded-lg hover:bg-yellow-500">Editar</button>
+              <button class="bg-red-500 text-white px-3 py-1 rounded-lg hover:bg-red-600">Eliminar</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+  </main>
+
+  <!-- 🚀 Modal con formulario actualizado -->
+  <div id="adoptionModal" class="hidden fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50">
+    <div class="bg-white rounded-custom shadow-2xl w-full max-w-lg p-8 border border-light">
+      <div class="flex justify-between items-center mb-6">
+        <h2 class="text-2xl font-bold text-primary flex items-center gap-2">🐶 Agregar Mascota</h2>
+        <button id="closeModalBtn" class="text-secondary hover:text-primary text-2xl">&times;</button>
+      </div>
+
+      <form id="adoptionForm" class="space-y-5">
+        <!-- Nombre -->
+        <div>
+          <label class="block text-sm font-semibold text-dark mb-1">Nombre de la mascota</label>
+          <input type="text" id="petName" placeholder="Ej: Firulais"
+            class="w-full rounded-custom border border-light px-4 py-2 bg-light focus:ring-2 focus:ring-secondary focus:outline-none" />
+        </div>
+
+        <!-- Edad -->
+        <div>
+          <label class="block text-sm font-semibold text-dark mb-1">Edad</label>
+          <input type="text" id="petAge" placeholder="Ej: 2 años"
+            class="w-full rounded-custom border border-light px-4 py-2 bg-light focus:ring-2 focus:ring-secondary focus:outline-none" />
+        </div>
+
+        <!-- Categoría de Edad -->
+        <div>
+          <label class="block text-sm font-semibold text-dark mb-1">Categoría de Edad</label>
+          <select id="petCategory"
+            class="w-full rounded-custom border border-light px-4 py-2 bg-light focus:ring-2 focus:ring-secondary focus:outline-none">
+            <option value="Cachorro">Cachorro</option>
+            <option value="Adulto">Adulto</option>
+            <option value="Senior">Senior</option>
+          </select>
+        </div>
+
+        <!-- Raza -->
+        <div>
+          <label class="block text-sm font-semibold text-dark mb-1">Raza</label>
+          <input type="text" id="petBreed" placeholder="Ej: Labrador"
+            class="w-full rounded-custom border border-light px-4 py-2 bg-light focus:ring-2 focus:ring-secondary focus:outline-none" />
+        </div>
+
+        <!-- Tamaño -->
+        <div>
+          <label class="block text-sm font-semibold text-dark mb-1">Tamaño</label>
+          <select id="petSize"
+            class="w-full rounded-custom border border-light px-4 py-2 bg-light focus:ring-2 focus:ring-secondary focus:outline-none">
+            <option value="Pequeño">Pequeño</option>
+            <option value="Mediano">Mediano</option>
+            <option value="Grande">Grande</option>
+          </select>
+        </div>
+
+        <!-- Descripción -->
+        <div>
+          <label class="block text-sm font-semibold text-dark mb-1">Descripción</label>
+          <textarea id="petDescription" placeholder="Ej: Juguetón y protector"
+            class="w-full rounded-custom border border-light px-4 py-2 bg-light focus:ring-2 focus:ring-secondary focus:outline-none"></textarea>
+        </div>
+
+        <!-- Imagen -->
+        <div>
+          <label class="block text-sm font-semibold text-dark mb-1">Foto de la mascota</label>
+          <input type="file" id="petImage" accept="image/*"
+            class="w-full rounded-custom border border-light px-4 py-2 bg-light focus:ring-2 focus:ring-secondary focus:outline-none" />
+        </div>
+
+        <!-- Estado -->
+        <div>
+          <label class="block text-sm font-semibold text-dark mb-1">Estado</label>
+          <select id="petStatus"
+            class="w-full rounded-custom border border-light px-4 py-2 bg-light focus:ring-2 focus:ring-secondary focus:outline-none">
+            <option value="Disponible">Disponible</option>
+            <option value="En proceso">En proceso</option>
+            <option value="Adoptado">Adoptado</option>
+          </select>
+        </div>
+
+        <!-- Botón -->
+        <div class="pt-4">
+          <button type="submit"
+            class="w-full rounded-custom bg-secondary px-4 py-3 text-white font-bold hover:bg-primary transition flex items-center justify-center gap-2 shadow-md">
+            🐾 Guardar Mascota
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+</body>
+</html>
+

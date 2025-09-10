@@ -1,0 +1,141 @@
+<html>
+
+<head>
+  <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="" />
+  <link rel="stylesheet" as="style" onload="this.rel='stylesheet'"
+    href="https://fonts.googleapis.com/css2?display=swap&amp;family=Inter%3Awght%40400%3B500%3B700%3B900&amp;family=Noto+Sans%3Awght%40400%3B500%3B700%3B900" />
+
+  <title>Pagina Principal</title>
+  <link rel="icon" type="image/x-icon" href="data:image/x-icon;base64," />
+
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+</head>
+
+<body>
+
+
+  
+  <div class="relative flex size-full min-h-screen flex-col bg-[#f8fbfa] group/design-root overflow-x-hidden"
+    style='font-family: Inter, "Noto Sans", sans-serif;'>
+    <div class="layout-container flex h-full grow flex-col">
+      <header
+        class="flex items-center justify-between whitespace-nowrap border-b border-solid border-b-[#e8f2ec] px-10 py-3">
+        <div class="flex items-center gap-4 text-[#0e1a13]">
+          <div class="size-4">
+            <img src="../assets/img/marca/Isotipo_2.svg" alt="logo">
+          </div>
+          <h2 class="text-[#0e1a13] text-lg font-bold leading-tight tracking-[-0.015em]">Pawslove</h2>
+        </div>
+        <div class="flex flex-1 justify-end gap-8">
+          <div class="flex items-center gap-9">
+            <a class="text-[#0e1a13] text-sm font-medium leading-normal" href="#">Principal</a>
+            <a class="text-[#0e1a13] text-sm font-medium leading-normal" href="#" style="display: none;">Products</a>
+            <a class="text-[#0e1a13] text-sm font-medium leading-normal" href="#" style="display: none;">Orders</a>
+            <a class="text-[#0e1a13] text-sm font-medium leading-normal" href="#" style="display: none;">Customers</a>
+            <a class="text-[#0e1a13] text-sm font-medium leading-normal" href="#" style="display: none;">Discounts</a>
+          </div>
+          <button
+            class="flex max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 bg-[#e8f2ec] text-[#0e1a13] gap-2 text-sm font-bold leading-normal tracking-[0.015em] min-w-0 px-2.5">
+            <div class="text-[#0e1a13]" data-icon="Bell" data-size="20px" data-weight="regular">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" fill="currentColor"
+                viewBox="0 0 256 256">
+                <path
+                  d="M221.8,175.94C216.25,166.38,208,139.33,208,104a80,80,0,1,0-160,0c0,35.34-8.26,62.38-13.81,71.94A16,16,0,0,0,48,200H88.81a40,40,0,0,0,78.38,0H208a16,16,0,0,0,13.8-24.06ZM128,216a24,24,0,0,1-22.62-16h45.24A24,24,0,0,1,128,216ZM48,184c7.7-13.24,16-43.92,16-80a64,64,0,1,1,128,0c0,36.05,8.28,66.73,16,80Z">
+                </path>
+              </svg>
+            </div>
+          </button>
+          <div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10"
+            style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAMEQibFtwI95Z--IbFt-rC5ux-b3AGe8hds5PpT2q22nrKBnIctFJ_ZENB9iPGv_5IGnwW9swPDs7TpXtZHMGH2vk7XI4XiI6qxqdXdsit-vcrodkEV3QeK7ctlBo7o2eIjb8DV9RRIOnrZeZoVlfW46AxODyNJa3CxCMHWe4gtPHwKr57hwZqhKmBGsMFdUy_kC-gUW95BhBFn5C34NhCiWCfH8BeaQNPYrDMnJKycxRErWX_I81dP2ae4K1OZXTi0sHWJIxU7G3h");'>
+          </div>
+        </div>
+      </header>
+      <div class="px-40 flex flex-1 justify-center py-5">
+        <div class="layout-content-container flex flex-col max-w-[960px] flex-1">
+          <div class="flex flex-wrap justify-between gap-3 p-4">
+            <p class="text-[#0e1a13] tracking-light text-[32px] font-bold leading-tight min-w-72">Principal</p>
+          </div>
+          <div class="flex flex-wrap gap-4 p-4">
+            <div class="flex min-w-[158px] flex-1 flex-col gap-2 rounded-lg p-6 border border-[#d1e6d9]">
+              <p class="text-[#0e1a13] text-base font-medium leading-normal">Ventas totales</p>
+              <p class="text-[#0e1a13] tracking-light text-2xl font-bold leading-tight">$0</p>
+            </div>
+            <div class="flex min-w-[158px] flex-1 flex-col gap-2 rounded-lg p-6 border border-[#d1e6d9]">
+              <p class="text-[#0e1a13] text-base font-medium leading-normal">Donations</p>
+              <p class="text-[#0e1a13] tracking-light text-2xl font-bold leading-tight">$0</p>
+            </div>
+            <div class="flex min-w-[158px] flex-1 flex-col gap-2 rounded-lg p-6 border border-[#d1e6d9]">
+              <p class="text-[#0e1a13] text-base font-medium leading-normal">Adoptions</p>
+              <p class="text-[#0e1a13] tracking-light text-2xl font-bold leading-tight">0</p>
+            </div>
+          </div>
+          <h2 class="text-[#0e1a13] text-[22px] font-bold leading-tight tracking-[-0.015em] px-4 pb-3 pt-5">Recent
+            Orders</h2>
+          <div class="px-4 py-3 @container">
+            <div class="flex overflow-hidden rounded-lg border border-[#d1e6d9] bg-[#f8fbfa]">
+              <table class="flex-1" id="TABLA">
+                <thead>
+                  <tr class="bg-[#f8fbfa]" id="FILA">
+                    <th class="px-4 py-3 text-left text-[#0e1a13] w-[400px] text-sm font-medium leading-normal">
+                      ID Orden
+                    </th>
+                    <th class="px-4 py-3 text-left text-[#0e1a13] w-[400px] text-sm font-medium leading-normal">
+                      Usuario
+                    </th>
+                    <th class="px-4 py-3 text-left text-[#0e1a13] w-[400px] text-sm font-medium leading-normal">
+                      Fecha</th>
+                    <th class="px-4 py-3 text-left text-[#0e1a13] w-60 text-sm font-medium leading-normal">
+                      Estado</th>
+                    <th class="px-4 py-3 text-left text-[#0e1a13] w-[200px] text-sm font-medium leading-normal">
+                      Total</th>
+                    <th class="px-4 py-3 text-left text-[#0e1a13] w-[200px] text-sm font-medium leading-normal">
+                      Acción</th>
+                  </tr>                  
+                </thead>
+
+                <tbody id="contenedorOrdenes"></tbody>
+              </table>
+            </div>
+            <style>
+              @container(max-width:120px) {
+                .table-babcc122-f1a1-4c66-951c-793323b852fe-column-120 {
+                  display: none;
+                }
+              }
+
+              @container(max-width:240px) {
+                .table-babcc122-f1a1-4c66-951c-793323b852fe-column-240 {
+                  display: none;
+                }
+              }
+
+              @container(max-width:360px) {
+                .table-babcc122-f1a1-4c66-951c-793323b852fe-column-360 {
+                  display: none;
+                }
+              }
+            </style>
+          </div>
+
+          <!-- Formulario para agregar pedidos -->
+          <h2 class="text-lg font-bold px-4 pt-5">Agregar Pedido</h2>
+          <form id="agregarOrdenForm" class="p-4 flex flex-wrap gap-2">
+            <input id="id" placeholder="Order ID" class="border p-2 rounded" />
+            <input id="usuario" placeholder="Customer" class="border p-2 rounded" />
+            <input id="fecha" type="date" class="border p-2 rounded" />
+            <input id="estado" placeholder="Status" class="border p-2 rounded" />
+            <input id="total" placeholder="Total" class="border p-2 rounded" />
+            <button type="submit" id="btnAgregar" class="bg-green-500 text-white px-4 py-2 rounded">Agregar</button>
+          </form>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Añadimos la referencia a nuestro script -->
+  <script src="../scripts/principalAdmin.js"></script>
+
+</body>
+
+</html>

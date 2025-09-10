@@ -1,0 +1,1 @@
+//Aquí se crearán los metodos de redireccion segun tipo de usuario para modular.
