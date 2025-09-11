@@ -1,558 +1,553 @@
 <!DOCTYPE html>
 <html lang="es">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Pawslove Foundation | Tienda</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link
-      href="https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap"
-      rel="stylesheet"
-    />
-    <script>
-      tailwind.config = {
-        theme: {
-          extend: {
-            colors: {
-              primary: "#6c40d1",
-              secondary: "#fc6dab",
-              accent: "#17b890",
-              light: "#ecf0f1",
-              dark: "#34252f",
-            },
-            fontFamily: {
-              fredoka: ["Fredoka One", "cursive"],
-            },
-            borderRadius: {
-              custom: "24px",
-            },
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Pawslove Foundation | Tienda</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap" rel="stylesheet" />
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: "#6c40d1",
+            secondary: "#fc6dab",
+            accent: "#17b890",
+            light: "#ecf0f1",
+            dark: "#34252f",
+          },
+          fontFamily: {
+            fredoka: ["Fredoka One", "cursive"],
+          },
+          borderRadius: {
+            custom: "24px",
           },
         },
-      };
-    </script>
-    <style>
-      .glass-effect {
-        background: rgba(255, 255, 255, 0.15);
-        backdrop-filter: blur(10px);
-        -webkit-backdrop-filter: blur(10px);
-        border: 1px solid rgba(255, 255, 255, 0.18);
-        box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
-      }
+      },
+    };
+  </script>
+  <style>
+    .glass-effect {
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
+    }
 
-      .gradient-primary {
-        background: linear-gradient(135deg, #6c40d1 0%, #8c66db 100%);
-      }
+    .gradient-primary {
+      background: linear-gradient(135deg, #6c40d1 0%, #8c66db 100%);
+    }
 
-      .gradient-secondary {
-        background: linear-gradient(135deg, #fc6dab 0%, #ff8dc0 100%);
-      }
+    .gradient-secondary {
+      background: linear-gradient(135deg, #fc6dab 0%, #ff8dc0 100%);
+    }
 
-      .gradient-accent {
-        background: linear-gradient(135deg, #17b890 0%, #2ed1a7 100%);
-      }
+    .gradient-accent {
+      background: linear-gradient(135deg, #17b890 0%, #2ed1a7 100%);
+    }
 
-      .gradient-dark {
-        background: linear-gradient(135deg, #34252f 0%, #4a3a45 100%);
-      }
+    .gradient-dark {
+      background: linear-gradient(135deg, #34252f 0%, #4a3a45 100%);
+    }
 
-      .product-card {
-        transition: all 0.3s ease;
-      }
+    .product-card {
+      transition: all 0.3s ease;
+    }
 
-      .product-card:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
-      }
+    .product-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+    }
 
-      body {
-        background-color: #f5f7fa;
-        background-image: radial-gradient(#d0d7de 1px, transparent 1px),
-          radial-gradient(#d0d7de 1px, transparent 1px);
-        background-size: 40px 40px;
-        background-position: 0 0, 20px 20px;
-      }
+    body {
+      background-color: #f5f7fa;
+      background-image: radial-gradient(#d0d7de 1px, transparent 1px),
+        radial-gradient(#d0d7de 1px, transparent 1px);
+      background-size: 40px 40px;
+      background-position: 0 0, 20px 20px;
+    }
 
+    .cart-panel {
+      position: fixed;
+      top: 0;
+      right: -400px;
+      width: 380px;
+      max-width: 100vw;
+      height: 100vh;
+      background: white;
+      box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+      transition: right 0.3s ease;
+      z-index: 1000;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .cart-panel.open {
+      right: 0;
+    }
+
+    .overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+      z-index: 999;
+    }
+
+    .overlay.open {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    /* Transiciones para el menú móvil */
+    .mobile-menu-transition {
+      transition: all 0.3s ease-in-out;
+      overflow: hidden;
+    }
+
+    .mobile-menu-open {
+      max-height: 300px;
+      opacity: 1;
+    }
+
+    .mobile-menu-closed {
+      max-height: 0;
+      opacity: 0;
+    }
+
+    /* Mejora responsive para tablets */
+    @media (max-width: 1024px) and (min-width: 768px) {
       .cart-panel {
-        position: fixed;
-        top: 0;
-        right: -400px;
-        width: 380px;
-        max-width: 100vw;
-        height: 100vh;
-        background: white;
-        box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
-        transition: right 0.3s ease;
-        z-index: 1000;
-        overflow-y: auto;
-        display: flex;
-        flex-direction: column;
+        width: 350px;
+      }
+    }
+
+    /* Mejora responsive para móviles */
+    @media (max-width: 767px) {
+      .cart-panel {
+        width: 100vw;
+        right: -100vw;
       }
 
       .cart-panel.open {
         right: 0;
       }
+    }
+  </style>
+</head>
 
-      .overlay {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: rgba(0, 0, 0, 0.5);
-        opacity: 0;
-        visibility: hidden;
-        transition: all 0.3s ease;
-        z-index: 999;
-      }
-
-      .overlay.open {
-        opacity: 1;
-        visibility: visible;
-      }
-
-      /* Transiciones para el menú móvil */
-      .mobile-menu-transition {
-        transition: all 0.3s ease-in-out;
-        overflow: hidden;
-      }
-
-      .mobile-menu-open {
-        max-height: 300px;
-        opacity: 1;
-      }
-
-      .mobile-menu-closed {
-        max-height: 0;
-        opacity: 0;
-      }
-
-      /* Mejora responsive para tablets */
-      @media (max-width: 1024px) and (min-width: 768px) {
-        .cart-panel {
-          width: 350px;
-        }
-      }
-
-      /* Mejora responsive para móviles */
-      @media (max-width: 767px) {
-        .cart-panel {
-          width: 100vw;
-          right: -100vw;
-        }
-        
-        .cart-panel.open {
-          right: 0;
-        }
-      }
-    </style>
-  </head>
-
-  <body class="min-h-screen font-sans">
-    <!-- Barra de navegación -->
-    <div class="flex justify-center">
-      <nav
-        class="fixed top-4 left-1/2 transform -translate-x-1/2 w-[90%] md:w-[60%] bg-white border border-gray-200 shadow-md rounded-full z-50 transition-all duration-300 flex items-center px-4 py-3"
-      >
-        <!-- Logo -->
-        <div class="flex items-center space-x-2">
-          <div class="h-10 w-10 flex items-center justify-center">
-           <img src="../assets/img/marca/Isotipo.svg" alt="logo">
-          </div>
+<body class="min-h-screen font-sans">
+  <!-- Barra de navegación -->
+  <div class="flex justify-center">
+    <nav
+      class="fixed top-4 left-1/2 transform -translate-x-1/2 w-[90%] md:w-[60%] bg-white border border-gray-200 shadow-md rounded-full z-50 transition-all duration-300 flex items-center px-4 py-3">
+      <!-- Logo -->
+      <div class="flex items-center space-x-2">
+        <div class="h-10 w-10 flex items-center justify-center ml-4 mt-1">
+          <img src="../assets/img/marca/Isotipo.svg" alt="logo">
         </div>
+      </div>
 
-        <!-- Menú desktop -->
-        <div
-          class="hidden md:flex items-center space-x-4 flex-1 justify-center text-gray-800 font-medium text-lg font-sans"
-        >
-          <a href="../index.html" class="hover:text-primary transition">Inicio</a>
-          <a href="../paginas/adopta.html" class="hover:text-primary transition">Adopta</a>
-          <a href="../paginas/nosotros.html" class="hover:text-primary transition">Nosotros</a>
-          <a
-            href="../paginas/donaciones.html"
-            class="bg-secondary text-white px-4 py-2 rounded-full hover:bg-opacity-90 transition"
-            >Donar</a
-          >
-          <a
-            href="../paginas/tienda.html"
-            class="bg-accent text-white px-4 py-2 rounded-full hover:bg-opacity-90 transition"
-            >Tienda</a
-          >
-        </div>
+      <!-- Menú desktop -->
+      <div
+        class="hidden md:flex items-center space-x-4 flex-1 justify-center text-gray-800 font-medium text-lg font-sans">
+        <a href="../index.html" class="hover:text-primary transition">Inicio</a>
+        <a href="../paginas/adopta.html" class="hover:text-primary transition">Adopta</a>
+        <a href="../paginas/nosotros.html" class="hover:text-primary transition">Nosotros</a>
+        <a href="../paginas/donaciones.html"
+          class="bg-secondary text-white px-4 py-2 rounded-full hover:bg-opacity-90 transition">Donar</a>
+        <a href="../paginas/tienda.html"
+          class="bg-accent text-white px-4 py-2 rounded-full hover:bg-opacity-90 transition">Tienda</a>
+        <a href="../paginas/contacto.html" class="hover:text-primary transition">Contacto</a>
+      </div>
 
-        <!-- Iconos y botones derecha -->
-        <div class="flex items-center space-x-4 ml-auto">
-          <!-- Ícono Carrito -->
-          <button
-            id="cart-button"
-            class="relative focus:outline-none"
-            aria-label="Abrir carrito"
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              class="h-7 w-7 text-gray-800 hover:text-primary transition"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-              stroke-width="2"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2 9h14l-2-9M10 21a1 1 0 100-2 1 1 0 000 2zm8 0a1 1 0 100-2 1 1 0 000 2z"
-              />
-            </svg>
-            <span
-              id="cart-count"
-              class="absolute -top-2 -right-2 bg-pink-500 text-white text-xs px-1.5 py-0.5 rounded-full hidden"
-              >0</span
-            >
-          </button>
-          
-          <!-- Avatar del usuario -->
-          <div id="imagenUsuario" class="h-10 w-10 bg-gradient-to-br from-primary to-secondary rounded-full flex items-center justify-center">
-            <span class="text-white font-bold text-sm">U</span>
-          </div>
-        </div>
-
-        <!-- Menú mobile toggle -->
-        <button
-          id="menu-toggle"
-          class="md:hidden text-dark focus:outline-none ml-4 flex items-center justify-center"
-          aria-label="Abrir menú"
-          aria-expanded="false"
-        >
-          <svg
-            id="menu-icon"
-            class="w-7 h-7 transition-transform duration-300"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M4 6h16M4 12h16M4 18h16"
-            ></path>
+      <!-- Iconos y botones derecha -->
+      <div class="flex items-center space-x-4 ml-auto mr-4 ">
+        <!-- Ícono Carrito -->
+        <button id="cart-button" class="relative focus:outline-none" aria-label="Abrir carrito">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 text-gray-800 hover:text-primary transition"
+            fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round"
+              d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2 9h14l-2-9M10 21a1 1 0 100-2 1 1 0 000 2zm8 0a1 1 0 100-2 1 1 0 000 2z" />
           </svg>
+          <span id="cart-count"
+            class="absolute -top-2 -right-2 bg-pink-500 text-white text-xs px-1.5 py-0.5 rounded-full hidden">0</span>
         </button>
 
-        <!-- Mobile menu -->
+        <!-- Avatar del usuario -->
         <div
-          id="mobile-menu"
-          class="absolute top-[60px] left-1/2 transform -translate-x-1/2 w-[90%] mobile-menu-transition mobile-menu-closed bg-white rounded-2xl shadow-md z-40 md:hidden"
-        >
-          <div
-            class="px-6 py-4 flex flex-col space-y-3 text-center font-medium text-gray-800"
-          >
-            <a href="../index.html" class="block py-2 hover:text-primary transition">Inicio</a>
-            <a href="../paginas/adopta.html" class="block py-2 hover:text-primary transition">Adopta</a>
-            <a href="../paginas/nosotros.html" class="block py-2 hover:text-primary transition">Nosotros</a>
-            <div class="flex items-center justify-around mt-4 space-x-2">
-              <a
-                href="../paginas/donaciones.html"
-                class="bg-secondary text-white px-4 py-2 rounded-full hover:bg-opacity-90 transition flex-1 text-center"
-              >
-                Donar
-              </a>
-              <a
-                href="../paginas/tienda.html"
-                class="bg-accent text-white px-4 py-2 rounded-full hover:bg-opacity-90 transition flex-1 text-center"
-              >
-                Tienda
-              </a>
-            </div>
-          </div>
-        </div>
-      </nav>
-    </div>
-
-    <!-- Panel del carrito -->
-    <div
-      id="cart-panel"
-      class="cart-panel"
-      aria-label="Panel de carrito de compras"
-      role="region"
-      aria-hidden="true"
-    >
-      <div class="p-6 flex flex-col h-full">
-        <div class="flex justify-between items-center mb-6">
-          <h2 class="text-2xl font-fredoka text-primary">Tu Carrito</h2>
-          <button
-            id="close-cart"
-            class="text-gray-500 hover:text-gray-700 focus:outline-none transition-colors"
-            aria-label="Cerrar carrito"
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              class="h-6 w-6"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M6 18L18 6M6 6l12 12"
-              />
-            </svg>
-          </button>
-        </div>
-
-        <div id="cart-items" class="mb-6 flex-1 overflow-y-auto">
-          <p class="text-gray-500 text-center py-10">Tu carrito está vacío</p>
-        </div>
-
-        <div class="border-t border-gray-200 pt-4">
-          <div class="mb-4 space-y-2">
-            <div class="flex justify-between items-center">
-              <span class="font-medium text-lg">IVA (19%)</span>
-              <span id="cart-iva" class="font-semibold text-primary">$0</span>
-            </div>
-            <div class="flex justify-between items-center">
-              <span class="font-medium text-lg">Subtotal</span>
-              <span id="cart-subtotal" class="font-semibold text-primary">$0</span>
-            </div>
-            <div
-              class="flex justify-between items-center border-t border-gray-300 pt-2"
-            >
-              <span class="font-bold text-xl">Total</span>
-              <span id="cart-total" class="font-bold text-xl text-primary">$0</span>
-            </div>
-          </div>
-          <button
-            id="proceder-pago-btn"
-            class="w-full bg-primary text-white py-3 rounded-custom font-medium hover:bg-opacity-90 transition-colors text-lg disabled:opacity-50 disabled:cursor-not-allowed"
-            disabled
-          >
-            Proceder al Pago
-          </button>
+          class="h-10 w-10 bg-gradient-to-br from-primary to-secondary rounded-full flex items-center justify-center">
+          <span class="text-white font-bold text-sm">U</span>
         </div>
       </div>
-    </div>
 
-    <!-- Overlay para el carrito -->
-    <div id="cart-overlay" class="overlay" tabindex="-1" aria-hidden="true"></div>
+      <!-- Menú mobile toggle -->
+      <button id="menu-toggle" class="md:hidden text-dark focus:outline-none ml-4 flex items-center justify-center"
+        aria-label="Abrir menú" aria-expanded="false">
+        <svg id="menu-icon" class="w-7 h-7 transition-transform duration-300" fill="none" stroke="currentColor"
+          viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+        </svg>
+      </button>
 
-    <!-- Notificación de producto agregado -->
-    <div
-      id="cart-notification"
-      class="fixed top-6 left-6 z-50 bg-primary text-white px-6 py-3 rounded-custom shadow-lg opacity-0 pointer-events-none transition-all duration-300 font-medium flex items-center space-x-2"
-      role="alert"
-      aria-live="polite"
-      aria-atomic="true"
-      style="min-width: 220px; box-shadow: 0 4px 15px rgba(108, 64, 209, 0.6);"
-    >
-      <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-        <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
-      </svg>
-      <span id="notification-text">Producto agregado al carrito</span>
-    </div>
-
-    <!-- Contenido principal -->
-    <main class="container mx-auto py-8 px-4">
-      <div class="text-center mb-10">
-        <h1 class="text-4xl font-fredoka text-primary mb-3 mt-24">
-          Tienda para Mascotas
-        </h1>
-        <p class="text-gray-600 max-w-2xl mx-auto">
-          Encuentra los mejores productos para consentir a tu compañero peludo.
-          Tenemos todo lo que necesitas para su cuidado y diversión.
-        </p>
-      </div>
-
-      <!-- Grid de productos -->
-      <div
-        class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"
-      >
-        <!-- Producto 1 -->
-        <div
-          class="product-card bg-white rounded-custom overflow-hidden shadow-md flex flex-col"
-        >
-          <div
-            class="h-48 bg-gradient-to-br from-primary/20 to-primary/10 flex items-center justify-center p-4"
-          >
-            <div class="w-full h-full bg-gray-200 rounded-lg flex items-center justify-center">
-              <span class="text-gray-500 text-sm">Imagen del producto</span>
-            </div>
-          </div>
-          <div class="p-5 flex-1 flex flex-col">
-            <h3 class="text-xl font-bold text-dark mb-2">
-              Alimento Premium para Perros
-            </h3>
-            <p class="text-gray-600 mb-4 flex-1">
-              Nutrición completa con vitaminas y minerales.
-            </p>
-            <div class="flex justify-between items-center mt-auto">
-              <span class="text-2xl font-bold text-primary">$24.990</span>
-              <button
-                class="add-to-cart bg-primary text-white py-2 px-4 rounded-custom font-medium hover:bg-opacity-90 transition-colors"
-                data-id="1"
-                data-name="Alimento Premium para Perros"
-                data-price="24990"
-                data-image="placeholder"
-              >
-                Agregar
-              </button>
-            </div>
-          </div>
-        </div>
-
-        <!-- Producto 2 -->
-        <div
-          class="product-card bg-white rounded-custom overflow-hidden shadow-md flex flex-col"
-        >
-          <div
-            class="h-48 bg-gradient-to-br from-primary/20 to-primary/10 flex items-center justify-center p-4"
-          >
-            <div class="w-full h-full bg-gray-200 rounded-lg flex items-center justify-center">
-              <span class="text-gray-500 text-sm">Imagen del producto</span>
-            </div>
-          </div>
-          <div class="p-5 flex-1 flex flex-col">
-            <h3 class="text-xl font-bold text-dark mb-2">
-              Juguete Interactivo
-            </h3>
-            <p class="text-gray-600 mb-4 flex-1">
-              Estimula mentalmente a tu mascota.
-            </p>
-            <div class="flex justify-between items-center mt-auto">
-              <span class="text-2xl font-bold text-primary">$15.500</span>
-              <button
-                class="add-to-cart bg-primary text-white py-2 px-4 rounded-custom font-medium hover:bg-opacity-90 transition-colors"
-                data-id="2"
-                data-name="Juguete Interactivo"
-                data-price="15500"
-                data-image="placeholder"
-              >
-                Agregar
-              </button>
-            </div>
-          </div>
-        </div>
-
-        <!-- Producto 3 -->
-        <div
-          class="product-card bg-white rounded-custom overflow-hidden shadow-md flex flex-col"
-        >
-          <div
-            class="h-48 bg-gradient-to-br from-primary/20 to-primary/10 flex items-center justify-center p-4"
-          >
-            <div class="w-full h-full bg-gray-200 rounded-lg flex items-center justify-center">
-              <span class="text-gray-500 text-sm">Imagen del producto</span>
-            </div>
-          </div>
-          <div class="p-5 flex-1 flex flex-col">
-            <h3 class="text-xl font-bold text-dark mb-2">Cama Comfort Plus</h3>
-            <p class="text-gray-600 mb-4 flex-1">
-              Cama ortopédica con memory foam.
-            </p>
-            <div class="flex justify-between items-center mt-auto">
-              <span class="text-2xl font-bold text-primary">$45.990</span>
-              <button
-                class="add-to-cart bg-primary text-white py-2 px-4 rounded-custom font-medium hover:bg-opacity-90 transition-colors"
-                data-id="3"
-                data-name="Cama Comfort Plus"
-                data-price="45990"
-                data-image="placeholder"
-              >
-                Agregar
-              </button>
-            </div>
-          </div>
-        </div>
-
-        <!-- Producto 4 -->
-        <div
-          class="product-card bg-white rounded-custom overflow-hidden shadow-md flex flex-col"
-        >
-          <div
-            class="h-48 bg-gradient-to-br from-primary/20 to-primary/10 flex items-center justify-center p-4"
-          >
-            <div class="w-full h-full bg-gray-200 rounded-lg flex items-center justify-center">
-              <span class="text-gray-500 text-sm">Imagen del producto</span>
-            </div>
-          </div>
-          <div class="p-5 flex-1 flex flex-col">
-            <h3 class="text-xl font-bold text-dark mb-2">
-              Plato de Comida Sencillo
-            </h3>
-            <p class="text-gray-600 mb-4 flex-1">
-              Ingredientes naturales para entrenamiento.
-            </p>
-            <div class="flex justify-between items-center mt-auto">
-              <span class="text-2xl font-bold text-primary">$9.990</span>
-              <button
-                class="add-to-cart bg-primary text-white py-2 px-4 rounded-custom font-medium hover:bg-opacity-90 transition-colors"
-                data-id="4"
-                data-name="Plato de Comida Sencillo"
-                data-price="9990"
-                data-image="placeholder"
-              >
-                Agregar
-              </button>
-            </div>
+      <!-- Mobile menu -->
+      <div id="mobile-menu"
+        class="mt-6 absolute top-[60px] left-1/2 transform -translate-x-1/2 w-[90%] mobile-menu-transition mobile-menu-closed bg-violet-200 rounded-2xl shadow-md z-40 md:hidden">
+        <div class="px-6 py-4 flex flex-col space-y-3 text-center font-medium text-gray-800">
+          <a href="../index.html" class="block py-2 hover:text-primary transition">Inicio</a>
+          <a href="../paginas/adopta.html" class="block py-2 hover:text-primary transition">Adopta</a>
+          <a href="../paginas/nosotros.html" class="block py-2 hover:text-primary transition">Nosotros</a>
+          <div class="flex items-center justify-around mt-4 space-x-2">
+            <a href="../paginas/donaciones.html"
+              class="bg-secondary text-white px-4 py-2 rounded-full hover:bg-opacity-90 transition flex-1 text-center">
+              Donar
+            </a>
+            <a href="../paginas/tienda.html"
+              class="bg-accent text-white px-4 py-2 rounded-full hover:bg-opacity-90 transition flex-1 text-center">
+              Tienda
+            </a>
           </div>
         </div>
       </div>
-    </main>
+    </nav>
+  </div>
 
-        <!-- Footer  -->
-<footer class="bg-light text-dark">
-        <div class="max-w-7xl mx-auto px-6 py-10 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
+  <!-- Panel del carrito -->
+  <div id="cart-panel" class="cart-panel" aria-label="Panel de carrito de compras" role="region" aria-hidden="true">
+    <div class="p-6 flex flex-col h-full">
+      <div class="flex justify-between items-center mb-6">
+        <h2 class="text-2xl font-fredoka text-primary">Tu Carrito</h2>
+        <button id="close-cart" class="text-gray-500 hover:text-gray-700 focus:outline-none transition-colors"
+          aria-label="Cerrar carrito">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+      </div>
 
-            <!-- Logo + Redes -->
-            <div class="flex flex-col items-start space-y-4">
-                <img src="../assets/img/marca/Logo.svg" alt="Logo PawsLove" class="w-36">
-                <p class="font-bold">Redes Sociales</p>
-                <div class="flex space-x-4">
-                    <a href="#"><img src="../assets/iconos/instagram.jpg" alt="Instagram" class="w-6 h-6"></a>
-                    <a href="#"><img src="../assets/iconos/tiktok.svg" alt="TikTok" class="w-6 h-6"></a>
-                    <a href="#"><img src="../assets/iconos/facebook.svg" alt="Facebook" class="w-6 h-6"></a>
-                </div>
-            </div>
+      <div id="cart-items" class="mb-6 flex-1 overflow-y-auto">
+        <p class="text-gray-500 text-center py-10">Tu carrito está vacío</p>
+      </div>
 
-            <!-- Contacto -->
-            <div class="flex flex-col items-start">
-                <h3 class="text-lg font-bold mb-3">Contáctanos</h3>
-                <p>(601) 000 0000</p>
-                <p>Cra 00. 53b Sur</p>
-            </div>
-
-            <!-- Enlaces -->
-            <div>
-                <h3 class="text-lg font-bold mb-3">Enlaces Rápidos</h3>
-                <ul class="space-y-2">
-                    <li><a href="../index.html" class="hover:text-primary transition">Inicio</a></li>
-                    <li><a href="../paginas/adopta.html" class="hover:text-primary transition">Adopta</a></li>
-                    <li><a href="../paginas/tienda.html" class="hover:text-primary transition">Tienda</a></li>
-                    <li><a href="../paginas/donaciones.html" class="hover:text-primary transition">Donar</a></li>
-                </ul>
-            </div>
-
-            <!-- Donaciones -->
-            <div>
-                <h3 class="text-lg font-bold mb-3">Sobre las Donaciones</h3>
-                <ul class="space-y-2">
-                    <li><a href="../paginas/donaciones.html" class="hover:text-primary transition">Términos y
-                            Condiciones</a></li>
-                    <li><a href="#" class="hover:text-primary transition">Informes</a></li>
-                    <li><a href="#" class="hover:text-primary transition">Política de Privacidad</a></li>
-                </ul>
-            </div>
-
+      <div class="border-t border-gray-200 pt-4">
+        <div class="mb-4 space-y-2">
+          <div class="flex justify-between items-center">
+            <span class="font-medium text-lg">IVA (19%)</span>
+            <span id="cart-iva" class="font-semibold text-primary">$0</span>
+          </div>
+          <div class="flex justify-between items-center">
+            <span class="font-medium text-lg">Subtotal</span>
+            <span id="cart-subtotal" class="font-semibold text-primary">$0</span>
+          </div>
+          <div class="flex justify-between items-center border-t border-gray-300 pt-2">
+            <span class="font-bold text-xl">Total</span>
+            <span id="cart-total" class="font-bold text-xl text-primary">$0</span>
+          </div>
         </div>
+        <button id="proceder-pago-btn"
+          class="w-full bg-primary text-white py-3 rounded-custom font-medium hover:bg-opacity-90 transition-colors text-lg disabled:opacity-50 disabled:cursor-not-allowed"
+          disabled>
+          Proceder al Pago
+        </button>
+      </div>
+    </div>
+  </div>
 
-        <!-- Footer Bottom -->
-        <div class="border-t border-gray-300 text-center py-4 text-sm">
-            <p>© 2025 PawsLove Foundation</p>
-            <p>Todos los derechos reservados</p>
+  <!-- Overlay para el carrito -->
+  <div id="cart-overlay" class="overlay" tabindex="-1" aria-hidden="true"></div>
+
+  <!-- Notificación de producto agregado -->
+  <div id="cart-notification"
+    class="fixed top-6 left-6 z-50 bg-primary text-white px-6 py-3 rounded-custom shadow-lg opacity-0 pointer-events-none transition-all duration-300 font-medium flex items-center space-x-2"
+    role="alert" aria-live="polite" aria-atomic="true"
+    style="min-width: 220px; box-shadow: 0 4px 15px rgba(108, 64, 209, 0.6);">
+    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 flex-shrink-0" fill="none" viewBox="0 0 24 24"
+      stroke="currentColor" stroke-width="2">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+    </svg>
+    <span id="notification-text">Producto agregado al carrito</span>
+  </div>
+
+  <!-- Contenido principal -->
+  <main class="container mx-auto py-8 px-4">
+    <div class="text-center mb-10">
+      <h1 class="text-4xl font-fredoka text-primary mb-3 mt-24">
+        Tienda para Mascotas
+      </h1>
+      <p class="text-gray-600 max-w-2xl mx-auto">
+        Encuentra los mejores productos para consentir a tu compañero peludo.
+        Tenemos todo lo que necesitas para su cuidado y diversión.
+      </p>
+    </div>
+
+    <!-- Grid de productos -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+      <!-- Producto 1 -->
+      <div class="product-card bg-white rounded-custom overflow-hidden shadow-md flex flex-col">
+        <div class="h-48 bg-gradient-to-br from-primary/20 to-primary/10 flex items-center justify-center p-4">
+          <div class="w-full h-full bg-gray-200 rounded-lg flex items-center justify-center">
+            <span class="text-gray-500 text-sm">Imagen del producto</span>
+          </div>
         </div>
-    </footer>
+        <div class="p-5 flex-1 flex flex-col">
+          <h3 class="text-xl font-bold text-dark mb-2">
+            Alimento Premium para Perros
+          </h3>
+          <p class="text-gray-600 mb-4 flex-1">
+            Nutrición completa con vitaminas y minerales.
+          </p>
+          <div class="flex justify-between items-center mt-auto">
+            <span class="text-2xl font-bold text-primary">$24.990</span>
+            <button
+              class="add-to-cart bg-primary text-white py-2 px-4 rounded-custom font-medium hover:bg-opacity-90 transition-colors"
+              data-id="1" data-name="Alimento Premium para Perros" data-price="24990" data-image="placeholder">
+              Agregar
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Producto 2 -->
+      <div class="product-card bg-white rounded-custom overflow-hidden shadow-md flex flex-col">
+        <div class="h-48 bg-gradient-to-br from-primary/20 to-primary/10 flex items-center justify-center p-4">
+          <div class="w-full h-full bg-gray-200 rounded-lg flex items-center justify-center">
+            <span class="text-gray-500 text-sm">Imagen del producto</span>
+          </div>
+        </div>
+        <div class="p-5 flex-1 flex flex-col">
+          <h3 class="text-xl font-bold text-dark mb-2">
+            Juguete Interactivo
+          </h3>
+          <p class="text-gray-600 mb-4 flex-1">
+            Estimula mentalmente a tu mascota.
+          </p>
+          <div class="flex justify-between items-center mt-auto">
+            <span class="text-2xl font-bold text-primary">$15.500</span>
+            <button
+              class="add-to-cart bg-primary text-white py-2 px-4 rounded-custom font-medium hover:bg-opacity-90 transition-colors"
+              data-id="2" data-name="Juguete Interactivo" data-price="15500" data-image="placeholder">
+              Agregar
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Producto 3 -->
+      <div class="product-card bg-white rounded-custom overflow-hidden shadow-md flex flex-col">
+        <div class="h-48 bg-gradient-to-br from-primary/20 to-primary/10 flex items-center justify-center p-4">
+          <div class="w-full h-full bg-gray-200 rounded-lg flex items-center justify-center">
+            <span class="text-gray-500 text-sm">Imagen del producto</span>
+          </div>
+        </div>
+        <div class="p-5 flex-1 flex flex-col">
+          <h3 class="text-xl font-bold text-dark mb-2">Cama Comfort Plus</h3>
+          <p class="text-gray-600 mb-4 flex-1">
+            Cama ortopédica con memory foam.
+          </p>
+          <div class="flex justify-between items-center mt-auto">
+            <span class="text-2xl font-bold text-primary">$45.990</span>
+            <button
+              class="add-to-cart bg-primary text-white py-2 px-4 rounded-custom font-medium hover:bg-opacity-90 transition-colors"
+              data-id="3" data-name="Cama Comfort Plus" data-price="45990" data-image="placeholder">
+              Agregar
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Producto 4 -->
+      <div class="product-card bg-white rounded-custom overflow-hidden shadow-md flex flex-col">
+        <div class="h-48 bg-gradient-to-br from-primary/20 to-primary/10 flex items-center justify-center p-4">
+          <div class="w-full h-full bg-gray-200 rounded-lg flex items-center justify-center">
+            <span class="text-gray-500 text-sm">Imagen del producto</span>
+          </div>
+        </div>
+        <div class="p-5 flex-1 flex flex-col">
+          <h3 class="text-xl font-bold text-dark mb-2">
+            Plato de Comida Sencillo
+          </h3>
+          <p class="text-gray-600 mb-4 flex-1">
+            Ingredientes naturales para entrenamiento.
+          </p>
+          <div class="flex justify-between items-center mt-auto">
+            <span class="text-2xl font-bold text-primary">$9.990</span>
+            <button
+              class="add-to-cart bg-primary text-white py-2 px-4 rounded-custom font-medium hover:bg-opacity-90 transition-colors"
+              data-id="4" data-name="Plato de Comida Sencillo" data-price="9990" data-image="placeholder">
+              Agregar
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Producto 5 -->
+      <div class="product-card bg-white rounded-custom overflow-hidden shadow-md flex flex-col">
+        <div class="h-48 bg-gradient-to-br from-primary/20 to-primary/10 flex items-center justify-center p-4">
+          <div class="w-full h-full bg-gray-200 rounded-lg flex items-center justify-center">
+            <span class="text-gray-500 text-sm">Imagen del producto</span>
+          </div>
+        </div>
+        <div class="p-5 flex-1 flex flex-col">
+          <h3 class="text-xl font-bold text-dark mb-2">
+            Plato de Comida Sencillo
+          </h3>
+          <p class="text-gray-600 mb-4 flex-1">
+            Ingredientes naturales para entrenamiento.
+          </p>
+          <div class="flex justify-between items-center mt-auto">
+            <span class="text-2xl font-bold text-primary">$9.990</span>
+            <button
+              class="add-to-cart bg-primary text-white py-2 px-4 rounded-custom font-medium hover:bg-opacity-90 transition-colors"
+              data-id="4" data-name="Plato de Comida Sencillo" data-price="9990" data-image="placeholder">
+              Agregar
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Producto 6 -->
+      <div class="product-card bg-white rounded-custom overflow-hidden shadow-md flex flex-col">
+        <div class="h-48 bg-gradient-to-br from-primary/20 to-primary/10 flex items-center justify-center p-4">
+          <div class="w-full h-full bg-gray-200 rounded-lg flex items-center justify-center">
+            <span class="text-gray-500 text-sm">Imagen del producto</span>
+          </div>
+        </div>
+        <div class="p-5 flex-1 flex flex-col">
+          <h3 class="text-xl font-bold text-dark mb-2">
+            Plato de Comida Sencillo
+          </h3>
+          <p class="text-gray-600 mb-4 flex-1">
+            Ingredientes naturales para entrenamiento.
+          </p>
+          <div class="flex justify-between items-center mt-auto">
+            <span class="text-2xl font-bold text-primary">$9.990</span>
+            <button
+              class="add-to-cart bg-primary text-white py-2 px-4 rounded-custom font-medium hover:bg-opacity-90 transition-colors"
+              data-id="4" data-name="Plato de Comida Sencillo" data-price="9990" data-image="placeholder">
+              Agregar
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Producto 7 -->
+      <div class="product-card bg-white rounded-custom overflow-hidden shadow-md flex flex-col">
+        <div class="h-48 bg-gradient-to-br from-primary/20 to-primary/10 flex items-center justify-center p-4">
+          <div class="w-full h-full bg-gray-200 rounded-lg flex items-center justify-center">
+            <span class="text-gray-500 text-sm">Imagen del producto</span>
+          </div>
+        </div>
+        <div class="p-5 flex-1 flex flex-col">
+          <h3 class="text-xl font-bold text-dark mb-2">
+            Plato de Comida Sencillo
+          </h3>
+          <p class="text-gray-600 mb-4 flex-1">
+            Ingredientes naturales para entrenamiento.
+          </p>
+          <div class="flex justify-between items-center mt-auto">
+            <span class="text-2xl font-bold text-primary">$9.990</span>
+            <button
+              class="add-to-cart bg-primary text-white py-2 px-4 rounded-custom font-medium hover:bg-opacity-90 transition-colors"
+              data-id="4" data-name="Plato de Comida Sencillo" data-price="9990" data-image="placeholder">
+              Agregar
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Producto 8 -->
+      <div class="product-card bg-white rounded-custom overflow-hidden shadow-md flex flex-col">
+        <div class="h-48 bg-gradient-to-br from-primary/20 to-primary/10 flex items-center justify-center p-4">
+          <div class="w-full h-full bg-gray-200 rounded-lg flex items-center justify-center">
+            <span class="text-gray-500 text-sm">Imagen del producto</span>
+          </div>
+        </div>
+        <div class="p-5 flex-1 flex flex-col">
+          <h3 class="text-xl font-bold text-dark mb-2">
+            Plato de Comida Sencillo
+          </h3>
+          <p class="text-gray-600 mb-4 flex-1">
+            Ingredientes naturales para entrenamiento.
+          </p>
+          <div class="flex justify-between items-center mt-auto">
+            <span class="text-2xl font-bold text-primary">$9.990</span>
+            <button
+              class="add-to-cart bg-primary text-white py-2 px-4 rounded-custom font-medium hover:bg-opacity-90 transition-colors"
+              data-id="4" data-name="Plato de Comida Sencillo" data-price="9990" data-image="placeholder">
+              Agregar
+            </button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Footer  -->
+  <footer class="bg-light text-dark">
+    <div class="max-w-7xl mx-auto px-6 py-10 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
+
+      <!-- Logo + Redes -->
+      <div class="flex flex-col items-start space-y-4">
+        <img src="../assets/img/marca/Logo.svg" alt="Logo PawsLove" class="w-36">
+        <p class="font-bold">Redes Sociales</p>
+        <div class="flex space-x-4">
+          <a href="#"><img src="../assets/iconos/instagram.jpg" alt="Instagram" class="w-6 h-6"></a>
+          <a href="#"><img src="../assets/iconos/tiktok.svg" alt="TikTok" class="w-6 h-6"></a>
+          <a href="#"><img src="../assets/iconos/facebook.svg" alt="Facebook" class="w-6 h-6"></a>
+        </div>
+      </div>
+
+      <!-- Contacto -->
+      <div class="flex flex-col items-start">
+        <h3 class="text-lg font-bold mb-3">Contáctanos</h3>
+        <p>(601) 000 0000</p>
+        <p>Cra 00. 53b Sur</p>
+      </div>
+
+      <!-- Enlaces -->
+      <div>
+        <h3 class="text-lg font-bold mb-3">Enlaces Rápidos</h3>
+        <ul class="space-y-2">
+          <li><a href="../index.html" class="hover:text-primary transition">Inicio</a></li>
+          <li><a href="../paginas/adopta.html" class="hover:text-primary transition">Adopta</a></li>
+          <li><a href="../paginas/tienda.html" class="hover:text-primary transition">Tienda</a></li>
+          <li><a href="../paginas/donaciones.html" class="hover:text-primary transition">Donar</a></li>
+        </ul>
+      </div>
+
+      <!-- Donaciones -->
+      <div>
+        <h3 class="text-lg font-bold mb-3">Sobre las Donaciones</h3>
+        <ul class="space-y-2">
+          <li><a href="../paginas/donaciones.html" class="hover:text-primary transition">Términos y
+              Condiciones</a></li>
+          <li><a href="#" class="hover:text-primary transition">Informes</a></li>
+          <li><a href="#" class="hover:text-primary transition">Política de Privacidad</a></li>
+        </ul>
+      </div>
+
+    </div>
+
+    <!-- Footer Bottom -->
+    <div class="border-t border-gray-300 text-center py-4 text-sm">
+      <p>© 2025 PawsLove Foundation</p>
+      <p>Todos los derechos reservados</p>
+    </div>
+  </footer>
 
 
 
-    <script type="module" src="../scripts/tienda.js"></script>
-  </body>
+  <script type="module" src="../scripts/tienda.js"></script>
+</body>
+
 </html>

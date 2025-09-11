@@ -56,7 +56,7 @@ function renderPetCards() {
 const chips = document.querySelectorAll(".chip");
 let cards = []; // Se inicializa vacío y se llena después de renderizar
 
-chips.forEach(chip => {
+chips.forEach((chip) => {
   chip.addEventListener("click", () => {
     chip.classList.toggle("active");
     filterCards();
@@ -64,12 +64,16 @@ chips.forEach(chip => {
 });
 
 function filterCards() {
-  cards.forEach(card => {
+  cards.forEach((card) => {
     let mostrar = true;
-    ["especie", "edad", "tamano", "estado"].forEach(cat => {
-      const activos = Array.from(document.querySelectorAll(`.chip.active[data-category="${cat}"]`))
-                           .map(c => c.dataset.value.toLowerCase());
-      if (activos.length > 0 && !activos.includes(card.dataset[cat].toLowerCase())) {
+    ["especie", "edad", "tamano", "estado"].forEach((cat) => {
+      const activos = Array.from(
+        document.querySelectorAll(`.chip.active[data-category="${cat}"]`)
+      ).map((c) => c.dataset.value.toLowerCase());
+      if (
+        activos.length > 0 &&
+        !activos.includes(card.dataset[cat].toLowerCase())
+      ) {
         mostrar = false;
       }
     });

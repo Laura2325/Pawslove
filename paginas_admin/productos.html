@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>🐾 Gestión de Mascotas - Pawslove</title>
+  <title>🐾 Gestión de Productos - Pawslove</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -19,8 +19,12 @@
             light: '#ecf0f1',
             dark: '#34252f'
           },
-          fontFamily: { fredoka: ['Fredoka One', 'cursive'] },
-          borderRadius: { 'custom': '24px' }
+          fontFamily: {
+            fredoka: ['Fredoka One', 'cursive']
+          },
+          borderRadius: {
+            'custom': '24px'
+          }
         }
       }
     }
@@ -40,6 +44,14 @@
       backdrop-filter: blur(12px);
       -webkit-backdrop-filter: blur(12px);
       box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.2);
+    }
+
+    body {
+      background-color: #f5f7fa;
+      background-image: radial-gradient(#d0d7de 1px, transparent 1px),
+        radial-gradient(#d0d7de 1px, transparent 1px);
+      background-size: 40px 40px;
+      background-position: 0 0, 20px 20px;
     }
   </style>
 </head>
@@ -170,42 +182,52 @@
         class="w-full p-3 border rounded-custom focus:ring-2 focus:ring-primary outline-none">
     </section>
 
-    <!-- Tabla de mascotas -->
+    <!-- Tabla de productos -->
     <section class="overflow-x-auto">
       <table class="w-full bg-white rounded-custom shadow">
         <thead class="bg-primary text-white">
           <tr>
             <th class="p-4 text-left">Imagen</th>
             <th class="p-4 text-left">Nombre</th>
-            <th class="p-4 text-left">Especie</th>
-            <th class="p-4 text-left">Edad</th>
-            <th class="p-4 text-left">Tamaño</th>
+            <th class="p-4 text-left">Categoría</th>
+            <th class="p-4 text-left">Stock</th>
+            <th class="p-4 text-left">Precio</th>
             <th class="p-4 text-left">Estado</th>
             <th class="p-4 text-center">Acciones</th>
           </tr>
         </thead>
-        <tbody id="petTable" class="divide-y divide-light">
-          <!-- Mascotas dinámicas -->
+        <tbody id="productTable" class="divide-y divide-light">
+          <!-- Productos dinámicos -->
         </tbody>
       </table>
     </section>
   </main>
 
-  <!-- Modal -->
-  <div id="petModal" class="hidden fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50">
+  <!-- 🚀 Modal -->
+  <div id="productModal" class="hidden fixed inset-0 bg-black bg-opacity-40 items-center justify-center z-50">
     <div class="bg-white rounded-custom shadow-2xl w-full max-w-lg p-8 border border-light">
       <div class="flex justify-between items-center mb-6">
-        <h2 class="text-2xl font-bold text-primary flex items-center gap-2">🐶 Agregar Mascota</h2>
+        <h2 class="text-2xl font-bold text-primary flex items-center gap-2">🐶 Agregar Producto</h2>
         <button id="closeModalBtn" class="text-secondary hover:text-primary text-2xl">&times;</button>
       </div>
 
-      <form id="petForm" class="space-y-5">
+      <form id="productForm" class="space-y-5">
+        <!-- Nombre -->
+        <div>
+          <label class="block text-sm font-semibold text-dark mb-1">Nombre del producto</label>
+          <input type="text" id="name" placeholder="Ej: Collar Rosa"
+            class="w-full rounded-custom border border-light px-4 py-2 bg-light focus:ring-2 focus:ring-secondary focus:outline-none" />
+        </div>
+
+        <!-- Categoría -->
         <div>
           <label class="block text-sm font-semibold text-dark mb-1">Nombre</label>
           <input type="text" id="name"
             class="w-full rounded-custom border border-light px-4 py-2 bg-light focus:ring-2 focus:ring-secondary focus:outline-none"
             required>
         </div>
+
+        <!-- Stock -->
         <div>
           <label class="block text-sm font-semibold text-dark mb-1">Especie</label>
           <select id="species"
@@ -214,11 +236,15 @@
             <option>Gato</option>
           </select>
         </div>
+
+        <!-- Precio -->
         <div>
           <label class="block text-sm font-semibold text-dark mb-1">Edad</label>
           <input type="text" id="age"
             class="w-full rounded-custom border border-light px-4 py-2 bg-light focus:ring-2 focus:ring-secondary focus:outline-none">
         </div>
+
+        <!-- Imagen -->
         <div>
           <label class="block text-sm font-semibold text-dark mb-1">Tamaño</label>
           <select id="size"
@@ -228,6 +254,8 @@
             <option>Grande</option>
           </select>
         </div>
+
+        <!-- Estado -->
         <div>
           <label class="block text-sm font-semibold text-dark mb-1">Estado</label>
           <select id="status"

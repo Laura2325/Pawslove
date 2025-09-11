@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Pawslove - Adopciones</title>
+  <title>Pawslove Foundation | Adopciones</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap" rel="stylesheet">
@@ -88,48 +88,88 @@
       color: white !important;
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
     }
+
+     /* Mobile menu styles */
+        .mobile-menu-transition {
+            transition: all 0.3s ease-in-out;
+            overflow: hidden;
+        }
+
+        .mobile-menu-open {
+            max-height: 300px;
+            opacity: 1;
+        }
+
+        .mobile-menu-closed {
+            max-height: 0;
+            opacity: 0;
+        }
+
   </style>
 </head>
 
 <body class="font-sans text-dark relative overflow-x-hidden">
 
-  <!-- NAVBAR -->
-  <nav
-    class="fixed top-4 left-1/2 transform -translate-x-1/2 w-[70%] md:w-[60%] bg-white border border-gray-200 shadow-md rounded-full z-50 transition-all duration-300">
-    <div class="flex items-center justify-between px-6 py-3">
-      <div class="flex items-center space-x-2">
-        <img src="../assets/img/marca/Isotipo_2.svg" alt="logo" class="h-10 w-10">
-      </div>
-      <div class="hidden md:flex items-center space-x-4">
-        <a href="../index.html" class="hover:text-primary transition">Inicio</a>
-        <a href="./adopta.html" class="hover:text-primary transition">Adopta</a>
-        <a href="./nosotros.html" class="hover:text-primary transition">Nosotros</a>
-        <a href="./donaciones.html"
-          class="bg-secondary text-white px-4 py-2 rounded-full hover:bg-opacity-90 transition">Donar</a>
-        <a href="./tienda.html"
-          class="bg-accent text-white px-4 py-2 rounded-full hover:bg-opacity-90 transition">Tienda</a>
-      </div>
-      <button id="menu-toggle" class="md:hidden text-dark focus:outline-none">
-        <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-        </svg>
-      </button>
+    <!-- Barra de navegación -->
+    <div class="flex justify-center">
+        <nav
+            class="fixed top-4 left-1/2 transform -translate-x-1/2 w-[90%] md:w-[60%] bg-white border border-gray-200 shadow-md rounded-full z-50 transition-all duration-300 flex items-center justify-between px-4 py-3">
+
+            <!-- Logo -->
+            <div class="flex items-center space-x-2">
+                <div class="h-10 w-10 flex items-center justify-center">
+                    <img src="../assets/img/marca/Isotipo.svg" alt="logo">
+                </div>
+            </div>
+
+            <!-- Menú desktop -->
+            <div class="hidden md:flex items-center space-x-4 flex-1 justify-center text-gray-800 font-medium text-lg font-sans">
+                <a href="../index.html" class="hover:text-primary transition">Inicio</a>
+                <a href="../paginas/adopta.html" class="hover:text-primary transition">Adopta</a>
+                <a href="../paginas/nosotros.html" class="hover:text-primary transition">Nosotros</a>
+                <a href="../paginas/donaciones.html"
+                    class="bg-secondary text-white px-4 py-2 rounded-full hover:bg-opacity-90 transition">Donar</a>
+                <a href="../paginas/tienda.html"
+                    class="bg-accent text-white px-4 py-2 rounded-full hover:bg-opacity-90 transition">Tienda</a>
+                <a href="../paginas/contacto.html" class="hover:text-primary transition">Contacto</a>
+            </div>
+
+            <!-- Iconos y menú móvil -->
+            <div class="flex items-center space-x-4">
+                <!-- Icono usuario -->
+                <a href="./login.html"
+                    class="h-10 w-10 rounded-full overflow-hidden bg-gradient-to-br from-primary to-secondary flex items-center justify-center cursor-pointer"
+                    aria-label="Ir a inicio de sesión" title="Inicio de Sesión">
+                    <img src="../assets/img/nosotros/love.jpg" alt="Icono de usuario" class="object-cover h-full w-full" />
+                </a>
+
+                <!-- Menú mobile toggle -->
+                <button id="menu-toggle" class="md:hidden text-dark focus:outline-none">
+                    <svg id="menu-icon" class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+            </div>
+
+            <!-- Mobile menu -->
+            <div id="mobile-menu"
+                class="absolute mt-4 top-[60px] left-1/2 transform -translate-x-1/2 w-[90%] mobile-menu-transition mobile-menu-closed bg-white rounded-2xl shadow-md z-40 md:hidden">
+                <div class="px-6 py-4 flex flex-col space-y-3 text-center font-medium text-gray-800">
+                    <a href="../index.html" class="block py-2 hover:text-primary transition">Inicio</a>
+                    <a href="../paginas/adopta.html" class="block py-2 hover:text-primary transition">Adopta</a>
+                    <a href="../paginas/nosotros.html" class="block py-2 hover:text-primary transition">Nosotros</a>
+                    <a href="./paginas/contacto.html" class="block py-2 hover:text-primary transition">Contacto</a>
+                    <div class="flex items-center justify-around mt-4 space-x-2">
+                        <a href="../paginas/donaciones.html"
+                            class="bg-secondary text-white px-4 py-2 rounded-full hover:bg-opacity-90 transition flex-1 text-center">Donar</a>
+                        <a href="../paginas/tienda.html"
+                            class="bg-accent text-white px-4 py-2 rounded-full hover:bg-opacity-90 transition flex-1 text-center">Tienda</a>
+                    </div>
+                </div>
+            </div>
+        </nav>
     </div>
-    <div id="mobile-menu"
-      class="absolute top-full left-0 w-full mt-2 max-h-0 overflow-hidden transition-all duration-500 ease-in-out bg-white rounded-2xl shadow-md z-40">
-      <div class="px-6 py-4">
-        <a href="../index.html" class="block py-2 hover:text-primary">Inicio</a>
-        <a href="./adopta.html" class="block py-2 hover:text-primary">Adopta</a>
-        <a href="./nosotros.html" class="block py-2 hover:text-primary">Nosotros</a>
-        <div class="flex items-center justify-around mt-4">
-          <a href="./donaciones.html"
-            class="bg-secondary text-white px-4 py-2 rounded-full hover:bg-opacity-90 transition">Donar</a>
-          <a href="./tienda.html"
-            class="bg-accent text-white px-4 py-2 rounded-full hover:bg-opacity-90 transition">Tienda</a>
-        </div>
-      </div>
-    </div>
-  </nav>
 
   <!-- BANNER -->
   <section class="relative w-full h-[900px] sm:h-[800px] md:h-[700px] lg:h-[750px]">
@@ -211,6 +251,59 @@
     class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 md:gap-8 w-full px-6">
     <!-- Las tarjetas de mascotas se generarán aquí dinámicamente -->
   </section>
+
+     <footer class="bg-light text-dark">
+        <div class="max-w-7xl mx-auto px-6 py-10 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
+
+            <!-- Logo + Redes -->
+            <div class="flex flex-col items-start space-y-4">
+                <img src="../assets/img/marca/Logo.svg" alt="Logo PawsLove" class="w-36">
+                <p class="font-bold">Redes Sociales</p>
+                <div class="flex space-x-4">
+                    <a href="#"><img src="../assets/iconos/instagram.jpg" alt="Instagram" class="w-6 h-6"></a>
+                    <a href="#"><img src="../assets/iconos/tiktok.svg" alt="TikTok" class="w-6 h-6"></a>
+                    <a href="#"><img src="../assets/iconos/facebook.svg" alt="Facebook" class="w-6 h-6"></a>
+                </div>
+            </div>
+
+            <!-- Contacto -->
+            <div class="flex flex-col items-start">
+                <h3 class="text-lg font-bold mb-3">Contáctanos</h3>
+                <p>(601) 000 0000</p>
+                <p>Cra 00. 53b Sur</p>
+            </div>
+
+            <!-- Enlaces -->
+            <div>
+                <h3 class="text-lg font-bold mb-3">Enlaces Rápidos</h3>
+                <ul class="space-y-2">
+                    <li><a href="../index.html" class="hover:text-primary transition">Inicio</a></li>
+                    <li><a href="../paginas/adopta.html" class="hover:text-primary transition">Adopta</a></li>
+                    <li><a href="../paginas/tienda.html" class="hover:text-primary transition">Tienda</a></li>
+                    <li><a href="../paginas/donaciones.html" class="hover:text-primary transition">Donar</a></li>
+                </ul>
+            </div>
+
+            <!-- Donaciones -->
+            <div>
+                <h3 class="text-lg font-bold mb-3">Sobre las Donaciones</h3>
+                <ul class="space-y-2">
+                    <li><a href="../paginas/donaciones.html" class="hover:text-primary transition">Términos y
+                            Condiciones</a></li>
+                    <li><a href="#" class="hover:text-primary transition">Informes</a></li>
+                    <li><a href="#" class="hover:text-primary transition">Política de Privacidad</a></li>
+                </ul>
+            </div>
+
+        </div>
+
+        <!-- Footer Bottom -->
+        <div class="border-t border-gray-300 text-center py-4 text-sm">
+            <p>© 2025 PawsLove Foundation - Todos los derechos reservados</p>
+        </div>
+    </footer>
+
+
 
   <!-- SCRIPT externo -->
   <script type="module" src="../scripts/adopta.js"></script>

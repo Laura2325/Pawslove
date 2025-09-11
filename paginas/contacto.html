@@ -8,60 +8,86 @@
 <script src="../tailwind.config.js"></script>
 <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&display=swap" rel="stylesheet" />
 
+<style>
+          .mobile-menu-transition {
+            transition: all 0.3s ease-in-out;
+            overflow: hidden;
+        }
+
+        .mobile-menu-open {
+            max-height: 300px;
+            opacity: 1;
+        }
+
+        .mobile-menu-closed {
+            max-height: 0;
+            opacity: 0;
+        }
+</style>
+
 <body>
 
-  <nav
-    class="fixed top-4 left-1/2 transform -translate-x-1/2 w-[70%] md:w-[60%] bg-white border border-gray-200 shadow-md rounded-full z-50 transition-all duration-300">
-    <div class="flex items-center justify-between px-6 py-3">
+    <!-- Barra de navegación -->
+    <div class="flex justify-center">
+        <nav
+            class="fixed top-4 left-1/2 transform -translate-x-1/2 w-[90%] md:w-[60%] bg-white border border-gray-200 shadow-md rounded-full z-50 transition-all duration-300 flex items-center justify-between px-4 py-3">
 
-      <!-- Logo -->
-      <div class="flex items-center space-x-2">
-        <img src="../assets/img/marca/Isotipo_2.svg" alt="logo" class="h-10 w-10 " />
-      </div>
+            <!-- Logo -->
+            <div class="flex items-center space-x-2">
+                <div class="h-10 w-10 flex items-center justify-center">
+                    <img src="../assets/img/marca/Isotipo.svg" alt="logo">
+                </div>
+            </div>
 
-      <!-- Menú desktop -->
-      <div class="hidden md:flex items-center space-x-4">
-        <a href="../index.html" class="hover:text-primary transition">Inicio</a>
-        <a href="./adopta.html" class="hover:text-primary transition">Adopta</a>
-        <a href="./nosotros.html" class="hover:text-primary transition">Nosotros</a>
-        <a href="./donaciones.html"
-          class="bg-secondary text-white px-4 py-2 rounded-full hover:bg-opacity-90 transition">Donar</a>
-        <a href="./tienda.html"
-          class="bg-accent text-white px-4 py-2 rounded-full hover:bg-opacity-90 transition">Tienda</a>
-      </div>
+            <!-- Menú desktop -->
+            <div class="hidden md:flex items-center space-x-4 flex-1 justify-center text-gray-800 font-medium text-lg">
+                <a href="../index.html" class="hover:text-primary transition">Inicio</a>
+                <a href="../paginas/adopta.html" class="hover:text-primary transition">Adopta</a>
+                <a href="../paginas/nosotros.html" class="hover:text-primary transition">Nosotros</a>
+                <a href="../paginas/donaciones.html"
+                    class="bg-secondary text-white px-4 py-2 rounded-full hover:bg-opacity-90 transition">Donar</a>
+                <a href="../paginas/tienda.html"
+                    class="bg-accent text-white px-4 py-2 rounded-full hover:bg-opacity-90 transition">Tienda</a>
+                <a href="../paginas/contacto.html" class="hover:text-primary transition">Contacto</a>
+            </div>
 
-      <!-- Menú mobile -->
-      <button id="menu-toggle" class="md:hidden text-dark focus:outline-none">
-        <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16">
-          </path>
-        </svg>
-      </button>
+            <!-- Iconos y menú móvil -->
+            <div class="flex items-center space-x-4">
+                <!-- Icono usuario -->
+                <a href="./login.html"
+                    class="h-10 w-10 rounded-full overflow-hidden bg-gradient-to-br from-primary to-secondary flex items-center justify-center cursor-pointer"
+                    aria-label="Ir a inicio de sesión" title="Inicio de Sesión">
+                    <img src="../assets/img/nosotros/love.jpg" alt="Icono de usuario" class="object-cover h-full w-full" />
+                </a>
+
+                <!-- Menú mobile toggle -->
+                <button id="menu-toggle" class="md:hidden text-dark focus:outline-none">
+                    <svg id="menu-icon" class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+            </div>
+
+            <!-- Mobile menu -->
+            <div id="mobile-menu"
+                class="absolute mt-4 top-[60px] left-1/2 transform -translate-x-1/2 w-[90%] mobile-menu-transition mobile-menu-closed bg-white rounded-2xl shadow-md z-40 md:hidden">
+                <div class="px-6 py-4 flex flex-col space-y-3 text-center font-medium text-gray-800">
+                    <a href="../index.html" class="block py-2 hover:text-primary transition">Inicio</a>
+                    <a href="../paginas/adopta.html" class="block py-2 hover:text-primary transition">Adopta</a>
+                    <a href="../paginas/nosotros.html" class="block py-2 hover:text-primary transition">Nosotros</a>
+                    <a href="../paginas/contacto.html" class="block py-2 hover:text-primary transition">Contacto</a>
+                    <div class="flex items-center justify-around mt-4 space-x-2">
+                        <a href="../paginas/donaciones.html"
+                            class="bg-secondary text-white px-4 py-2 rounded-full hover:bg-opacity-90 transition flex-1 text-center">Donar</a>
+                        <a href="../paginas/tienda.html"
+                            class="bg-accent text-white px-4 py-2 rounded-full hover:bg-opacity-90 transition flex-1 text-center">Tienda</a>
+                    </div>
+                </div>
+            </div>
+        </nav>
     </div>
 
-    <!-- Mobile menu -->
-    <div id="mobile-menu"
-      class="absolute top-full left-0 w-full mt-2 max-h-0 overflow-hidden transition-all duration-500 ease-in-out bg-white rounded-2xl shadow-md z-40">
-
-      <!-- Contenido -->
-      <div class="px-6 py-4">
-        <a href="../index.html" class="block py-2 hover:text-primary">Inicio</a>
-        <a href="./adopta.html" class="block py-2 hover:text-primary">Adopta</a>
-        <a href="./nosotros.html" class="block py-2 hover:text-primary">Nosotros</a>
-        <div class="flex items-center justify-around mt-4">
-          <a href="./donaciones.html"
-            class="bg-secondary text-white px-4 py-2 rounded-full hover:bg-opacity-90 transition">
-            Donar
-          </a>
-          <a href="./tienda.html"
-            class="bg-accent text-white px-4 py-2 rounded-full hover:bg-opacity-90 transition">
-            Tienda
-          </a>
-        </div>
-      </div>
-    </div>
-
-  </nav>
 
   <div>
     <!-- Video de fondo -->
@@ -302,27 +328,38 @@
     
 
     <script>
-      // Menu Movile Toggle
-      const menuToggle = document.getElementById('menu-toggle');
-      const mobileMenu = document.getElementById('mobile-menu');
-
-      menuToggle.addEventListener('click', () => {
-        if (mobileMenu.classList.contains('max-h-0')) {
-          mobileMenu.classList.remove('max-h-0');
-          mobileMenu.classList.add('max-h-[400px]');
-        } else {
-          mobileMenu.classList.add('max-h-0');
-          mobileMenu.classList.remove('max-h-[400px]');
+        const menuToggle = document.getElementById('menu-toggle');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const menuIcon = document.getElementById('menu-icon');
+        let mobileMenuOpen = false;
+        function toggleMobileMenu() {
+            mobileMenuOpen = !mobileMenuOpen;
+            if (mobileMenuOpen) {
+                mobileMenu.classList.remove('mobile-menu-closed');
+                mobileMenu.classList.add('mobile-menu-open');
+                menuIcon.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>';
+            } else {
+                mobileMenu.classList.remove('mobile-menu-open');
+                mobileMenu.classList.add('mobile-menu-closed');
+                menuIcon.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>';
+            }
         }
-      });
+        menuToggle.addEventListener('click', toggleMobileMenu);
+        // Cerrar menú móvil al cambiar a escritorio
+        window.addEventListener('resize', () => {
+            if (window.innerWidth >= 768 && mobileMenuOpen) {
+                toggleMobileMenu();
+            }
+        });
 
-      // 🔑 Cerrar menú al cambiar a escritorio
-      window.addEventListener('resize', () => {
-        if (window.innerWidth >= 768) {
-          mobileMenu.classList.add('max-h-0');
-          mobileMenu.classList.remove('max-h-[400px]');
-        }
-      });
+
+        // 🔑 Cerrar menú al cambiar a escritorio
+        window.addEventListener('resize', () => {
+            if (window.innerWidth >= 768) {
+                mobileMenu.classList.add('max-h-0');
+                mobileMenu.classList.remove('max-h-[400px]');
+            }
+        })
     </script>
 
 

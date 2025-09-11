@@ -195,7 +195,7 @@ export const metodosUsuarios = {
     actualizarUsuario
 };
 
-// --- Funciones para Mascotas ---
+//! --- Funciones para Mascotas ---
 
 /**
  * Obtiene todas las mascotas desde localStorage.
@@ -263,6 +263,7 @@ export const metodosMascotas = {
     eliminarMascota,
     actualizarMascota
 }
+
 
 // --- Funciones para Solicitudes de Adopción ---
 
