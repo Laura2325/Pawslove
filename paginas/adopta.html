@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Pawslove - Adopciones</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap" rel="stylesheet">
 
   <script>
@@ -39,20 +41,25 @@
   </script>
 
   <style>
-    body { background-color: #ecf0f1; }
+    body {
+      background-color: #ecf0f1;
+    }
+
     .bento-card {
       transition: all 0.4s ease;
       position: relative;
       overflow: hidden;
     }
+
     .bento-card:hover {
       transform: translateY(-8px) scale(1.02);
-      box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
     }
+
     .overlay {
       position: absolute;
       inset: 0;
-      background: rgba(0,0,0,0.55);
+      background: rgba(0, 0, 0, 0.55);
       backdrop-filter: blur(6px);
       display: flex;
       flex-direction: column;
@@ -63,22 +70,32 @@
       padding: 1rem;
       text-align: center;
     }
-    .bento-card:hover .overlay { opacity: 1; }
+
+    .bento-card:hover .overlay {
+      opacity: 1;
+    }
+
     .chip {
       transition: all 0.2s ease-in-out;
     }
-    .chip:hover { transform: scale(1.05); }
+
+    .chip:hover {
+      transform: scale(1.05);
+    }
+
     .chip.active {
       background: linear-gradient(to right, #6c40d1, #fc6dab);
       color: white !important;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
     }
   </style>
 </head>
+
 <body class="font-sans text-dark relative overflow-x-hidden">
 
   <!-- NAVBAR -->
-  <nav class="fixed top-4 left-1/2 transform -translate-x-1/2 w-[70%] md:w-[60%] bg-white border border-gray-200 shadow-md rounded-full z-50 transition-all duration-300">
+  <nav
+    class="fixed top-4 left-1/2 transform -translate-x-1/2 w-[70%] md:w-[60%] bg-white border border-gray-200 shadow-md rounded-full z-50 transition-all duration-300">
     <div class="flex items-center justify-between px-6 py-3">
       <div class="flex items-center space-x-2">
         <img src="../assets/img/marca/Isotipo_2.svg" alt="logo" class="h-10 w-10">
@@ -87,8 +104,10 @@
         <a href="../index.html" class="hover:text-primary transition">Inicio</a>
         <a href="./adopta.html" class="hover:text-primary transition">Adopta</a>
         <a href="./nosotros.html" class="hover:text-primary transition">Nosotros</a>
-        <a href="./donaciones.html" class="bg-secondary text-white px-4 py-2 rounded-full hover:bg-opacity-90 transition">Donar</a>
-        <a href="./tienda.html" class="bg-accent text-white px-4 py-2 rounded-full hover:bg-opacity-90 transition">Tienda</a>
+        <a href="./donaciones.html"
+          class="bg-secondary text-white px-4 py-2 rounded-full hover:bg-opacity-90 transition">Donar</a>
+        <a href="./tienda.html"
+          class="bg-accent text-white px-4 py-2 rounded-full hover:bg-opacity-90 transition">Tienda</a>
       </div>
       <button id="menu-toggle" class="md:hidden text-dark focus:outline-none">
         <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -96,14 +115,17 @@
         </svg>
       </button>
     </div>
-    <div id="mobile-menu" class="absolute top-full left-0 w-full mt-2 max-h-0 overflow-hidden transition-all duration-500 ease-in-out bg-white rounded-2xl shadow-md z-40">
+    <div id="mobile-menu"
+      class="absolute top-full left-0 w-full mt-2 max-h-0 overflow-hidden transition-all duration-500 ease-in-out bg-white rounded-2xl shadow-md z-40">
       <div class="px-6 py-4">
         <a href="../index.html" class="block py-2 hover:text-primary">Inicio</a>
         <a href="./adopta.html" class="block py-2 hover:text-primary">Adopta</a>
         <a href="./nosotros.html" class="block py-2 hover:text-primary">Nosotros</a>
         <div class="flex items-center justify-around mt-4">
-          <a href="./donaciones.html" class="bg-secondary text-white px-4 py-2 rounded-full hover:bg-opacity-90 transition">Donar</a>
-          <a href="./tienda.html" class="bg-accent text-white px-4 py-2 rounded-full hover:bg-opacity-90 transition">Tienda</a>
+          <a href="./donaciones.html"
+            class="bg-secondary text-white px-4 py-2 rounded-full hover:bg-opacity-90 transition">Donar</a>
+          <a href="./tienda.html"
+            class="bg-accent text-white px-4 py-2 rounded-full hover:bg-opacity-90 transition">Tienda</a>
         </div>
       </div>
     </div>
@@ -111,16 +133,21 @@
 
   <!-- BANNER -->
   <section class="relative w-full h-[900px] sm:h-[800px] md:h-[700px] lg:h-[750px]">
-    <img src="../assets/img/Fondo/ADOPCIONES3.jpg" alt="Adopciones" class="w-full h-full object-cover rounded-b-2xl shadow-md">
+    <img src="../assets/img/Fondo/ADOPCIONES3.jpg" alt="Adopciones"
+      class="w-full h-full object-cover rounded-b-2xl shadow-md">
     <div class="absolute inset-0 bg-gradient-to-t from-dark/70 to-transparent rounded-b-2xl"></div>
-    <div class="absolute inset-0 flex flex-col justify-center items-center text-center px-4 sm:px-8 md:px-12 lg:px-16 xl:px-20">
-      <h1 class="font-extrabold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent font-fredoka leading-snug" style="font-size: clamp(2.5rem, 5vw, 5rem);">
+    <div
+      class="absolute inset-0 flex flex-col justify-center items-center text-center px-4 sm:px-8 md:px-12 lg:px-16 xl:px-20">
+      <h1
+        class="font-extrabold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent font-fredoka leading-snug"
+        style="font-size: clamp(2.5rem, 5vw, 5rem);">
         Encuentra a tu mejor amigo 🐾
       </h1>
       <p class="mt-4 text-white text-lg sm:text-xl md:text-2xl max-w-2xl">
         Más de 30 mascotas esperan un hogar lleno de amor.
       </p>
-      <a href="#petsList" class="mt-6 px-6 py-3 rounded-custom bg-gradient-to-r from-primary to-secondary text-white font-bold shadow-lg hover:opacity-90">
+      <a href="#petsList"
+        class="mt-6 px-6 py-3 rounded-custom bg-gradient-to-r from-primary to-secondary text-white font-bold shadow-lg hover:opacity-90">
         Ver todas 🐶🐱
       </a>
     </div>
@@ -135,34 +162,44 @@
         <div>
           <h3 class="font-semibold mb-3 text-lg text-dark">Especie</h3>
           <div class="flex flex-wrap gap-3">
-            <div class="chip px-5 py-2 rounded-full bg-purple-200 cursor-pointer" data-category="especie" data-value="perro">🐶 Perro</div>
-            <div class="chip px-5 py-2 rounded-full bg-purple-200 cursor-pointer" data-category="especie" data-value="gato">🐱 Gato</div>
+            <div class="chip px-5 py-2 rounded-full bg-purple-200 cursor-pointer" data-category="especie"
+              data-value="perro">🐶 Perro</div>
+            <div class="chip px-5 py-2 rounded-full bg-purple-200 cursor-pointer" data-category="especie"
+              data-value="gato">🐱 Gato</div>
           </div>
         </div>
         <!-- Edad -->
         <div>
           <h3 class="font-semibold mb-3 text-lg text-dark">Edad</h3>
           <div class="flex flex-wrap gap-3">
-            <div class="chip px-5 py-2 rounded-full bg-purple-200 cursor-pointer" data-category="edad" data-value="cachorro">🐾 Cachorro</div>
-            <div class="chip px-5 py-2 rounded-full bg-purple-200 cursor-pointer" data-category="edad" data-value="adulto">✨ Adulto</div>
-            <div class="chip px-5 py-2 rounded-full bg-purple-200 cursor-pointer" data-category="edad" data-value="senior">🌙 Senior</div>
+            <div class="chip px-5 py-2 rounded-full bg-purple-200 cursor-pointer" data-category="edad"
+              data-value="cachorro">🐾 Cachorro</div>
+            <div class="chip px-5 py-2 rounded-full bg-purple-200 cursor-pointer" data-category="edad"
+              data-value="adulto">✨ Adulto</div>
+            <div class="chip px-5 py-2 rounded-full bg-purple-200 cursor-pointer" data-category="edad"
+              data-value="senior">🌙 Senior</div>
           </div>
         </div>
         <!-- Tamaño -->
         <div>
           <h3 class="font-semibold mb-3 text-lg text-dark">Tamaño</h3>
           <div class="flex flex-wrap gap-3">
-            <div class="chip px-5 py-2 rounded-full bg-purple-200 cursor-pointer" data-category="tamano" data-value="pequeño">🐾 Pequeño</div>
-            <div class="chip px-5 py-2 rounded-full bg-purple-200 cursor-pointer" data-category="tamano" data-value="mediano">⚡ Mediano</div>
-            <div class="chip px-5 py-2 rounded-full bg-purple-200 cursor-pointer" data-category="tamano" data-value="grande">🦴 Grande</div>
+            <div class="chip px-5 py-2 rounded-full bg-purple-200 cursor-pointer" data-category="tamano"
+              data-value="pequeño">🐾 Pequeño</div>
+            <div class="chip px-5 py-2 rounded-full bg-purple-200 cursor-pointer" data-category="tamano"
+              data-value="mediano">⚡ Mediano</div>
+            <div class="chip px-5 py-2 rounded-full bg-purple-200 cursor-pointer" data-category="tamano"
+              data-value="grande">🦴 Grande</div>
           </div>
         </div>
         <!-- Estado -->
         <div>
           <h3 class="font-semibold mb-3 text-lg text-dark">Estado</h3>
           <div class="flex flex-wrap gap-3">
-            <div class="chip px-5 py-2 rounded-full bg-purple-200 cursor-pointer" data-category="estado" data-value="disponible">💜 Disponible</div>
-            <div class="chip px-5 py-2 rounded-full bg-purple-200 cursor-pointer" data-category="estado" data-value="adoptado">❌ Adoptado</div>
+            <div class="chip px-5 py-2 rounded-full bg-purple-200 cursor-pointer" data-category="estado"
+              data-value="disponible">💜 Disponible</div>
+            <div class="chip px-5 py-2 rounded-full bg-purple-200 cursor-pointer" data-category="estado"
+              data-value="adoptado">❌ Adoptado</div>
           </div>
         </div>
       </div>
@@ -170,120 +207,13 @@
   </section>
 
   <!-- TARJETAS -->
-  <section id="petsList" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 md:gap-8 w-full px-6">
-
-    <!-- Tarjeta 1 -->
-    <div class="bento-card bg-gradient-to-br from-white to-purple-50 rounded-custom shadow-lg overflow-hidden animate-fadeInUp"
-         data-especie="perro" data-edad="cachorro" data-tamano="mediano" data-estado="disponible">
-      <img src="https://placedog.net/600/450?id=1" alt="Luna" class="w-full h-64 sm:h-72 md:h-80 lg:h-80 object-cover rounded-t-custom">
-      <div class="p-6">
-        <h3 class="text-2xl font-bold text-dark mb-3">Luna</h3>
-        <p class="text-lg text-gray-600"><strong>Edad:</strong> 2 años</p>
-        <p class="text-lg text-gray-600"><strong>Raza:</strong> Mestiza</p>
-        <p class="text-lg text-gray-600"><strong>Tamaño:</strong> Mediano</p>
-        <span class="inline-block mb-4 px-5 py-1.5 text-base rounded-full bg-gradient-to-r from-accent to-secondary text-white w-fit shadow-md">Disponible</span>
-      </div>
-      <div class="overlay">
-        <h3 class="text-xl font-bold mb-2 text-white">Luna 🐾</h3>
-        <p class="text-sm mb-3 text-white">Rescatada de la calle, muy juguetona y amorosa 💜.</p>
-        <button onclick="adoptarMascota('Luna')" class="px-4 py-2 rounded-full bg-primary hover:bg-secondary text-white">Adoptar 💜</button>
-      </div>
-    </div>
-
-    <!-- Tarjeta 2 -->
-    <div class="bento-card bg-gradient-to-br from-white to-purple-50 rounded-custom shadow-lg overflow-hidden animate-fadeInUp"
-         data-especie="gato" data-edad="adulto" data-tamano="pequeño" data-estado="disponible">
-      <img src="https://placekitten.com/600/450" alt="Misu" class="w-full h-64 sm:h-72 md:h-80 lg:h-80 object-cover rounded-t-custom">
-      <div class="p-6">
-        <h3 class="text-2xl font-bold text-dark mb-3">Misu</h3>
-        <p class="text-lg text-gray-600"><strong>Edad:</strong> 3 años</p>
-        <p class="text-lg text-gray-600"><strong>Raza:</strong> Siamés</p>
-        <p class="text-lg text-gray-600"><strong>Tamaño:</strong> Pequeño</p>
-        <span class="inline-block mb-4 px-5 py-1.5 text-base rounded-full bg-gradient-to-r from-accent to-secondary text-white w-fit shadow-md">Disponible</span>
-      </div>
-      <div class="overlay">
-        <h3 class="text-xl font-bold mb-2 text-white">Misu 🐱</h3>
-        <p class="text-sm mb-3 text-white">Gato tranquilo y cariñoso, le gusta dormir y acurrucarse.</p>
-        <button onclick="adoptarMascota('Misu')" class="px-4 py-2 rounded-full bg-primary hover:bg-secondary text-white">Adoptar 💜</button>
-      </div>
-    </div>
-
-    <!-- Tarjeta 3 -->
-    <div class="bento-card bg-gradient-to-br from-white to-purple-50 rounded-custom shadow-lg overflow-hidden animate-fadeInUp"
-         data-especie="perro" data-edad="adulto" data-tamano="grande" data-estado="adoptado">
-      <img src="https://placedog.net/600/450?id=2" alt="Rocky" class="w-full h-64 sm:h-72 md:h-80 lg:h-80 object-cover rounded-t-custom">
-      <div class="p-6">
-        <h3 class="text-2xl font-bold text-dark mb-3">Rocky</h3>
-        <p class="text-lg text-gray-600"><strong>Edad:</strong> 4 años</p>
-        <p class="text-lg text-gray-600"><strong>Raza:</strong> Labrador</p>
-        <p class="text-lg text-gray-600"><strong>Tamaño:</strong> Grande</p>
-        <span class="inline-block mb-4 px-5 py-1.5 text-base rounded-full bg-gray-400 text-white w-fit shadow-md">Adoptado</span>
-      </div>
-      <div class="overlay">
-        <h3 class="text-xl font-bold mb-2 text-white">Rocky 🐶</h3>
-        <p class="text-sm mb-3 text-white">Fiel y protector, ya ha sido adoptado.</p>
-        <button onclick="adoptarMascota('Rocky')" class="px-4 py-2 rounded-full bg-primary hover:bg-secondary text-white">Adoptar 💜</button>
-      </div>
-    </div>
-
-    <!-- Tarjeta 4 -->
-    <div class="bento-card bg-gradient-to-br from-white to-purple-50 rounded-custom shadow-lg overflow-hidden animate-fadeInUp"
-         data-especie="gato" data-edad="cachorro" data-tamano="pequeño" data-estado="disponible">
-      <img src="https://placekitten.com/601/451" alt="Nina" class="w-full h-64 sm:h-72 md:h-80 lg:h-80 object-cover rounded-t-custom">
-      <div class="p-6">
-        <h3 class="text-2xl font-bold text-dark mb-3">Nina</h3>
-        <p class="text-lg text-gray-600"><strong>Edad:</strong> 1 año</p>
-        <p class="text-lg text-gray-600"><strong>Raza:</strong> Persa</p>
-        <p class="text-lg text-gray-600"><strong>Tamaño:</strong> Pequeño</p>
-        <span class="inline-block mb-4 px-5 py-1.5 text-base rounded-full bg-gradient-to-r from-accent to-secondary text-white w-fit shadow-md">Disponible</span>
-      </div>
-      <div class="overlay">
-        <h3 class="text-xl font-bold mb-2 text-white">Nina 🐱</h3>
-        <p class="text-sm mb-3 text-white">Gatita juguetona y curiosa, ideal para departamentos.</p>
-        <button onclick="adoptarMascota('Nina')" class="px-4 py-2 rounded-full bg-primary hover:bg-secondary text-white">Adoptar 💜</button>
-      </div>
-    </div>
-
-    <!-- Tarjeta 5 -->
-    <div class="bento-card bg-gradient-to-br from-white to-purple-50 rounded-custom shadow-lg overflow-hidden animate-fadeInUp"
-         data-especie="perro" data-edad="senior" data-tamano="grande" data-estado="disponible">
-      <img src="https://placedog.net/600/450?id=3" alt="Max" class="w-full h-64 sm:h-72 md:h-80 lg:h-80 object-cover rounded-t-custom">
-      <div class="p-6">
-        <h3 class="text-2xl font-bold text-dark mb-3">Max</h3>
-        <p class="text-lg text-gray-600"><strong>Edad:</strong> 9 años</p>
-        <p class="text-lg text-gray-600"><strong>Raza:</strong> Pastor Alemán</p>
-        <p class="text-lg text-gray-600"><strong>Tamaño:</strong> Grande</p>
-        <span class="inline-block mb-4 px-5 py-1.5 text-base rounded-full bg-gradient-to-r from-accent to-secondary text-white w-fit shadow-md">Disponible</span>
-      </div>
-      <div class="overlay">
-        <h3 class="text-xl font-bold mb-2 text-white">Max 🐶</h3>
-        <p class="text-sm mb-3 text-white">Perro calmado y cariñoso, busca un hogar tranquilo.</p>
-        <button onclick="adoptarMascota('Max')" class="px-4 py-2 rounded-full bg-primary hover:bg-secondary text-white">Adoptar 💜</button>
-      </div>
-    </div>
-
-    <!-- Tarjeta 6 -->
-    <div class="bento-card bg-gradient-to-br from-white to-purple-50 rounded-custom shadow-lg overflow-hidden animate-fadeInUp"
-         data-especie="gato" data-edad="senior" data-tamano="pequeño" data-estado="adoptado">
-      <img src="https://placekitten.com/602/452" alt="Simba" class="w-full h-64 sm:h-72 md:h-80 lg:h-80 object-cover rounded-t-custom">
-      <div class="p-6">
-        <h3 class="text-2xl font-bold text-dark mb-3">Simba</h3>
-        <p class="text-lg text-gray-600"><strong>Edad:</strong> 8 años</p>
-        <p class="text-lg text-gray-600"><strong>Raza:</strong> Maine Coon</p>
-        <p class="text-lg text-gray-600"><strong>Tamaño:</strong> Pequeño</p>
-        <span class="inline-block mb-4 px-5 py-1.5 text-base rounded-full bg-gray-400 text-white w-fit shadow-md">Adoptado</span>
-      </div>
-      <div class="overlay">
-        <h3 class="text-xl font-bold mb-2 text-white">Simba 🐱</h3>
-        <p class="text-sm mb-3 text-white">Gato tranquilo, ya ha sido adoptado.</p>
-        <button onclick="adoptarMascota('Simba')" class="px-4 py-2 rounded-full bg-primary hover:bg-secondary text-white">Adoptar 💜</button>
-      </div>
-    </div>
-
+  <section id="petsList"
+    class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 md:gap-8 w-full px-6">
+    <!-- Las tarjetas de mascotas se generarán aquí dinámicamente -->
   </section>
 
   <!-- SCRIPT externo -->
-   <script src="../scripts/adopciones.js"></script>
-  <script src="../scripts/adopta.js"></script>
+  <script type="module" src="../scripts/adopta.js"></script>
 </body>
+
 </html>

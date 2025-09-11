@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -34,61 +35,151 @@
             transform: translateY(-2px);
             transition: all 0.2s ease;
         }
-        
+
         .status-badge {
             font-size: 0.75rem;
             padding: 0.25rem 0.75rem;
             border-radius: 9999px;
         }
-        
+
         .modal {
             transition: opacity 0.3s ease, transform 0.3s ease;
         }
-        
+
         .modal-hidden {
             opacity: 0;
             transform: scale(0.9);
             pointer-events: none;
         }
-        
+
         .modal-visible {
             opacity: 1;
             transform: scale(1);
         }
-        
+
         /* Estilos para la barra lateral */
         .sidebar {
             width: 250px;
             transform: translateX(-250px);
             transition: transform 0.3s ease;
         }
-        
+
         .sidebar-open {
             transform: translateX(0);
         }
-        
+
         @media (min-width: 1024px) {
             .sidebar {
                 transform: translateX(0);
             }
-            
+
             .main-content {
                 margin-left: 250px;
             }
         }
-        
+
         .overlay {
             display: none;
         }
-        
+
         @media (max-width: 1023px) {
-            .sidebar-open + .overlay {
+            .sidebar-open+.overlay {
                 display: block;
             }
         }
     </style>
 </head>
-<body class="bg-gray-100 min-h-screen flex">   
+
+<body class="bg-gray-100 min-h-screen flex">
+    <!-- Barra lateral de navegación -->
+    <aside id="sidebar"
+        class="bg-primary sidebar-glass text-light w-64 space-y-6 py-7 px-2 absolute inset-y-0 left-0 transform -translate-x-full md:relative md:translate-x-0 transition duration-200 ease-in-out z-10">
+        <!-- Logo y título del panel de administración -->
+        <div class="text-white flex items-center space-x-2 px-4">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24"
+                stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+            </svg>
+            <span class="text-2xl font-fredoka">AdminPanel</span>
+        </div>
+
+        <!-- Menú de navegación principal -->
+        <nav class="space-y-2">
+            <!-- Enlace activo (Inicio) -->
+            <a href="./admin.html" class="py-3 px-4 rounded flex items-center space-x-3 bg-white/20">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
+                    stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+                </svg>
+                <span>Inicio</span>
+            </a>
+            <a href="./productos.html"
+                class="py-3 px-4 rounded flex items-center space-x-3 hover:bg-white/10 transition-all">
+                <!-- Enlaces de navegación secundarios -->
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
+                    stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4" />
+                </svg>
+                <span>Productos</span>
+            </a>
+            <!-- <a href="#" class="py-3 px-4 rounded flex items-center space-x-3 hover:bg-white/10 transition-all">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+        </svg>
+        <span>Adopciones</span>
+      </a>
+      <a href="#" class="py-3 px-4 rounded flex items-center space-x-3 hover:bg-white/10 transition-all">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+        </svg>
+        <span>Órdenes</span>
+      </a>
+      <a href="#" class="py-3 px-4 rounded flex items-center space-x-3 hover:bg-white/10 transition-all">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+        </svg>
+        <span>Donaciones</span>
+      </a> -->
+            <a href="./usuarios.html"
+                class="py-3 px-4 rounded flex items-center space-x-3 hover:bg-white/10 transition-all">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
+                    stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
+                </svg>
+                <span>Usuarios</span>
+            </a>
+            <a href="./mascotas.html"
+                class="py-3 px-4 rounded flex items-center space-x-3 hover:bg-white/10 transition-all">
+                <i class="fas fa-paw w-6"></i>
+                <span class="ml-3">Mascotas</span>
+            </a>
+            <!-- <a href="" class="py-3 px-4 rounded flex items-center space-x-3 hover:bg-white/10 transition-all">
+        <i class="fas fa-cog w-6"></i>
+        <span class="ml-3">Configuración</span>
+      </a> -->
+        </nav>
+
+        <!-- Footer de la barra lateral con información del administrador -->
+        <div class="absolute bottom-0 w-full left-0 p-4 border-t border-white/10">
+            <div class="flex items-center space-x-3">
+                <img class="h-10 w-10 rounded-full object-cover border-2 border-white/30"
+                    src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2'/%3E%3Ccircle cx='12' cy='7' r='4'/%3E%3C/svg%3E"
+                    alt="Usuario" />
+                <div>
+                    <p class="font-medium">Admin User</p>
+                    <p class="text-sm text-white/70">Administrador</p>
+                </div>
+            </div>
+        </div>
+    </aside>
     <!-- Overlay para móvil -->
     <div class="overlay fixed inset-0 bg-black bg-opacity-50 z-40" id="overlay"></div>
 
@@ -111,17 +202,20 @@
                 <h2 class="text-3xl font-fredoka text-primary">Gestión de Usuarios</h2>
                 <div class="flex space-x-4">
                     <div class="relative">
-                        <input type="text" placeholder="Buscar usuarios..." class="pl-10 pr-4 py-2 rounded-custom border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary">
+                        <input type="text" placeholder="Buscar usuarios..."
+                            class="pl-10 pr-4 py-2 rounded-custom border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary">
                         <i class="fas fa-search absolute left-3 top-3 text-gray-400"></i>
                     </div>
-                    <select class="rounded-custom border border-gray-300 px-4 py-2 focus:outline-none focus:ring-2 focus:ring-primary">
+                    <select
+                        class="rounded-custom border border-gray-300 px-4 py-2 focus:outline-none focus:ring-2 focus:ring-primary">
                         <option>Todos los estados</option>
                         <option>Pendiente</option>
                         <option>En revisión</option>
                         <option>Aprobado</option>
                         <option>Rechazado</option>
                     </select>
-                    <button id="refresh-data" class="bg-primary text-white px-4 py-2 rounded-custom hover:bg-purple-800">
+                    <button id="refresh-data"
+                        class="bg-primary text-white px-4 py-2 rounded-custom hover:bg-purple-800">
                         <i class="fas fa-sync-alt"></i>
                     </button>
                 </div>
@@ -137,12 +231,18 @@
                 <table class="min-w-full divide-y divide-gray-200">
                     <thead class="bg-gray-50">
                         <tr>
-                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Usuario</th>
-                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Fecha solicitud</th>
-                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Documento</th>
-                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Ciudad</th>
-                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Estado</th>
-                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Acciones</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                Usuario</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                Fecha solicitud</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                Documento</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                Ciudad</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                Estado</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                Acciones</th>
                         </tr>
                     </thead>
                     <tbody class="bg-white divide-y divide-gray-200" id="users-table-body">
@@ -152,7 +252,8 @@
             </div>
 
             <!-- Pagination -->
-            <div class="bg-white px-4 py-3 flex items-center justify-between border-t border-gray-200 rounded-b-custom sm:px-6 mt-4">
+            <div
+                class="bg-white px-4 py-3 flex items-center justify-between border-t border-gray-200 rounded-b-custom sm:px-6 mt-4">
                 <div class="hidden sm:flex-1 sm:flex sm:items-center sm:justify-between">
                     <div>
                         <p class="text-sm text-gray-700">
@@ -167,16 +268,23 @@
                     </div>
                     <div>
                         <nav class="relative z-0 inline-flex rounded-md shadow-sm -space-x-px" aria-label="Pagination">
-                            <a href="#" class="relative inline-flex items-center px-2 py-2 rounded-l-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
+                            <a href="#"
+                                class="relative inline-flex items-center px-2 py-2 rounded-l-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
                                 <span class="sr-only">Anterior</span>
                                 <i class="fas fa-chevron-left"></i>
                             </a>
-                            <a href="#" class="relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50">1</a>
-                            <a href="#" class="relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50">2</a>
-                            <a href="#" class="relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50">3</a>
-                            <span class="relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm font-medium text-gray-700">...</span>
-                            <a href="#" class="relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50">10</a>
-                            <a href="#" class="relative inline-flex items-center px-2 py-2 rounded-r-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
+                            <a href="#"
+                                class="relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50">1</a>
+                            <a href="#"
+                                class="relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50">2</a>
+                            <a href="#"
+                                class="relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50">3</a>
+                            <span
+                                class="relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm font-medium text-gray-700">...</span>
+                            <a href="#"
+                                class="relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50">10</a>
+                            <a href="#"
+                                class="relative inline-flex items-center px-2 py-2 rounded-r-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
                                 <span class="sr-only">Siguiente</span>
                                 <i class="fas fa-chevron-right"></i>
                             </a>
@@ -188,7 +296,8 @@
     </div>
 
     <!-- User Detail Modal -->
-    <div id="user-detail-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 modal modal-hidden">
+    <div id="user-detail-modal"
+        class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 modal modal-hidden">
         <div class="bg-white rounded-custom p-6 max-w-4xl w-full mx-4 max-h-screen overflow-y-auto">
             <div class="flex justify-between items-center mb-6">
                 <h3 class="text-2xl font-fredoka text-primary">Detalles del Usuario</h3>
@@ -196,7 +305,7 @@
                     <i class="fas fa-times text-xl"></i>
                 </button>
             </div>
-            
+
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
                 <div>
                     <h4 class="text-lg font-semibold mb-4 text-primary">Información Personal</h4>
@@ -205,10 +314,11 @@
                         <p><span class="font-semibold">Email:</span> <span id="detail-email">-</span></p>
                         <p><span class="font-semibold">Teléfono:</span> <span id="detail-telefono">-</span></p>
                         <p><span class="font-semibold">Documento:</span> <span id="detail-documento">-</span></p>
-                        <p><span class="font-semibold">Fecha de nacimiento:</span> <span id="detail-fecha-nacimiento">-</span></p>
+                        <p><span class="font-semibold">Fecha de nacimiento:</span> <span
+                                id="detail-fecha-nacimiento">-</span></p>
                     </div>
                 </div>
-                
+
                 <div>
                     <h4 class="text-lg font-semibold mb-4 text-primary">Dirección</h4>
                     <div class="space-y-3">
@@ -219,35 +329,40 @@
                     </div>
                 </div>
             </div>
-            
+
             <div class="mb-6">
                 <h4 class="text-lg font-semibold mb-4 text-primary">Situación de Vivienda</h4>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <p><span class="font-semibold">Tipo de vivienda:</span> <span id="detail-tipo-vivienda">-</span></p>
-                    <p><span class="font-semibold">Permiso mascota:</span> <span id="detail-permiso-mascota">-</span></p>
-                    <p><span class="font-semibold">Espacio exterior:</span> <span id="detail-espacio-exterior">-</span></p>
+                    <p><span class="font-semibold">Permiso mascota:</span> <span id="detail-permiso-mascota">-</span>
+                    </p>
+                    <p><span class="font-semibold">Espacio exterior:</span> <span id="detail-espacio-exterior">-</span>
+                    </p>
                     <p><span class="font-semibold">Espacio seguro:</span> <span id="detail-espacio-seguro">-</span></p>
                 </div>
             </div>
-            
+
             <div class="mb-6">
                 <h4 class="text-lg font-semibold mb-4 text-primary">Experiencia con Mascotas</h4>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <p><span class="font-semibold">Experiencia previa:</span> <span id="detail-experiencia">-</span></p>
                     <p><span class="font-semibold">Modalidad laboral:</span> <span id="detail-modalidad">-</span></p>
-                    <p><span class="font-semibold">Espacio para mascota:</span> <span id="detail-espacio-mascota">-</span></p>
+                    <p><span class="font-semibold">Espacio para mascota:</span> <span
+                            id="detail-espacio-mascota">-</span></p>
                     <p><span class="font-semibold">Tiempo diario:</span> <span id="detail-tiempo">-</span></p>
                 </div>
             </div>
-            
+
             <div class="flex justify-end space-x-4 mt-8">
                 <button class="bg-gray-300 text-gray-700 px-6 py-2 rounded-custom font-semibold hover:bg-gray-400">
                     Descargar PDF
                 </button>
-                <button id="modal-btn-rechazar" class="bg-red-500 text-white px-6 py-2 rounded-custom font-semibold hover:bg-red-600">
+                <button id="modal-btn-rechazar"
+                    class="bg-red-500 text-white px-6 py-2 rounded-custom font-semibold hover:bg-red-600">
                     Rechazar
                 </button>
-                <button id="modal-btn-aprobar" class="bg-green-500 text-white px-6 py-2 rounded-custom font-semibold hover:bg-green-600">
+                <button id="modal-btn-aprobar"
+                    class="bg-green-500 text-white px-6 py-2 rounded-custom font-semibold hover:bg-green-600">
                     Aprobar
                 </button>
             </div>
@@ -256,4 +371,5 @@
 
     <script type="module" src="../scripts/usuarios.js"></script>
 </body>
+
 </html>
