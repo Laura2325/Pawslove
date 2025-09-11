@@ -2,7 +2,7 @@
 const chips = document.querySelectorAll(".chip");
 const cards = document.querySelectorAll(".bento-card");
 
-chips.forEach(chip => {
+chips.forEach((chip) => {
   chip.addEventListener("click", () => {
     chip.classList.toggle("active");
     filterCards();
@@ -10,12 +10,16 @@ chips.forEach(chip => {
 });
 
 function filterCards() {
-  cards.forEach(card => {
+  cards.forEach((card) => {
     let mostrar = true;
-    ["especie", "edad", "tamano", "estado"].forEach(cat => {
-      const activos = Array.from(document.querySelectorAll(`.chip.active[data-category="${cat}"]`))
-                           .map(c => c.dataset.value.toLowerCase());
-      if (activos.length > 0 && !activos.includes(card.dataset[cat].toLowerCase())) {
+    ["especie", "edad", "tamano", "estado"].forEach((cat) => {
+      const activos = Array.from(
+        document.querySelectorAll(`.chip.active[data-category="${cat}"]`)
+      ).map((c) => c.dataset.value.toLowerCase());
+      if (
+        activos.length > 0 &&
+        !activos.includes(card.dataset[cat].toLowerCase())
+      ) {
         mostrar = false;
       }
     });
@@ -54,6 +58,7 @@ function adoptarMascota(nombre) {
   alert(`¡Has seleccionado adoptar a ${nombre}!`);
 }
 
+<<<<<<< HEAD
 
 // Toggle menú móvil
 const menuToggle = document.getElementById('menu-toggle');
@@ -61,4 +66,37 @@ const mobileMenu = document.getElementById('mobile-menu');
 menuToggle.addEventListener('click', () => {
   mobileMenu.classList.toggle('max-h-0');
   mobileMenu.classList.toggle('max-h-96');
+=======
+// Menu Mobile Toggle
+const menuToggle = document.getElementById("menu-toggle");
+const mobileMenu = document.getElementById("mobile-menu");
+const menuIcon = document.getElementById("menu-icon");
+let mobileMenuOpen = false;
+
+function toggleMobileMenu() {
+  mobileMenuOpen = !mobileMenuOpen;
+  if (mobileMenuOpen) {
+    mobileMenu.classList.remove("mobile-menu-closed", "max-h-0");
+    mobileMenu.classList.add("mobile-menu-open", "max-h-[400px]");
+    menuIcon.innerHTML =
+      '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>';
+  } else {
+    mobileMenu.classList.remove("mobile-menu-open", "max-h-[400px]");
+    mobileMenu.classList.add("mobile-menu-closed", "max-h-0");
+    menuIcon.innerHTML =
+      '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>';
+  }
+}
+
+menuToggle.addEventListener("click", toggleMobileMenu);
+
+// Cerrar menú móvil al cambiar a escritorio
+window.addEventListener("resize", () => {
+  if (window.innerWidth >= 768 && mobileMenuOpen) {
+    toggleMobileMenu();
+  }
+>>>>>>> 79b0c9977fb3be3465a0c1f15036cce1a4b53ab6
 });
+
+// Inicializar menú cerrado
+mobileMenu.classList.add("mobile-menu-closed", "max-h-0");
