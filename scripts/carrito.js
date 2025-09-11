@@ -1,14 +1,5 @@
+import {formatoPrecios} from "./utilidades.js";
 const cartContainer = document.getElementById("cart-container");
-
-    // Función para formatear precios colombianos
-    function formatPrice(value) {
-      return new Intl.NumberFormat("es-CO", {
-        style: "currency",
-        currency: "COP",
-        minimumFractionDigits: 0,
-        maximumFractionDigits: 0
-      }).format(value);
-    }
 
 
     // Función para mostrar toast
@@ -100,7 +91,7 @@ const cartContainer = document.getElementById("cart-container");
                 <span class="font-semibold text-dark">${item.name}</span>
               </div>
             </td>
-            <td class="py-4 px-4 font-bold text-primary">${formatPrice(item.price)}</td>
+            <td class="py-4 px-4 font-bold text-primary">${formatoPrecios.formatoPrecio(item.price)}</td>
             <td class="py-4 px-4">
               <div class="flex items-center space-x-2">
                 <button class="decrease-qty bg-gray-200 hover:bg-gray-300 rounded w-8 h-8 flex items-center justify-center font-bold text-lg transition-colors">−</button>
@@ -108,7 +99,7 @@ const cartContainer = document.getElementById("cart-container");
                 <button class="increase-qty bg-gray-200 hover:bg-gray-300 rounded w-8 h-8 flex items-center justify-center font-bold text-lg transition-colors">+</button>
               </div>
             </td>
-            <td class="py-4 px-4 font-bold text-primary">${formatPrice(item.price * item.quantity)}</td>
+            <td class="py-4 px-4 font-bold text-primary">${formatoPrecios.formatoPrecio(item.price * item.quantity)}</td>
             <td class="py-4 px-4">
               <button class="remove-item text-red-500 hover:text-red-700 font-bold text-xl p-2 hover:bg-red-50 rounded transition-colors" title="Eliminar producto">&times;</button>
             </td>
@@ -125,7 +116,7 @@ const cartContainer = document.getElementById("cart-container");
               </div>
               <div class="flex-1 min-w-0">
                 <h3 class="font-semibold text-dark mb-1 text-lg">${item.name}</h3>
-                <p class="text-primary font-bold mb-3 text-xl">${formatPrice(item.price)}</p>
+                <p class="text-primary font-bold mb-3 text-xl">${formatoPrecios.formatoPrecio(item.price)}</p>
                 
                 <div class="flex items-center justify-between">
                   <div class="flex items-center space-x-3 bg-white rounded-full px-3 py-1 border">
@@ -139,7 +130,7 @@ const cartContainer = document.getElementById("cart-container");
                 <div class="mt-3 pt-3 border-t border-gray-200">
                   <div class="flex justify-between items-center">
                     <span class="text-gray-600">Subtotal:</span>
-                    <span class="font-bold text-primary text-xl">${formatPrice(item.price * item.quantity)}</span>
+                    <span class="font-bold text-primary text-xl">${formatoPrecios.formatoPrecio(item.price * item.quantity)}</span>
                   </div>
                 </div>
               </div>
@@ -213,15 +204,15 @@ const cartContainer = document.getElementById("cart-container");
             <div class="max-w-md ml-auto space-y-3">
               <div class="flex justify-between text-base md:text-lg font-medium">
                 <span>IVA (19%)</span>
-                <span class="text-primary font-semibold">${formatPrice(iva)}</span>
+                <span class="text-primary font-semibold">${formatoPrecios.formatoPrecio(iva)}</span>
               </div>
               <div class="flex justify-between text-base md:text-lg font-medium">
                 <span>Subtotal</span>
-                <span class="text-primary font-semibold">${formatPrice(subtotal)}</span>
+                <span class="text-primary font-semibold">${formatoPrecios.formatoPrecio(subtotal)}</span>
               </div>
               <div class="flex justify-between text-lg md:text-xl font-bold border-t border-gray-300 pt-3">
                 <span>Total</span>
-                <span class="text-primary">${formatPrice(subtotal + iva)}</span>
+                <span class="text-primary">${formatoPrecios.formatoPrecio(subtotal + iva)}</span>
               </div>
               
               <div class="flex flex-col sm:flex-row gap-3 sm:gap-4 mt-6 pt-4 border-t border-gray-200">

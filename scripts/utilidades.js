@@ -1,5 +1,32 @@
 // Funciones de utilidad
 
+//Metodos de fecha y hora segun formato
+function obtenerFechaActual() {
+    return new Date().toISOString().split('T')[0];
+}
+
+function obtenerHoraMinutoActual() {
+    return new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+}
+
+function obtenerHoraActual12Horas() {
+    const now = new Date();
+    let horas = now.getHours();
+    const minutos = now.getMinutes();
+    const ampm = horas >= 12 ? 'PM' : 'AM';
+
+    horas = horas % 12 || 12; // Convierte 0 a 12 para el formato de 12 horas
+    const formattedTime = `${horas}:${minutos.toString().padStart(2, '0')} ${ampm}`;
+    
+    return formattedTime;
+}
+
+export const metodosFechaHora = {
+    obtenerFechaActual,
+    obtenerHoraMinutoActual,
+    obtenerHoraActual12Horas
+}
+
 //* Formatos de datos
 function formatoPrecio(value) {
     return new Intl.NumberFormat('es-CO', {
@@ -25,11 +52,6 @@ function formatDate(dateString) {
 function getInitials(name) {
     if (!name) return 'NN';
     return name.split(' ').map(word => word[0]).join('').toUpperCase().substring(0, 2);
-}
-
-export const usuariosAdmin = {    
-    formatDate,
-    getInitials
 }
 
 //* Metodos para obtener formato de los formularios
@@ -93,12 +115,13 @@ function getTimeDedication(time) {
     return times[time] || '';
 }
 
-export const datosFormularioAdopcion = {
+export const usuariosAdmin = {
+    formatDate,
+    getInitials,
     getDocumentType,
     getIncomeRange,
     getHousingType,
     getWorkModality,
     getPetSpace,
     getTimeDedication
-
-}
+};

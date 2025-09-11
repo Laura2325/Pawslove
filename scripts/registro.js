@@ -1,5 +1,6 @@
 import { alertasRegistro } from "./sweetalert2.min.js";
 import { metodosUsuarios } from "./manejoLocalStorage.js";
+import { metodosFechaHora } from "./utilidades.js";
 
 document.addEventListener('DOMContentLoaded', () => {
 
@@ -45,24 +46,26 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
-        const usuarios = metodosUsuarios.obtenerUsuarios();
-        if (usuarios.some(user => user.correo === correo.value)) {
-            alertasRegistro.usuarioExistente();
-            return;
-        }
         const usuario = {
             nombre: nombreUsuario.value.trim(),
             correo: correo.value.trim(),
             contraseña: contraseña.value,
-            tipo: 'Cliente'
+            tipo: 'Cliente',
+            fechaRegistro: metodosFechaHora.obtenerFechaActual(),
+            horaRegistro: metodosFechaHora.obtenerHoraActual12Horas()
         };
 
-        usuarios.push(usuario);
-        metodosUsuarios.guardarUsuarios(usuarios);
+        if (!metodosUsuarios.agregarUsuario(usuario)) {
+            alertasRegistro.usuarioExistente();
+            return;
+        }
 
-        alertasRegistro.usuarioRegistrado();
-        const btnClose = document.getElementById('closeRegister');
-        btnClose.click();
+        // Mostrar la alerta y esperar a que termine para cambiar de vista
+        alertasRegistro.usuarioRegistrado().then(() => {
+            const btnClose = document.getElementById('closeRegister');
+            history.back();
+            btnClose.click();
+        });
     });
 
 });

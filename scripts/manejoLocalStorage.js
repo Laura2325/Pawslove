@@ -2,6 +2,7 @@ const KEY_CARRITO = 'Pawslove_Carrito';
 const KEY_PRODUCTOS = 'Pawslove_Productos';
 const KEY_USUARIOS = 'pawsloveUsers';
 const KEY_MASCOTAS = 'Pawslove_Mascotas';
+const KEY_SOLICITUDES = 'Pawslove_SolicitudesAdopcion';
 
 //* --- Funciones para Productos ---
 
@@ -152,15 +153,16 @@ function guardarUsuarios(usuarios) {
 /**
  * Agrega un nuevo usuario a la lista.
  * @param {Object} nuevoUsuario - El usuario a agregar.
+ * @returns {boolean} - Devuelve true si el usuario fue agregado, false si ya existía.
  */
 function agregarUsuario(nuevoUsuario) {
     const usuarios = obtenerUsuarios();
     if (usuarios.some(u => u.correo === nuevoUsuario.correo)) {
-        console.warn(`El usuario con correo ${nuevoUsuario.correo} ya existe.`);
-        return;
+        return false; // Indica que el usuario ya existe.
     }
     usuarios.push(nuevoUsuario);
     guardarUsuarios(usuarios);
+    return true; // Indica que el usuario fue agregado con éxito.
 }
 
 /**
@@ -238,3 +240,57 @@ function eliminarMascota(identificador) {
  */
 function actualizarMascota(identificador, datosActualizados) {
 }
+
+// --- Funciones para Solicitudes de Adopción ---
+
+/**
+ * Obtiene todas las solicitudes de adopción desde localStorage.
+ */
+function obtenerSolicitudes() {
+    const solicitudesJSON = localStorage.getItem(KEY_SOLICITUDES);
+    try {
+        // Si no hay datos, devuelve un array vacío.
+        return solicitudesJSON ? JSON.parse(solicitudesJSON) : [];
+    } catch (e) {
+        console.error("Error al parsear solicitudes de adopción:", e);
+        return [];
+    }
+}
+
+/**
+ * Guarda el array de solicitudes en localStorage.
+ * @param {Array} solicitudes - El array de solicitudes a guardar.
+ */
+function guardarSolicitudes(solicitudes) {
+    localStorage.setItem(KEY_SOLICITUDES, JSON.stringify(solicitudes));
+}
+
+/**
+ * Agrega una nueva solicitud a la lista.
+ * @param {Object} nuevaSolicitud - La solicitud a agregar.
+ */
+function agregarSolicitud(nuevaSolicitud) {
+    const solicitudes = obtenerSolicitudes();
+    solicitudes.unshift(nuevaSolicitud); // Agrega al inicio para que aparezca primero
+    guardarSolicitudes(solicitudes);
+}
+
+/**
+ * Elimina una solicitud por el email del solicitante.
+ * @param {string} email - El email de la solicitud a eliminar.
+ */
+function eliminarSolicitud(email) {
+    let solicitudes = obtenerSolicitudes();
+    const solicitudesFiltradas = solicitudes.filter(solicitud => solicitud.email !== email);
+
+    if (solicitudesFiltradas.length < solicitudes.length) {
+        guardarSolicitudes(solicitudesFiltradas);
+    }
+}
+
+export const metodosSolicitudes = {
+    obtenerSolicitudes,
+    guardarSolicitudes,
+    agregarSolicitud,
+    eliminarSolicitud
+};
