@@ -1,4 +1,4 @@
-import {formatoPrecios} from './fomatoPrecio.js';
+import {formatoPrecios} from './utilidades.js';
 
 // Variables globales
       let cart = {};
@@ -66,9 +66,9 @@ import {formatoPrecios} from './fomatoPrecio.js';
 
         if (Object.keys(cart).length === 0) {
           elements.cartItems.innerHTML = '<p class="text-gray-500 text-center py-10">Tu carrito está vacío</p>';
-          elements.cartIva.textContent = formatoPrecios(0);
-          elements.cartSubtotal.textContent = formatoPrecios(0);
-          elements.cartTotal.textContent = formatoPrecios(0);
+          elements.cartIva.textContent = formatoPrecios.formatoPrecio(0);
+          elements.cartSubtotal.textContent = formatoPrecios.formatoPrecio(0);
+          elements.cartTotal.textContent = formatoPrecios.formatoPrecio(0);
           elements.procederPago.disabled = true;
           updateCartCount();
           return;
@@ -83,7 +83,7 @@ import {formatoPrecios} from './fomatoPrecio.js';
             </div>
             <div class="flex-1 min-w-0">
               <h4 class="font-semibold text-dark truncate">${item.name}</h4>
-              <p class="text-primary font-bold">${formatoPrecios(item.price)}</p>
+              <p class="text-primary font-bold">${formatoPrecios.formatoPrecio(item.price)}</p>
               <div class="flex items-center mt-2 space-x-2">
                 <button class="decrease-qty bg-gray-200 hover:bg-gray-300 rounded w-8 h-8 flex items-center justify-center text-lg font-bold">−</button>
                 <span class="px-2">${item.quantity}</span>
@@ -122,9 +122,9 @@ import {formatoPrecios} from './fomatoPrecio.js';
         const iva = subtotal * 0.19;
         const total = subtotal + iva;
 
-        elements.cartIva.textContent = formatoPrecios(iva);
-        elements.cartSubtotal.textContent = formatoPrecios(subtotal);
-        elements.cartTotal.textContent = formatoPrecios(total);
+        elements.cartIva.textContent = formatoPrecios.formatoPrecio(iva);
+        elements.cartSubtotal.textContent = formatoPrecios.formatoPrecio(subtotal);
+        elements.cartTotal.textContent = formatoPrecios.formatoPrecio(total);
         elements.procederPago.disabled = false;
         updateCartCount();
       }

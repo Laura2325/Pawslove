@@ -1,7 +1,8 @@
 const KEY_CARRITO = 'Pawslove_Carrito';
 const KEY_PRODUCTOS = 'Pawslove_Productos';
-const KEY_USUARIOS = 'Pawslove_Usuarios';
+const KEY_USUARIOS = 'pawsloveUsers';
 const KEY_MASCOTAS = 'Pawslove_Mascotas';
+const KEY_SOLICITUDES = 'Pawslove_SolicitudesAdopcion';
 
 //* --- Funciones para Productos ---
 
@@ -9,8 +10,15 @@ const KEY_MASCOTAS = 'Pawslove_Mascotas';
  * Obtiene todos los productos desde localStorage.
  */
 function obtenerProductos() {
-    let productos = JSON.parse(localStorage.getItem(KEY_PRODUCTOS));
-    return productos;
+    const productosJSON = localStorage.getItem(KEY_PRODUCTOS);
+    try {
+        // Si no hay nada, devuelve un array vacío para evitar errores.
+        return productosJSON ? JSON.parse(productosJSON) : [];
+    } catch (e) {
+        console.error("Error al parsear productos desde localStorage:", e);
+        // En caso de error en el parseo, devuelve un array vacío.
+        return [];
+    }
 }
 
 /**
@@ -102,12 +110,36 @@ function calcularTotalCarrito() {
 
 //* --- Funciones para Usuarios ---
 
+function inicializarAdmin() {
+        let usuarios = metodosUsuarios.obtenerUsuarios();
+
+        const adminExists = usuarios.some(user => user.correo === 'admin_pawslove@gmail.com');
+
+        if (!adminExists) {
+            const adminUser = {
+                nombre: 'admin_pawslove',
+                correo: 'admin_pawslove@gmail.com',
+                contraseña: 'admin_pawslove',
+                tipo: 'Administrador Principal'
+            };
+            usuarios.unshift(adminUser);
+            guardarUsuarios(usuarios);
+        }
+    }
+
 /**
  * Obtiene todos los usuarios desde localStorage.
  */
 function obtenerUsuarios() {
-    let usuarios = JSON.parse(localStorage.getItem(KEY_USUARIOS));
-    return usuarios;
+    const usuariosJSON = localStorage.getItem(KEY_USUARIOS);
+    try {
+        // Si no hay nada, devuelve un array vacío para evitar errores.
+        return usuariosJSON ? JSON.parse(usuariosJSON) : [];
+    } catch (e) {
+        console.error("Error al parsear usuarios desde localStorage:", e);
+        // En caso de error en el parseo, devuelve un array vacío.
+        return [];
+    }
 }
 
 /**
@@ -115,20 +147,35 @@ function obtenerUsuarios() {
  * @param {Array} usuarios - El array de usuarios a guardar.
  */
 function guardarUsuarios(usuarios) {
+    localStorage.setItem(KEY_USUARIOS, JSON.stringify(usuarios));
 }
 
 /**
  * Agrega un nuevo usuario a la lista.
  * @param {Object} nuevoUsuario - El usuario a agregar.
+ * @returns {boolean} - Devuelve true si el usuario fue agregado, false si ya existía.
  */
 function agregarUsuario(nuevoUsuario) {
+    const usuarios = obtenerUsuarios();
+    if (usuarios.some(u => u.correo === nuevoUsuario.correo)) {
+        return false; // Indica que el usuario ya existe.
+    }
+    usuarios.push(nuevoUsuario);
+    guardarUsuarios(usuarios);
+    return true; // Indica que el usuario fue agregado con éxito.
 }
 
 /**
  * Elimina un usuario por su identificador (ID o email).
- * @param {string|number} identificador - El ID o email del usuario a eliminar.
+ * @param {string} email - El email del usuario a eliminar.
  */
-function eliminarUsuario(identificador) {
+function eliminarUsuario(email) {
+    let usuarios = obtenerUsuarios();
+    const usuariosFiltrados = usuarios.filter(usuario => usuario.correo !== email);
+
+    if (usuariosFiltrados.length < usuarios.length) {
+        guardarUsuarios(usuariosFiltrados);
+    }
 }
 
 /**
@@ -139,14 +186,30 @@ function eliminarUsuario(identificador) {
 function actualizarUsuario(identificador, datosActualizados) {
 }
 
+export const metodosUsuarios = {
+    inicializarAdmin,
+    obtenerUsuarios,
+    guardarUsuarios,
+    agregarUsuario,
+    eliminarUsuario,
+    actualizarUsuario
+};
+
 // --- Funciones para Mascotas ---
 
 /**
  * Obtiene todas las mascotas desde localStorage.
  */
 function obtenerMascotas() {
-    let mascotas = JSON.parse(localStorage.getItem(KEY_MASCOTAS));
-    return mascotas;
+    const mascotasJSON = localStorage.getItem(KEY_MASCOTAS);
+    try {
+        // Si no hay nada, devuelve un array vacío para evitar errores.
+        return mascotasJSON ? JSON.parse(mascotasJSON) : [];
+    } catch (e) {
+        console.error("Error al parsear mascotas desde localStorage:", e);
+        // En caso de error en el parseo, devuelve un array vacío.
+        return [];
+    }
 }
 
 /**
@@ -177,3 +240,57 @@ function eliminarMascota(identificador) {
  */
 function actualizarMascota(identificador, datosActualizados) {
 }
+
+// --- Funciones para Solicitudes de Adopción ---
+
+/**
+ * Obtiene todas las solicitudes de adopción desde localStorage.
+ */
+function obtenerSolicitudes() {
+    const solicitudesJSON = localStorage.getItem(KEY_SOLICITUDES);
+    try {
+        // Si no hay datos, devuelve un array vacío.
+        return solicitudesJSON ? JSON.parse(solicitudesJSON) : [];
+    } catch (e) {
+        console.error("Error al parsear solicitudes de adopción:", e);
+        return [];
+    }
+}
+
+/**
+ * Guarda el array de solicitudes en localStorage.
+ * @param {Array} solicitudes - El array de solicitudes a guardar.
+ */
+function guardarSolicitudes(solicitudes) {
+    localStorage.setItem(KEY_SOLICITUDES, JSON.stringify(solicitudes));
+}
+
+/**
+ * Agrega una nueva solicitud a la lista.
+ * @param {Object} nuevaSolicitud - La solicitud a agregar.
+ */
+function agregarSolicitud(nuevaSolicitud) {
+    const solicitudes = obtenerSolicitudes();
+    solicitudes.unshift(nuevaSolicitud); // Agrega al inicio para que aparezca primero
+    guardarSolicitudes(solicitudes);
+}
+
+/**
+ * Elimina una solicitud por el email del solicitante.
+ * @param {string} email - El email de la solicitud a eliminar.
+ */
+function eliminarSolicitud(email) {
+    let solicitudes = obtenerSolicitudes();
+    const solicitudesFiltradas = solicitudes.filter(solicitud => solicitud.email !== email);
+
+    if (solicitudesFiltradas.length < solicitudes.length) {
+        guardarSolicitudes(solicitudesFiltradas);
+    }
+}
+
+export const metodosSolicitudes = {
+    obtenerSolicitudes,
+    guardarSolicitudes,
+    agregarSolicitud,
+    eliminarSolicitud
+};
