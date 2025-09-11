@@ -58,15 +58,6 @@ function adoptarMascota(nombre) {
   alert(`¡Has seleccionado adoptar a ${nombre}!`);
 }
 
-<<<<<<< HEAD
-
-// Toggle menú móvil
-const menuToggle = document.getElementById('menu-toggle');
-const mobileMenu = document.getElementById('mobile-menu');
-menuToggle.addEventListener('click', () => {
-  mobileMenu.classList.toggle('max-h-0');
-  mobileMenu.classList.toggle('max-h-96');
-=======
 // Menu Mobile Toggle
 const menuToggle = document.getElementById("menu-toggle");
 const mobileMenu = document.getElementById("mobile-menu");
@@ -95,7 +86,6 @@ window.addEventListener("resize", () => {
   if (window.innerWidth >= 768 && mobileMenuOpen) {
     toggleMobileMenu();
   }
->>>>>>> 79b0c9977fb3be3465a0c1f15036cce1a4b53ab6
 });
 
 // Inicializar menú cerrado
