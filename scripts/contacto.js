@@ -31,15 +31,28 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
-  // listeners botones perfil
+  // Listeners para los botones de perfil
   profileButtons.forEach((button) => {
     button.addEventListener("click", function () {
       changeProfile(this.dataset.profile);
     });
   });
 
-  // init
-  changeProfile("adoptante");
+  // --- Lógica para pre-llenar mascota de interés y establecer perfil inicial ---
+  const urlParams = new URLSearchParams(window.location.search);
+  const petName = urlParams.get('mascota');
+
+  if (petName) {
+    const petInterestInput = document.getElementById('mascota-interes');
+    const petInterestContainer = document.getElementById('mascota-interes-container');
+    if (petInterestInput && petInterestContainer) {
+      petInterestInput.value = decodeURIComponent(petName);
+      petInterestContainer.style.display = 'block'; // Mostrar el campo
+    }
+    changeProfile("adoptante"); // Forzar perfil adoptante
+  } else {
+    changeProfile("adoptante"); // Perfil por defecto si no hay mascota
+  }
 
   // Envío del formulario (con fallback JSON -> FormData)
   formulario.addEventListener("submit", async function (e) {

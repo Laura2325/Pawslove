@@ -1,4 +1,5 @@
-import {metodosMascotas} from "./manejoLocalStorage";
+import { metodosMascotas } from "./manejoLocalStorage.js";
+
 document.addEventListener("DOMContentLoaded", () => {
   const petForm = document.getElementById("petForm");
   const petIdField = document.getElementById("petId");
@@ -7,18 +8,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const edad = document.getElementById("edad");
   const descripcion = document.getElementById("descripcion");
   const petListAdmin = document.getElementById("petListAdmin");
-
-  const STORAGE_KEY = "mascotas";
-
-  // Obtener mascotas del localStorage
-  function obtenerMascotas() {
-    return JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
-  }
-
-  // Guardar mascotas en localStorage
-  function guardarMascotas(mascotas) {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(mascotas));
-  }
 
   // Renderizar la lista de mascotas en admin
   function renderMascotas() {
@@ -48,7 +37,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // Evento guardar mascota (crear o editar)
   petForm.addEventListener("submit", (e) => {
     e.preventDefault();
-    const mascotas = obtenerMascotas();
+    const mascotas = metodosMascotas.obtenerMascotas();
 
     if (petIdField.value) {
       // Editar
@@ -73,7 +62,7 @@ document.addEventListener("DOMContentLoaded", () => {
       mascotas.push(nuevaMascota);
     }
 
-    guardarMascotas(mascotas);
+    metodosMascotas.guardarMascotas(mascotas);
     petForm.reset();
     petIdField.value = "";
     renderMascotas();
@@ -81,7 +70,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Hacer accesibles las funciones desde el HTML
   window.editarMascota = (id) => {
-    const mascotas = obtenerMascotas();
+    const mascotas = metodosMascotas.obtenerMascotas();
     const pet = mascotas.find((p) => p.id === id);
     if (!pet) return;
 
@@ -93,9 +82,9 @@ document.addEventListener("DOMContentLoaded", () => {
   };
 
   window.eliminarMascota = (id) => {
-    let mascotas = obtenerMascotas();
+    let mascotas = metodosMascotas.obtenerMascotas();
     mascotas = mascotas.filter((p) => p.id !== id);
-    guardarMascotas(mascotas);
+    metodosMascotas.guardarMascotas(mascotas);
     renderMascotas();
   };
 

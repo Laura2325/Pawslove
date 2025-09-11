@@ -111,21 +111,21 @@ function calcularTotalCarrito() {
 //* --- Funciones para Usuarios ---
 
 function inicializarAdmin() {
-        let usuarios = metodosUsuarios.obtenerUsuarios();
+    let usuarios = metodosUsuarios.obtenerUsuarios();
 
-        const adminExists = usuarios.some(user => user.correo === 'admin_pawslove@gmail.com');
+    const adminExists = usuarios.some(user => user.correo === 'admin_pawslove@gmail.com');
 
-        if (!adminExists) {
-            const adminUser = {
-                nombre: 'admin_pawslove',
-                correo: 'admin_pawslove@gmail.com',
-                contraseña: 'admin_pawslove',
-                tipo: 'Administrador Principal'
-            };
-            usuarios.unshift(adminUser);
-            guardarUsuarios(usuarios);
-        }
+    if (!adminExists) {
+        const adminUser = {
+            nombre: 'admin_pawslove',
+            correo: 'admin_pawslove@gmail.com',
+            contraseña: 'admin_pawslove',
+            tipo: 'Administrador Principal'
+        };
+        usuarios.unshift(adminUser);
+        guardarUsuarios(usuarios);
     }
+}
 
 /**
  * Obtiene todos los usuarios desde localStorage.
@@ -203,11 +203,9 @@ export const metodosUsuarios = {
 function obtenerMascotas() {
     const mascotasJSON = localStorage.getItem(KEY_MASCOTAS);
     try {
-        // Si no hay nada, devuelve un array vacío para evitar errores.
         return mascotasJSON ? JSON.parse(mascotasJSON) : [];
     } catch (e) {
         console.error("Error al parsear mascotas desde localStorage:", e);
-        // En caso de error en el parseo, devuelve un array vacío.
         return [];
     }
 }
@@ -216,7 +214,9 @@ function obtenerMascotas() {
  * Guarda el array de mascotas en localStorage.
  * @param {Array} mascotas - El array de mascotas a guardar.
  */
+// Guardar mascotas en localStorage
 function guardarMascotas(mascotas) {
+    localStorage.setItem(KEY_MASCOTAS, JSON.stringify(mascotas));
 }
 
 /**
@@ -224,21 +224,36 @@ function guardarMascotas(mascotas) {
  * @param {Object} nuevaMascota - La mascota a agregar.
  */
 function agregarMascota(nuevaMascota) {
+    const mascotas = obtenerMascotas();
+    // Asignar un ID único basado en el tiempo
+    const mascotaConId = { ...nuevaMascota, id: Date.now() };
+    mascotas.push(mascotaConId);
+    guardarMascotas(mascotas);
 }
 
 /**
  * Elimina una mascota por su identificador (ID).
- * @param {string|number} identificador - El ID de la mascota a eliminar.
+ * @param {number} id - El ID de la mascota a eliminar.
  */
-function eliminarMascota(identificador) {
+function eliminarMascota(id) {
+    let mascotas = obtenerMascotas();
+    mascotas = mascotas.filter(mascota => mascota.id !== id);
+    guardarMascotas(mascotas);
 }
 
 /**
  * Actualiza una mascota existente.
- * @param {string|number} identificador - El ID de la mascota a actualizar.
+ * @param {number} id - El ID de la mascota a actualizar.
  * @param {Object} datosActualizados - Los nuevos datos de la mascota.
  */
-function actualizarMascota(identificador, datosActualizados) {
+function actualizarMascota(id, datosActualizados) {
+    const mascotas = obtenerMascotas();
+    const index = mascotas.findIndex(mascota => mascota.id === id);
+    if (index !== -1) {
+        // Conserva el ID original y actualiza el resto de los datos.
+        mascotas[index] = { ...mascotas[index], ...datosActualizados, id: id };
+        guardarMascotas(mascotas);
+    }
 }
 
 export const metodosMascotas = {
@@ -248,6 +263,7 @@ export const metodosMascotas = {
     eliminarMascota,
     actualizarMascota
 }
+
 
 // --- Funciones para Solicitudes de Adopción ---
 

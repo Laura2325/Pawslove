@@ -135,6 +135,12 @@
 
     <!-- Sección Adoptante -->
     <div class="perfil-seccion" id="adoptante-section" aria-hidden="false">
+      <!-- Campo para la mascota de interés (se llenará con JS) -->
+      <div class="grupo-formulario" id="mascota-interes-container" style="display: none;">
+        <label for="mascota-interes">Mascota de interés</label>
+        <input type="text" id="mascota-interes" name="mascota_interes" readonly class="bg-gray-100 cursor-not-allowed" />
+      </div>
+
       <div class="grupo-formulario">
         <label for="interes-adopcion">¿Qué tipo de perrito buscas? *</label>
         <select id="interes-adopcion" name="interes_adopcion" required>
