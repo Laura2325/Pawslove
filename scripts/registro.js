@@ -4,14 +4,16 @@ import { metodosFechaHora } from "./utilidades.js";
 
 document.addEventListener('DOMContentLoaded', () => {
 
-    const nombreUsuario = document.getElementById('nombreRegistro');
-    const correo = document.getElementById('emailRegistro');
-    const contraseña = document.getElementById('passwordRegistro');
-    const confirmarContraseña = document.getElementById('confirmarPassword');
-    const btnRegistrarse = document.getElementById('btnRegistrarse');    
+    const registroForm = document.getElementById('registroForm');
+    if (!registroForm) return;
 
-    btnRegistrarse.addEventListener('click', (e) => {
+    registroForm.addEventListener('submit', (e) => {
         e.preventDefault();
+
+        const nombreUsuario = document.getElementById('nombreRegistro');
+        const correo = document.getElementById('emailRegistro');
+        const contraseña = document.getElementById('passwordRegistro');
+        const confirmarContraseña = document.getElementById('confirmarPassword');
 
         if (!nombreUsuario.value.trim() || !correo.value.trim() || !contraseña.value.trim()) {
             alertasRegistro.camposIncompletos();
@@ -63,8 +65,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // Mostrar la alerta y esperar a que termine para cambiar de vista
         alertasRegistro.usuarioRegistrado().then(() => {
             const btnClose = document.getElementById('closeRegister');
-            history.back();
-            btnClose.click();
+            btnClose.click(); // Vuelve a la vista de login de forma controlada
         });
     });
 
