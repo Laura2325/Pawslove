@@ -9,11 +9,10 @@ function renderPetCards() {
   }
 
   const mascotas = metodosMascotas.obtenerMascotas();
-  const mascotasDisponibles = mascotas.filter(pet => pet.status === 'Disponible');
 
   container.innerHTML = ''; // Limpiar contenido estático
 
-  if (mascotasDisponibles.length === 0) {
+  if (mascotas.length === 0) {
     container.innerHTML = `
     <div class="col-span-full text-center bg-white rounded-custom shadow-lg p-8 md:p-12">
         <img src="../assets/img/marca/Isotipo_2.svg" alt="Pawslove" class="mx-auto h-20 w-20 opacity-40 mb-6">
@@ -24,23 +23,30 @@ function renderPetCards() {
     return;
   }
 
-  container.innerHTML = mascotasDisponibles.map(pet => `
+  container.innerHTML = mascotas.map(pet => {
+    const isAdopted = pet.status !== 'Disponible';
+    const adoptButtonHTML = isAdopted
+      ? `<span class="px-4 py-2 rounded-full bg-gray-500 text-white cursor-not-allowed">Ya tiene un hogar ❤️</span>`
+      : `<button data-pet-name="${pet.name}" class="adopt-button px-4 py-2 rounded-full bg-primary hover:bg-secondary text-white">Adoptar 💜</button>`;
+
+    return `
     <div class="bento-card bg-white rounded-custom shadow-lg overflow-hidden animate-fadeInUp"
          data-especie="${(pet.species || '').toLowerCase()}" data-edad="${(pet.age || '').toLowerCase()}" data-tamano="${(pet.size || '').toLowerCase()}" data-estado="${(pet.status || '').toLowerCase()}">
       <img src="${pet.image || 'https://via.placeholder.com/600x450.png?text=Sin+Foto'}" alt="${pet.name}" class="w-full h-64 sm:h-72 md:h-80 lg:h-80 object-cover rounded-t-custom">
       <div class="p-6">
         <h3 class="text-2xl font-bold text-dark mb-3">${pet.name}</h3>
+        <p class="text-lg text-gray-600"><strong>Especie:</strong> ${pet.species}</p>
         <p class="text-lg text-gray-600"><strong>Edad:</strong> ${pet.age}</p>
         <p class="text-lg text-gray-600"><strong>Tamaño:</strong> ${pet.size}</p>
-        <span class="inline-block mb-4 px-5 py-1.5 text-base rounded-full bg-gradient-to-r from-accent to-secondary text-white w-fit shadow-md">${pet.status}</span>
+        <span class="inline-block mb-4 px-5 py-1.5 text-base rounded-full ${isAdopted ? 'bg-gray-400' : 'bg-gradient-to-r from-accent to-secondary'} text-white w-fit shadow-md">${pet.status}</span>
       </div>
       <div class="overlay">
         <h3 class="text-xl font-bold mb-2 text-white">${pet.name} 🐾</h3>
         <p class="text-sm mb-3 text-white">${pet.description || 'Una mascota adorable esperando un hogar.'}</p>
-        <button data-pet-name="${pet.name}" class="adopt-button px-4 py-2 rounded-full bg-primary hover:bg-secondary text-white">Adoptar 💜</button>
+        ${adoptButtonHTML}
       </div>
-    </div>
-  `).join('');
+    </div>`;
+  }).join('');
 
   // Actualizar la lista de tarjetas para que los filtros funcionen
   cards = document.querySelectorAll(".bento-card");
