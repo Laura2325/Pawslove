@@ -184,9 +184,21 @@
         </button>
 
         <!-- Avatar del usuario -->
-        <div
-          class="h-10 w-10 bg-gradient-to-br from-primary to-secondary rounded-full flex items-center justify-center">
-          <span class="text-white font-bold text-sm">U</span>
+        <!-- Iconos y menú móvil -->
+        <div class="flex items-center space-x-4">
+          <!-- Icono usuario -->
+          <a href="../login.html"
+            class="h-10 w-10 rounded-full overflow-hidden bg-gradient-to-br from-primary to-secondary flex items-center justify-center cursor-pointer"
+            aria-label="Ir a inicio de sesión" title="Inicio de Sesión">
+            <img src="../assets/img/nosotros/love.jpg" alt="Icono de usuario" class="object-cover h-full w-full" />
+          </a>
+
+          <!-- Menú mobile toggle -->
+          <button id="menu-toggle" class="md:hidden text-dark focus:outline-none">
+            <svg id="menu-icon" class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+            </svg>
+          </button>
         </div>
       </div>
 
