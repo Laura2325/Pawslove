@@ -1,3 +1,4 @@
+import {metodosMascotas} from "./manejoLocalStorage";
 document.addEventListener("DOMContentLoaded", () => {
   const petForm = document.getElementById("petForm");
   const petIdField = document.getElementById("petId");
@@ -21,7 +22,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Renderizar la lista de mascotas en admin
   function renderMascotas() {
-    const mascotas = obtenerMascotas();
+    const mascotas = metodosMascotas.obtenerMascotas();
     petListAdmin.innerHTML = "";
 
     if (mascotas.length === 0) {
