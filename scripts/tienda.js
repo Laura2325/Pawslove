@@ -79,7 +79,7 @@ function updateCartUI() {
     div.className = 'flex items-center mb-4 border-b border-gray-200 pb-4';
     div.innerHTML = `
             <div class="w-16 h-16 bg-gray-200 rounded mr-4 flex-shrink-0 flex items-center justify-center">
-              <span class="text-xs text-gray-500">IMG</span>
+              <img src="${item.image}" alt="${item.name}" class="object-cover h-10 w-10 rounded">
             </div>
             <div class="flex-1 min-w-0">
               <h4 class="font-semibold text-dark truncate">${item.name}</h4>
