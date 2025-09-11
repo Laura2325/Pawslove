@@ -1,33 +1,19 @@
 import { alertasRegistro } from "./sweetalert2.min.js";
+import { metodosUsuarios } from "./manejoLocalStorage.js";
+import { metodosFechaHora } from "./utilidades.js";
 
 document.addEventListener('DOMContentLoaded', () => {
 
-    const USERS_STORAGE_KEY = 'pawsloveUsers';
-    const nombreUsuario = document.getElementById('nombreRegistro');
-    const correo = document.getElementById('emailRegistro');
-    const contraseña = document.getElementById('passwordRegistro');
-    const confirmarContraseña = document.getElementById('confirmarPassword');
-    const btnRegistrarse = document.getElementById('btnRegistrarse');
-    // const passwordLengthError = document.getElementById('passwordLengthError');
-    // const passwordMatchError = document.getElementById('passwordMatchError');
+    const registroForm = document.getElementById('registroForm');
+    if (!registroForm) return;
 
-    // Función para obtener los usuarios existentes del localStorage
-    function obtenerUsuarios() {
-        const usuariosJSON = localStorage.getItem(USERS_STORAGE_KEY);
-        try {
-            return usuariosJSON ? JSON.parse(usuariosJSON) : [];
-        } catch (e) {
-            console.error("Error al parsear usuarios de localStorage", e);
-            return [];
-        }
-    }
-
-    function guardarUsuarios(usuarios) {
-        localStorage.setItem(USERS_STORAGE_KEY, JSON.stringify(usuarios));
-    }   
-
-    btnRegistrarse.addEventListener('click', (e) => {
+    registroForm.addEventListener('submit', (e) => {
         e.preventDefault();
+
+        const nombreUsuario = document.getElementById('nombreRegistro');
+        const correo = document.getElementById('emailRegistro');
+        const contraseña = document.getElementById('passwordRegistro');
+        const confirmarContraseña = document.getElementById('confirmarPassword');
 
         if (!nombreUsuario.value.trim() || !correo.value.trim() || !contraseña.value.trim()) {
             alertasRegistro.camposIncompletos();
@@ -62,24 +48,25 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
-        const usuarios = obtenerUsuarios();
-        if (usuarios.some(user => user.correo === correo.value)) {
-            alertasRegistro.usuarioExistente();
-            return;
-        }
         const usuario = {
             nombre: nombreUsuario.value.trim(),
             correo: correo.value.trim(),
             contraseña: contraseña.value,
-            tipo: 'Cliente'
+            tipo: 'Cliente',
+            fechaRegistro: metodosFechaHora.obtenerFechaActual(),
+            horaRegistro: metodosFechaHora.obtenerHoraActual12Horas()
         };
 
-        usuarios.push(usuario);
-        guardarUsuarios(usuarios);
+        if (!metodosUsuarios.agregarUsuario(usuario)) {
+            alertasRegistro.usuarioExistente();
+            return;
+        }
 
-        alertasRegistro.usuarioRegistrado();
-        const btnClose = document.getElementById('closeRegister');
-        btnClose.click();
+        // Mostrar la alerta y esperar a que termine para cambiar de vista
+        alertasRegistro.usuarioRegistrado().then(() => {
+            const btnClose = document.getElementById('closeRegister');
+            btnClose.click(); // Vuelve a la vista de login de forma controlada
+        });
     });
 
 });

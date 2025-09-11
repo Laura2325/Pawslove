@@ -1,0 +1,52 @@
+// Datos de ejemplo (en un caso real, estos vendrían de una base de datos)
+let usersData = [
+    {
+        id: 1,
+        nombre: "María Alejandra González",
+        email: "maria.gonzalez@email.com",
+        telefono: "+57 312 345 6789",
+        documento: "10.234.567 (C.C.)",
+        fechaNacimiento: "15/08/1985",
+        direccion: "Calle 123 # 45 - 67",
+        ciudad: "Medellín",
+        ocupacion: "Ingeniera",
+        ingresos: "3 a 5 SMMLV",
+        tipoVivienda: "Apartamento Propio",
+        permisoMascota: "Sí",
+        espacioExterior: "Sí (Balcón)",
+        espacioSeguro: "Sí",
+        experiencia: "Sí",
+        modalidad: "Mixto",
+        espacioMascota: "Interior de la casa",
+        tiempo: "4 a 6 horas",
+        fechaSolicitud: "15/05/2023",
+        horaSolicitud: "10:24 AM",
+        estado: "Pendiente",
+        iniciales: "MA"
+    },
+    {
+        id: 2,
+        nombre: "Carlos Andrés Rodríguez",
+        email: "carlos.rodriguez@email.com",
+        telefono: "+57 320 987 6543",
+        documento: "98.765.432 (C.C.)",
+        fechaNacimiento: "22/11/1990",
+        direccion: "Carrera 56 # 78 - 90",
+        ciudad: "Bogotá",
+        ocupacion: "Diseñador",
+        ingresos: "3 a 5 SMMLV",
+        tipoVivienda: "Apartamento Alquilado",
+        permisoMascota: "Sí",
+        espacioExterior: "No",
+        espacioSeguro: "Sí",
+        experiencia: "Sí",
+        modalidad: "Remoto",
+        espacioMascota: "Interior de la casa",
+        tiempo: "Más de 6 horas",
+        fechaSolicitud: "14/05/2023",
+        horaSolicitud: "03:45 PM",
+        estado: "Aprobado",
+        iniciales: "CR"
+    }
+];
+export { usersData };

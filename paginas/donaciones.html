@@ -148,7 +148,7 @@
         </div>
 
         <!-- Iconos derecha -->
-        <div class="flex items-center space-x-4 ml-auto">
+        <div id="imagenUsuario" class="flex items-center space-x-4 ml-auto">
           <div class="h-10 w-10 bg-gradient-to-br from-primary to-secondary rounded-full flex items-center justify-center">
             <span class="text-white font-bold text-sm">U</span>
           </div>
@@ -855,6 +855,11 @@
 
         console.log('Página de donaciones cargada correctamente');
       });
+
+      const ingresoUsuario = document.getElementById('imagenUsuario');
+      ingresoUsuario.addEventListener('click', ()=>{
+        window.location.href = '../login.html';
+      });      
     </script>
   </body>
 </html>
