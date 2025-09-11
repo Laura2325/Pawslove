@@ -1,13 +1,11 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>🐾 Gestión de Productos - Pawslove</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <script>
     tailwind.config = {
       theme: {
@@ -30,22 +28,12 @@
     }
   </script>
   <style>
-    body {
-      background-color: #f5f7fa;
-      background-image:
-        radial-gradient(#d0d7de 1px, transparent 1px),
-        radial-gradient(#d0d7de 1px, transparent 1px);
-      background-size: 40px 40px;
-      background-position: 0 0, 20px 20px;
-    }
-
     .sidebar-glass {
       background: rgba(108, 64, 209, 0.85);
       backdrop-filter: blur(12px);
       -webkit-backdrop-filter: blur(12px);
       box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.2);
     }
-
     body {
       background-color: #f5f7fa;
       background-image: radial-gradient(#d0d7de 1px, transparent 1px),
@@ -55,41 +43,41 @@
     }
   </style>
 </head>
-
 <body class="min-h-screen font-sans flex">
 
-  <!-- Sidebar -->
-  <aside id="sidebar"
-    class="sidebar-glass font-fredoka text-light w-64 space-y-6 py-7 px-2 absolute inset-y-0 left-0 transform -translate-x-full md:relative md:translate-x-0 transition duration-300 ease-in-out z-10 bg-dark/80 backdrop-blur-xl border-r border-white/10 rounded-r-custom">
+    <aside id="sidebar"
+        class="sidebar-glass font-fredoka text-light w-64 space-y-6 py-7 px-2 absolute inset-y-0 left-0 transform -translate-x-full md:relative md:translate-x-0 transition duration-300 ease-in-out z-10 bg-dark/80 backdrop-blur-xl border-r border-white/10 rounded-r-custom">
 
-    <!-- Logo y título del panel de administración -->
-    <div class="flex items-center justify-center mb-6">
-      <img src="../assets/img/marca/Logo_2.svg" alt="Logo" class="h-12">
-    </div>
+        <!-- Logo y título del panel de administración -->
+        <div class="flex items-center justify-center mb-6">
+            <img src="../assets/img/marca/Logo_2.svg" alt="Logo" class="h-12">
+        </div>
 
-    <!-- Menú de navegación principal -->
-    <nav class="space-y-2">
-      <!-- Enlace activo (Inicio) -->
-      <a href="../paginas_admin/admin.html"
-        class="py-3 px-4 rounded-custom flex items-center space-x-3 hover:bg-primary/20 transition-all duration-200">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-            d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
-        </svg>
-        <span>Inicio</span>
-      </a>
+        <!-- Menú de navegación principal -->
+        <nav class="space-y-2">
+            <!-- Enlace activo (Inicio) -->
+            <a href="../paginas_admin/admin.html"
+                class="py-3 px-4 rounded-custom flex items-center space-x-3 hover:bg-primary/20 transition-all duration-200">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
+                    stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+                </svg>
+                <span>Inicio</span>
+            </a>
 
-      <!-- Enlaces secundarios -->
-      <a href="../paginas_admin/productos.html"
-        class="py-3 px-4 rounded-custom flex items-center space-x-3 hover:bg-primary/20 transition-all duration-200">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-            d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4" />
-        </svg>
-        <span>Productos</span>
-      </a>
+            <!-- Enlaces secundarios -->
+            <a href="../paginas_admin/productos.html"
+                class="py-3 px-4 rounded-custom flex items-center space-x-3 hover:bg-primary/20 transition-all duration-200">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
+                    stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4" />
+                </svg>
+                <span>Productos</span>
+            </a>
 
-      <!-- <a href="#"
+            <!-- <a href="#"
             class="py-3 px-4 rounded-custom flex items-center space-x-3 hover:bg-primary/20 transition-all duration-200">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
                 stroke="currentColor">
@@ -101,7 +89,7 @@
             <span>Adopciones</span>
         </a> -->
 
-      <!-- <a href="#"
+            <!-- <a href="#"
             class="py-3 px-4 rounded-custom flex items-center space-x-3 hover:bg-primary/20 transition-all duration-200">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
                 stroke="currentColor">
@@ -111,7 +99,7 @@
             <span>Órdenes</span>
         </a> -->
 
-      <!-- <a href="#"
+            <!-- <a href="#"
             class="py-3 px-4 rounded-custom flex items-center space-x-3 hover:bg-primary/20 transition-all duration-200">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
                 stroke="currentColor">
@@ -121,27 +109,29 @@
             <span>Donaciones</span>
         </a> -->
 
-      <a href="../paginas_admin/usuarios.html"
-        class="py-3 px-4 rounded-custom flex items-center space-x-3 hover:bg-primary/20 transition-all duration-200">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-            d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
-        </svg>
-        <span>Usuarios</span>
-      </a>
+            <a href="../paginas_admin/usuarios.html"
+                class="py-3 px-4 rounded-custom flex items-center space-x-3 hover:bg-primary/20 transition-all duration-200">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
+                    stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
+                </svg>
+                <span>Usuarios</span>
+            </a>
 
-      <!-- Mascotas con ícono SVG -->
-      <a href="../paginas_admin/mascotas.html"
-        class="py-3 px-4 rounded-custom flex items-center space-x-3 hover:bg-primary/20 transition-all duration-200">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-            d="M4.5 9a2.5 2.5 0 115 0 2.5 2.5 0 01-5 0zm10 0a2.5 2.5 0 115 0 2.5 2.5 0 01-5 0zM6 16c0-1.657 2.686-3 6-3s6 1.343 6 3-2.686 3-6 3-6-1.343-6-3z" />
-        </svg>
-        <span>Mascotas</span>
-      </a>
+            <!-- Mascotas con ícono SVG -->
+            <a href="../paginas_admin/mascotas.html"
+                class="py-3 px-4 rounded-custom flex items-center space-x-3 hover:bg-primary/20 transition-all duration-200">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
+                    stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M4.5 9a2.5 2.5 0 115 0 2.5 2.5 0 01-5 0zm10 0a2.5 2.5 0 115 0 2.5 2.5 0 01-5 0zM6 16c0-1.657 2.686-3 6-3s6 1.343 6 3-2.686 3-6 3-6-1.343-6-3z" />
+                </svg>
+                <span>Mascotas</span>
+            </a>
 
-      <!-- Configuración con ícono SVG -->
-      <!-- <a href="#"
+            <!-- Configuración con ícono SVG -->
+            <!-- <a href="#"
             class="py-3 px-4 rounded-custom flex items-center space-x-3 hover:bg-primary/20 transition-all duration-200">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
                 stroke="currentColor">
@@ -150,35 +140,38 @@
             </svg>
             <span>Configuración</span>
         </a> -->
-    </nav>
+        </nav>
 
-    <!-- Footer de la barra lateral con información del administrador -->
-    <div class="absolute bottom-0 w-full left-0 p-4 border-t border-white/10">
-      <div class="flex items-center space-x-3">
-        <img class="h-10 w-10 rounded-full object-cover border-2 border-primary"
-          src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2'/%3E%3Ccircle cx='12' cy='7' r='4'/%3E%3C/svg%3E"
-          alt="Usuario" />
-        <div>
-          <p class="font-semibold">Admin User</p>
-          <p class="text-sm text-light/70">Administrador</p>
+        <!-- Footer de la barra lateral con información del administrador -->
+        <div class="absolute bottom-0 w-full left-0 p-4 border-t border-white/10">
+            <div class="flex items-center space-x-3">
+                <img class="h-10 w-10 rounded-full object-cover border-2 border-primary"
+                    src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2'/%3E%3Ccircle cx='12' cy='7' r='4'/%3E%3C/svg%3E"
+                    alt="Usuario" />
+                <div>
+                    <p class="font-semibold">Admin User</p>
+                    <p class="text-sm text-light/70">Administrador</p>
+                </div>
+            </div>
         </div>
-      </div>
     </div>
-  </aside>
-  <!-- Contenido principal -->
+</aside>
+
+
+  <!-- 🚀 Contenido principal -->
   <main class="flex-1 p-6">
 
     <!-- Botón para abrir modal -->
     <div class="flex justify-end mb-6">
       <button id="openModalBtn"
         class="bg-secondary text-white px-5 py-2 rounded-custom font-bold shadow-md hover:bg-primary transition flex items-center gap-2">
-        Agregar Producto
+        🐾 Agregar Producto
       </button>
     </div>
 
     <!-- Buscador -->
     <section class="mb-6">
-      <input type="text" id="search" placeholder="Buscar mascotas..."
+      <input type="text" id="search" placeholder="Buscar productos..."
         class="w-full p-3 border rounded-custom focus:ring-2 focus:ring-primary outline-none">
     </section>
 
@@ -221,38 +214,30 @@
 
         <!-- Categoría -->
         <div>
-          <label class="block text-sm font-semibold text-dark mb-1">Nombre</label>
-          <input type="text" id="name"
-            class="w-full rounded-custom border border-light px-4 py-2 bg-light focus:ring-2 focus:ring-secondary focus:outline-none"
-            required>
+          <label class="block text-sm font-semibold text-dark mb-1">Categoría</label>
+          <input type="text" id="category" placeholder="Ej: Accesorios"
+            class="w-full rounded-custom border border-light px-4 py-2 bg-light focus:ring-2 focus:ring-secondary focus:outline-none" />
         </div>
 
         <!-- Stock -->
         <div>
-          <label class="block text-sm font-semibold text-dark mb-1">Especie</label>
-          <select id="species"
-            class="w-full rounded-custom border border-light px-4 py-2 bg-light focus:ring-2 focus:ring-secondary focus:outline-none">
-            <option>Perro</option>
-            <option>Gato</option>
-          </select>
+          <label class="block text-sm font-semibold text-dark mb-1">Stock</label>
+          <input type="number" id="stock" min="0" placeholder="Ej: 12"
+            class="w-full rounded-custom border border-light px-4 py-2 bg-light focus:ring-2 focus:ring-secondary focus:outline-none" />
         </div>
 
         <!-- Precio -->
         <div>
-          <label class="block text-sm font-semibold text-dark mb-1">Edad</label>
-          <input type="text" id="age"
-            class="w-full rounded-custom border border-light px-4 py-2 bg-light focus:ring-2 focus:ring-secondary focus:outline-none">
+          <label class="block text-sm font-semibold text-dark mb-1">Precio</label>
+          <input type="number" id="price" min="0" step="100" placeholder="Ej: 25000"
+            class="w-full rounded-custom border border-light px-4 py-2 bg-light focus:ring-2 focus:ring-secondary focus:outline-none" />
         </div>
 
         <!-- Imagen -->
         <div>
-          <label class="block text-sm font-semibold text-dark mb-1">Tamaño</label>
-          <select id="size"
-            class="w-full rounded-custom border border-light px-4 py-2 bg-light focus:ring-2 focus:ring-secondary focus:outline-none">
-            <option>Pequeño</option>
-            <option>Mediano</option>
-            <option>Grande</option>
-          </select>
+          <label class="block text-sm font-semibold text-dark mb-1">Imagen del producto</label>
+          <input type="file" id="image" accept="image/*"
+            class="w-full rounded-custom border border-light px-4 py-2 bg-light focus:ring-2 focus:ring-secondary focus:outline-none" />
         </div>
 
         <!-- Estado -->
@@ -260,35 +245,23 @@
           <label class="block text-sm font-semibold text-dark mb-1">Estado</label>
           <select id="status"
             class="w-full rounded-custom border border-light px-4 py-2 bg-light focus:ring-2 focus:ring-secondary focus:outline-none">
-            <option>Disponible</option>
-            <option>Adoptado</option>
+            <option value="Activo">Activo</option>
+            <option value="Inactivo">Inactivo</option>
           </select>
         </div>
-        <div>
-          <label class="block text-sm font-semibold text-dark mb-1">Imagen</label>
-          <input type="file" id="image" accept="image/*"
-            class="w-full rounded-custom border border-light px-4 py-2 bg-light focus:ring-2 focus:ring-secondary focus:outline-none">
+
+        <!-- Botón -->
+        <div class="pt-4">
+          <button type="submit"
+            class="w-full rounded-custom bg-secondary px-4 py-3 text-white font-bold hover:bg-primary transition flex items-center justify-center gap-2 shadow-md">
+            🐾 Guardar Producto
+          </button>
         </div>
-        <div>
-          <label class="block text-sm font-semibold text-dark mb-1">Descripción</label>
-          <textarea id="description" rows="3"
-            class="w-full rounded-custom border border-light px-4 py-2 bg-light focus:ring-2 focus:ring-secondary focus:outline-none"></textarea>
-        </div>
-        <button type="submit"
-          class="w-full rounded-custom bg-secondary px-4 py-3 text-white font-bold hover:bg-primary transition flex items-center justify-center gap-2 shadow-md">
-          🐾 Guardar Mascota
-        </button>
       </form>
     </div>
   </div>
 
-  <script src="../scripts/mascotas.js"></script>
+  <script src="../scripts/scriptproductos.js"></script>
 </body>
-
 </html>
 
-
-<script src="../scripts/scriptproductos.js"></script>
-</body>
-
-</html>
