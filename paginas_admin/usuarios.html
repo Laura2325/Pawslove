@@ -67,7 +67,7 @@
             transform: translateX(0);
         }
         
-        @media (min-width: 1024px) {
+        /* @media (min-width: 1024px) {
             .sidebar {
                 transform: translateX(0);
             }
@@ -75,7 +75,7 @@
             .main-content {
                 margin-left: 250px;
             }
-        }
+        } */
         
         .overlay {
             display: none;
@@ -88,7 +88,123 @@
         }
     </style>
 </head>
-<body class="bg-gray-100 min-h-screen flex">   
+<body class="bg-gray-100 min-h-screen flex">
+    
+        <!-- Barra lateral de navegación -->
+    <aside id="sidebar"
+    class="sidebar-glass font-fredoka text-light w-64 space-y-6 py-7 px-2 absolute inset-y-0 left-0 transform -translate-x-full md:relative md:translate-x-0 transition duration-300 ease-in-out z-10 bg-dark/80 backdrop-blur-xl border-r border-white/10 rounded-r-custom">
+
+    <!-- Logo y título del panel de administración -->
+    <div class="flex items-center justify-center mb-6">
+        <img src="../assets/img/marca/Logo_2.svg" alt="Logo" class="h-12">
+    </div>
+
+    <!-- Menú de navegación principal -->
+    <nav class="space-y-2">
+        <!-- Enlace activo (Inicio) -->
+        <a href="../paginas_admin/admin.html"
+            class="py-3 px-4 rounded-custom flex items-center space-x-3 hover:bg-primary/20 transition-all duration-200">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
+                stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+            </svg>
+            <span>Inicio</span>
+        </a>
+
+        <!-- Enlaces secundarios -->
+        <a href="../paginas_admin/productos.html"
+            class="py-3 px-4 rounded-custom flex items-center space-x-3 hover:bg-primary/20 transition-all duration-200">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
+                stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4" />
+            </svg>
+            <span>Productos</span>
+        </a>
+
+        <!-- <a href="#"
+            class="py-3 px-4 rounded-custom flex items-center space-x-3 hover:bg-primary/20 transition-all duration-200">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
+                stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+            </svg>
+            <span>Adopciones</span>
+        </a> -->
+
+        <!-- <a href="#"
+            class="py-3 px-4 rounded-custom flex items-center space-x-3 hover:bg-primary/20 transition-all duration-200">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
+                stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+            </svg>
+            <span>Órdenes</span>
+        </a> -->
+
+        <!-- <a href="#"
+            class="py-3 px-4 rounded-custom flex items-center space-x-3 hover:bg-primary/20 transition-all duration-200">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
+                stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            <span>Donaciones</span>
+        </a> -->
+
+        <a href="../paginas_admin/usuarios.html"
+            class="py-3 px-4 rounded-custom flex items-center space-x-3 hover:bg-primary/20 transition-all duration-200">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
+                stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
+            </svg>
+            <span>Usuarios</span>
+        </a>
+
+        <!-- Mascotas con ícono SVG -->
+        <a href="../paginas_admin/mascotas.html"
+            class="py-3 px-4 rounded-custom flex items-center space-x-3 hover:bg-primary/20 transition-all duration-200">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
+                stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M4.5 9a2.5 2.5 0 115 0 2.5 2.5 0 01-5 0zm10 0a2.5 2.5 0 115 0 2.5 2.5 0 01-5 0zM6 16c0-1.657 2.686-3 6-3s6 1.343 6 3-2.686 3-6 3-6-1.343-6-3z" />
+            </svg>
+            <span>Mascotas</span>
+        </a>
+
+        <!-- Configuración con ícono SVG -->
+        <!-- <a href="#"
+            class="py-3 px-4 rounded-custom flex items-center space-x-3 hover:bg-primary/20 transition-all duration-200">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
+                stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l.7 2.146a1 1 0 00.95.69h2.262c.969 0 1.371 1.24.588 1.81l-1.833 1.334a1 1 0 00-.364 1.118l.7 2.146c.3.921-.755 1.688-1.54 1.118L12 11.347l-1.413 1.042c-.785.57-1.84-.197-1.54-1.118l.7-2.146a1 1 0 00-.364-1.118L7.55 7.573c-.783-.57-.381-1.81.588-1.81h2.262a1 1 0 00.95-.69l.7-2.146z" />
+            </svg>
+            <span>Configuración</span>
+        </a> -->
+    </nav>
+
+    <!-- Footer de la barra lateral con información del administrador -->
+    <div class="absolute bottom-0 w-full left-0 p-4 border-t border-white/10">
+        <div class="flex items-center space-x-3">
+            <img class="h-10 w-10 rounded-full object-cover border-2 border-primary"
+                src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2'/%3E%3Ccircle cx='12' cy='7' r='4'/%3E%3C/svg%3E"
+                alt="Usuario" />
+            <div>
+                <p class="font-semibold">Admin User</p>
+                <p class="text-sm text-light/70">Administrador</p>
+            </div>
+        </div>
+    </div>
+</aside>
+
+    
+
+
     <!-- Overlay para móvil -->
     <div class="overlay fixed inset-0 bg-black bg-opacity-50 z-40" id="overlay"></div>
 
@@ -106,7 +222,7 @@
         </header>
 
         <!-- Contenido principal -->
-        <main class="container mx-auto px-4 py-8">
+        <main class="container px-4 py-8">
             <div class="flex justify-between items-center mb-8">
                 <h2 class="text-3xl font-fredoka text-primary">Gestión de Usuarios</h2>
                 <div class="flex space-x-4">
