@@ -25,8 +25,35 @@ function filterCards() {
 
 // Función de adopción
 function adoptarMascota(nombre) {
+  // Buscar la tarjeta que corresponde al nombre
+  const card = Array.from(document.querySelectorAll(".bento-card"))
+                    .find(c => c.querySelector("h3").textContent.trim() === nombre);
+
+  // Obtener info de la tarjeta
+  const especie = card.dataset.especie || "No definida";
+  const edad = card.dataset.edad || "No definida";
+  const descripcion = card.querySelector("p") 
+                      ? card.querySelector("p").textContent.trim() 
+                      : "Sin descripción";
+
+  // Obtener mascotas guardadas
+  let mascotas = JSON.parse(localStorage.getItem("mascotas")) || [];
+
+  // Agregar mascota con la misma estructura que usa adopciones.js
+  mascotas.push({
+    id: Date.now(),
+    nombre,
+    especie,
+    edad,
+    descripcion
+  });
+
+  // Guardar en localStorage
+  localStorage.setItem("mascotas", JSON.stringify(mascotas));
+
   alert(`¡Has seleccionado adoptar a ${nombre}!`);
 }
+
 
 // Toggle menú móvil
 const menuToggle = document.getElementById('menu-toggle');
