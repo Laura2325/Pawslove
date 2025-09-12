@@ -1,19 +1,110 @@
 <!DOCTYPE html>
 <html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Pawslove Foundation | Donaciones</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script type="module" src="../tailwind.config.js"></script>
+    <style>
+      body {
+        background-color: #f5f7fa;
+        background-image: radial-gradient(#d0d7de 1px, transparent 1px),
+          radial-gradient(#d0d7de 1px, transparent 1px);
+        background-size: 40px 40px;
+        background-position: 0 0, 20px 20px;
+      }
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Pawslove Foundation | Donaciones</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap" rel="stylesheet" />
+      .donation-card {
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+        border-top: 4px solid;
+      }
 
-  <script type="module" src="/Pawslove/tailwind.config.js"></script>
+      .donation-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+      }
 
+      .gradient-bg {
+        background: linear-gradient(135deg, #6c40d1 0%, #fc6dab 100%);
+      }
 
-</head>
+      .progress-bar {
+        transition: width 1s ease-in-out;
+      }
+
+      .floating {
+        animation: float 3s ease-in-out infinite;
+      }
+
+      @keyframes float {
+        0%, 100% { transform: translateY(0px); }
+        50% { transform: translateY(-10px); }
+      }
+
+      .pulse-animation {
+        animation: pulse 2s infinite;
+      }
+
+      @keyframes pulse {
+        0%, 100% { opacity: 1; }
+        50% { opacity: 0.7; }
+      }
+
+      .modal-enter {
+        opacity: 0;
+        transform: scale(0.9) translateY(20px);
+        transition: all 0.3s ease;
+      }
+
+      .modal-enter-active {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+      }
+
+      /* Mobile menu styles */
+      .mobile-menu-transition {
+        transition: all 0.3s ease-in-out;
+        overflow: hidden;
+      }
+
+      .mobile-menu-open {
+        max-height: 300px;
+        opacity: 1;
+      }
+
+      .mobile-menu-closed {
+        max-height: 0;
+        opacity: 0;
+      }
+      
+      .impact-item {
+        display: flex;
+        align-items: center;
+        margin-bottom: 1rem;
+      }
+      
+      .impact-icon {
+        background: rgba(108, 64, 209, 0.1);
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-right: 15px;
+        flex-shrink: 0;
+      }
+
+    </style>
+  </head>
 
 <body class="min-h-screen font-sans">
 

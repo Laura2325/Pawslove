@@ -6,27 +6,8 @@
   <title>🐾 Gestión de Productos - Pawslove</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap" rel="stylesheet">
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            primary: '#6c40d1',
-            secondary: '#fc6dab',
-            accent: '#17b890',
-            light: '#ecf0f1',
-            dark: '#34252f'
-          },
-          fontFamily: {
-            fredoka: ['Fredoka One', 'cursive']
-          },
-          borderRadius: {
-            'custom': '24px'
-          }
-        }
-      }
-    }
-  </script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <script type="module" src="../tailwind.config.js"></script>
   <style>
     .sidebar-glass {
       background: rgba(108, 64, 209, 0.85);
@@ -161,22 +142,20 @@
   <!-- 🚀 Contenido principal -->
   <main class="flex-1 p-6">
 
-    <!-- Botón para abrir modal -->
-    <div class="flex justify-end mb-6">
-      <button id="openModalBtn"
-        class="bg-secondary text-white px-5 py-2 rounded-custom font-bold shadow-md hover:bg-primary transition flex items-center gap-2">
-        🐾 Agregar Producto
-      </button>
-    </div>
 
     <!-- Buscador -->
-    <section class="mb-6">
+    <section class="mb-6 flex items-center gap-4">
       <input type="text" id="search" placeholder="Buscar productos..."
-        class="w-full p-3 border rounded-custom focus:ring-2 focus:ring-primary outline-none">
+        class="flex-1 p-3 border rounded-custom focus:ring-2 focus:ring-primary outline-none">
+      <!-- Botón para abrir modal -->
+      <button id="openModalBtn"
+        class="bg-secondary text-white px-5 py-3 rounded-custom font-bold shadow-md hover:bg-primary transition flex items-center gap-2 whitespace-nowrap">
+        🐾 Agregar Producto
+      </button>
     </section>
 
     <!-- Tabla de productos -->
-    <section class="overflow-x-auto">
+    <section class="overflow-x-auto rounded-custom">
       <table class="w-full bg-white rounded-custom shadow">
         <thead class="bg-primary text-white">
           <tr>
@@ -262,4 +241,5 @@
   </div>
   <script src="../scripts/scriptproductos.js"></script>
 </body>
+
 </html>

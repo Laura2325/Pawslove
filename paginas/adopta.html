@@ -1,21 +1,83 @@
 <!DOCTYPE html>
 <html lang="es">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Pawslove Foundation | Adopciones</title>
 
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pawslove Foundation | Adopciones</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap" rel="stylesheet">
 
-    <link rel="stylesheet" href="../styles/adopta.css" />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap"
-      rel="stylesheet"
-    />
+  <script type="module" src="../tailwind.config.js"></script>
 
-    <script type="module" src="/Pawslove/tailwind.config.js"></script>
-  </head>
+  <style>
+    body {
+      background-color: #ecf0f1;
+    }
+
+    .bento-card {
+      transition: all 0.4s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .bento-card:hover {
+      transform: translateY(-8px) scale(1.02);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+    }
+
+    .overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.55);
+      backdrop-filter: blur(6px);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transition: opacity 0.4s ease;
+      padding: 1rem;
+      text-align: center;
+    }
+
+    .bento-card:hover .overlay {
+      opacity: 1;
+    }
+
+    .chip {
+      transition: all 0.2s ease-in-out;
+    }
+
+    .chip:hover {
+      transform: scale(1.05);
+    }
+
+    .chip.active {
+      background: linear-gradient(to right, #6c40d1, #fc6dab);
+      color: white !important;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    }
+
+     /* Mobile menu styles */
+        .mobile-menu-transition {
+            transition: all 0.3s ease-in-out;
+            overflow: hidden;
+        }
+
+        .mobile-menu-open {
+            max-height: 300px;
+            opacity: 1;
+        }
+
+        .mobile-menu-closed {
+            max-height: 0;
+            opacity: 0;
+        }
+
+  </style>
+</head>
 
   <body class="font-sans text-dark relative overflow-x-hidden">
     <!-- Barra de navegación -->
@@ -295,39 +357,19 @@
       <!-- Las tarjetas de mascotas se generarán aquí dinámicamente -->
     </section>
 
-    <footer class="bg-light text-dark">
-      <div
-        class="max-w-7xl mx-auto px-6 py-10 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8"
-      >
-        <!-- Logo + Redes -->
-        <div class="flex flex-col items-start space-y-4">
-          <img
-            src="../assets/img/marca/Logo.svg"
-            alt="Logo PawsLove"
-            class="w-36"
-          />
-          <p class="font-bold">Redes Sociales</p>
-          <div class="flex space-x-4">
-            <a href="#"
-              ><img
-                src="../assets/iconos/instagram.jpg"
-                alt="Instagram"
-                class="w-6 h-6"
-            /></a>
-            <a href="#"
-              ><img
-                src="../assets/iconos/tiktok.svg"
-                alt="TikTok"
-                class="w-6 h-6"
-            /></a>
-            <a href="#"
-              ><img
-                src="../assets/iconos/facebook.svg"
-                alt="Facebook"
-                class="w-6 h-6"
-            /></a>
-          </div>
-        </div>
+     <footer class="bg-light text-dark">
+        <div class="max-w-7xl mx-auto px-6 py-10 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
+
+            <!-- Logo + Redes -->
+            <div class="flex flex-col items-start space-y-4">
+                <img loading="lazy" src="../assets/img/marca/Logo.svg" alt="Logo PawsLove" class="w-36">
+                <p class="font-bold">Redes Sociales</p>
+                <div class="flex space-x-4">
+                    <a href="#"><img loading="lazy" src="../assets/iconos/instagram.jpg" alt="Instagram" class="w-6 h-6"></a>
+                    <a href="#"><img loading="lazy" src="../assets/iconos/tiktok.svg" alt="TikTok" class="w-6 h-6"></a>
+                    <a href="#"><img loading="lazy" src="../assets/iconos/facebook.svg" alt="Facebook" class="w-6 h-6"></a>
+                </div>
+            </div>
 
         <!-- Contacto -->
         <div class="flex flex-col items-start">

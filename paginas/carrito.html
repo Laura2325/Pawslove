@@ -1,20 +1,66 @@
 <!DOCTYPE html>
 <html lang="es">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Pawslove Foundation | Carrito</title>
 
-    <script src="https://cdn.tailwindcss.com"></script>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Pawslove Foundation | Carrito</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap" rel="stylesheet" />
+  <script type="module" src="../tailwind.config.js"></script>
+  <style>
+    body {
+      background-color: #f5f7fa;
+      background-image: radial-gradient(#d0d7de 1px, transparent 1px),
+        radial-gradient(#d0d7de 1px, transparent 1px);
+      background-size: 40px 40px;
+      background-position: 0 0, 20px 20px;
+      font-family: "Fredoka One", cursive, sans-serif;
+    }
 
-    <link rel="stylesheet" href="../styles/carrito-compras.css" />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap"
-      rel="stylesheet"
-    />
+    .product-card {
+      transition: all 0.3s ease;
+    }
 
-    <script type="module" src="/Pawslove/tailwind.config.js"></script>
-  </head>
+    .product-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Estilos para tabla responsive */
+    @media (max-width: 768px) {
+      .table-responsive {
+        display: none;
+      }
+
+      .card-responsive {
+        display: block;
+      }
+    }
+
+    @media (min-width: 769px) {
+      .table-responsive {
+        display: table;
+      }
+
+      .card-responsive {
+        display: none;
+      }
+    }
+
+    /* Animaciones para modales */
+    .modal-enter {
+      opacity: 0;
+      transform: scale(0.9);
+      transition: all 0.3s ease;
+    }
+
+    .modal-enter-active {
+      opacity: 1;
+      transform: scale(1);
+    }
+  </style>
+</head>
 
   <body class="min-h-screen flex flex-col">
     
