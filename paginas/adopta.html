@@ -1,312 +1,405 @@
 <!DOCTYPE html>
 <html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pawslove Foundation | Adopciones</title>
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Pawslove Foundation | Adopciones</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            primary: '#6c40d1',
-            secondary: '#fc6dab',
-            accent: '#17b890',
-            light: '#ecf0f1',
-            dark: '#34252f'
-          },
-          fontFamily: {
-            fredoka: ['Fredoka One', 'cursive']
-          },
-          borderRadius: {
-            'custom': '24px'
-          },
-          keyframes: {
-            fadeInUp: {
-              "0%": { opacity: "0", transform: "translateY(40px)" },
-              "100%": { opacity: "1", transform: "translateY(0)" }
-            }
-          },
-          animation: {
-            fadeInUp: "fadeInUp 0.8s ease-out forwards"
-          }
-        }
-      }
-    }
-  </script>
+    <link rel="stylesheet" href="../styles/adopta.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap"
+      rel="stylesheet"
+    />
 
-  <style>
-    body {
-      background-color: #ecf0f1;
-    }
+    <script type="module" src="/Pawslove/tailwind.config.js"></script>
+  </head>
 
-    .bento-card {
-      transition: all 0.4s ease;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .bento-card:hover {
-      transform: translateY(-8px) scale(1.02);
-      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
-    }
-
-    .overlay {
-      position: absolute;
-      inset: 0;
-      background: rgba(0, 0, 0, 0.55);
-      backdrop-filter: blur(6px);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      opacity: 0;
-      transition: opacity 0.4s ease;
-      padding: 1rem;
-      text-align: center;
-    }
-
-    .bento-card:hover .overlay {
-      opacity: 1;
-    }
-
-    .chip {
-      transition: all 0.2s ease-in-out;
-    }
-
-    .chip:hover {
-      transform: scale(1.05);
-    }
-
-    .chip.active {
-      background: linear-gradient(to right, #6c40d1, #fc6dab);
-      color: white !important;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-    }
-
-     /* Mobile menu styles */
-        .mobile-menu-transition {
-            transition: all 0.3s ease-in-out;
-            overflow: hidden;
-        }
-
-        .mobile-menu-open {
-            max-height: 300px;
-            opacity: 1;
-        }
-
-        .mobile-menu-closed {
-            max-height: 0;
-            opacity: 0;
-        }
-
-  </style>
-</head>
-
-<body class="font-sans text-dark relative overflow-x-hidden">
-
+  <body class="font-sans text-dark relative overflow-x-hidden">
     <!-- Barra de navegación -->
     <div class="flex justify-center">
-        <nav
-            class="fixed top-4 left-1/2 transform -translate-x-1/2 w-[90%] md:w-[60%] bg-white border border-gray-200 shadow-md rounded-full z-50 transition-all duration-300 flex items-center justify-between px-4 py-3">
+      <nav
+        class="fixed top-4 left-1/2 transform -translate-x-1/2 w-[90%] md:w-[60%] bg-white border border-gray-200 shadow-md rounded-full z-50 transition-all duration-300 flex items-center justify-between px-4 py-3"
+      >
+        <!-- Logo -->
+        <div class="flex items-center space-x-2">
+          <div class="h-10 w-10 flex items-center justify-center">
+            <img src="../assets/img/marca/Isotipo.svg" alt="logo" />
+          </div>
+        </div>
 
-            <!-- Logo -->
-            <div class="flex items-center space-x-2">
-                <div class="h-10 w-10 flex items-center justify-center">
-                    <img src="../assets/img/marca/Isotipo.svg" alt="logo">
-                </div>
+        <!-- Menú desktop -->
+        <div
+          class="hidden md:flex items-center space-x-4 flex-1 justify-center text-gray-800 font-medium text-lg font-sans"
+        >
+          <a href="../index.html" class="hover:text-primary transition"
+            >Inicio</a
+          >
+          <a href="../paginas/adopta.html" class="hover:text-primary transition"
+            >Adopta</a
+          >
+          <a
+            href="../paginas/nosotros.html"
+            class="hover:text-primary transition"
+            >Nosotros</a
+          >
+          <a
+            href="../paginas/donaciones.html"
+            class="bg-secondary text-white px-4 py-2 rounded-full hover:bg-opacity-90 transition"
+            >Donar</a
+          >
+          <a
+            href="../paginas/tienda.html"
+            class="bg-accent text-white px-4 py-2 rounded-full hover:bg-opacity-90 transition"
+            >Tienda</a
+          >
+          <a
+            href="../paginas/contacto.html"
+            class="hover:text-primary transition"
+            >Contacto</a
+          >
+        </div>
+
+        <!-- Iconos y menú móvil -->
+        <div class="flex items-center space-x-4">
+          <!-- Icono usuario -->
+          <a
+            href="../login.html"
+            class="h-10 w-10 rounded-full overflow-hidden bg-gradient-to-br from-primary to-secondary flex items-center justify-center cursor-pointer"
+            aria-label="Ir a inicio de sesión"
+            title="Inicio de Sesión"
+          >
+            <img
+              src="../assets/img/nosotros/love.jpg"
+              alt="Icono de usuario"
+              class="object-cover h-full w-full"
+            />
+          </a>
+
+          <!-- Menú mobile toggle -->
+          <button
+            id="menu-toggle"
+            class="md:hidden text-dark focus:outline-none"
+          >
+            <svg
+              id="menu-icon"
+              class="w-7 h-7"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M4 6h16M4 12h16M4 18h16"
+              ></path>
+            </svg>
+          </button>
+        </div>
+
+        <!-- Mobile menu -->
+        <div
+          id="mobile-menu"
+          class="absolute mt-4 top-[60px] left-1/2 transform -translate-x-1/2 w-[90%] mobile-menu-transition mobile-menu-closed bg-white rounded-2xl shadow-md z-40 md:hidden"
+        >
+          <div
+            class="px-6 py-4 flex flex-col space-y-3 text-center font-medium text-gray-800"
+          >
+            <a
+              href="../index.html"
+              class="block py-2 hover:text-primary transition"
+              >Inicio</a
+            >
+            <a
+              href="../paginas/adopta.html"
+              class="block py-2 hover:text-primary transition"
+              >Adopta</a
+            >
+            <a
+              href="../paginas/nosotros.html"
+              class="block py-2 hover:text-primary transition"
+              >Nosotros</a
+            >
+            <a
+              href="./paginas/contacto.html"
+              class="block py-2 hover:text-primary transition"
+              >Contacto</a
+            >
+            <div class="flex items-center justify-around mt-4 space-x-2">
+              <a
+                href="../paginas/donaciones.html"
+                class="bg-secondary text-white px-4 py-2 rounded-full hover:bg-opacity-90 transition flex-1 text-center"
+                >Donar</a
+              >
+              <a
+                href="../paginas/tienda.html"
+                class="bg-accent text-white px-4 py-2 rounded-full hover:bg-opacity-90 transition flex-1 text-center"
+                >Tienda</a
+              >
             </div>
-
-            <!-- Menú desktop -->
-            <div class="hidden md:flex items-center space-x-4 flex-1 justify-center text-gray-800 font-medium text-lg font-sans">
-                <a href="../index.html" class="hover:text-primary transition">Inicio</a>
-                <a href="../paginas/adopta.html" class="hover:text-primary transition">Adopta</a>
-                <a href="../paginas/nosotros.html" class="hover:text-primary transition">Nosotros</a>
-                <a href="../paginas/donaciones.html"
-                    class="bg-secondary text-white px-4 py-2 rounded-full hover:bg-opacity-90 transition">Donar</a>
-                <a href="../paginas/tienda.html"
-                    class="bg-accent text-white px-4 py-2 rounded-full hover:bg-opacity-90 transition">Tienda</a>
-                <a href="../paginas/contacto.html" class="hover:text-primary transition">Contacto</a>
-            </div>
-
-            <!-- Iconos y menú móvil -->
-            <div class="flex items-center space-x-4">
-                <!-- Icono usuario -->
-                <a href="../login.html"
-                    class="h-10 w-10 rounded-full overflow-hidden bg-gradient-to-br from-primary to-secondary flex items-center justify-center cursor-pointer"
-                    aria-label="Ir a inicio de sesión" title="Inicio de Sesión">
-                    <img src="../assets/img/nosotros/love.jpg" alt="Icono de usuario" class="object-cover h-full w-full" />
-                </a>
-
-                <!-- Menú mobile toggle -->
-                <button id="menu-toggle" class="md:hidden text-dark focus:outline-none">
-                    <svg id="menu-icon" class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M4 6h16M4 12h16M4 18h16"></path>
-                    </svg>
-                </button>
-            </div>
-
-            <!-- Mobile menu -->
-            <div id="mobile-menu"
-                class="absolute mt-4 top-[60px] left-1/2 transform -translate-x-1/2 w-[90%] mobile-menu-transition mobile-menu-closed bg-white rounded-2xl shadow-md z-40 md:hidden">
-                <div class="px-6 py-4 flex flex-col space-y-3 text-center font-medium text-gray-800">
-                    <a href="../index.html" class="block py-2 hover:text-primary transition">Inicio</a>
-                    <a href="../paginas/adopta.html" class="block py-2 hover:text-primary transition">Adopta</a>
-                    <a href="../paginas/nosotros.html" class="block py-2 hover:text-primary transition">Nosotros</a>
-                    <a href="./paginas/contacto.html" class="block py-2 hover:text-primary transition">Contacto</a>
-                    <div class="flex items-center justify-around mt-4 space-x-2">
-                        <a href="../paginas/donaciones.html"
-                            class="bg-secondary text-white px-4 py-2 rounded-full hover:bg-opacity-90 transition flex-1 text-center">Donar</a>
-                        <a href="../paginas/tienda.html"
-                            class="bg-accent text-white px-4 py-2 rounded-full hover:bg-opacity-90 transition flex-1 text-center">Tienda</a>
-                    </div>
-                </div>
-            </div>
-        </nav>
+          </div>
+        </div>
+      </nav>
     </div>
 
-  <!-- BANNER -->
-  <section class="relative w-full h-[900px] sm:h-[800px] md:h-[700px] lg:h-[750px]">
-    <img src="../assets/img/Fondo/ADOPCIONES3.jpg" alt="Adopciones"
-      class="w-full h-full object-cover rounded-b-2xl shadow-md">
-    <div class="absolute inset-0 bg-gradient-to-t from-dark/70 to-transparent rounded-b-2xl"></div>
-    <div
-      class="absolute inset-0 flex flex-col justify-center items-center text-center px-4 sm:px-8 md:px-12 lg:px-16 xl:px-20">
-      <h1
-        class="font-extrabold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent font-fredoka leading-snug"
-        style="font-size: clamp(2.5rem, 5vw, 5rem);">
-        Encuentra a tu mejor amigo 🐾
-      </h1>
-      <p class="mt-4 text-white text-lg sm:text-xl md:text-2xl max-w-2xl">
-        Más de 30 mascotas esperan un hogar lleno de amor.
-      </p>
-      <a href="#petsList"
-        class="mt-6 px-6 py-3 rounded-custom bg-gradient-to-r from-primary to-secondary text-white font-bold shadow-lg hover:opacity-90">
-        Ver todas 🐶🐱
-      </a>
-    </div>
-  </section>
+    <!-- BANNER -->
+    <section
+      class="relative w-full h-[900px] sm:h-[800px] md:h-[700px] lg:h-[750px]"
+    >
+      <img
+        src="../assets/img/Fondo/ADOPCIONES3.jpg"
+        alt="Adopciones"
+        class="w-full h-full object-cover rounded-b-2xl shadow-md"
+      />
+      <div
+        class="absolute inset-0 bg-gradient-to-t from-dark/70 to-transparent rounded-b-2xl"
+      ></div>
+      <div
+        class="absolute inset-0 flex flex-col justify-center items-center text-center px-4 sm:px-8 md:px-12 lg:px-16 xl:px-20"
+      >
+        <h1
+          class="font-extrabold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent font-fredoka leading-snug"
+          style="font-size: clamp(2.5rem, 5vw, 5rem)"
+        >
+          Encuentra a tu mejor amigo 🐾
+        </h1>
+        <p class="mt-4 text-white text-lg sm:text-xl md:text-2xl max-w-2xl">
+          Más de 30 mascotas esperan un hogar lleno de amor.
+        </p>
+        <a
+          href="#petsList"
+          class="mt-6 px-6 py-3 rounded-custom bg-gradient-to-r from-primary to-secondary text-white font-bold shadow-lg hover:opacity-90"
+        >
+          Ver todas 🐶🐱
+        </a>
+      </div>
+    </section>
 
-  <!-- FILTROS -->
-  <section class="w-full mx-auto px-6 py-16 flex flex-col gap-12">
-    <div class="glass-effect rounded-custom p-10 shadow-lg bg-white/70 backdrop-blur-md w-full">
-      <h2 class="text-3xl font-bold text-primary flex items-center gap-2 mb-8">🔍 Filtros</h2>
-      <div class="grid grid-cols-1 md:grid-cols-4 gap-6 md:gap-8 w-full">
-        <!-- Especie -->
-        <div>
-          <h3 class="font-semibold mb-3 text-lg text-dark">Especie</h3>
-          <div class="flex flex-wrap gap-3">
-            <div class="chip px-5 py-2 rounded-full bg-purple-200 cursor-pointer" data-category="especie"
-              data-value="perro">🐶 Perro</div>
-            <div class="chip px-5 py-2 rounded-full bg-purple-200 cursor-pointer" data-category="especie"
-              data-value="gato">🐱 Gato</div>
+    <!-- FILTROS -->
+    <section class="w-full mx-auto px-6 py-16 flex flex-col gap-12">
+      <div
+        class="glass-effect rounded-custom p-10 shadow-lg bg-white/70 backdrop-blur-md w-full"
+      >
+        <h2
+          class="text-3xl font-bold text-primary flex items-center gap-2 mb-8"
+        >
+          🔍 Filtros
+        </h2>
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-6 md:gap-8 w-full">
+          <!-- Especie -->
+          <div>
+            <h3 class="font-semibold mb-3 text-lg text-dark">Especie</h3>
+            <div class="flex flex-wrap gap-3">
+              <div
+                class="chip px-5 py-2 rounded-full bg-purple-200 cursor-pointer"
+                data-category="especie"
+                data-value="perro"
+              >
+                🐶 Perro
+              </div>
+              <div
+                class="chip px-5 py-2 rounded-full bg-purple-200 cursor-pointer"
+                data-category="especie"
+                data-value="gato"
+              >
+                🐱 Gato
+              </div>
+            </div>
           </div>
-        </div>
-        <!-- Edad -->
-        <div>
-          <h3 class="font-semibold mb-3 text-lg text-dark">Edad</h3>
-          <div class="flex flex-wrap gap-3">
-            <div class="chip px-5 py-2 rounded-full bg-purple-200 cursor-pointer" data-category="edad"
-              data-value="cachorro">🐾 Cachorro</div>
-            <div class="chip px-5 py-2 rounded-full bg-purple-200 cursor-pointer" data-category="edad"
-              data-value="adulto">✨ Adulto</div>
-            <div class="chip px-5 py-2 rounded-full bg-purple-200 cursor-pointer" data-category="edad"
-              data-value="senior">🌙 Senior</div>
+          <!-- Edad -->
+          <div>
+            <h3 class="font-semibold mb-3 text-lg text-dark">Edad</h3>
+            <div class="flex flex-wrap gap-3">
+              <div
+                class="chip px-5 py-2 rounded-full bg-purple-200 cursor-pointer"
+                data-category="edad"
+                data-value="cachorro"
+              >
+                🐾 Cachorro
+              </div>
+              <div
+                class="chip px-5 py-2 rounded-full bg-purple-200 cursor-pointer"
+                data-category="edad"
+                data-value="adulto"
+              >
+                ✨ Adulto
+              </div>
+              <div
+                class="chip px-5 py-2 rounded-full bg-purple-200 cursor-pointer"
+                data-category="edad"
+                data-value="senior"
+              >
+                🌙 Senior
+              </div>
+            </div>
           </div>
-        </div>
-        <!-- Tamaño -->
-        <div>
-          <h3 class="font-semibold mb-3 text-lg text-dark">Tamaño</h3>
-          <div class="flex flex-wrap gap-3">
-            <div class="chip px-5 py-2 rounded-full bg-purple-200 cursor-pointer" data-category="tamano"
-              data-value="pequeño">🐾 Pequeño</div>
-            <div class="chip px-5 py-2 rounded-full bg-purple-200 cursor-pointer" data-category="tamano"
-              data-value="mediano">⚡ Mediano</div>
-            <div class="chip px-5 py-2 rounded-full bg-purple-200 cursor-pointer" data-category="tamano"
-              data-value="grande">🦴 Grande</div>
+          <!-- Tamaño -->
+          <div>
+            <h3 class="font-semibold mb-3 text-lg text-dark">Tamaño</h3>
+            <div class="flex flex-wrap gap-3">
+              <div
+                class="chip px-5 py-2 rounded-full bg-purple-200 cursor-pointer"
+                data-category="tamano"
+                data-value="pequeño"
+              >
+                🐾 Pequeño
+              </div>
+              <div
+                class="chip px-5 py-2 rounded-full bg-purple-200 cursor-pointer"
+                data-category="tamano"
+                data-value="mediano"
+              >
+                ⚡ Mediano
+              </div>
+              <div
+                class="chip px-5 py-2 rounded-full bg-purple-200 cursor-pointer"
+                data-category="tamano"
+                data-value="grande"
+              >
+                🦴 Grande
+              </div>
+            </div>
           </div>
-        </div>
-        <!-- Estado -->
-        <div>
-          <h3 class="font-semibold mb-3 text-lg text-dark">Estado</h3>
-          <div class="flex flex-wrap gap-3">
-            <div class="chip px-5 py-2 rounded-full bg-purple-200 cursor-pointer" data-category="estado"
-              data-value="disponible">💜 Disponible</div>
-            <div class="chip px-5 py-2 rounded-full bg-purple-200 cursor-pointer" data-category="estado"
-              data-value="adoptado">❌ Adoptado</div>
+          <!-- Estado -->
+          <div>
+            <h3 class="font-semibold mb-3 text-lg text-dark">Estado</h3>
+            <div class="flex flex-wrap gap-3">
+              <div
+                class="chip px-5 py-2 rounded-full bg-purple-200 cursor-pointer"
+                data-category="estado"
+                data-value="disponible"
+              >
+                💜 Disponible
+              </div>
+              <div
+                class="chip px-5 py-2 rounded-full bg-purple-200 cursor-pointer"
+                data-category="estado"
+                data-value="adoptado"
+              >
+                ❌ Adoptado
+              </div>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- TARJETAS -->
-  <section id="petsList"
-    class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 md:gap-8 w-full px-6">
-    <!-- Las tarjetas de mascotas se generarán aquí dinámicamente -->
-  </section>
+    <!-- TARJETAS -->
+    <section
+      id="petsList"
+      class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 md:gap-8 w-full px-6"
+    >
+      <!-- Las tarjetas de mascotas se generarán aquí dinámicamente -->
+    </section>
 
-     <footer class="bg-light text-dark">
-        <div class="max-w-7xl mx-auto px-6 py-10 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
-
-            <!-- Logo + Redes -->
-            <div class="flex flex-col items-start space-y-4">
-                <img src="../assets/img/marca/Logo.svg" alt="Logo PawsLove" class="w-36">
-                <p class="font-bold">Redes Sociales</p>
-                <div class="flex space-x-4">
-                    <a href="#"><img src="../assets/iconos/instagram.jpg" alt="Instagram" class="w-6 h-6"></a>
-                    <a href="#"><img src="../assets/iconos/tiktok.svg" alt="TikTok" class="w-6 h-6"></a>
-                    <a href="#"><img src="../assets/iconos/facebook.svg" alt="Facebook" class="w-6 h-6"></a>
-                </div>
-            </div>
-
-            <!-- Contacto -->
-            <div class="flex flex-col items-start">
-                <h3 class="text-lg font-bold mb-3">Contáctanos</h3>
-                <p>(601) 000 0000</p>
-                <p>Cra 00. 53b Sur</p>
-            </div>
-
-            <!-- Enlaces -->
-            <div>
-                <h3 class="text-lg font-bold mb-3">Enlaces Rápidos</h3>
-                <ul class="space-y-2">
-                    <li><a href="../index.html" class="hover:text-primary transition">Inicio</a></li>
-                    <li><a href="../paginas/adopta.html" class="hover:text-primary transition">Adopta</a></li>
-                    <li><a href="../paginas/tienda.html" class="hover:text-primary transition">Tienda</a></li>
-                    <li><a href="../paginas/donaciones.html" class="hover:text-primary transition">Donar</a></li>
-                </ul>
-            </div>
-
-            <!-- Donaciones -->
-            <div>
-                <h3 class="text-lg font-bold mb-3">Sobre las Donaciones</h3>
-                <ul class="space-y-2">
-                    <li><a href="../paginas/donaciones.html" class="hover:text-primary transition">Términos y
-                            Condiciones</a></li>
-                    <li><a href="#" class="hover:text-primary transition">Informes</a></li>
-                    <li><a href="#" class="hover:text-primary transition">Política de Privacidad</a></li>
-                </ul>
-            </div>
-
+    <footer class="bg-light text-dark">
+      <div
+        class="max-w-7xl mx-auto px-6 py-10 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8"
+      >
+        <!-- Logo + Redes -->
+        <div class="flex flex-col items-start space-y-4">
+          <img
+            src="../assets/img/marca/Logo.svg"
+            alt="Logo PawsLove"
+            class="w-36"
+          />
+          <p class="font-bold">Redes Sociales</p>
+          <div class="flex space-x-4">
+            <a href="#"
+              ><img
+                src="../assets/iconos/instagram.jpg"
+                alt="Instagram"
+                class="w-6 h-6"
+            /></a>
+            <a href="#"
+              ><img
+                src="../assets/iconos/tiktok.svg"
+                alt="TikTok"
+                class="w-6 h-6"
+            /></a>
+            <a href="#"
+              ><img
+                src="../assets/iconos/facebook.svg"
+                alt="Facebook"
+                class="w-6 h-6"
+            /></a>
+          </div>
         </div>
 
-        <!-- Footer Bottom -->
-        <div class="border-t border-gray-300 text-center py-4 text-sm">
-            <p>© 2025 PawsLove Foundation - Todos los derechos reservados</p>
+        <!-- Contacto -->
+        <div class="flex flex-col items-start">
+          <h3 class="text-lg font-bold mb-3">Contáctanos</h3>
+          <p>(601) 000 0000</p>
+          <p>Cra 00. 53b Sur</p>
         </div>
+
+        <!-- Enlaces -->
+        <div>
+          <h3 class="text-lg font-bold mb-3">Enlaces Rápidos</h3>
+          <ul class="space-y-2">
+            <li>
+              <a href="../index.html" class="hover:text-primary transition"
+                >Inicio</a
+              >
+            </li>
+            <li>
+              <a
+                href="../paginas/adopta.html"
+                class="hover:text-primary transition"
+                >Adopta</a
+              >
+            </li>
+            <li>
+              <a
+                href="../paginas/tienda.html"
+                class="hover:text-primary transition"
+                >Tienda</a
+              >
+            </li>
+            <li>
+              <a
+                href="../paginas/donaciones.html"
+                class="hover:text-primary transition"
+                >Donar</a
+              >
+            </li>
+          </ul>
+        </div>
+
+        <!-- Donaciones -->
+        <div>
+          <h3 class="text-lg font-bold mb-3">Sobre las Donaciones</h3>
+          <ul class="space-y-2">
+            <li>
+              <a
+                href="../paginas/donaciones.html"
+                class="hover:text-primary transition"
+                >Términos y Condiciones</a
+              >
+            </li>
+            <li>
+              <a href="#" class="hover:text-primary transition">Informes</a>
+            </li>
+            <li>
+              <a href="#" class="hover:text-primary transition"
+                >Política de Privacidad</a
+              >
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Footer Bottom -->
+      <div class="border-t border-gray-300 text-center py-4 text-sm">
+        <p>© 2025 PawsLove Foundation - Todos los derechos reservados</p>
+      </div>
     </footer>
 
-
-
-  <!-- SCRIPT externo -->
-  <script type="module" src="../scripts/adopta.js"></script>
-</body>
-
+    <!-- SCRIPT externo -->
+    <script type="module" src="../scripts/adopta.js"></script>
+    <script type="module" src="../scripts/menu.js"></script>
+  </body>
 </html>

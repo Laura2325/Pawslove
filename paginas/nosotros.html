@@ -11,54 +11,15 @@
   <script src="../tailwind.config.js"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
 
-  <!-- Tipografías -->
+  
   <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Poppins:wght@300;400;500;600&display=swap"
     rel="stylesheet">
 
 
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            primary: '#6c40d1',
-            secondary: '#fc6dab',
-            accent: '#17b890',
-            light: '#ecf0f1',
-            dark: '#34252f'
-          },
-          fontFamily: {
-            fredoka: ['Fredoka One', 'cursive'],
-            poppins: ['Poppins', 'sans-serif']
-          },
-          borderRadius: {
-            'custom': '24px'
-          }
-        }
-      }
-    }
-  </script>
+  <script type="module" src="/Pawslove/tailwind.config.js"></script>
+  <link rel="stylesheet" href="../styles/menu.css">
 
-  <style>
-    /* Transiciones para el menú móvil */
-    .mobile-menu-transition {
-      transition: max-height 0.3s ease-in-out, padding 0.3s ease-in-out;
-    }
-
-    .mobile-menu-closed {
-      max-height: 0;
-      padding-top: 0;
-      padding-bottom: 0;
-      overflow: hidden;
-    }
-
-    .mobile-menu-open {
-      max-height: 400px;
-      /* Ajusta según el contenido */
-      padding-top: 1rem;
-      padding-bottom: 1rem;
-    }
-  </style>
+ 
 
 </head>
 
@@ -373,56 +334,14 @@
     </footer>
 
 
-    <script src="https://unpkg.com/scrollreveal"></script>
-    <script src="../scripts/script.js"></script>
 
+    <script type="module" src="../scripts/menu.js"></script>
 
-    <script>
-      // Menu Mobile Toggle
-      const menuToggle = document.getElementById("menu-toggle");
-      const mobileMenu = document.getElementById("mobile-menu");
-      const menuIcon = document.getElementById("menu-icon");
-      let mobileMenuOpen = false;
-
-      function toggleMobileMenu() {
-        mobileMenuOpen = !mobileMenuOpen;
-        if (mobileMenuOpen) {
-          mobileMenu.classList.remove("mobile-menu-closed", "max-h-0");
-          mobileMenu.classList.add("mobile-menu-open", "max-h-[400px]");
-          menuIcon.innerHTML =
-            '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>';
-        } else {
-          mobileMenu.classList.remove("mobile-menu-open", "max-h-[400px]");
-          mobileMenu.classList.add("mobile-menu-closed", "max-h-0");
-          menuIcon.innerHTML =
-            '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>';
-        }
-      }
-
-      menuToggle.addEventListener("click", toggleMobileMenu);
-
-      // Cerrar menú móvil al cambiar a escritorio
-      window.addEventListener("resize", () => {
-        if (window.innerWidth >= 768 && mobileMenuOpen) {
-          toggleMobileMenu();
-        }
-      });
-
-      // Inicializar menú cerrado
-      mobileMenu.classList.add("mobile-menu-closed", "max-h-0");
-
-
-    </script>
 
     <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" />
-    <script>
-      AOS.init({
-        duration: 1000,
-        once: true,
-        offset: 100,
-      });
-    </script>
+    <script type="module" src="../scripts/utilidades.js"></script>
+    
 </body>
 
 </html>

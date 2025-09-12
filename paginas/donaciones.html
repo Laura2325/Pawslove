@@ -1,894 +1,596 @@
 <!DOCTYPE html>
 <html lang="es">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Pawslove Foundation | Donaciones</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link
-      href="https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap"
-      rel="stylesheet"
-    />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <script>
-      tailwind.config = {
-        theme: {
-          extend: {
-            colors: {
-              primary: "#6c40d1",
-              secondary: "#fc6dab",
-              accent: "#17b890",
-              light: "#ecf0f1",
-              dark: "#34252f",
-            },
-            fontFamily: {
-              fredoka: ["Fredoka One", "cursive"],
-            },
-            borderRadius: {
-              custom: "24px",
-            },
-          },
-        },
-      };
-    </script>
-    <style>
-      body {
-        background-color: #f5f7fa;
-        background-image: radial-gradient(#d0d7de 1px, transparent 1px),
-          radial-gradient(#d0d7de 1px, transparent 1px);
-        background-size: 40px 40px;
-        background-position: 0 0, 20px 20px;
-      }
 
-      .donation-card {
-        transition: all 0.3s ease;
-        position: relative;
-        overflow: hidden;
-        border-top: 4px solid;
-      }
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Pawslove Foundation | Donaciones</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap" rel="stylesheet" />
 
-      .donation-card:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
-      }
+  <script type="module" src="/Pawslove/tailwind.config.js"></script>
 
-      .gradient-bg {
-        background: linear-gradient(135deg, #6c40d1 0%, #fc6dab 100%);
-      }
 
-      .progress-bar {
-        transition: width 1s ease-in-out;
-      }
+</head>
 
-      .floating {
-        animation: float 3s ease-in-out infinite;
-      }
+<body class="min-h-screen font-sans">
 
-      @keyframes float {
-        0%, 100% { transform: translateY(0px); }
-        50% { transform: translateY(-10px); }
-      }
+  <!-- Barra de navegación -->
+  <div class="flex justify-center">
+    <nav
+      class="fixed top-4 left-1/2 transform -translate-x-1/2 w-[90%] md:w-[60%] bg-white border border-gray-200 shadow-md rounded-full z-50 transition-all duration-300 flex items-center justify-between px-4 py-3">
 
-      .pulse-animation {
-        animation: pulse 2s infinite;
-      }
-
-      @keyframes pulse {
-        0%, 100% { opacity: 1; }
-        50% { opacity: 0.7; }
-      }
-
-      .modal-enter {
-        opacity: 0;
-        transform: scale(0.9) translateY(20px);
-        transition: all 0.3s ease;
-      }
-
-      .modal-enter-active {
-        opacity: 1;
-        transform: scale(1) translateY(0);
-      }
-
-      /* Mobile menu styles */
-      .mobile-menu-transition {
-        transition: all 0.3s ease-in-out;
-        overflow: hidden;
-      }
-
-      .mobile-menu-open {
-        max-height: 300px;
-        opacity: 1;
-      }
-
-      .mobile-menu-closed {
-        max-height: 0;
-        opacity: 0;
-      }
-      
-      .impact-item {
-        display: flex;
-        align-items: center;
-        margin-bottom: 1rem;
-      }
-      
-      .impact-icon {
-        background: rgba(108, 64, 209, 0.1);
-        width: 40px;
-        height: 40px;
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        margin-right: 15px;
-        flex-shrink: 0;
-      }
-
-    </style>
-  </head>
-
-  <body class="min-h-screen font-sans">
-
-        <!-- Barra de navegación -->
-    <div class="flex justify-center">
-        <nav
-            class="fixed top-4 left-1/2 transform -translate-x-1/2 w-[90%] md:w-[60%] bg-white border border-gray-200 shadow-md rounded-full z-50 transition-all duration-300 flex items-center justify-between px-4 py-3">
-
-            <!-- Logo -->
-            <div class="flex items-center space-x-2">
-                <div class="h-10 w-10 flex items-center justify-center">
-                    <img src="../assets/img/marca/Isotipo.svg" alt="logo">
-                </div>
-            </div>
-
-            <!-- Menú desktop -->
-            <div class="hidden md:flex items-center space-x-4 flex-1 justify-center text-gray-800 font-medium text-lg">
-                <a href="../index.html" class="hover:text-primary transition">Inicio</a>
-                <a href="../paginas/adopta.html" class="hover:text-primary transition">Adopta</a>
-                <a href="../paginas/nosotros.html" class="hover:text-primary transition">Nosotros</a>
-                <a href="../paginas/donaciones.html"
-                    class="bg-secondary text-white px-4 py-2 rounded-full hover:bg-opacity-90 transition">Donar</a>
-                <a href="../paginas/tienda.html"
-                    class="bg-accent text-white px-4 py-2 rounded-full hover:bg-opacity-90 transition">Tienda</a>
-                <a href="../paginas/contacto.html" class="hover:text-primary transition">Contacto</a>
-            </div>
-
-            <!-- Iconos y menú móvil -->
-            <div class="flex items-center space-x-4">
-                <!-- Icono usuario -->
-                <a href="../login.html"
-                    class="h-10 w-10 rounded-full overflow-hidden bg-gradient-to-br from-primary to-secondary flex items-center justify-center cursor-pointer"
-                    aria-label="Ir a inicio de sesión" title="Inicio de Sesión">
-                    <img src="../assets/img/nosotros/love.jpg" alt="Icono de usuario" class="object-cover h-full w-full" />
-                </a>
-
-                <!-- Menú mobile toggle -->
-                <button id="menu-toggle" class="md:hidden text-dark focus:outline-none">
-                    <svg id="menu-icon" class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M4 6h16M4 12h16M4 18h16"></path>
-                    </svg>
-                </button>
-            </div>
-
-            <!-- Mobile menu -->
-            <div id="mobile-menu"
-                class="absolute mt-4 top-[60px] left-1/2 transform -translate-x-1/2 w-[90%] mobile-menu-transition mobile-menu-closed bg-white rounded-2xl shadow-md z-40 md:hidden">
-                <div class="px-6 py-4 flex flex-col space-y-3 text-center font-medium text-gray-800">
-                    <a href="../index.html" class="block py-2 hover:text-primary transition">Inicio</a>
-                    <a href="../paginas/adopta.html" class="block py-2 hover:text-primary transition">Adopta</a>
-                    <a href="../paginas/nosotros.html" class="block py-2 hover:text-primary transition">Nosotros</a>
-                    <a href="./paginas/contacto.html" class="block py-2 hover:text-primary transition">Contacto</a>
-                    <div class="flex items-center justify-around mt-4 space-x-2">
-                        <a href="../paginas/donaciones.html"
-                            class="bg-secondary text-white px-4 py-2 rounded-full hover:bg-opacity-90 transition flex-1 text-center">Donar</a>
-                        <a href="../paginas/tienda.html"
-                            class="bg-accent text-white px-4 py-2 rounded-full hover:bg-opacity-90 transition flex-1 text-center">Tienda</a>
-                    </div>
-                </div>
-            </div>
-        </nav>
-    </div>
-
-    <!-- Hero Section -->
-    <section class="relative overflow-hidden pt-24 pb-16 px-4">
-      <div class="container mx-auto text-center relative z-10">
-        <div class="floating absolute top-10 right-10 text-secondary text-4xl">♥</div>
-        <div class="floating absolute top-20 left-16 text-accent text-3xl" style="animation-delay: 1s;">♥</div>
-        <div class="floating absolute top-32 right-1/4 text-primary text-2xl" style="animation-delay: 2s;">♥</div>
-        
-        <h1 class="text-4xl md:text-6xl font-fredoka text-primary mb-6 mt-12">
-          Juntos Salvamos Vidas
-        </h1>
-        <p class="text-xl md:text-2xl text-gray-600 mb-8 max-w-3xl mx-auto">
-          Tu donación hace la diferencia entre la vida y la muerte para perros y gatos abandonados. 
-          Cada peso cuenta para darles amor, cuidado y una segunda oportunidad.
-        </p>
-        
-        <!-- Estadísticas rápidas -->
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8 max-w-4xl mx-auto">
-          <div class="bg-white rounded-custom p-6 shadow-md">
-            <div class="text-3xl md:text-4xl font-fredoka text-primary mb-2">+1,200</div>
-            <div class="text-gray-600">Animales rescatados</div>
-          </div>
-          <div class="bg-white rounded-custom p-6 shadow-md">
-            <div class="text-3xl md:text-4xl font-fredoka text-secondary mb-2">850</div>
-            <div class="text-gray-600">Adopciones exitosas</div>
-          </div>
-          <div class="bg-white rounded-custom p-6 shadow-md">
-            <div class="text-3xl md:text-4xl font-fredoka text-accent mb-2">24/7</div>
-            <div class="text-gray-600">Cuidado médico</div>
-          </div>
+      <!-- Logo -->
+      <div class="flex items-center space-x-2">
+        <div class="h-10 w-10 flex items-center justify-center">
+          <img src="../assets/img/marca/Isotipo.svg" alt="logo">
         </div>
+      </div>
 
-        <button id="donate-hero-btn" class="gradient-bg text-white px-8 py-4 rounded-custom text-lg font-bold hover:shadow-lg transition-all transform hover:scale-105 pulse-animation">
-          Donar Ahora
+      <!-- Menú desktop -->
+      <div class="hidden md:flex items-center space-x-4 flex-1 justify-center text-gray-800 font-medium text-lg">
+        <a href="../index.html" class="hover:text-primary transition">Inicio</a>
+        <a href="../paginas/adopta.html" class="hover:text-primary transition">Adopta</a>
+        <a href="../paginas/nosotros.html" class="hover:text-primary transition">Nosotros</a>
+        <a href="../paginas/donaciones.html"
+          class="bg-secondary text-white px-4 py-2 rounded-full hover:bg-opacity-90 transition">Donar</a>
+        <a href="../paginas/tienda.html"
+          class="bg-accent text-white px-4 py-2 rounded-full hover:bg-opacity-90 transition">Tienda</a>
+        <a href="../paginas/contacto.html" class="hover:text-primary transition">Contacto</a>
+      </div>
+
+      <!-- Iconos y menú móvil -->
+      <div class="flex items-center space-x-4">
+        <!-- Icono usuario -->
+        <a href="../login.html"
+          class="h-10 w-10 rounded-full overflow-hidden bg-gradient-to-br from-primary to-secondary flex items-center justify-center cursor-pointer"
+          aria-label="Ir a inicio de sesión" title="Inicio de Sesión">
+          <img src="../assets/img/nosotros/love.jpg" alt="Icono de usuario" class="object-cover h-full w-full" />
+        </a>
+
+        <!-- Menú mobile toggle -->
+        <button id="menu-toggle" class="md:hidden text-dark focus:outline-none">
+          <svg id="menu-icon" class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+          </svg>
         </button>
       </div>
-    </section>
 
-    <!-- Métodos de donación -->
-    <section class="py-16 px-4">
-      <div class="container mx-auto">
-        <div class="text-center mb-12">
-          <h2 class="text-3xl md:text-4xl font-fredoka text-primary mb-4">
-            Formas de Ayudar
-          </h2>
-          <p class="text-xl text-gray-600 max-w-2xl mx-auto">
-            Elige la forma que más te acomode para hacer tu donación y cambiar vidas
-          </p>
-        </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-          <!-- Donación única -->
-          <div class="donation-card bg-white rounded-custom p-6 shadow-md text-center border-t-primary">
-            <div class="bg-primary/10 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
-              <i class="fas fa-gift text-primary text-2xl"></i>
-            </div>
-            <h3 class="text-xl font-bold text-dark mb-2">Donación Única</h3>
-            <p class="text-gray-600 mb-4">Apoya nuestra causa con una contribución puntual</p>
-            
-            <div class="text-left mb-5">
-              <div class="impact-item">
-                <div class="impact-icon">
-                  <i class="fas fa-paw text-primary"></i>
-                </div>
-                <span class="text-sm">$20.000 alimenta a un animal por 1 mes</span>
-              </div>
-              <div class="impact-item">
-                <div class="impact-icon">
-                  <i class="fas fa-syringe text-primary"></i>
-                </div>
-                <span class="text-sm">$50.000 cubre vacunas básicas</span>
-              </div>
-              <div class="impact-item">
-                <div class="impact-icon">
-                  <i class="fas fa-stethoscope text-primary"></i>
-                </div>
-                <span class="text-sm">$100.000 ayuda en una cirugía</span>
-              </div>
-            </div>
-            
-            <button class="donate-btn w-full bg-primary text-white py-3 rounded-custom hover:bg-opacity-90 transition font-medium" data-type="unique">
-              Donar ahora
-            </button>
-          </div>
-
-          <!-- Donación mensual -->
-          <div class="donation-card bg-white rounded-custom p-6 shadow-md text-center border-t-secondary relative">
-            <span class="absolute top-3 left-1/2 transform -translate-x-1/2 bg-secondary text-white text-xs font-bold px-3 py-1 rounded-full">
-              MÁS POPULAR
-            </span>
-            <div class="bg-secondary/10 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
-              <i class="fas fa-heart text-secondary text-2xl"></i>
-            </div>
-            <h3 class="text-xl font-bold text-dark mb-2">Donación Recurrente</h3>
-            <p class="text-gray-600 mb-4">Conviértete en héroe constante con aportes mensuales</p>
-            
-            <div class="text-left mb-5">
-              <div class="impact-item">
-                <div class="impact-icon">
-                  <i class="fas fa-hand-holding-heart text-secondary"></i>
-                </div>
-                <span class="text-sm">Proporciona sostenibilidad a largo plazo</span>
-              </div>
-              <div class="impact-item">
-                <div class="impact-icon">
-                  <i class="fas fa-calendar-check text-secondary"></i>
-                </div>
-                <span class="text-sm">Puedes cancelar en cualquier momento</span>
-              </div>
-              <div class="impact-item">
-                <div class="impact-icon">
-                  <i class="fas fa-award text-secondary"></i>
-                </div>
-                <span class="text-sm">Recibirás reportes periódicos de impacto</span>
-              </div>
-            </div>
-            
-            <button class="donate-btn w-full bg-secondary text-white py-3 rounded-custom hover:bg-opacity-90 transition font-medium" data-type="monthly">
-              Donar mensualmente
-            </button>
-          </div>
-
-          <!-- Patrocinio -->
-          <div class="donation-card bg-white rounded-custom p-6 shadow-md text-center border-t-accent">
-            <div class="bg-accent/10 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
-              <i class="fas fa-hands-helping text-accent text-2xl"></i>
-            </div>
-            <h3 class="text-xl font-bold text-dark mb-2">Patrocinio Directo</h3>
-            <p class="text-gray-600 mb-4">Apadrina un animal específico y sigue su progreso</p>
-            
-            <div class="text-left mb-5">
-              <div class="impact-item">
-                <div class="impact-icon">
-                  <i class="fas fa-camera text-accent"></i>
-                </div>
-                <span class="text-sm">Recibirás fotos y actualizaciones</span>
-              </div>
-              <div class="impact-item">
-                <div class="impact-icon">
-                  <i class="fas fa-certificate text-accent"></i>
-                </div>
-                <span class="text-sm">Certificado de patrocinio personalizado</span>
-              </div>
-              <div class="impact-item">
-                <div class="impact-icon">
-                  <i class="fas fa-envelope text-accent"></i>
-                </div>
-                <span class="text-sm">Posibilidad de visitar a tu ahijado</span>
-              </div>
-            </div>
-            
-            <button class="donate-btn w-full bg-accent text-white py-3 rounded-custom hover:bg-opacity-90 transition font-medium" data-type="sponsor">
-              Conocer animales
-            </button>
-          </div>
-
-          <!-- Donación en especie -->
-          <div class="donation-card bg-white rounded-custom p-6 shadow-md text-center border-t-yellow-500">
-            <div class="bg-yellow-100 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
-              <i class="fas fa-box-open text-yellow-600 text-2xl"></i>
-            </div>
-            <h3 class="text-xl font-bold text-dark mb-2">Donación en Especie</h3>
-            <p class="text-gray-600 mb-4">Contribuye con alimentos, medicamentos o suministros</p>
-            
-            <div class="text-left mb-5">
-              <div class="impact-item">
-                <div class="impact-icon">
-                  <i class="fas fa-pills text-yellow-600"></i>
-                </div>
-                <span class="text-sm">Medicamentos y vitaminas</span>
-              </div>
-              <div class="impact-item">
-                <div class="impact-icon">
-                  <i class="fas fa-utensils text-yellow-600"></i>
-                </div>
-                <span class="text-sm">Alimento para perros y gatos</span>
-              </div>
-              <div class="impact-item">
-                <div class="impact-icon">
-                  <i class="fas fa-blanket text-yellow-600"></i>
-                </div>
-                <span class="text-sm">Cobijas, toallas y camas</span>
-              </div>
-            </div>
-            
-            <button class="donate-btn w-full bg-yellow-500 text-white py-3 rounded-custom hover:bg-opacity-90 transition font-medium" data-type="supplies">
-              Ver lista completa
-            </button>
-          </div>
-        </div>
-        
-        <!-- Información adicional de donaciones -->
-        <div class="mt-16 bg-gray-50 rounded-custom p-8">
-          <h3 class="text-2xl font-fredoka text-primary mb-6 text-center">Información importante sobre donaciones</h3>
-          <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div class="text-center">
-              <div class="bg-primary/20 w-14 h-14 rounded-full flex items-center justify-center mx-auto mb-3">
-                <i class="fas fa-lock text-primary text-xl"></i>
-              </div>
-              <h4 class="font-bold text-dark mb-2">Transacciones Seguras</h4>
-              <p class="text-gray-600 text-sm">Tus datos están protegidos con encriptación de última generación</p>
-            </div>
-            <div class="text-center">
-              <div class="bg-primary/20 w-14 h-14 rounded-full flex items-center justify-center mx-auto mb-3">
-                <i class="fas fa-receipt text-primary text-xl"></i>
-              </div>
-              <h4 class="font-bold text-dark mb-2">Recibo Deducible</h4>
-              <p class="text-gray-600 text-sm">Emitimos recibos oficiales para deducciones de impuestos</p>
-            </div>
-            <div class="text-center">
-              <div class="bg-primary/20 w-14 h-14 rounded-full flex items-center justify-center mx-auto mb-3">
-                <i class="fas fa-chart-pie text-primary text-xl"></i>
-              </div>
-              <h4 class="font-bold text-dark mb-2">Transparencia</h4>
-              <p class="text-gray-600 text-sm">Publicamos informes anuales detallando el uso de los fondos</p>
-            </div>
+      <!-- Mobile menu -->
+      <div id="mobile-menu"
+        class="absolute mt-4 top-[60px] left-1/2 transform -translate-x-1/2 w-[90%] mobile-menu-transition mobile-menu-closed bg-white rounded-2xl shadow-md z-40 md:hidden">
+        <div class="px-6 py-4 flex flex-col space-y-3 text-center font-medium text-gray-800">
+          <a href="../index.html" class="block py-2 hover:text-primary transition">Inicio</a>
+          <a href="../paginas/adopta.html" class="block py-2 hover:text-primary transition">Adopta</a>
+          <a href="../paginas/nosotros.html" class="block py-2 hover:text-primary transition">Nosotros</a>
+          <a href="./paginas/contacto.html" class="block py-2 hover:text-primary transition">Contacto</a>
+          <div class="flex items-center justify-around mt-4 space-x-2">
+            <a href="../paginas/donaciones.html"
+              class="bg-secondary text-white px-4 py-2 rounded-full hover:bg-opacity-90 transition flex-1 text-center">Donar</a>
+            <a href="../paginas/tienda.html"
+              class="bg-accent text-white px-4 py-2 rounded-full hover:bg-opacity-90 transition flex-1 text-center">Tienda</a>
           </div>
         </div>
       </div>
-    </section>
+    </nav>
+  </div>
 
-    <!-- Testimonios de donantes -->
-    <section class="py-16 px-4 bg-gray-50">
-      <div class="container mx-auto">
-        <div class="text-center mb-12">
-          <h2 class="text-3xl md:text-4xl font-fredoka text-primary mb-4">
-            Lo que dicen nuestros donantes
-          </h2>
-          <p class="text-xl text-gray-600">
-            Conoce las experiencias de quienes han apoyado nuestra causa
-          </p>
+  <!-- Hero Section -->
+  <section class="relative overflow-hidden pt-24 pb-16 px-4">
+    <div class="container mx-auto text-center relative z-10">
+      <div class="floating absolute top-10 right-10 text-secondary text-4xl">♥</div>
+      <div class="floating absolute top-20 left-16 text-accent text-3xl" style="animation-delay: 1s;">♥</div>
+      <div class="floating absolute top-32 right-1/4 text-primary text-2xl" style="animation-delay: 2s;">♥</div>
+
+      <h1 class="text-4xl md:text-6xl font-fredoka text-primary mb-6 mt-12">
+        Juntos Salvamos Vidas
+      </h1>
+      <p class="text-xl md:text-2xl text-gray-600 mb-8 max-w-3xl mx-auto">
+        Tu donación hace la diferencia entre la vida y la muerte para perros y gatos abandonados.
+        Cada peso cuenta para darles amor, cuidado y una segunda oportunidad.
+      </p>
+
+      <!-- Estadísticas rápidas -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8 max-w-4xl mx-auto">
+        <div class="bg-white rounded-custom p-6 shadow-md">
+          <div class="text-3xl md:text-4xl font-fredoka text-primary mb-2">+1,200</div>
+          <div class="text-gray-600">Animales rescatados</div>
         </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-          <div class="bg-white rounded-custom p-6 shadow-md">
-            <div class="flex items-center mb-4">
-              <div class="w-12 h-12 bg-primary/20 rounded-full flex items-center justify-center mr-3">
-                <span class="text-primary font-bold">M</span>
-              </div>
-              <div>
-                <h4 class="font-bold">María González</h4>
-                <p class="text-sm text-gray-500">Donante mensual desde 2022</p>
-              </div>
-            </div>
-            <p class="text-gray-600 italic">
-              "Me encanta recibir las actualizaciones mensuales y saber exactamente cómo mi contribución está ayudando. Es transparente y me hace sentir parte de esta gran familia."
-            </p>
-          </div>
-
-          <div class="bg-white rounded-custom p-6 shadow-md">
-            <div class="flex items-center mb-4">
-              <div class="w-12 h-12 bg-primary/20 rounded-full flex items-center justify-center mr-3">
-                <span class="text-primary font-bold">C</span>
-              </div>
-              <div>
-                <h4 class="font-bold">Carlos Rodríguez</h4>
-                <p class="text-sm text-gray-500">Patrocinador de Luna</p>
-              </div>
-            </div>
-            <p class="text-gray-600 italic">
-              "Patrocinar a Luna ha sido una experiencia increíble. Ver su progreso desde que estaba enferma hasta ahora que está feliz y saludable no tiene precio."
-            </p>
-          </div>
-
-          <div class="bg-white rounded-custom p-6 shadow-md">
-            <div class="flex items-center mb-4">
-              <div class="w-12 h-12 bg-primary/20 rounded-full flex items-center justify-center mr-3">
-                <span class="text-primary font-bold">A</span>
-              </div>
-              <div>
-                <h4 class="font-bold">Ana Martínez</h4>
-                <p class="text-sm text-gray-500">Donante en especie</p>
-              </div>
-            </div>
-            <p class="text-gray-600 italic">
-              "Cada mes llevo alimento y medicamentos. El personal es muy amable y me muestran cómo mis donaciones son utilizadas directamente para los animales."
-            </p>
-          </div>
+        <div class="bg-white rounded-custom p-6 shadow-md">
+          <div class="text-3xl md:text-4xl font-fredoka text-secondary mb-2">850</div>
+          <div class="text-gray-600">Adopciones exitosas</div>
+        </div>
+        <div class="bg-white rounded-custom p-6 shadow-md">
+          <div class="text-3xl md:text-4xl font-fredoka text-accent mb-2">24/7</div>
+          <div class="text-gray-600">Cuidado médico</div>
         </div>
       </div>
-    </section>
 
-    <!-- Campaña actual -->
-    <section class="py-16 px-4 bg-white">
-      <div class="container mx-auto">
-        <div class="max-w-4xl mx-auto">
-          <div class="text-center mb-8">
-            <h2 class="text-3xl md:text-4xl font-fredoka text-primary mb-4">
-              Campaña Urgente: Medicina para Max
-            </h2>
-            <p class="text-xl text-gray-600">
-              Max necesita una cirugía urgente. Tu ayuda puede salvar su vida.
-            </p>
+      <button id="donate-hero-btn"
+        class="gradient-bg text-white px-8 py-4 rounded-custom text-lg font-bold hover:shadow-lg transition-all transform hover:scale-105 pulse-animation">
+        Donar Ahora
+      </button>
+    </div>
+  </section>
+
+  <!-- Métodos de donación -->
+  <section class="py-16 px-4">
+    <div class="container mx-auto">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl md:text-4xl font-fredoka text-primary mb-4">
+          Formas de Ayudar
+        </h2>
+        <p class="text-xl text-gray-600 max-w-2xl mx-auto">
+          Elige la forma que más te acomode para hacer tu donación y cambiar vidas
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <!-- Donación única -->
+        <div class="donation-card bg-white rounded-custom p-6 shadow-md text-center border-t-primary">
+          <div class="bg-primary/10 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
+            <i class="fas fa-gift text-primary text-2xl"></i>
           </div>
+          <h3 class="text-xl font-bold text-dark mb-2">Donación Única</h3>
+          <p class="text-gray-600 mb-4">Apoya nuestra causa con una contribución puntual</p>
 
-          <div class="bg-gray-50 rounded-custom p-6 md:p-8">
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
-              <div>
-                <div class="w-full h-64 bg-gray-200 rounded-custom mb-6 flex items-center justify-center">
-                  <img src="../assets/img/marca/pexels-hilaryh-1084165.jpg" alt="max" class="object-cover w-full h-full rounded-custom">
-                </div>
+          <div class="text-left mb-5">
+            <div class="impact-item">
+              <div class="impact-icon">
+                <i class="fas fa-paw text-primary"></i>
               </div>
-              
-              <div>
-                <h3 class="text-2xl font-bold text-dark mb-4">La historia de Max</h3>
-                <p class="text-gray-600 mb-6">
-                  Max fue encontrado en las calles con una herida grave en su pata. 
-                  Necesita cirugía inmediata y medicamentos especializados para recuperarse 
-                  completamente y encontrar un hogar amoroso.
-                </p>
-
-                <!-- Progress bar -->
-                <div class="mb-6">
-                  <div class="flex justify-between mb-2">
-                    <span class="text-sm font-medium text-gray-600">Progreso</span>
-                    <span class="text-sm font-medium text-primary">$450.000 / $800.000</span>
-                  </div>
-                  <div class="w-full bg-gray-200 rounded-full h-3">
-                    <div class="progress-bar bg-gradient-to-r from-primary to-secondary h-3 rounded-full" style="width: 56%"></div>
-                  </div>
-                  <div class="text-sm text-gray-600 mt-2">56% completado - Quedan 12 días</div>
-                </div>
-
-                <button id="donate-max-btn" class="w-full gradient-bg text-white py-3 rounded-custom font-bold hover:shadow-lg transition-all">
-                  Ayudar a Max
-                </button>
+              <span class="text-sm">$20.000 alimenta a un animal por 1 mes</span>
+            </div>
+            <div class="impact-item">
+              <div class="impact-icon">
+                <i class="fas fa-syringe text-primary"></i>
               </div>
+              <span class="text-sm">$50.000 cubre vacunas básicas</span>
+            </div>
+            <div class="impact-item">
+              <div class="impact-icon">
+                <i class="fas fa-stethoscope text-primary"></i>
+              </div>
+              <span class="text-sm">$100.000 ayuda en una cirugía</span>
             </div>
           </div>
-        </div>
-      </div>
-    </section>
 
-    <!-- Preguntas frecuentes -->
-    <section class="py-16 px-4 bg-gray-50">
-      <div class="container mx-auto max-w-4xl">
-        <div class="text-center mb-12">
-          <h2 class="text-3xl md:text-4xl font-fredoka text-primary mb-4">
-            Preguntas Frecuentes
-          </h2>
-          <p class="text-xl text-gray-600">
-            Resolvemos tus dudas sobre las donaciones
-          </p>
-        </div>
-
-        <div class="space-y-4">
-          <div class="bg-white rounded-custom p-6 shadow-md">
-            <h3 class="text-lg font-bold text-dark mb-2">¿Cómo se utilizan mis donaciones?</h3>
-            <p class="text-gray-600">
-              El 85% de tu donación se destina directamente al cuidado de los animales (alimentación, veterinario, medicinas). 
-              El 15% restante cubre gastos operativos como transporte, mantenimiento de refugios y costos administrativos.
-            </p>
-          </div>
-          
-          <div class="bg-white rounded-custom p-6 shadow-md">
-            <h3 class="text-lg font-bold text-dark mb-2">¿Puedo deducir mis donaciones de impuestos?</h3>
-            <p class="text-gray-600">
-              Sí, todas las donaciones son deducibles de impuestos. Te enviaremos un recibo oficial por email 
-              que puedes presentar ante la autoridad tributaria correspondiente.
-            </p>
-          </div>
-          
-          <div class="bg-white rounded-custom p-6 shadow-md">
-            <h3 class="text-lg font-bold text-dark mb-2">¿Puedo cancelar mi donación recurrente en cualquier momento?</h3>
-            <p class="text-gray-600">
-              Sí, puedes cancelar tu donación recurrente en cualquier momento enviando un email a 
-              donaciones@pawslove.org o llamando a nuestro centro de atención a donantes.
-            </p>
-          </div>
-          
-          <div class="bg-white rounded-custom p-6 shadow-md">
-            <h3 class="text-lg font-bold text-dark mb-2">¿Cómo recibo updates sobre mi ahijado si decido patrocinar?</h3>
-            <p class="text-gray-600">
-              Una vez al mes te enviaremos por email fotos y un reporte del progreso de tu ahijado. 
-              También tendrás acceso prioritario para visitarlo previa coordinación.
-            </p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Modal de donación -->
-    <div id="donation-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center opacity-0 pointer-events-none transition-opacity duration-300 z-50 p-4">
-      <div id="modal-content" class="bg-white rounded-custom p-6 md:p-8 max-w-md w-full shadow-xl modal-enter">
-        <div class="text-center mb-6">
-          <h3 class="text-2xl font-fredoka text-primary mb-2" id="modal-title">Hacer Donación</h3>
-          <p class="text-gray-600" id="modal-subtitle">Elige el monto que deseas donar</p>
-        </div>
-
-        <!-- Montos predefinidos -->
-        <div class="grid grid-cols-2 gap-3 mb-6">
-          <button class="amount-btn border-2 border-gray-200 py-3 rounded-custom hover:border-primary hover:text-primary transition-colors" data-amount="5000">$5.000</button>
-          <button class="amount-btn border-2 border-gray-200 py-3 rounded-custom hover:border-primary hover:text-primary transition-colors" data-amount="10000">$10.000</button>
-          <button class="amount-btn border-2 border-gray-200 py-3 rounded-custom hover:border-primary hover:text-primary transition-colors" data-amount="25000">$25.000</button>
-          <button class="amount-btn border-2 border-gray-200 py-3 rounded-custom hover:border-primary hover:text-primary transition-colors" data-amount="50000">$50.000</button>
-        </div>
-
-        <!-- Monto personalizado -->
-        <div class="mb-6">
-          <label class="block text-gray-700 mb-2">Monto personalizado</label>
-          <input type="number" id="custom-amount" placeholder="Ingresa tu monto" class="w-full border border-gray-300 rounded-custom px-4 py-2 focus:border-primary focus:outline-none">
-        </div>
-
-        <!-- Botones de acción -->
-        <div class="flex flex-col sm:flex-row gap-3">
-          <button id="cancel-donation" class="flex-1 bg-gray-300 text-gray-700 py-3 rounded-custom hover:bg-gray-400 transition-colors">
-            Cancelar
+          <button
+            class="donate-btn w-full bg-primary text-white py-3 rounded-custom hover:bg-opacity-90 transition font-medium"
+            data-type="unique">
+            Donar ahora
           </button>
-          <button id="confirm-donation" class="flex-1 bg-primary text-white py-3 rounded-custom hover:bg-opacity-90 transition-colors">
-            Donar
+        </div>
+
+        <!-- Donación mensual -->
+        <div class="donation-card bg-white rounded-custom p-6 shadow-md text-center border-t-secondary relative">
+          <span
+            class="absolute top-3 left-1/2 transform -translate-x-1/2 bg-secondary text-white text-xs font-bold px-3 py-1 rounded-full">
+            MÁS POPULAR
+          </span>
+          <div class="bg-secondary/10 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
+            <i class="fas fa-heart text-secondary text-2xl"></i>
+          </div>
+          <h3 class="text-xl font-bold text-dark mb-2">Donación Recurrente</h3>
+          <p class="text-gray-600 mb-4">Conviértete en héroe constante con aportes mensuales</p>
+
+          <div class="text-left mb-5">
+            <div class="impact-item">
+              <div class="impact-icon">
+                <i class="fas fa-hand-holding-heart text-secondary"></i>
+              </div>
+              <span class="text-sm">Proporciona sostenibilidad a largo plazo</span>
+            </div>
+            <div class="impact-item">
+              <div class="impact-icon">
+                <i class="fas fa-calendar-check text-secondary"></i>
+              </div>
+              <span class="text-sm">Puedes cancelar en cualquier momento</span>
+            </div>
+            <div class="impact-item">
+              <div class="impact-icon">
+                <i class="fas fa-award text-secondary"></i>
+              </div>
+              <span class="text-sm">Recibirás reportes periódicos de impacto</span>
+            </div>
+          </div>
+
+          <button
+            class="donate-btn w-full bg-secondary text-white py-3 rounded-custom hover:bg-opacity-90 transition font-medium"
+            data-type="monthly">
+            Donar mensualmente
+          </button>
+        </div>
+
+        <!-- Patrocinio -->
+        <div class="donation-card bg-white rounded-custom p-6 shadow-md text-center border-t-accent">
+          <div class="bg-accent/10 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
+            <i class="fas fa-hands-helping text-accent text-2xl"></i>
+          </div>
+          <h3 class="text-xl font-bold text-dark mb-2">Patrocinio Directo</h3>
+          <p class="text-gray-600 mb-4">Apadrina un animal específico y sigue su progreso</p>
+
+          <div class="text-left mb-5">
+            <div class="impact-item">
+              <div class="impact-icon">
+                <i class="fas fa-camera text-accent"></i>
+              </div>
+              <span class="text-sm">Recibirás fotos y actualizaciones</span>
+            </div>
+            <div class="impact-item">
+              <div class="impact-icon">
+                <i class="fas fa-certificate text-accent"></i>
+              </div>
+              <span class="text-sm">Certificado de patrocinio personalizado</span>
+            </div>
+            <div class="impact-item">
+              <div class="impact-icon">
+                <i class="fas fa-envelope text-accent"></i>
+              </div>
+              <span class="text-sm">Posibilidad de visitar a tu ahijado</span>
+            </div>
+          </div>
+
+          <button
+            class="donate-btn w-full bg-accent text-white py-3 rounded-custom hover:bg-opacity-90 transition font-medium"
+            data-type="sponsor">
+            Conocer animales
+          </button>
+        </div>
+
+        <!-- Donación en especie -->
+        <div class="donation-card bg-white rounded-custom p-6 shadow-md text-center border-t-yellow-500">
+          <div class="bg-yellow-100 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
+            <i class="fas fa-box-open text-yellow-600 text-2xl"></i>
+          </div>
+          <h3 class="text-xl font-bold text-dark mb-2">Donación en Especie</h3>
+          <p class="text-gray-600 mb-4">Contribuye con alimentos, medicamentos o suministros</p>
+
+          <div class="text-left mb-5">
+            <div class="impact-item">
+              <div class="impact-icon">
+                <i class="fas fa-pills text-yellow-600"></i>
+              </div>
+              <span class="text-sm">Medicamentos y vitaminas</span>
+            </div>
+            <div class="impact-item">
+              <div class="impact-icon">
+                <i class="fas fa-utensils text-yellow-600"></i>
+              </div>
+              <span class="text-sm">Alimento para perros y gatos</span>
+            </div>
+            <div class="impact-item">
+              <div class="impact-icon">
+                <i class="fas fa-blanket text-yellow-600"></i>
+              </div>
+              <span class="text-sm">Cobijas, toallas y camas</span>
+            </div>
+          </div>
+
+          <button
+            class="donate-btn w-full bg-yellow-500 text-white py-3 rounded-custom hover:bg-opacity-90 transition font-medium"
+            data-type="supplies">
+            Ver lista completa
           </button>
         </div>
       </div>
-    </div>
 
-    <!-- Toast notification -->
-    <div id="toast" class="fixed bottom-4 right-4 bg-accent text-white px-6 py-3 rounded-custom shadow-lg opacity-0 pointer-events-none transition-all duration-300 transform translate-y-2 z-50">
-      <div class="flex items-center space-x-2">
-        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-          <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
-        </svg>
-        <span id="toast-message">¡Gracias por tu donación!</span>
+      <!-- Información adicional de donaciones -->
+      <div class="mt-16 bg-gray-50 rounded-custom p-8">
+        <h3 class="text-2xl font-fredoka text-primary mb-6 text-center">Información importante sobre donaciones</h3>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div class="text-center">
+            <div class="bg-primary/20 w-14 h-14 rounded-full flex items-center justify-center mx-auto mb-3">
+              <i class="fas fa-lock text-primary text-xl"></i>
+            </div>
+            <h4 class="font-bold text-dark mb-2">Transacciones Seguras</h4>
+            <p class="text-gray-600 text-sm">Tus datos están protegidos con encriptación de última generación</p>
+          </div>
+          <div class="text-center">
+            <div class="bg-primary/20 w-14 h-14 rounded-full flex items-center justify-center mx-auto mb-3">
+              <i class="fas fa-receipt text-primary text-xl"></i>
+            </div>
+            <h4 class="font-bold text-dark mb-2">Recibo Deducible</h4>
+            <p class="text-gray-600 text-sm">Emitimos recibos oficiales para deducciones de impuestos</p>
+          </div>
+          <div class="text-center">
+            <div class="bg-primary/20 w-14 h-14 rounded-full flex items-center justify-center mx-auto mb-3">
+              <i class="fas fa-chart-pie text-primary text-xl"></i>
+            </div>
+            <h4 class="font-bold text-dark mb-2">Transparencia</h4>
+            <p class="text-gray-600 text-sm">Publicamos informes anuales detallando el uso de los fondos</p>
+          </div>
+        </div>
       </div>
     </div>
+  </section>
 
-<footer class="bg-light text-dark">
-        <div class="max-w-7xl mx-auto px-6 py-10 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
+  <!-- Testimonios de donantes -->
+  <section class="py-16 px-4 bg-gray-50">
+    <div class="container mx-auto">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl md:text-4xl font-fredoka text-primary mb-4">
+          Lo que dicen nuestros donantes
+        </h2>
+        <p class="text-xl text-gray-600">
+          Conoce las experiencias de quienes han apoyado nuestra causa
+        </p>
+      </div>
 
-            <!-- Logo + Redes -->
-            <div class="flex flex-col items-start space-y-4">
-                <img src="../assets/img/marca/Logo.svg" alt="Logo PawsLove" class="w-36">
-                <p class="font-bold">Redes Sociales</p>
-                <div class="flex space-x-4">
-                    <a href="#"><img src="../assets/iconos/instagram.jpg" alt="Instagram" class="w-6 h-6"></a>
-                    <a href="#"><img src="../assets/iconos/tiktok.svg" alt="TikTok" class="w-6 h-6"></a>
-                    <a href="#"><img src="../assets/iconos/facebook.svg" alt="Facebook" class="w-6 h-6"></a>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div class="bg-white rounded-custom p-6 shadow-md">
+          <div class="flex items-center mb-4">
+            <div class="w-12 h-12 bg-primary/20 rounded-full flex items-center justify-center mr-3">
+              <span class="text-primary font-bold">M</span>
+            </div>
+            <div>
+              <h4 class="font-bold">María González</h4>
+              <p class="text-sm text-gray-500">Donante mensual desde 2022</p>
+            </div>
+          </div>
+          <p class="text-gray-600 italic">
+            "Me encanta recibir las actualizaciones mensuales y saber exactamente cómo mi contribución está ayudando. Es
+            transparente y me hace sentir parte de esta gran familia."
+          </p>
+        </div>
+
+        <div class="bg-white rounded-custom p-6 shadow-md">
+          <div class="flex items-center mb-4">
+            <div class="w-12 h-12 bg-primary/20 rounded-full flex items-center justify-center mr-3">
+              <span class="text-primary font-bold">C</span>
+            </div>
+            <div>
+              <h4 class="font-bold">Carlos Rodríguez</h4>
+              <p class="text-sm text-gray-500">Patrocinador de Luna</p>
+            </div>
+          </div>
+          <p class="text-gray-600 italic">
+            "Patrocinar a Luna ha sido una experiencia increíble. Ver su progreso desde que estaba enferma hasta ahora
+            que está feliz y saludable no tiene precio."
+          </p>
+        </div>
+
+        <div class="bg-white rounded-custom p-6 shadow-md">
+          <div class="flex items-center mb-4">
+            <div class="w-12 h-12 bg-primary/20 rounded-full flex items-center justify-center mr-3">
+              <span class="text-primary font-bold">A</span>
+            </div>
+            <div>
+              <h4 class="font-bold">Ana Martínez</h4>
+              <p class="text-sm text-gray-500">Donante en especie</p>
+            </div>
+          </div>
+          <p class="text-gray-600 italic">
+            "Cada mes llevo alimento y medicamentos. El personal es muy amable y me muestran cómo mis donaciones son
+            utilizadas directamente para los animales."
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Campaña actual -->
+  <section class="py-16 px-4 bg-white">
+    <div class="container mx-auto">
+      <div class="max-w-4xl mx-auto">
+        <div class="text-center mb-8">
+          <h2 class="text-3xl md:text-4xl font-fredoka text-primary mb-4">
+            Campaña Urgente: Medicina para Max
+          </h2>
+          <p class="text-xl text-gray-600">
+            Max necesita una cirugía urgente. Tu ayuda puede salvar su vida.
+          </p>
+        </div>
+
+        <div class="bg-gray-50 rounded-custom p-6 md:p-8">
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+            <div>
+              <div class="w-full h-64 bg-gray-200 rounded-custom mb-6 flex items-center justify-center">
+                <img src="../assets/img/marca/pexels-hilaryh-1084165.jpg" alt="max"
+                  class="object-cover w-full h-full rounded-custom">
+              </div>
+            </div>
+
+            <div>
+              <h3 class="text-2xl font-bold text-dark mb-4">La historia de Max</h3>
+              <p class="text-gray-600 mb-6">
+                Max fue encontrado en las calles con una herida grave en su pata.
+                Necesita cirugía inmediata y medicamentos especializados para recuperarse
+                completamente y encontrar un hogar amoroso.
+              </p>
+
+              <!-- Progress bar -->
+              <div class="mb-6">
+                <div class="flex justify-between mb-2">
+                  <span class="text-sm font-medium text-gray-600">Progreso</span>
+                  <span class="text-sm font-medium text-primary">$450.000 / $800.000</span>
                 </div>
-            </div>
+                <div class="w-full bg-gray-200 rounded-full h-3">
+                  <div class="progress-bar bg-gradient-to-r from-primary to-secondary h-3 rounded-full"
+                    style="width: 56%"></div>
+                </div>
+                <div class="text-sm text-gray-600 mt-2">56% completado - Quedan 12 días</div>
+              </div>
 
-            <!-- Contacto -->
-            <div class="flex flex-col items-start">
-                <h3 class="text-lg font-bold mb-3">Contáctanos</h3>
-                <p>(601) 000 0000</p>
-                <p>Cra 00. 53b Sur</p>
+              <button id="donate-max-btn"
+                class="w-full gradient-bg text-white py-3 rounded-custom font-bold hover:shadow-lg transition-all">
+                Ayudar a Max
+              </button>
             </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-            <!-- Enlaces -->
-            <div>
-                <h3 class="text-lg font-bold mb-3">Enlaces Rápidos</h3>
-                <ul class="space-y-2">
-                    <li><a href="../index.html" class="hover:text-primary transition">Inicio</a></li>
-                    <li><a href="../paginas/adopta.html" class="hover:text-primary transition">Adopta</a></li>
-                    <li><a href="../paginas/tienda.html" class="hover:text-primary transition">Tienda</a></li>
-                    <li><a href="../paginas/donaciones.html" class="hover:text-primary transition">Donar</a></li>
-                </ul>
-            </div>
+  <!-- Preguntas frecuentes -->
+  <section class="py-16 px-4 bg-gray-50">
+    <div class="container mx-auto max-w-4xl">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl md:text-4xl font-fredoka text-primary mb-4">
+          Preguntas Frecuentes
+        </h2>
+        <p class="text-xl text-gray-600">
+          Resolvemos tus dudas sobre las donaciones
+        </p>
+      </div>
 
-            <!-- Donaciones -->
-            <div>
-                <h3 class="text-lg font-bold mb-3">Sobre las Donaciones</h3>
-                <ul class="space-y-2">
-                    <li><a href="../paginas/donaciones.html" class="hover:text-primary transition">Términos y
-                            Condiciones</a></li>
-                    <li><a href="#" class="hover:text-primary transition">Informes</a></li>
-                    <li><a href="#" class="hover:text-primary transition">Política de Privacidad</a></li>
-                </ul>
-            </div>
-
+      <div class="space-y-4">
+        <div class="bg-white rounded-custom p-6 shadow-md">
+          <h3 class="text-lg font-bold text-dark mb-2">¿Cómo se utilizan mis donaciones?</h3>
+          <p class="text-gray-600">
+            El 85% de tu donación se destina directamente al cuidado de los animales (alimentación, veterinario,
+            medicinas).
+            El 15% restante cubre gastos operativos como transporte, mantenimiento de refugios y costos administrativos.
+          </p>
         </div>
 
-        <!-- Footer Bottom -->
-        <div class="border-t border-gray-300 text-center py-4 text-sm">
-            <p>© 2025 PawsLove Foundation</p>
-            <p>Todos los derechos reservados</p>
+        <div class="bg-white rounded-custom p-6 shadow-md">
+          <h3 class="text-lg font-bold text-dark mb-2">¿Puedo deducir mis donaciones de impuestos?</h3>
+          <p class="text-gray-600">
+            Sí, todas las donaciones son deducibles de impuestos. Te enviaremos un recibo oficial por email
+            que puedes presentar ante la autoridad tributaria correspondiente.
+          </p>
         </div>
-    </footer>
 
-    <script>
-      // Variables globales
- 
-      let currentDonationType = '';
-      let selectedAmount = 0;
+        <div class="bg-white rounded-custom p-6 shadow-md">
+          <h3 class="text-lg font-bold text-dark mb-2">¿Puedo cancelar mi donación recurrente en cualquier momento?</h3>
+          <p class="text-gray-600">
+            Sí, puedes cancelar tu donación recurrente en cualquier momento enviando un email a
+            donaciones@pawslove.org o llamando a nuestro centro de atención a donantes.
+          </p>
+        </div>
 
-      // Elementos del DOM
-      const elements = {
-        
-        donationModal: document.getElementById('donation-modal'),
-        modalContent: document.getElementById('modal-content'),
-        modalTitle: document.getElementById('modal-title'),
-        modalSubtitle: document.getElementById('modal-subtitle'),
-        customAmount: document.getElementById('custom-amount'),
-        cancelDonation: document.getElementById('cancel-donation'),
-        confirmDonation: document.getElementById('confirm-donation'),
-        toast: document.getElementById('toast'),
-        toastMessage: document.getElementById('toast-message')
-      };
+        <div class="bg-white rounded-custom p-6 shadow-md">
+          <h3 class="text-lg font-bold text-dark mb-2">¿Cómo recibo updates sobre mi ahijado si decido patrocinar?</h3>
+          <p class="text-gray-600">
+            Una vez al mes te enviaremos por email fotos y un reporte del progreso de tu ahijado.
+            También tendrás acceso prioritario para visitarlo previa coordinación.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
 
-      // Funciones de utilidad
-      function formatPrice(value) {
-        return new Intl.NumberFormat('es-CO', { 
-          style: 'currency', 
-          currency: 'COP',
-          minimumFractionDigits: 0,
-          maximumFractionDigits: 0
-        }).format(value);
-      }
+  <!-- Modal de donación -->
+  <div id="donation-modal"
+    class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center opacity-0 pointer-events-none transition-opacity duration-300 z-50 p-4">
+    <div id="modal-content" class="bg-white rounded-custom p-6 md:p-8 max-w-md w-full shadow-xl modal-enter">
+      <div class="text-center mb-6">
+        <h3 class="text-2xl font-fredoka text-primary mb-2" id="modal-title">Hacer Donación</h3>
+        <p class="text-gray-600" id="modal-subtitle">Elige el monto que deseas donar</p>
+      </div>
 
-      function showToast(message) {
-        elements.toastMessage.textContent = message;
-        elements.toast.classList.remove('opacity-0', 'pointer-events-none', 'translate-y-2');
-        
-        setTimeout(() => {
-          elements.toast.classList.add('opacity-0', 'pointer-events-none', 'translate-y-2');
-        }, 4000);
-      }
+      <!-- Montos predefinidos -->
+      <div class="grid grid-cols-2 gap-3 mb-6">
+        <button
+          class="amount-btn border-2 border-gray-200 py-3 rounded-custom hover:border-primary hover:text-primary transition-colors"
+          data-amount="5000">$5.000</button>
+        <button
+          class="amount-btn border-2 border-gray-200 py-3 rounded-custom hover:border-primary hover:text-primary transition-colors"
+          data-amount="10000">$10.000</button>
+        <button
+          class="amount-btn border-2 border-gray-200 py-3 rounded-custom hover:border-primary hover:text-primary transition-colors"
+          data-amount="25000">$25.000</button>
+        <button
+          class="amount-btn border-2 border-gray-200 py-3 rounded-custom hover:border-primary hover:text-primary transition-colors"
+          data-amount="50000">$50.000</button>
+      </div>
 
-      function closeModal() {
-        elements.modalContent.classList.remove('modal-enter-active');
-        setTimeout(() => {
-          elements.donationModal.classList.add('opacity-0', 'pointer-events-none');
-        }, 200);
-        
-        // Reset form
-        selectedAmount = 0;
-        elements.customAmount.value = '';
-        document.querySelectorAll('.amount-btn').forEach(btn => {
-          btn.classList.remove('border-primary', 'text-primary', 'bg-primary', 'text-white');
-          btn.classList.add('border-gray-200');
-        });
-      }
+      <!-- Monto personalizado -->
+      <div class="mb-6">
+        <label class="block text-gray-700 mb-2">Monto personalizado</label>
+        <input type="number" id="custom-amount" placeholder="Ingresa tu monto"
+          class="w-full border border-gray-300 rounded-custom px-4 py-2 focus:border-primary focus:outline-none">
+      </div>
 
-      
-// Menu Mobile Toggle - SOLUCIÓN CORREGIDA
-const menuToggle = document.getElementById('menu-toggle');
-const mobileMenu = document.getElementById('mobile-menu');
-const menuIcon = document.getElementById('menu-icon');
-let mobileMenuOpen = false;
+      <!-- Botones de acción -->
+      <div class="flex flex-col sm:flex-row gap-3">
+        <button id="cancel-donation"
+          class="flex-1 bg-gray-300 text-gray-700 py-3 rounded-custom hover:bg-gray-400 transition-colors">
+          Cancelar
+        </button>
+        <button id="confirm-donation"
+          class="flex-1 bg-primary text-white py-3 rounded-custom hover:bg-opacity-90 transition-colors">
+          Donar
+        </button>
+      </div>
+    </div>
+  </div>
 
-function toggleMobileMenu() {
-    mobileMenuOpen = !mobileMenuOpen;
-    if (mobileMenuOpen) {
-        mobileMenu.classList.remove('mobile-menu-closed', 'max-h-0');
-        mobileMenu.classList.add('mobile-menu-open', 'max-h-[400px]');
-        menuIcon.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>';
-    } else {
-        mobileMenu.classList.remove('mobile-menu-open', 'max-h-[400px]');
-        mobileMenu.classList.add('mobile-menu-closed', 'max-h-0');
-        menuIcon.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>';
-    }
-}
+  <!-- Toast notification -->
+  <div id="toast"
+    class="fixed bottom-4 right-4 bg-accent text-white px-6 py-3 rounded-custom shadow-lg opacity-0 pointer-events-none transition-all duration-300 transform translate-y-2 z-50">
+    <div class="flex items-center space-x-2">
+      <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+        <path fill-rule="evenodd"
+          d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+          clip-rule="evenodd" />
+      </svg>
+      <span id="toast-message">¡Gracias por tu donación!</span>
+    </div>
+  </div>
 
-menuToggle.addEventListener('click', toggleMobileMenu);
+  <footer class="bg-light text-dark">
+    <div class="max-w-7xl mx-auto px-6 py-10 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
 
-// Cerrar menú móvil al cambiar a escritorio
-window.addEventListener('resize', () => {
-    if (window.innerWidth >= 768 && mobileMenuOpen) {
-        toggleMobileMenu();
-    }
-});
+      <!-- Logo + Redes -->
+      <div class="flex flex-col items-start space-y-4">
+        <img src="../assets/img/marca/Logo.svg" alt="Logo PawsLove" class="w-36">
+        <p class="font-bold">Redes Sociales</p>
+        <div class="flex space-x-4">
+          <a href="#"><img src="../assets/iconos/instagram.jpg" alt="Instagram" class="w-6 h-6"></a>
+          <a href="#"><img src="../assets/iconos/tiktok.svg" alt="TikTok" class="w-6 h-6"></a>
+          <a href="#"><img src="../assets/iconos/facebook.svg" alt="Facebook" class="w-6 h-6"></a>
+        </div>
+      </div>
 
-// Inicializar menú cerrado
-mobileMenu.classList.add('mobile-menu-closed', 'max-h-0');
+      <!-- Contacto -->
+      <div class="flex flex-col items-start">
+        <h3 class="text-lg font-bold mb-3">Contáctanos</h3>
+        <p>(601) 000 0000</p>
+        <p>Cra 00. 53b Sur</p>
+      </div>
 
-      function processDonation() {
-        const amount = selectedAmount || parseInt(elements.customAmount.value) || 0;
-        
-        if (amount < 1000) {
-          showToast('El monto mínimo de donación es $1.000');
-          return;
-        }
+      <!-- Enlaces -->
+      <div>
+        <h3 class="text-lg font-bold mb-3">Enlaces Rápidos</h3>
+        <ul class="space-y-2">
+          <li><a href="../index.html" class="hover:text-primary transition">Inicio</a></li>
+          <li><a href="../paginas/adopta.html" class="hover:text-primary transition">Adopta</a></li>
+          <li><a href="../paginas/tienda.html" class="hover:text-primary transition">Tienda</a></li>
+          <li><a href="../paginas/donaciones.html" class="hover:text-primary transition">Donar</a></li>
+        </ul>
+      </div>
 
-        // Simular procesamiento
-        elements.confirmDonation.textContent = 'Procesando...';
-        elements.confirmDonation.disabled = true;
+      <!-- Donaciones -->
+      <div>
+        <h3 class="text-lg font-bold mb-3">Sobre las Donaciones</h3>
+        <ul class="space-y-2">
+          <li><a href="../paginas/donaciones.html" class="hover:text-primary transition">Términos y
+              Condiciones</a></li>
+          <li><a href="#" class="hover:text-primary transition">Informes</a></li>
+          <li><a href="#" class="hover:text-primary transition">Política de Privacidad</a></li>
+        </ul>
+      </div>
 
-        setTimeout(() => {
-          closeModal();
-          
-          const messages = {
-            'unique': `¡Gracias por tu donación de ${formatPrice(amount)}!`,
-            'monthly': `¡Te has suscrito a donaciones mensuales de ${formatPrice(amount)}!`,
-            'sponsor': `¡Ahora patrocinas un animal con ${formatPrice(amount)} mensuales!`,
-            'supplies': 'Gracias por tu interés en donar suministros'
-          };
+    </div>
 
-          showToast(messages[currentDonationType] || '¡Gracias por tu donación!');
-          
-          // Reset button
-          elements.confirmDonation.textContent = 'Donar';
-          elements.confirmDonation.disabled = false;
+    <!-- Footer Bottom -->
+    <div class="border-t border-gray-300 text-center py-4 text-sm">
+      <p>© 2025 PawsLove Foundation</p>
+      <p>Todos los derechos reservados</p>
+    </div>
+  </footer>
 
-          // Simulate progress bar update for Max campaign
-          if (Math.random() > 0.5) {
-            updateProgressBar();
-          }
-        }, 2000);
-      }
 
-      function updateProgressBar() {
-        const progressBar = document.querySelector('.progress-bar');
-        const currentProgress = parseInt(progressBar.style.width) || 56;
-        const newProgress = Math.min(currentProgress + Math.floor(Math.random() * 10) + 5, 100);
-        
-        setTimeout(() => {
-          progressBar.style.width = newProgress + '%';
-          
-          // Update amounts
-          const totalGoal = 800000;
-          const newAmount = Math.floor((newProgress / 100) * totalGoal);
-          const progressText = document.querySelector('.progress-bar').parentNode.nextElementSibling;
-          progressText.innerHTML = `${newProgress}% completado - ${newProgress >= 100 ? '¡Meta alcanzada!' : 'Quedan ' + Math.max(0, Math.floor(Math.random() * 10) + 1) + ' días'}`;
-          
-          const amountText = progressText.previousElementSibling.querySelector('.text-primary');
-          amountText.textContent = `${formatPrice(newAmount)} / ${formatPrice(totalGoal)}`;
-          
-          if (newProgress >= 100) {
-            showToast('¡La campaña de Max ha alcanzado su meta!');
-          }
-        }, 500);
-      }
+  <script type="module" src="../scripts/menu.js"></script>
+  <script type="module" src="../scripts/utilidades.js"></script>
+  <script type="module" src="../scripts/donaciones.js"></script>
+  
 
-      // Event Listeners
-      document.addEventListener('DOMContentLoaded', () => {
-        // Mobile menu
-        elements.menuToggle.onclick = toggleMobileMenu;
+</body>
 
-        // Close mobile menu on resize
-        window.onresize = () => {
-          if (window.innerWidth >= 768 && mobileMenuOpen) {
-            toggleMobileMenu();
-          }
-        };
-
-        // Donation buttons
-        document.querySelectorAll('.donate-btn').forEach(btn => {
-          btn.onclick = () => openModal(btn.dataset.type);
-        });
-
-        // Hero and Max donation buttons
-        document.getElementById('donate-hero-btn').onclick = () => openModal('unique');
-        document.getElementById('donate-max-btn').onclick = () => openModal('unique');
-
-        // Modal controls
-        elements.cancelDonation.onclick = closeModal;
-        elements.confirmDonation.onclick = processDonation;
-
-        // Amount buttons
-        document.querySelectorAll('.amount-btn').forEach(btn => {
-          btn.onclick = () => {
-            // Reset all buttons
-            document.querySelectorAll('.amount-btn').forEach(b => {
-              b.classList.remove('border-primary', 'text-white', 'bg-primary');
-              b.classList.add('border-gray-200');
-            });
-
-            // Activate selected button
-            btn.classList.remove('border-gray-200');
-            btn.classList.add('border-primary', 'text-white', 'bg-primary');
-
-            selectedAmount = parseInt(btn.dataset.amount);
-            elements.customAmount.value = '';
-          };
-        });
-
-        // Custom amount input
-        elements.customAmount.oninput = () => {
-          if (elements.customAmount.value) {
-            selectedAmount = 0;
-            document.querySelectorAll('.amount-btn').forEach(btn => {
-              btn.classList.remove('border-primary', 'text-white', 'bg-primary');
-              btn.classList.add('border-gray-200');
-            });
-          }
-        };
-
-        // Close modal on outside click
-        elements.donationModal.onclick = (e) => {
-          if (e.target === elements.donationModal) {
-            closeModal();
-          }
-        };
-
-        // Close modal with Escape key
-        document.onkeydown = (e) => {
-          if (e.key === 'Escape' && !elements.donationModal.classList.contains('opacity-0')) {
-            closeModal();
-          }
-        };
-
-        // Animate progress bar on load
-        setTimeout(() => {
-          document.querySelector('.progress-bar').style.width = '56%';
-        }, 1000);
-
-        console.log('Página de donaciones cargada correctamente');
-      });
-
-      const ingresoUsuario = document.getElementById('imagenUsuario');
-      ingresoUsuario.addEventListener('click', ()=>{
-        window.location.href = '../login.html';
-      });      
-    </script>
-  </body>
 </html>

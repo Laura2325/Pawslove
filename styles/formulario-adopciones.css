@@ -1,0 +1,73 @@
+     .form-step {
+        transition: opacity 0.3s ease-in-out;
+      }
+
+
+      /* Animaciones personalizadas */
+      @keyframes pulse {
+        0% {
+          transform: scale(1);
+        }
+
+        50% {
+          transform: scale(1.05);
+        }
+
+        100% {
+          transform: scale(1);
+        }
+      }
+
+      @keyframes bounce {
+        0%,
+        100% {
+          transform: translateY(0);
+        }
+
+        50% {
+          transform: translateY(-5px);
+        }
+      }
+
+      .step-progress {
+        transition: width 0.5s ease-in-out;
+      }
+
+      .step-item {
+        transition: all 0.3s ease;
+      }
+
+      .step-item.active {
+        animation: pulse 0.5s ease;
+      }
+
+      .step-icon {
+        transition: all 0.3s ease;
+      }
+
+      .step-item.completed .step-icon {
+        animation: bounce 0.5s ease;
+      }
+
+      .form-step {
+        transition: opacity 0.5s ease, transform 0.5s ease;
+      }
+
+      .form-step.hidden {
+        display: none;
+      }
+
+      .form-step.active {
+        opacity: 1;
+        transform: translateX(0);
+      }
+
+      .form-step.next {
+        opacity: 0;
+        transform: translateX(50px);
+      }
+
+      .form-step.prev {
+        opacity: 0;
+        transform: translateX(-50px);
+      }

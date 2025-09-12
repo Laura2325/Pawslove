@@ -1,13 +1,50 @@
-  @keyframes fade-in {
-        from {
-          opacity: 0;
-          transform: translateY(10px);
-        }
-        to {
-          opacity: 1;
-          transform: translateY(0);
-        }
+    body {
+      background-color: #f5f7fa;
+      background-image: radial-gradient(#d0d7de 1px, transparent 1px),
+        radial-gradient(#d0d7de 1px, transparent 1px);
+      background-size: 40px 40px;
+      background-position: 0 0, 20px 20px;
+      font-family: "Fredoka One", cursive, sans-serif;
+    }
+
+    .product-card {
+      transition: all 0.3s ease;
+    }
+
+    .product-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Estilos para tabla responsive */
+    @media (max-width: 768px) {
+      .table-responsive {
+        display: none;
       }
-      .animate-fade-in {
-        animation: fade-in 0.6s ease-in-out;
+
+      .card-responsive {
+        display: block;
       }
+    }
+
+    @media (min-width: 769px) {
+      .table-responsive {
+        display: table;
+      }
+
+      .card-responsive {
+        display: none;
+      }
+    }
+
+    /* Animaciones para modales */
+    .modal-enter {
+      opacity: 0;
+      transform: scale(0.9);
+      transition: all 0.3s ease;
+    }
+
+    .modal-enter-active {
+      opacity: 1;
+      transform: scale(1);
+    }

@@ -1,143 +1,103 @@
 <!DOCTYPE html>
 <html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Pawslove Foundation | Carrito</title>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Pawslove Foundation | Carrito</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap" rel="stylesheet" />
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            primary: "#6c40d1",
-            secondary: "#fc6dab",
-            accent: "#17b890",
-            light: "#ecf0f1",
-            dark: "#34252f",
-          },
-          fontFamily: {
-            fredoka: ["Fredoka One", "cursive"],
-          },
-          borderRadius: {
-            custom: "24px",
-          },
-        },
-      },
-    };
-  </script>
-  <style>
-    body {
-      background-color: #f5f7fa;
-      background-image: radial-gradient(#d0d7de 1px, transparent 1px),
-        radial-gradient(#d0d7de 1px, transparent 1px);
-      background-size: 40px 40px;
-      background-position: 0 0, 20px 20px;
-      font-family: "Fredoka One", cursive, sans-serif;
-    }
+    <script src="https://cdn.tailwindcss.com"></script>
 
-    .product-card {
-      transition: all 0.3s ease;
-    }
+    <link rel="stylesheet" href="../styles/carrito-compras.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap"
+      rel="stylesheet"
+    />
 
-    .product-card:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
-    }
+    <script type="module" src="/Pawslove/tailwind.config.js"></script>
+  </head>
 
-    /* Estilos para tabla responsive */
-    @media (max-width: 768px) {
-      .table-responsive {
-        display: none;
-      }
+  <body class="min-h-screen flex flex-col">
+    
+    <header
+      class="bg-white shadow-md py-3 md:py-4 px-4 md:px-6 flex flex-col sm:flex-row items-start sm:items-center justify-between sticky top-0 z-50 gap-3 sm:gap-0"
+    >
+      <h1 class="text-xl md:text-2xl lg:text-3xl font-fredoka text-primary">
+        Tu Carrito de Compras
+      </h1>
+      <a
+        href="./tienda.html"
+        class="bg-primary text-white px-4 py-2 rounded-custom hover:bg-opacity-90 transition-colors font-medium text-sm md:text-base w-full sm:w-auto text-center"
+        >Volver a la Tienda</a
+      >
+    </header>
 
-      .card-responsive {
-        display: block;
-      }
-    }
+    <main
+      class="container mx-auto flex-grow px-3 md:px-4 py-4 md:py-8 max-w-7xl"
+    >
+      <div
+        id="cart-container"
+        class="bg-white rounded-custom shadow-md p-3 md:p-6"
+      >
+        <!-- Contenido del carrito se cargará aquí -->
+      </div>
+    </main>
 
-    @media (min-width: 769px) {
-      .table-responsive {
-        display: table;
-      }
-
-      .card-responsive {
-        display: none;
-      }
-    }
-
-    /* Animaciones para modales */
-    .modal-enter {
-      opacity: 0;
-      transform: scale(0.9);
-      transition: all 0.3s ease;
-    }
-
-    .modal-enter-active {
-      opacity: 1;
-      transform: scale(1);
-    }
-  </style>
-</head>
-
-<body class="min-h-screen flex flex-col">
-  <header
-    class="bg-white shadow-md py-3 md:py-4 px-4 md:px-6 flex flex-col sm:flex-row items-start sm:items-center justify-between sticky top-0 z-50 gap-3 sm:gap-0">
-    <h1 class="text-xl md:text-2xl lg:text-3xl font-fredoka text-primary">
-      Tu Carrito de Compras
-    </h1>
-    <a href="./tienda.html"
-      class="bg-primary text-white px-4 py-2 rounded-custom hover:bg-opacity-90 transition-colors font-medium text-sm md:text-base w-full sm:w-auto text-center">Volver
-      a la Tienda</a>
-  </header>
-
-  <main class="container mx-auto flex-grow px-3 md:px-4 py-4 md:py-8 max-w-7xl">
-    <div id="cart-container" class="bg-white rounded-custom shadow-md p-3 md:p-6">
-      <!-- Contenido del carrito se cargará aquí -->
-    </div>
-  </main>
-
-  <!-- Modal para confirmar vaciar carrito -->
-  <div id="confirm-modal"
-    class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center opacity-0 pointer-events-none transition-opacity duration-300 z-50 p-4">
-    <div class="bg-white rounded-custom p-4 md:p-6 max-w-sm w-full shadow-lg text-center modal-enter"
-      id="modal-content">
-      <h2 class="text-lg md:text-xl font-fredoka text-primary mb-4">
-        ¿Estás seguro que deseas vaciar el carrito?
-      </h2>
-      <div class="flex flex-col sm:flex-row justify-center gap-3 sm:gap-4">
-        <button id="confirm-yes"
-          class="bg-red-500 hover:bg-red-600 text-white px-6 py-2 rounded-custom font-medium transition-colors order-2 sm:order-1">
-          Sí, vaciar
-        </button>
-        <button id="confirm-no"
-          class="bg-gray-300 hover:bg-gray-400 text-gray-700 px-6 py-2 rounded-custom font-medium transition-colors order-1 sm:order-2">
-          Cancelar
-        </button>
+    <!-- Modal para confirmar vaciar carrito -->
+    <div
+      id="confirm-modal"
+      class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center opacity-0 pointer-events-none transition-opacity duration-300 z-50 p-4"
+    >
+      <div
+        class="bg-white rounded-custom p-4 md:p-6 max-w-sm w-full shadow-lg text-center modal-enter"
+        id="modal-content"
+      >
+        <h2 class="text-lg md:text-xl font-fredoka text-primary mb-4">
+          ¿Estás seguro que deseas vaciar el carrito?
+        </h2>
+        <div class="flex flex-col sm:flex-row justify-center gap-3 sm:gap-4">
+          <button
+            id="confirm-yes"
+            class="bg-red-500 hover:bg-red-600 text-white px-6 py-2 rounded-custom font-medium transition-colors order-2 sm:order-1"
+          >
+            Sí, vaciar
+          </button>
+          <button
+            id="confirm-no"
+            class="bg-gray-300 hover:bg-gray-400 text-gray-700 px-6 py-2 rounded-custom font-medium transition-colors order-1 sm:order-2"
+          >
+            Cancelar
+          </button>
+        </div>
       </div>
     </div>
-  </div>
 
-  <!-- Toast notification para acciones -->
-  <div id="toast"
-    class="fixed bottom-4 left-4 right-4 md:left-auto md:right-4 md:w-80 bg-primary text-white px-4 py-3 rounded-custom shadow-lg opacity-0 pointer-events-none transition-all duration-300 transform translate-y-2 z-50">
-    <div class="flex items-center space-x-2">
-      <svg class="w-5 h-5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-        <path fill-rule="evenodd"
-          d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-          clip-rule="evenodd" />
-      </svg>
-      <span id="toast-message">Acción realizada</span>
+    <!-- Toast notification para acciones -->
+    <div
+      id="toast"
+      class="fixed bottom-4 left-4 right-4 md:left-auto md:right-4 md:w-80 bg-primary text-white px-4 py-3 rounded-custom shadow-lg opacity-0 pointer-events-none transition-all duration-300 transform translate-y-2 z-50"
+    >
+      <div class="flex items-center space-x-2">
+        <svg
+          class="w-5 h-5 flex-shrink-0"
+          fill="currentColor"
+          viewBox="0 0 20 20"
+        >
+          <path
+            fill-rule="evenodd"
+            d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+            clip-rule="evenodd"
+          />
+        </svg>
+        <span id="toast-message">Acción realizada</span>
+      </div>
     </div>
-  </div>
 
-  <footer class="bg-white border-t border-gray-200 py-3 md:py-4 text-center text-gray-600 text-sm md:text-base px-4">
-    &copy; 2025 Pawslove Foundation. Todos los derechos reservados.
-  </footer>
+    <footer
+      class="bg-white border-t border-gray-200 py-3 md:py-4 text-center text-gray-600 text-sm md:text-base px-4"
+    >
+      &copy; 2025 Pawslove Foundation. Todos los derechos reservados.
+    </footer>
 
-  <script type="module" src="../scripts/carrito.js"></script>
-</body>
-
+    <script type="module" src="../scripts/carrito.js"></script>
+  </body>
 </html>

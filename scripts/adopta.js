@@ -97,13 +97,5 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
   
-  // Toggle menú móvil
-  const menuToggle = document.getElementById('menu-toggle');
-  const mobileMenu = document.getElementById('mobile-menu');
-  if (menuToggle && mobileMenu) {
-    menuToggle.addEventListener('click', () => {
-      mobileMenu.classList.toggle('max-h-0');
-      mobileMenu.classList.toggle('max-h-96');
-    });
-  }
+
 });
