@@ -9,36 +9,7 @@
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap" rel="stylesheet">
 
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            primary: '#6c40d1',
-            secondary: '#fc6dab',
-            accent: '#17b890',
-            light: '#ecf0f1',
-            dark: '#34252f'
-          },
-          fontFamily: {
-            fredoka: ['Fredoka One', 'cursive']
-          },
-          borderRadius: {
-            'custom': '24px'
-          },
-          keyframes: {
-            fadeInUp: {
-              "0%": { opacity: "0", transform: "translateY(40px)" },
-              "100%": { opacity: "1", transform: "translateY(0)" }
-            }
-          },
-          animation: {
-            fadeInUp: "fadeInUp 0.8s ease-out forwards"
-          }
-        }
-      }
-    }
-  </script>
+  <script type="module" src="../tailwind.config.js"></script>
 
   <style>
     body {
@@ -257,12 +228,12 @@
 
             <!-- Logo + Redes -->
             <div class="flex flex-col items-start space-y-4">
-                <img src="../assets/img/marca/Logo.svg" alt="Logo PawsLove" class="w-36">
+                <img loading="lazy" src="../assets/img/marca/Logo.svg" alt="Logo PawsLove" class="w-36">
                 <p class="font-bold">Redes Sociales</p>
                 <div class="flex space-x-4">
-                    <a href="#"><img src="../assets/iconos/instagram.jpg" alt="Instagram" class="w-6 h-6"></a>
-                    <a href="#"><img src="../assets/iconos/tiktok.svg" alt="TikTok" class="w-6 h-6"></a>
-                    <a href="#"><img src="../assets/iconos/facebook.svg" alt="Facebook" class="w-6 h-6"></a>
+                    <a href="#"><img loading="lazy" src="../assets/iconos/instagram.jpg" alt="Instagram" class="w-6 h-6"></a>
+                    <a href="#"><img loading="lazy" src="../assets/iconos/tiktok.svg" alt="TikTok" class="w-6 h-6"></a>
+                    <a href="#"><img loading="lazy" src="../assets/iconos/facebook.svg" alt="Facebook" class="w-6 h-6"></a>
                 </div>
             </div>
 

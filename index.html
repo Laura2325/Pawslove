@@ -8,28 +8,7 @@
 
     <!-- Tailwind -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        primary: '#6c40d1',
-                        secondary: '#fc6dab',
-                        accent: '#17b890',
-                        light: '#ecf0f1',
-                        dark: '#34252f'
-                    },
-                    fontFamily: {
-                        fredoka: ['Fredoka One', 'cursive'],
-                        poppins: ['Poppins', 'sans-serif']
-                    },
-                    borderRadius: {
-                        'custom': '24px'
-                    }
-                }
-            }
-        }
-    </script>
+    <script type="module" src="./tailwind.config.js"></script>
 
     <!-- Tipografías -->
     <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Poppins:wght@300;400;500;600&display=swap"
@@ -143,7 +122,7 @@
 
                 <!-- Slide 1 -->
                 <div class="swiper-slide relative h-full w-full">
-                    <img src="./assets/img/marca/carrusel-1.jpg" alt="1" class="w-full h-full object-cover">
+                    <img loading="lazy" src="./assets/img/marca/carrusel-1.jpg" alt="1" class="w-full h-full object-cover">
                     <div
                         class="absolute inset-0 bg-black/50 flex flex-col justify-center items-center text-center text-white p-6">
                         <h1 class="font-fredoka font-bold text-5xl md:text-6xl mb-6" data-aos="fade-up">¡Adopta un amigo
@@ -158,7 +137,7 @@
 
                 <!-- Slide 2 -->
                 <div class="swiper-slide relative h-full w-full">
-                    <img src="./assets/img/marca/carrusel-2.jpg" alt="2" class="w-full h-full object-cover">
+                    <img loading="lazy" src="./assets/img/marca/carrusel-2.jpg" alt="2" class="w-full h-full object-cover">
                     <div
                         class="absolute inset-0 bg-black/50 flex flex-col justify-center items-center text-center text-white p-6">
                         <h1 class="font-fredoka font-bold text-5xl md:text-6xl mb-6" data-aos="fade-up">¡Dales una nueva
@@ -173,7 +152,7 @@
 
                 <!-- Slide 3 -->
                 <div class="swiper-slide relative h-full w-full">
-                    <img src="./assets/img/marca/carrusel-3.jpg" alt="3" class="w-full h-full object-cover">
+                    <img loading="lazy" src="./assets/img/marca/carrusel-3.jpg" alt="3" class="w-full h-full object-cover">
                     <div
                         class="absolute inset-0 bg-black/50 flex flex-col justify-center items-center text-center text-white p-6">
                         <h1 class="font-fredoka font-bold text-5xl md:text-6xl mb-6" data-aos="fade-up">¡Tu nuevo mejor
@@ -352,7 +331,7 @@
                     <div class="swiper-slide">
                         <div class="pet-card bg-white rounded-custom overflow-hidden mx-auto max-w-sm">
                             <div class="relative">
-                                <img src="https://images.unsplash.com/photo-1543466835-00a7907e9de1?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1074&q=80"
+                                <img loading="lazy" src="https://images.unsplash.com/photo-1543466835-00a7907e9de1?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1074&q=80"
                                     alt="Luna - Perrita Labrador" class="w-full h-64 object-cover">
                                 <span
                                     class="absolute top-4 left-4 bg-secondary text-white py-1 px-3 rounded-full text-sm">Perrita</span>
@@ -381,7 +360,7 @@
                     <div class="swiper-slide">
                         <div class="pet-card bg-white rounded-custom overflow-hidden mx-auto max-w-sm">
                             <div class="relative">
-                                <img src="https://images.unsplash.com/photo-1533738363-b7f9aef128ce?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=735&q=80"
+                                <img loading="lazy" src="https://images.unsplash.com/photo-1533738363-b7f9aef128ce?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=735&q=80"
                                     alt="Simba - Gatito Naranja" class="w-full h-64 object-cover">
                                 <span
                                     class="absolute top-4 left-4 bg-secondary text-white py-1 px-3 rounded-full text-sm">Gatito</span>
@@ -409,7 +388,7 @@
                     <div class="swiper-slide">
                         <div class="pet-card bg-white rounded-custom overflow-hidden mx-auto max-w-sm">
                             <div class="relative">
-                                <img src="https://images.unsplash.com/photo-1554692918-08fa0fdc9db3?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80"
+                                <img loading="lazy" src="https://images.unsplash.com/photo-1554692918-08fa0fdc9db3?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80"
                                     alt="Rocky - Perro Pastor Alemán" class="w-full h-64 object-cover">
                                 <span
                                     class="absolute top-4 left-4 bg-secondary text-white py-1 px-3 rounded-full text-sm">Perro</span>
@@ -437,7 +416,7 @@
                     <div class="swiper-slide">
                         <div class="pet-card bg-white rounded-custom overflow-hidden mx-auto max-w-sm">
                             <div class="relative">
-                                <img src="https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1143&q=80"
+                                <img loading="lazy" src="https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1143&q=80"
                                     alt="Mía - Gata Siamesa" class="w-full h-64 object-cover">
                                 <span
                                     class="absolute top-4 left-4 bg-secondary text-white py-1 px-3 rounded-full text-sm">Gata</span>
@@ -466,7 +445,7 @@
                     <div class="swiper-slide">
                         <div class="pet-card bg-white rounded-custom overflow-hidden mx-auto max-w-sm">
                             <div class="relative">
-                                <img src="https://images.unsplash.com/photo-1583337130417-3346a1be7dee?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1064&q=80"
+                                <img loading="lazy" src="https://images.unsplash.com/photo-1583337130417-3346a1be7dee?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1064&q=80"
                                     alt="Toby - Cachorro Mixto" class="w-full h-64 object-cover">
                                 <span
                                     class="absolute top-4 left-4 bg-secondary text-white py-1 px-3 rounded-full text-sm">Cachorro</span>
@@ -495,7 +474,7 @@
                     <div class="swiper-slide">
                         <div class="pet-card bg-white rounded-custom overflow-hidden mx-auto max-w-sm">
                             <div class="relative">
-                                <img src="https://images.unsplash.com/photo-1592194996308-7b43878e84a6?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80"
+                                <img loading="lazy" src="https://images.unsplash.com/photo-1592194996308-7b43878e84a6?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80"
                                     alt="Cleo - Gatita Bengalí" class="w-full h-64 object-cover">
                                 <span
                                     class="absolute top-4 left-4 bg-secondary text-white py-1 px-3 rounded-full text-sm">Gatita</span>
@@ -544,12 +523,12 @@
 
             <!-- Logo + Redes -->
             <div class="flex flex-col items-start space-y-4">
-                <img src="../assets/img/marca/Logo.svg" alt="Logo PawsLove" class="w-36">
+                <img loading="lazy" src="../assets/img/marca/Logo.svg" alt="Logo PawsLove" class="w-36">
                 <p class="font-bold">Redes Sociales</p>
                 <div class="flex space-x-4">
-                    <a href="#"><img src="../assets/iconos/instagram.jpg" alt="Instagram" class="w-6 h-6"></a>
-                    <a href="#"><img src="../assets/iconos/tiktok.svg" alt="TikTok" class="w-6 h-6"></a>
-                    <a href="#"><img src="../assets/iconos/facebook.svg" alt="Facebook" class="w-6 h-6"></a>
+                    <a href="#"><img loading="lazy" src="../assets/iconos/instagram.jpg" alt="Instagram" class="w-6 h-6"></a>
+                    <a href="#"><img loading="lazy" src="../assets/iconos/tiktok.svg" alt="TikTok" class="w-6 h-6"></a>
+                    <a href="#"><img  loading="lazy"src="../assets/iconos/facebook.svg" alt="Facebook" class="w-6 h-6"></a>
                 </div>
             </div>
 

@@ -15,7 +15,7 @@ function renderPetCards() {
   if (mascotas.length === 0) {
     container.innerHTML = `
     <div class="col-span-full text-center bg-white rounded-custom shadow-lg p-8 md:p-12">
-        <img src="../assets/img/marca/Isotipo_2.svg" alt="Pawslove" class="mx-auto h-20 w-20 opacity-40 mb-6">
+        <img loading="lazy" src="../assets/img/marca/Isotipo_2.svg" alt="Pawslove" class="mx-auto h-20 w-20 opacity-40 mb-6">
         <h3 class="text-2xl font-bold font-fredoka text-primary mb-3">¡Vuelve pronto!</h3>
         <p class="text-gray-600 max-w-lg mx-auto">Actualmente no tenemos mascotas disponibles para adopción, pero nuestro equipo trabaja sin descanso para rescatar a más amigos peludos.</p>
         <p class="text-gray-500 mt-4">¡Gracias por considerar la adopción!</p>
@@ -24,7 +24,7 @@ function renderPetCards() {
   }
 
   container.innerHTML = mascotas.map(pet => {
-    const isAdopted = pet.status !== 'Disponible';
+    const isAdopted = pet.status !== '¿Me adoptas?';
     const adoptButtonHTML = isAdopted
       ? `<span class="px-4 py-2 rounded-full bg-gray-500 text-white cursor-not-allowed">Ya tiene un hogar ❤️</span>`
       : `<button data-pet-name="${pet.name}" class="adopt-button px-4 py-2 rounded-full bg-primary hover:bg-secondary text-white">Adoptar 💜</button>`;
@@ -32,7 +32,7 @@ function renderPetCards() {
     return `
     <div class="bento-card bg-white rounded-custom shadow-lg overflow-hidden animate-fadeInUp"
          data-especie="${(pet.species || '').toLowerCase()}" data-edad="${(pet.age || '').toLowerCase()}" data-tamano="${(pet.size || '').toLowerCase()}" data-estado="${(pet.status || '').toLowerCase()}">
-      <img src="${pet.image || 'https://via.placeholder.com/600x450.png?text=Sin+Foto'}" alt="${pet.name}" class="w-full h-64 sm:h-72 md:h-80 lg:h-80 object-cover rounded-t-custom">
+      <img loading="lazy" src="${pet.image || 'https://via.placeholder.com/600x450.png?text=Sin+Foto'}" alt="${pet.name}" class="w-full h-64 sm:h-72 md:h-80 lg:h-80 object-cover rounded-t-custom">
       <div class="p-6">
         <h3 class="text-2xl font-bold text-dark mb-3">${pet.name}</h3>
         <p class="text-lg text-gray-600"><strong>Especie:</strong> ${pet.species}</p>
