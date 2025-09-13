@@ -1,6 +1,6 @@
-import { alertasRegistro } from "./sweetalert2.min.js";
-import { metodosUsuarios } from "./manejoLocalStorage.js";
-import { metodosFechaHora } from "./utilidades.js";
+import { alertasRegistro } from "../sweetalert2.min.js";
+import { metodosUsuarios } from "../manejoLocalStorage.js";
+import { metodosFechaHora } from "../utilidades.js";
 
 document.addEventListener('DOMContentLoaded', () => {
 

@@ -1,6 +1,6 @@
-import { alertRestablecerContrasena } from "./sweetalert2.min.js";
-import { alertasRegistro } from "./sweetalert2.min.js";
-import { metodosUsuarios } from "./manejoLocalStorage.js";
+import { alertRestablecerContrasena } from "../sweetalert2.min.js";
+import { alertasRegistro } from "../sweetalert2.min.js";
+import { metodosUsuarios } from "../manejoLocalStorage.js";
 // Obtiene referencias a los elementos del DOM
 const resetForm = document.getElementById('reset-form');
 

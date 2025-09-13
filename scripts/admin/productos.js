@@ -1,4 +1,4 @@
-import {alertasProductos} from './sweetalert2.min.js';
+import {alertasProductos} from '../sweetalert2.min.js';
 
 let productos = JSON.parse(localStorage.getItem("productos")) || [];
 let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
