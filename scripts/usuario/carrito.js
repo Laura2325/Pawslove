@@ -1,4 +1,4 @@
-import {formatoPrecios} from "./utilidades.js";
+import {formatoPrecios} from "../utilidades.js";
 const cartContainer = document.getElementById("cart-container");
 
 

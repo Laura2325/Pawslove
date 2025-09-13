@@ -1,4 +1,4 @@
-import { formatoPrecios } from './utilidades.js';
+import { formatoPrecios } from '../utilidades.js';
 
 // Variables globales
 let cart = {};

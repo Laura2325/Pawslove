@@ -1,5 +1,5 @@
-import { usuariosAdmin } from "./utilidades.js";
-import { metodosUsuarios, metodosSolicitudes } from "./manejoLocalStorage.js";
+import { usuariosAdmin } from "../utilidades.js";
+import { metodosUsuarios, metodosSolicitudes } from "../manejoLocalStorage.js";
 
 const FORM_DATA_KEY = 'formularioAdopcion';
 let usuariosCombinados = [];

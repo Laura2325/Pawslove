@@ -1,5 +1,5 @@
-import {alertasLogin} from "./sweetalert2.min.js";
-import { metodosUsuarios } from "./manejoLocalStorage.js";
+import {alertasLogin} from "../sweetalert2.min.js";
+import { metodosUsuarios } from "../manejoLocalStorage.js";
 
 document.addEventListener('DOMContentLoaded', () => {  
     metodosUsuarios.inicializarAdmin();
