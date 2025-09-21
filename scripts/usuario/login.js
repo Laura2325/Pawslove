@@ -1,7 +1,7 @@
-import {alertasLogin} from "../sweetalert2.min.js";
+import { alertasLogin } from "../sweetalert2.min.js";
 import { metodosUsuarios } from "../manejoLocalStorage.js";
 
-document.addEventListener('DOMContentLoaded', () => {  
+document.addEventListener('DOMContentLoaded', () => {
     metodosUsuarios.inicializarAdmin();
 
     const loginForm = document.getElementById('loginForm');
@@ -32,7 +32,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (usuarioEncontrado) {
             // ¡Inicio de sesión exitoso!
             alertasLogin.loginCorrecto(usuarioEncontrado);
-            
+
         } else {
             // Error en el inicio de sesión
             alertasLogin.loginError();
@@ -40,4 +40,21 @@ document.addEventListener('DOMContentLoaded', () => {
             passwordInput.value = '';
         }
     });
+
+    //! Metodo para acceder desde la API desarrollada
+    // async function obtenerDatos() {
+    //     try {
+    //         const response = await fetch('https://api.example.com/data');
+    //         if (!response.ok) {
+    //             throw new Error('Error en la solicitud');
+    //         }
+    //         const data = await response.json();
+    //         console.log(data); // Procesar los datos
+    //     } catch (error) {
+    //         console.error('Hubo un problema con la solicitud:', error);
+    //     }
+    // }
+
+    // obtenerDatos();
+
 });

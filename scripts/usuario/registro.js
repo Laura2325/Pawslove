@@ -67,6 +67,32 @@ document.addEventListener('DOMContentLoaded', () => {
             const btnClose = document.getElementById('closeRegister');
             btnClose.click(); // Vuelve a la vista de login de forma controlada
         });
+
+        //! Inicio creacion de metodo para usar APi de registro de usuarios
+
+        // async function enviarDatos() {
+        //     try {
+        //         const response = await fetch('https://api.example.com/data', {
+        //             method: 'POST',
+        //             headers: {
+        //                 'Content-Type': 'application/json',
+        //             },
+        //             body: JSON.stringify({ nombre: 'Juan', edad: 30 }),
+        //         });
+
+        //         if (!response.ok) {
+        //             throw new Error('Error en la solicitud');
+        //         }
+
+        //         const data = await response.json();
+        //         console.log('Respuesta del servidor:', data);
+        //     } catch (error) {
+        //         console.error('Hubo un problema con la solicitud:', error);
+        //     }
+        // }
+
+        // enviarDatos();
+
     });
 
 });
