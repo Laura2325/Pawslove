@@ -1,6 +1,5 @@
 import { alertasRegistro } from "../sweetalert2.min.js";
 import { metodosUsuarios } from "../manejoLocalStorage.js";
-import { metodosFechaHora } from "../utilidades.js";
 
 document.addEventListener('DOMContentLoaded', () => {
 
@@ -50,11 +49,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const usuario = {
             nombre: nombreUsuario.value.trim(),
-            correo: correo.value.trim(),
-            contraseña: contraseña.value,
-            tipo: 'Cliente',
-            fechaRegistro: metodosFechaHora.obtenerFechaActual(),
-            horaRegistro: metodosFechaHora.obtenerHoraActual12Horas()
+            apellido: apellidoUsuario.value.trim(),
+            email: correo.value.trim(),
+            password: contraseña.value,                                        
+            direccion: "Calle Falsa 123",            
+            telefono: "123456789"                        
         };
 
         if (!metodosUsuarios.agregarUsuario(usuario)) {
@@ -70,28 +69,29 @@ document.addEventListener('DOMContentLoaded', () => {
 
         //! Inicio creacion de metodo para usar APi de registro de usuarios
 
-        // async function enviarDatos() {
-        //     try {
-        //         const response = await fetch('https://api.example.com/data', {
-        //             method: 'POST',
-        //             headers: {
-        //                 'Content-Type': 'application/json',
-        //             },
-        //             body: JSON.stringify({ nombre: 'Juan', edad: 30 }),
-        //         });
+        async function enviarDatos() {
+            try {
+                const response = await fetch('http://localhost:8080/auth/register', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(usuario),
+                });
 
-        //         if (!response.ok) {
-        //             throw new Error('Error en la solicitud');
-        //         }
+                if (!response.ok) {
+                    throw new Error('Error en la solicitud');
+                }
 
-        //         const data = await response.json();
-        //         console.log('Respuesta del servidor:', data);
-        //     } catch (error) {
-        //         console.error('Hubo un problema con la solicitud:', error);
-        //     }
-        // }
+                const data = await response.json();
+                console.log('Respuesta del servidor:', data);
+            } catch (error) {
+                console.error('Hubo un problema con la solicitud:', error);
+                alertasRegistro.usuarioRegistrado();
+            }
+        }
 
-        // enviarDatos();
+        enviarDatos();
 
     });
 

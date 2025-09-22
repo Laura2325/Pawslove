@@ -42,19 +42,38 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     //! Metodo para acceder desde la API desarrollada
-    // async function obtenerDatos() {
-    //     try {
-    //         const response = await fetch('https://api.example.com/data');
-    //         if (!response.ok) {
-    //             throw new Error('Error en la solicitud');
-    //         }
-    //         const data = await response.json();
-    //         console.log(data); // Procesar los datos
-    //     } catch (error) {
-    //         console.error('Hubo un problema con la solicitud:', error);
-    //     }
-    // }
+    // Enviar credenciales al backend
+    async function login(username, password) {
+        const response = await fetch('http://localhost:8080/auth/loginConDTO', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email, password }),
+        });
 
-    // obtenerDatos();
+        if (response.ok) {
+            const { token } = await response.json();
+            // Almacenar el token (por ejemplo, en localStorage)
+            localStorage.setItem('jwt', token);
+        } else {
+            console.error('Error al iniciar sesión');
+        }
+    }
+
+    // Usar el token en solicitudes protegidas
+    async function getProtectedData() {
+        const token = localStorage.getItem('jwt');
+        const response = await fetch('https://api.example.com/protected', {
+            method: 'GET',
+            headers: { Authorization: `Bearer ${token}` },
+        });
+
+        if (response.ok) {
+            const data = await response.json();
+            console.log(data);
+        } else {
+            console.error('Acceso denegado');
+        }
+    }
+
 
 });
