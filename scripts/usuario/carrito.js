@@ -83,17 +83,11 @@ function renderCart(cart) {
 
         tr.innerHTML = `
             <td class="py-4 px-4">
-<<<<<<< HEAD:scripts/carrito.js
                 <div class="flex items-center space-x-4">
                     <div class="w-16 h-16 bg-gray-200 rounded flex items-center justify-center flex-shrink-0 overflow-hidden">
                         <img src="${item.image}" alt="${item.name}" class="object-cover w-full h-full">
                     </div>
                     <span class="font-semibold text-dark">${item.name}</span>
-=======
-              <div class="flex items-center space-x-4">
-                <div class="w-16 h-16 bg-gray-200 rounded flex items-center justify-center flex-shrink-0 overflow-hidden">
-                  <img src="${item.image || '../assets/img/marca/Isotipo_2.svg'}" alt="${item.name}" class="h-full w-full object-cover">
->>>>>>> 2abca662c30f1c2864b5ec0e83bf6642c20ca7d5:scripts/usuario/carrito.js
                 </div>
             </td>
             <td class="py-4 px-4 font-bold text-primary">${formatoPrecios.formatoPrecio(item.price)}</td>

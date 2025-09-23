@@ -136,6 +136,12 @@ export const usuariosAdmin = {
   getTimeDedication,
 };
 
+AOS.init({
+  duration: 1000,
+  once: true,
+  offset: 100,
+});
+
 function emailValido(email) {
     if (!email) return false;
     // Regex mejorada: asegura que el TLD (lo que va después del último punto) tenga al menos 2 letras.
