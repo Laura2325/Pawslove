@@ -37,37 +37,54 @@ document.addEventListener('DOMContentLoaded', () => {
                 body: JSON.stringify({ email, password }),
             });
 
-            // 4. Validar el resultado del inicio de sesión
             if (response.ok) {
-                const data = await response.json(); // Esperamos { token, usuario: { nombre, tipo, ... } }
+                const token = await response.text();
+                sessionStorage.setItem('jwt', token);
 
-                // Guardar el token en sessionStorage
-                sessionStorage.setItem('jwt', data.token);
-                // Opcional: guardar info del usuario para uso en el frontend
-                sessionStorage.setItem('usuario', JSON.stringify(data.usuario));
-
-                // ¡Inicio de sesión exitoso!
-                alertasLogin.loginCorrecto(data.usuario);
+                await Swal.fire({
+                    title: '¡Inicio de sesión exitoso!',
+                    text: 'Serás redirigido a la página principal.',
+                    icon: 'success',
+                    timer: 2000,
+                    showConfirmButton: false,
+                });
+                window.location.replace("index.html");
 
             } else {
-                // Limpiar campos en caso de error
                 emailInput.value = '';
                 passwordInput.value = '';
 
-                // Manejar errores específicos
-                if (response.status === 404) {
-                    alertasLogin.alertaEmailNoRegistrado();
+                if (response.status === 404 || response.status === 401) {
+                    try {
+                        const adminResponse = await fetch('http://localhost:8080/administradores');
+                        if (adminResponse.ok) {
+                            const administradores = await adminResponse.json();
+                            const adminEncontrado = administradores.find(
+                                admin => admin.email === email && admin.contrasena === password
+                            );
+
+                            if (adminEncontrado) {
+                                alertasLogin.loginCorrecto(adminEncontrado);
+                            } else {
+                                alertasLogin.alertaEmailNoRegistrado();
+                            }
+                        } else {
+                            alertasLogin.alertaEmailNoRegistrado();
+                        }
+                    } catch (adminError) {
+                        console.error('Error al verificar administradores:', adminError);
+                        alertasLogin.alertaEmailNoRegistrado();
+                    }
                 } else {
-                    // Para 401 (Unauthorized) u otros errores
                     alertasLogin.loginError();
                 }
             }
         } catch (error) {
-            console.error('Error de conexión:', error);
+            console.error('Error de conexión o autenticación:', error);
             Swal.fire({
                 icon: 'error',
-                title: 'Error de Conexión',
-                text: 'No se pudo conectar con el servidor. Por favor, inténtalo más tarde.',
+                title: 'Error de Autenticación',
+                text: error.message || 'No se pudo completar el inicio de sesión. Por favor, inténtalo más tarde.',
             });
         }
     });
