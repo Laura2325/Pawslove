@@ -1,21 +1,21 @@
 import { alertasRegistro } from "../sweetalert2.min.js";
-import { metodosUsuarios } from "../manejoLocalStorage.js";
-import { metodosFechaHora } from "../utilidades.js";
+import { validadorEmail } from "../utilidades.js";
 
 document.addEventListener('DOMContentLoaded', () => {
 
     const registroForm = document.getElementById('registroForm');
     if (!registroForm) return;
 
-    registroForm.addEventListener('submit', (e) => {
+    registroForm.addEventListener('submit', async (e) => {
         e.preventDefault();
 
         const nombreUsuario = document.getElementById('nombreRegistro');
+        const apellidoUsuario = document.getElementById('apellidoRegistro');
         const correo = document.getElementById('emailRegistro');
         const contraseña = document.getElementById('passwordRegistro');
         const confirmarContraseña = document.getElementById('confirmarPassword');
 
-        if (!nombreUsuario.value.trim() || !correo.value.trim() || !contraseña.value.trim()) {
+        if (!nombreUsuario.value.trim() || !apellidoUsuario.value.trim() || !correo.value.trim() || !contraseña.value.trim()) {
             alertasRegistro.camposIncompletos();
             return;
         }
@@ -36,6 +36,11 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
+        if (contraseña.value !== confirmarContraseña.value) {
+            alertasRegistro.contrasenasNoCoinciden();
+            return;
+        }
+
         // Nueva validación para excluir símbolos que podrían ser problemáticos.
         const tieneSimbolosProhibidos = /[<>"'&]/.test(contraseña.value);
         if (tieneSimbolosProhibidos) {
@@ -43,30 +48,62 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
-        if (contraseña.value !== confirmarContraseña.value) {
-            alertasRegistro.contrasenasNoCoinciden();
+        if (!validadorEmail.emailValido(correo.value)) {
+            alertasRegistro.correoInvalido(correo.value);
             return;
         }
 
-        const usuario = {
-            nombre: nombreUsuario.value.trim(),
-            correo: correo.value.trim(),
-            contraseña: contraseña.value,
-            tipo: 'Cliente',
-            fechaRegistro: metodosFechaHora.obtenerFechaActual(),
-            horaRegistro: metodosFechaHora.obtenerHoraActual12Horas()
-        };
+        try {
+            // 1. Verificar si el correo ya existe en el backend
+            const checkResponse = await fetch('http://localhost:8080/usuarios/buscarPorEmail?email=' + correo.value.trim(), {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                }
+            });
 
-        if (!metodosUsuarios.agregarUsuario(usuario)) {
-            alertasRegistro.usuarioExistente();
-            return;
+            // Si la respuesta es 'ok' (status 200-299), significa que el usuario fue encontrado.
+            if (checkResponse.ok) {
+                alertasRegistro.usuarioExistente();
+                return;
+            }
+
+            // 2. Si el usuario no existe, proceder con el registro
+            const usuario = {
+                nombre: nombreUsuario.value.trim(),
+                apellido: apellidoUsuario.value.trim(),
+                email: correo.value.trim(),
+                password: contraseña.value,
+                // Los siguientes son valores de ejemplo, ajústalos según sea necesario
+                direccion: "Calle Falsa 123",
+                telefono: "123456789"
+            };
+
+            const registerResponse = await fetch('http://localhost:8080/auth/register', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(usuario),
+            });
+
+            if (!registerResponse.ok) {
+                throw new Error('Error en el registro');
+            }
+
+            // 3. Si el registro es exitoso, mostrar alerta y redirigir
+            await alertasRegistro.usuarioRegistrado();
+            document.getElementById('closeRegister').click(); // Vuelve a la vista de login
+
+        } catch (error) {
+            console.error('Hubo un problema con la solicitud de registro:', error);
+            // Aquí podrías mostrar una alerta de error genérica
+            Swal.fire({
+                icon: 'error',
+                title: 'Error de Conexión',
+                text: 'No se pudo completar el registro. Por favor, inténtalo más tarde.',
+            });
         }
-
-        // Mostrar la alerta y esperar a que termine para cambiar de vista
-        alertasRegistro.usuarioRegistrado().then(() => {
-            const btnClose = document.getElementById('closeRegister');
-            btnClose.click(); // Vuelve a la vista de login de forma controlada
-        });
     });
 
 });

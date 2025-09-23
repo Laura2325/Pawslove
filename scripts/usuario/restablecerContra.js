@@ -25,10 +25,14 @@ resetForm.addEventListener('submit', (event) => {
     // Por seguridad, siempre mostramos el mismo mensaje, pero internamente
     // podríamos condicionar el envío de un correo real a si 'usuarioExiste' es true.
     console.log(`Solicitud de restablecimiento para: ${email}. ¿Usuario existe? ${usuarioExiste}`);
-
+    
+    // Limpia el campo de correo electrónico
+    emailInput.value = '';
+    
     // Muestra un mensaje de éxito con SweetAlert2
     alertRestablecerContrasena.alertRestablecerContra();
 
-    // Limpia el campo de correo electrónico
-    emailInput.value = '';
+    // Vuelve a la vista de login
+    closeResetPassword.click();
+
 });
