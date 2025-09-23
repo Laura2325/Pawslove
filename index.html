@@ -8,7 +8,7 @@
 
     <!-- Tailwind -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <script type="module" src="./tailwind.config.js"></script>
+
 
     <!-- Tipografías -->
     <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Poppins:wght@300;400;500;600&display=swap"
@@ -49,9 +49,47 @@
             opacity: 0;
         }
     </style>
+    <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#6c40d1',
+            secondary: '#fc6dab',
+            accent: '#17b890',
+            light: '#ecf0f1',
+            dark: '#34252f',
+          },
+          borderRadius: {
+            nav: '24px',
+            custom: '24px'
+          },
+          spacing: {
+            spacing: '1rem',
+          },
+          boxShadow: {
+            nav: '0 4px 6px rgba(0, 0, 0, 0.1)',
+          },
+          fontFamily: {
+            fredoka: ['Fredoka One', 'cursive'],
+            montserrat: ['Montserrat', 'sans-serif'],
+          },
+          keyframes: {
+            fadeInUp: {
+              "0%": { opacity: "0", transform: "translateY(40px)" },
+              "100%": { opacity: "1", transform: "translateY(0)" }
+            }
+          },
+          animation: {
+            fadeInUp: "fadeInUp 0.8s ease-out forwards"
+          }
+        }
+      }
+    }
+  </script>
 </head>
 
-<body class="bg-light text-dark font-poppins">
+<body class="bg-light text-dark font-montserrat">
 
     <!-- Barra de navegación -->
     <div class="flex justify-center">
@@ -303,7 +341,7 @@
 
             <!-- Información adicional -->
             <div class="mt-16 bg-accent text-white rounded-custom p-8 md:p-12 text-center" data-aos="fade-up">
-                <h3 class="title text-2xl md:text-3xl mb-4">¿Quieres ser parte del cambio?</h3>
+                <h3 class="font-fredoka text-2xl md:text-3xl mb-4">¿Quieres ser parte del cambio?</h3>
                 <p class="text-lg mb-6 max-w-3xl mx-auto">Cada adopción, donación o hora de voluntariado marca la
                     diferencia en la vida de estos animales.</p>
                 <a href="./paginas/contacto.html"
@@ -506,7 +544,7 @@
 
             <!-- Call to Action -->
             <div class="mt-16 bg-primary text-white rounded-custom p-8 md:p-12 text-center" data-aos="fade-up">
-                <h3 class="title text-2xl md:text-3xl mb-4">¿Te enamoraste de alguno de nuestros peludos?</h3>
+                <h3 class="font-fredoka text-2xl md:text-3xl mb-4">¿Te enamoraste de alguno de nuestros peludos?</h3>
                 <p class="text-lg mb-6 max-w-3xl mx-auto">Completa el formulario de adopción y programa una cita para
                     conocerlos en persona. El proceso de adopción típicamente toma 3-5 días.</p>
                 <a href="./paginas/formulario-adopcion.html"

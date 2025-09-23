@@ -1,109 +1,117 @@
-import {formatoPrecios} from "./utilidades.js";
+// Función de formato de precios (reemplaza la importación)
+const formatoPrecios = {
+    formatoPrecio: (precio) => {
+        return new Intl.NumberFormat('es-CO', {
+            style: 'currency',
+            currency: 'COP'
+        }).format(precio);
+    }
+};
+
 const cartContainer = document.getElementById("cart-container");
 
+// Función para mostrar toast
+function showToast(message) {
+    const toast = document.getElementById('toast');
+    const toastMessage = document.getElementById('toast-message');
+    toastMessage.textContent = message;
 
-    // Función para mostrar toast
-    function showToast(message) {
-      const toast = document.getElementById('toast');
-      const toastMessage = document.getElementById('toast-message');
-      toastMessage.textContent = message;
+    toast.classList.remove('opacity-0', 'pointer-events-none', 'translate-y-2');
+    toast.classList.add('opacity-1', 'translate-y-0');
 
-      toast.classList.remove('opacity-0', 'pointer-events-none', 'translate-y-2');
-      toast.classList.add('opacity-1', 'translate-y-0');
-
-      setTimeout(() => {
+    setTimeout(() => {
         toast.classList.add('opacity-0', 'pointer-events-none', 'translate-y-2');
         toast.classList.remove('opacity-1', 'translate-y-0');
-      }, 3000);
-    }
+    }, 3000);
+}
 
-    // Cargar carrito desde localStorage
-    function loadCart() {
-      const savedCart = localStorage.getItem("petShopCart");
-      if (savedCart) {
+// Cargar carrito desde localStorage
+function loadCart() {
+    const savedCart = localStorage.getItem("petShopCart");
+    if (savedCart) {
         try {
-          return JSON.parse(savedCart);
+            return JSON.parse(savedCart);
         } catch {
-          return {};
+            return {};
         }
-      }
-      return {};
     }
+    return {};
+}
 
-    // Guardar carrito en localStorage
-    function saveCart(cart) {
-      localStorage.setItem("petShopCart", JSON.stringify(cart));
-    }
+// Guardar carrito en localStorage
+function saveCart(cart) {
+    localStorage.setItem("petShopCart", JSON.stringify(cart));
+}
 
-    // Renderizar carrito
-    function renderCart(cart) {
-      cartContainer.innerHTML = "";
+// Renderizar carrito
+function renderCart(cart) {
+    cartContainer.innerHTML = "";
 
-      if (Object.keys(cart).length === 0) {
+    if (Object.keys(cart).length === 0) {
         cartContainer.innerHTML = `
             <div class="text-center py-12 md:py-20">
-              <svg class="w-16 h-16 md:w-24 md:h-24 mx-auto text-gray-300 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2 9h14l-2-9M10 21a1 1 0 100-2 1 1 0 000 2zm8 0a1 1 0 100-2 1 1 0 000 2z"/>
-              </svg>
-              <p class="text-gray-500 text-lg md:text-xl mb-4">Tu carrito está vacío</p>
-              <a href="./tienda.html" class="inline-block bg-primary text-white px-6 py-3 rounded-custom hover:bg-opacity-90 transition-colors font-medium">
-                Explorar Productos
-              </a>
+                <svg class="w-16 h-16 md:w-24 md:h-24 mx-auto text-gray-300 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2 9h14l-2-9M10 21a1 1 0 100-2 1 1 0 000 2zm8 0a1 1 0 100-2 1 1 0 000 2z"/>
+                </svg>
+                <p class="text-gray-500 text-lg md:text-xl mb-4">Tu carrito está vacío</p>
+                <a href="./tienda.html" class="inline-block bg-primary text-white px-6 py-3 rounded-custom hover:bg-opacity-90 transition-colors font-medium">
+                    Explorar Productos
+                </a>
             </div>
-          `;
-        return;
-      }
-
-      // Vista de tabla para desktop
-      const table = document.createElement("table");
-      table.className = "table-responsive w-full text-left border-collapse";
-
-      table.innerHTML = `
-          <thead>
-            <tr class="border-b border-gray-300">
-              <th class="py-3 px-4 font-semibold">Producto</th>
-              <th class="py-3 px-4 font-semibold">Precio</th>
-              <th class="py-3 px-4 font-semibold">Cantidad</th>
-              <th class="py-3 px-4 font-semibold">Subtotal</th>
-              <th class="py-3 px-4 font-semibold">Acciones</th>
-            </tr>
-          </thead>
-          <tbody></tbody>
         `;
+        return;
+    }
 
-      const tbody = table.querySelector("tbody");
+    // Vista de tabla para desktop
+    const table = document.createElement("table");
+    table.className = "table-responsive w-full text-left border-collapse";
 
-      // Vista de cards para móvil
-      const cardsContainer = document.createElement("div");
-      cardsContainer.className = "card-responsive space-y-4";
+    table.innerHTML = `
+        <thead>
+            <tr class="border-b border-gray-300">
+                <th class="py-3 px-4 font-semibold">Producto</th>
+                <th class="py-3 px-4 font-semibold">Precio</th>
+                <th class="py-3 px-4 font-semibold">Cantidad</th>
+                <th class="py-3 px-4 font-semibold">Subtotal</th>
+                <th class="py-3 px-4 font-semibold">Acciones</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    `;
 
-      Object.values(cart).forEach((item) => {
+    const tbody = table.querySelector("tbody");
+
+    // Vista de cards para móvil
+    const cardsContainer = document.createElement("div");
+    cardsContainer.className = "card-responsive space-y-4";
+
+    Object.values(cart).forEach((item) => {
         // Fila de tabla para desktop
         const tr = document.createElement("tr");
         tr.className = "border-b border-gray-200 hover:bg-gray-50 transition-colors";
 
         tr.innerHTML = `
             <td class="py-4 px-4">
-              <div class="flex items-center space-x-4">
-                <div class="w-16 h-16 bg-gray-200 rounded flex items-center justify-center flex-shrink-0">
-                  <span class="text-xs text-gray-500">IMG</span>
+                <div class="flex items-center space-x-4">
+                    <div class="w-16 h-16 bg-gray-200 rounded flex items-center justify-center flex-shrink-0 overflow-hidden">
+                        <img src="${item.image}" alt="${item.name}" class="object-cover w-full h-full">
+                    </div>
+                    <span class="font-semibold text-dark">${item.name}</span>
                 </div>
-                <span class="font-semibold text-dark">${item.name}</span>
-              </div>
             </td>
             <td class="py-4 px-4 font-bold text-primary">${formatoPrecios.formatoPrecio(item.price)}</td>
             <td class="py-4 px-4">
-              <div class="flex items-center space-x-2">
-                <button class="decrease-qty bg-gray-200 hover:bg-gray-300 rounded w-8 h-8 flex items-center justify-center font-bold text-lg transition-colors">−</button>
-                <span class="quantity font-medium px-2 min-w-[2rem] text-center">${item.quantity}</span>
-                <button class="increase-qty bg-gray-200 hover:bg-gray-300 rounded w-8 h-8 flex items-center justify-center font-bold text-lg transition-colors">+</button>
-              </div>
+                <div class="flex items-center space-x-2">
+                    <button class="decrease-qty bg-gray-200 hover:bg-gray-300 rounded w-8 h-8 flex items-center justify-center font-bold text-lg transition-colors">−</button>
+                    <span class="quantity font-medium px-2 min-w-[2rem] text-center">${item.quantity}</span>
+                    <button class="increase-qty bg-gray-200 hover:bg-gray-300 rounded w-8 h-8 flex items-center justify-center font-bold text-lg transition-colors">+</button>
+                </div>
             </td>
             <td class="py-4 px-4 font-bold text-primary">${formatoPrecios.formatoPrecio(item.price * item.quantity)}</td>
             <td class="py-4 px-4">
-              <button class="remove-item text-red-500 hover:text-red-700 font-bold text-xl p-2 hover:bg-red-50 rounded transition-colors" title="Eliminar producto">&times;</button>
+                <button class="remove-item text-red-500 hover:text-red-700 font-bold text-xl p-2 hover:bg-red-50 rounded transition-colors" title="Eliminar producto">&times;</button>
             </td>
-          `;
+        `;
 
         // Card para móvil
         const card = document.createElement("div");
@@ -111,31 +119,31 @@ const cartContainer = document.getElementById("cart-container");
 
         card.innerHTML = `
             <div class="flex items-start space-x-4">
-              <div class="w-20 h-20 bg-gray-200 rounded-lg flex items-center justify-center flex-shrink-0">
-                <span class="text-xs text-gray-500">IMG</span>
-              </div>
-              <div class="flex-1 min-w-0">
-                <h3 class="font-semibold text-dark mb-1 text-lg">${item.name}</h3>
-                <p class="text-primary font-bold mb-3 text-xl">${formatoPrecios.formatoPrecio(item.price)}</p>
-                
-                <div class="flex items-center justify-between">
-                  <div class="flex items-center space-x-3 bg-white rounded-full px-3 py-1 border">
-                    <button class="decrease-qty text-gray-600 hover:text-primary font-bold text-xl w-8 h-8 flex items-center justify-center">−</button>
-                    <span class="quantity font-medium px-2 min-w-[2rem] text-center text-lg">${item.quantity}</span>
-                    <button class="increase-qty text-gray-600 hover:text-primary font-bold text-xl w-8 h-8 flex items-center justify-center">+</button>
-                  </div>
-                  <button class="remove-item text-red-500 hover:text-red-700 bg-red-50 hover:bg-red-100 rounded-full w-10 h-10 flex items-center justify-center font-bold text-xl transition-colors">×</button>
+                <div class="w-20 h-20 bg-gray-200 rounded-lg flex items-center justify-center flex-shrink-0 overflow-hidden">
+                    <img src="${item.image}" alt="${item.name}" class="object-cover w-full h-full">
                 </div>
-                
-                <div class="mt-3 pt-3 border-t border-gray-200">
-                  <div class="flex justify-between items-center">
-                    <span class="text-gray-600">Subtotal:</span>
-                    <span class="font-bold text-primary text-xl">${formatoPrecios.formatoPrecio(item.price * item.quantity)}</span>
-                  </div>
+                <div class="flex-1 min-w-0">
+                    <h3 class="font-semibold text-dark mb-1 text-lg">${item.name}</h3>
+                    <p class="text-primary font-bold mb-3 text-xl">${formatoPrecios.formatoPrecio(item.price)}</p>
+                    
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center space-x-3 bg-white rounded-full px-3 py-1 border">
+                            <button class="decrease-qty text-gray-600 hover:text-primary font-bold text-xl w-8 h-8 flex items-center justify-center">−</button>
+                            <span class="quantity font-medium px-2 min-w-[2rem] text-center text-lg">${item.quantity}</span>
+                            <button class="increase-qty text-gray-600 hover:text-primary font-bold text-xl w-8 h-8 flex items-center justify-center">+</button>
+                        </div>
+                        <button class="remove-item text-red-500 hover:text-red-700 bg-red-50 hover:bg-red-100 rounded-full w-10 h-10 flex items-center justify-center font-bold text-xl transition-colors">×</button>
+                    </div>
+                    
+                    <div class="mt-3 pt-3 border-t border-gray-200">
+                        <div class="flex justify-between items-center">
+                            <span class="text-gray-600">Subtotal:</span>
+                            <span class="font-bold text-primary text-xl">${formatoPrecios.formatoPrecio(item.price * item.quantity)}</span>
+                        </div>
+                    </div>
                 </div>
-              </div>
             </div>
-          `;
+        `;
 
         // Event listeners para tabla
         const decreaseBtnTable = tr.querySelector(".decrease-qty");
@@ -149,29 +157,29 @@ const cartContainer = document.getElementById("cart-container");
 
         // Funciones de manejo
         const decreaseHandler = () => {
-          if (item.quantity > 1) {
-            item.quantity--;
-            showToast(`Cantidad actualizada: ${item.name}`);
-          } else {
-            delete cart[item.id];
-            showToast(`${item.name} eliminado del carrito`);
-          }
-          saveCart(cart);
-          renderCart(cart);
+            if (item.quantity > 1) {
+                item.quantity--;
+                showToast(`Cantidad actualizada: ${item.name}`);
+            } else {
+                delete cart[item.id];
+                showToast(`${item.name} eliminado del carrito`);
+            }
+            saveCart(cart);
+            renderCart(cart);
         };
 
         const increaseHandler = () => {
-          item.quantity++;
-          showToast(`Cantidad actualizada: ${item.name}`);
-          saveCart(cart);
-          renderCart(cart);
+            item.quantity++;
+            showToast(`Cantidad actualizada: ${item.name}`);
+            saveCart(cart);
+            renderCart(cart);
         };
 
         const removeHandler = () => {
-          showToast(`${item.name} eliminado del carrito`);
-          delete cart[item.id];
-          saveCart(cart);
-          renderCart(cart);
+            showToast(`${item.name} eliminado del carrito`);
+            delete cart[item.id];
+            saveCart(cart);
+            renderCart(cart);
         };
 
         // Asignar eventos
@@ -185,120 +193,263 @@ const cartContainer = document.getElementById("cart-container");
 
         tbody.appendChild(tr);
         cardsContainer.appendChild(card);
-      });
+    });
 
-      // Calcular totales
-      const totalWithoutIva = Object.values(cart).reduce(
+    // Calcular totales
+    const totalWithoutIva = Object.values(cart).reduce(
         (acc, item) => acc + item.price * item.quantity,
         0
-      );
-      const iva = totalWithoutIva * 0.19;
-      const subtotal = totalWithoutIva;
+    );
+    const iva = totalWithoutIva * 0.19;
+    const subtotal = totalWithoutIva;
 
-      // Sección de totales responsive
-      const totalsDiv = document.createElement("div");
-      totalsDiv.className = "mt-6 md:mt-8";
+    // Sección de totales responsive
+    const totalsDiv = document.createElement("div");
+    totalsDiv.className = "mt-6 md:mt-8";
 
-      totalsDiv.innerHTML = `
-          <div class="bg-gray-50 rounded-custom p-4 md:p-6">
+    totalsDiv.innerHTML = `
+        <div class="bg-gray-50 rounded-custom p-4 md:p-6">
             <div class="max-w-md ml-auto space-y-3">
-              <div class="flex justify-between text-base md:text-lg font-medium">
-                <span>IVA (19%)</span>
-                <span class="text-primary font-semibold">${formatoPrecios.formatoPrecio(iva)}</span>
-              </div>
-              <div class="flex justify-between text-base md:text-lg font-medium">
-                <span>Subtotal</span>
-                <span class="text-primary font-semibold">${formatoPrecios.formatoPrecio(subtotal)}</span>
-              </div>
-              <div class="flex justify-between text-lg md:text-xl font-bold border-t border-gray-300 pt-3">
-                <span>Total</span>
-                <span class="text-primary">${formatoPrecios.formatoPrecio(subtotal + iva)}</span>
-              </div>
-              
-              <div class="flex flex-col sm:flex-row gap-3 sm:gap-4 mt-6 pt-4 border-t border-gray-200">
-                <button id="empty-cart-btn" class="flex-1 bg-red-500 text-white py-3 px-4 rounded-custom font-medium hover:bg-red-600 transition-colors text-base md:text-lg order-2 sm:order-1">
-                  Vaciar Carrito
-                </button>
-                <button id="checkout-btn" class="flex-1 bg-primary text-white py-3 px-4 rounded-custom font-medium hover:bg-opacity-90 transition-colors text-base md:text-lg order-1 sm:order-2">
-                  Proceder al Pago
-                </button>
-              </div>
+                <div class="flex justify-between text-base md:text-lg font-medium">
+                    <span>IVA (19%)</span>
+                    <span class="text-primary font-semibold">${formatoPrecios.formatoPrecio(iva)}</span>
+                </div>
+                <div class="flex justify-between text-base md:text-lg font-medium">
+                    <span>Subtotal</span>
+                    <span class="text-primary font-semibold">${formatoPrecios.formatoPrecio(subtotal)}</span>
+                </div>
+                <div class="flex justify-between text-lg md:text-xl font-bold border-t border-gray-300 pt-3">
+                    <span>Total</span>
+                    <span class="text-primary">${formatoPrecios.formatoPrecio(subtotal + iva)}</span>
+                </div>
+                
+                <div class="flex flex-col sm:flex-row gap-3 sm:gap-4 mt-6 pt-4 border-t border-gray-200">
+                    <button id="empty-cart-btn" class="flex-1 bg-red-500 text-white py-3 px-4 rounded-custom font-medium hover:bg-red-600 transition-colors text-base md:text-lg order-2 sm:order-1">
+                        Vaciar Carrito
+                    </button>
+                    <button id="checkout-btn" class="flex-1 bg-primary text-white py-3 px-4 rounded-custom font-medium hover:bg-opacity-90 transition-colors text-base md:text-lg order-1 sm:order-2">
+                        Proceder al Pago
+                    </button>
+                </div>
             </div>
-          </div>
-        `;
+        </div>
+    `;
 
-      // Agregar elementos al contenedor
-      cartContainer.appendChild(table);
-      cartContainer.appendChild(cardsContainer);
-      cartContainer.appendChild(totalsDiv);
+    // Agregar elementos al contenedor
+    cartContainer.appendChild(table);
+    cartContainer.appendChild(cardsContainer);
+    cartContainer.appendChild(totalsDiv);
 
-      // Configurar modal y eventos
-      setupModalEvents(cart);
-      setupCheckoutEvent();
+    // Configurar modal y eventos
+    setupModalEvents(cart);
+    setupCheckoutEvent();
+}
+
+function setupModalEvents(cart) {
+    const confirmModal = document.getElementById("confirm-modal");
+    const modalContent = document.getElementById("modal-content");
+    const confirmYesBtn = document.getElementById("confirm-yes");
+    const confirmNoBtn = document.getElementById("confirm-no");
+    const emptyCartBtn = document.getElementById("empty-cart-btn");
+
+    if (emptyCartBtn) {
+        emptyCartBtn.addEventListener("click", () => {
+            confirmModal.classList.remove("opacity-0", "pointer-events-none");
+            modalContent.classList.add("modal-enter-active");
+        });
     }
 
-    function setupModalEvents(cart) {
-      const confirmModal = document.getElementById("confirm-modal");
-      const modalContent = document.getElementById("modal-content");
-      const confirmYesBtn = document.getElementById("confirm-yes");
-      const confirmNoBtn = document.getElementById("confirm-no");
-      const emptyCartBtn = document.getElementById("empty-cart-btn");
-
-      if (emptyCartBtn) {
-        emptyCartBtn.addEventListener("click", () => {
-          confirmModal.classList.remove("opacity-0", "pointer-events-none");
-          modalContent.classList.add("modal-enter-active");
-        });
-      }
-
-      confirmNoBtn.addEventListener("click", () => {
+    confirmNoBtn.addEventListener("click", () => {
         modalContent.classList.remove("modal-enter-active");
         confirmModal.classList.add("opacity-0", "pointer-events-none");
-      });
+    });
 
-      confirmYesBtn.addEventListener("click", () => {
+    confirmYesBtn.addEventListener("click", () => {
         for (const key in cart) {
-          delete cart[key];
+            delete cart[key];
         }
         saveCart(cart);
         showToast("Carrito vaciado correctamente");
         renderCart(cart);
         modalContent.classList.remove("modal-enter-active");
         confirmModal.classList.add("opacity-0", "pointer-events-none");
-      });
-
-      // Cerrar modal al hacer clic fuera
-      confirmModal.addEventListener("click", (e) => {
-        if (e.target === confirmModal) {
-          modalContent.classList.remove("modal-enter-active");
-          confirmModal.classList.add("opacity-0", "pointer-events-none");
-        }
-      });
-    }
-
-    function setupCheckoutEvent() {
-      const checkoutBtn = document.getElementById("checkout-btn");
-      if (checkoutBtn) {
-        checkoutBtn.addEventListener("click", () => {
-          showToast("Redirigiendo al proceso de pago...");
-          // Simular redirección
-          setTimeout(() => {
-            alert("Función de pago no implementada en esta demo");
-          }, 1000);
-        });
-      }
-    }
-
-    // Cerrar modal con tecla Escape
-    document.addEventListener("keydown", (e) => {
-      if (e.key === "Escape") {
-        const confirmModal = document.getElementById("confirm-modal");
-        const modalContent = document.getElementById("modal-content");
-        modalContent.classList.remove("modal-enter-active");
-        confirmModal.classList.add("opacity-0", "pointer-events-none");
-      }
     });
 
-    // Inicializar
+    // Cerrar modal al hacer clic fuera
+    confirmModal.addEventListener("click", (e) => {
+        if (e.target === confirmModal) {
+            modalContent.classList.remove("modal-enter-active");
+            confirmModal.classList.add("opacity-0", "pointer-events-none");
+        }
+    });
+    
+    // Cerrar con Escape
+    document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape") {
+            const confirmModal = document.getElementById("confirm-modal");
+            const modalContent = document.getElementById("modal-content");
+            if (confirmModal && !confirmModal.classList.contains("pointer-events-none")) {
+                modalContent.classList.remove("modal-enter-active");
+                confirmModal.classList.add("opacity-0", "pointer-events-none");
+            }
+            
+            // También cerrar modal de pago si está abierto
+            const paymentModal = document.getElementById("payment-success-modal");
+            if (paymentModal && !paymentModal.classList.contains("pointer-events-none")) {
+                closePaymentModal();
+            }
+        }
+    });
+}
+
+function setupCheckoutEvent() {
+    const checkoutBtn = document.getElementById("checkout-btn");
+    if (checkoutBtn) {
+        checkoutBtn.addEventListener("click", () => {
+            showToast("Procesando pago...");
+            
+            // Simular proceso de pago
+            setTimeout(() => {
+                showPaymentSuccessModal();
+            }, 1500);
+        });
+    }
+}
+
+// Función para mostrar el modal de pago exitoso
+function showPaymentSuccessModal() {
+    // Crear el modal si no existe
+    let paymentModal = document.getElementById("payment-success-modal");
+    
+    if (!paymentModal) {
+        paymentModal = document.createElement("div");
+        paymentModal.id = "payment-success-modal";
+        paymentModal.className = "fixed inset-0 z-50 flex items-center justify-center opacity-0 pointer-events-none transition-all duration-300";
+        paymentModal.innerHTML = `
+            <div class="absolute inset-0 bg-black bg-opacity-50"></div>
+            <div class="relative bg-white rounded-custom p-8 mx-4 max-w-md w-full transform transition-all duration-300 scale-95 opacity-0">
+                <div class="text-center">
+                    <!-- Ícono de éxito -->
+                    <div class="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <svg class="w-12 h-12 text-accent" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                        </svg>
+                    </div>
+                    
+                    <!-- Título -->
+                    <h3 class="text-2xl font-fredoka text-primary mb-4">¡Pago Exitoso!</h3>
+                    
+                    <!-- Mensaje -->
+                    <p class="text-gray-600 mb-6">
+                        Tu pedido ha sido procesado correctamente. Recibirás un correo de confirmación shortly.
+                    </p>
+                    
+                    <!-- Detalles del pago -->
+                    <div class="bg-gray-50 rounded-custom p-4 mb-6 text-left">
+                        <div class="flex justify-between items-center mb-2">
+                            <span class="text-gray-600">N° de Transacción:</span>
+                            <span class="font-semibold text-primary">#${Math.random().toString(36).substr(2, 9).toUpperCase()}</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-gray-600">Fecha:</span>
+                            <span class="font-semibold">${new Date().toLocaleDateString('es-CO')}</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Botones -->
+                    <div class="flex flex-col sm:flex-row gap-3">
+                        <button id="continue-shopping-btn" class="flex-1 bg-primary text-white py-3 px-6 rounded-custom font-medium hover:bg-opacity-90 transition-colors">
+                            Seguir Comprando
+                        </button>
+                        <button id="view-orders-btn" class="flex-1 bg-accent text-white py-3 px-6 rounded-custom font-medium hover:bg-opacity-90 transition-colors">
+                            Ver Pedidos
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Botón de cerrar -->
+                <button id="close-payment-modal" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600 transition-colors">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                    </svg>
+                </button>
+            </div>
+        `;
+        document.body.appendChild(paymentModal);
+        
+        // Event listeners para el modal
+        setupPaymentModalEvents();
+    }
+    
+    // Mostrar el modal con animación
+    setTimeout(() => {
+        paymentModal.classList.remove("opacity-0", "pointer-events-none");
+        const modalContent = paymentModal.querySelector('.relative');
+        modalContent.classList.remove("scale-95", "opacity-0");
+        modalContent.classList.add("scale-100", "opacity-100");
+    }, 50);
+}
+
+// Configurar eventos del modal de pago
+function setupPaymentModalEvents() {
+    const paymentModal = document.getElementById("payment-success-modal");
+    const closeBtn = paymentModal.querySelector("#close-payment-modal");
+    const continueBtn = paymentModal.querySelector("#continue-shopping-btn");
+    const viewOrdersBtn = paymentModal.querySelector("#view-orders-btn");
+    
+    const closePaymentModal = () => {
+        paymentModal.classList.add("opacity-0", "pointer-events-none");
+        const modalContent = paymentModal.querySelector('.relative');
+        modalContent.classList.add("scale-95", "opacity-0");
+        modalContent.classList.remove("scale-100", "opacity-100");
+    };
+    
+    closeBtn.addEventListener("click", closePaymentModal);
+    
+    continueBtn.addEventListener("click", () => {
+        closePaymentModal();
+        // Vaciar carrito después de pago exitoso
+        const cart = {};
+        saveCart(cart);
+        setTimeout(() => {
+            window.location.href = "./tienda.html";
+        }, 300);
+    });
+    
+    viewOrdersBtn.addEventListener("click", () => {
+        closePaymentModal();
+        // Vaciar carrito después de pago exitoso
+        const cart = {};
+        saveCart(cart);
+        setTimeout(() => {
+            // En una implementación real, aquí iría la redirección a la página de pedidos
+            showToast("Página de pedidos no implementada en esta demo");
+        }, 300);
+    });
+    
+    // Cerrar modal al hacer clic fuera
+    paymentModal.addEventListener("click", (e) => {
+        if (e.target === paymentModal) {
+            closePaymentModal();
+        }
+    });
+}
+
+// Cerrar modal con tecla Escape (función auxiliar)
+function closePaymentModal() {
+    const paymentModal = document.getElementById("payment-success-modal");
+    if (paymentModal) {
+        paymentModal.classList.add("opacity-0", "pointer-events-none");
+        const modalContent = paymentModal.querySelector('.relative');
+        if (modalContent) {
+            modalContent.classList.add("scale-95", "opacity-0");
+            modalContent.classList.remove("scale-100", "opacity-100");
+        }
+    }
+}
+
+// Inicializar
+document.addEventListener("DOMContentLoaded", () => {
     const cart = loadCart();
     renderCart(cart);
+});

@@ -1,69 +1,110 @@
 <!DOCTYPE html>
 <html lang="es">
-
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Pawslove Foundation | Carrito</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap" rel="stylesheet" />
-  <script type="module" src="../tailwind.config.js"></script>
-  <style>
-    body {
-      background-color: #f5f7fa;
-      background-image: radial-gradient(#d0d7de 1px, transparent 1px),
-        radial-gradient(#d0d7de 1px, transparent 1px);
-      background-size: 40px 40px;
-      background-position: 0 0, 20px 20px;
-      font-family: "Fredoka One", cursive, sans-serif;
-    }
-
-    .product-card {
-      transition: all 0.3s ease;
-    }
-
-    .product-card:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
-    }
-
-    /* Estilos para tabla responsive */
-    @media (max-width: 768px) {
-      .table-responsive {
-        display: none;
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Pawslove Foundation | Carrito</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap"
+      rel="stylesheet"
+    />
+    <script type="module" src="../tailwind.config.js"></script>
+    <style>
+      body {
+        background-color: #f5f7fa;
+        background-image: radial-gradient(#d0d7de 1px, transparent 1px),
+          radial-gradient(#d0d7de 1px, transparent 1px);
+        background-size: 40px 40px;
+        background-position: 0 0, 20px 20px;
+        font-family: "Fredoka One", cursive, sans-serif;
       }
 
-      .card-responsive {
-        display: block;
-      }
-    }
-
-    @media (min-width: 769px) {
-      .table-responsive {
-        display: table;
+      .product-card {
+        transition: all 0.3s ease;
       }
 
-      .card-responsive {
-        display: none;
+      .product-card:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
       }
-    }
 
-    /* Animaciones para modales */
-    .modal-enter {
-      opacity: 0;
-      transform: scale(0.9);
-      transition: all 0.3s ease;
-    }
+      /* Animaciones para los modales */
+      .modal-enter-active {
+        animation: modalEnter 0.3s ease-out;
+      }
 
-    .modal-enter-active {
-      opacity: 1;
-      transform: scale(1);
-    }
-  </style>
-</head>
+      @keyframes modalEnter {
+        from {
+          opacity: 0;
+          transform: scale(0.95) translateY(-10px);
+        }
+        to {
+          opacity: 1;
+          transform: scale(1) translateY(0);
+        }
+      }
+
+      .scale-95 {
+        transform: scale(0.95);
+      }
+
+      .scale-100 {
+        transform: scale(1);
+      }
+
+      .opacity-0 {
+        opacity: 0;
+      }
+
+      .opacity-100 {
+        opacity: 1;
+      }
+
+      .pointer-events-none {
+        pointer-events: none;
+      }
+
+      .transition-all {
+        transition: all 0.3s ease;
+      }
+
+      /* Estilos para tabla responsive */
+      @media (max-width: 768px) {
+        .table-responsive {
+          display: none;
+        }
+
+        .card-responsive {
+          display: block;
+        }
+      }
+
+      @media (min-width: 769px) {
+        .table-responsive {
+          display: table;
+        }
+
+        .card-responsive {
+          display: none;
+        }
+      }
+
+      /* Animaciones para modales */
+      .modal-enter {
+        opacity: 0;
+        transform: scale(0.9);
+        transition: all 0.3s ease;
+      }
+
+      .modal-enter-active {
+        opacity: 1;
+        transform: scale(1);
+      }
+    </style>
+  </head>
 
   <body class="min-h-screen flex flex-col">
-    
     <header
       class="bg-white shadow-md py-3 md:py-4 px-4 md:px-6 flex flex-col sm:flex-row items-start sm:items-center justify-between sticky top-0 z-50 gap-3 sm:gap-0"
     >
