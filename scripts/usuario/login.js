@@ -1,13 +1,12 @@
-import { alertasLogin } from "../sweetalert2.min.js";
-import { metodosUsuarios } from "../manejoLocalStorage.js";
+import { alertasLogin, alertasRegistro } from "../sweetalert2.min.js";
+import { validadorEmail } from "../utilidades.js";
 
 document.addEventListener('DOMContentLoaded', () => {
-    metodosUsuarios.inicializarAdmin();
 
     const loginForm = document.getElementById('loginForm');
     if (!loginForm) return; // Salir si el formulario no existe en la página
 
-    loginForm.addEventListener('submit', (e) => {
+    loginForm.addEventListener('submit', async (e) => {
         e.preventDefault();
 
         const emailInput = document.getElementById('emailLogin');
@@ -22,58 +21,54 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
-        // 2. Obtener la lista de usuarios de localStorage
-        const usuarios = metodosUsuarios.obtenerUsuarios();
+        // 2. Validación de formato de email
+        if (!validadorEmail.emailValido(email)) {
+            alertasRegistro.correoInvalido(email);
+            return;
+        }
 
-        // 3. Buscar si el usuario existe y la contraseña coincide
-        const usuarioEncontrado = usuarios.find(user => user.correo === email && user.contraseña === password);
+        try {
+            // 3. Enviar credenciales al backend
+            const response = await fetch('http://localhost:8080/auth/loginConDTO', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ email, password }),
+            });
 
-        // 4. Validar el resultado del inicio de sesión
-        if (usuarioEncontrado) {
-            // ¡Inicio de sesión exitoso!
-            alertasLogin.loginCorrecto(usuarioEncontrado);
+            // 4. Validar el resultado del inicio de sesión
+            if (response.ok) {
+                const data = await response.json(); // Esperamos { token, usuario: { nombre, tipo, ... } }
 
-        } else {
-            // Error en el inicio de sesión
-            alertasLogin.loginError();
-            emailInput.value = '';
-            passwordInput.value = '';
+                // Guardar el token en sessionStorage
+                sessionStorage.setItem('jwt', data.token);
+                // Opcional: guardar info del usuario para uso en el frontend
+                sessionStorage.setItem('usuario', JSON.stringify(data.usuario));
+
+                // ¡Inicio de sesión exitoso!
+                alertasLogin.loginCorrecto(data.usuario);
+
+            } else {
+                // Limpiar campos en caso de error
+                emailInput.value = '';
+                passwordInput.value = '';
+
+                // Manejar errores específicos
+                if (response.status === 404) {
+                    alertasLogin.alertaEmailNoRegistrado();
+                } else {
+                    // Para 401 (Unauthorized) u otros errores
+                    alertasLogin.loginError();
+                }
+            }
+        } catch (error) {
+            console.error('Error de conexión:', error);
+            Swal.fire({
+                icon: 'error',
+                title: 'Error de Conexión',
+                text: 'No se pudo conectar con el servidor. Por favor, inténtalo más tarde.',
+            });
         }
     });
-
-    //! Metodo para acceder desde la API desarrollada
-    // Enviar credenciales al backend
-    async function login(username, password) {
-        const response = await fetch('http://localhost:8080/auth/loginConDTO', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ email, password }),
-        });
-
-        if (response.ok) {
-            const { token } = await response.json();
-            // Almacenar el token (por ejemplo, en localStorage)
-            localStorage.setItem('jwt', token);
-        } else {
-            console.error('Error al iniciar sesión');
-        }
-    }
-
-    // Usar el token en solicitudes protegidas
-    async function getProtectedData() {
-        const token = localStorage.getItem('jwt');
-        const response = await fetch('https://api.example.com/protected', {
-            method: 'GET',
-            headers: { Authorization: `Bearer ${token}` },
-        });
-
-        if (response.ok) {
-            const data = await response.json();
-            console.log(data);
-        } else {
-            console.error('Acceso denegado');
-        }
-    }
-
-
 });

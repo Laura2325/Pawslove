@@ -125,3 +125,14 @@ export const usuariosAdmin = {
     getPetSpace,
     getTimeDedication
 };
+
+function emailValido(email) {
+    if (!email) return false;
+    // Regex mejorada: asegura que el TLD (lo que va después del último punto) tenga al menos 2 letras.
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[a-zA-Z]{2,}$/;
+    return emailRegex.test(email);
+}
+
+export const validadorEmail = {
+    emailValido
+};

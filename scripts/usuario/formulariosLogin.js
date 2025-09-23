@@ -40,7 +40,8 @@ closeRegister.addEventListener('click', (event) => {
 
 linkToResetPassword.addEventListener('click', (event) => {
     event.preventDefault();
-    showView(contenidoResetPassword);
+    showView(contenidoResetPassword);    
+    emailInput.value = '';    
 });
 
 closeResetPassword.addEventListener('click', (event) => {
