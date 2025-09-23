@@ -1,4 +1,4 @@
-import { metodosMascotas } from "./manejoLocalStorage.js";
+import { metodosMascotas } from "../manejoLocalStorage.js";
 // Selecciones del DOM
 const openModalBtn = document.getElementById('openModalBtn');
 const closeModalBtn = document.getElementById('closeModalBtn');

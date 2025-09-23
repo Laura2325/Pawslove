@@ -1,6 +1,6 @@
-import { alertRestablecerContrasena } from "./sweetalert2.min.js";
-import { alertasRegistro } from "./sweetalert2.min.js";
-import { metodosUsuarios } from "./manejoLocalStorage.js";
+import { alertRestablecerContrasena } from "../sweetalert2.min.js";
+import { alertasRegistro } from "../sweetalert2.min.js";
+import { metodosUsuarios } from "../manejoLocalStorage.js";
 // Obtiene referencias a los elementos del DOM
 const resetForm = document.getElementById('reset-form');
 
@@ -25,10 +25,14 @@ resetForm.addEventListener('submit', (event) => {
     // Por seguridad, siempre mostramos el mismo mensaje, pero internamente
     // podríamos condicionar el envío de un correo real a si 'usuarioExiste' es true.
     console.log(`Solicitud de restablecimiento para: ${email}. ¿Usuario existe? ${usuarioExiste}`);
-
+    
+    // Limpia el campo de correo electrónico
+    emailInput.value = '';
+    
     // Muestra un mensaje de éxito con SweetAlert2
     alertRestablecerContrasena.alertRestablecerContra();
 
-    // Limpia el campo de correo electrónico
-    emailInput.value = '';
+    // Vuelve a la vista de login
+    closeResetPassword.click();
+
 });

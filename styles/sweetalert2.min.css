@@ -1,0 +1,69 @@
+/* Estilos personalizados para SweetAlert2 con el tema de Pawslove */
+
+/* Contenedor principal del modal */
+.swal2-popup {
+    border-radius: 24px !important; /* Usando tu 'custom' border-radius */
+    font-family: 'Montserrat', sans-serif !important;
+    background-color: #f5f7fa !important;
+    border: 2px solid #6c40d1; /* Color primario */
+}
+
+/* Título de la alerta */
+.swal2-title {
+    font-family: 'Fredoka One', cursive !important;
+    color: #34252f !important; /* Color 'dark' */
+}
+
+/* Contenido/texto de la alerta */
+.swal2-html-container {
+    color: #555 !important;
+}
+
+/* Botón de Confirmar */
+.swal2-confirm {
+    background-color: #6c40d1 !important; /* Color 'primary' */
+    border-radius: 12px !important;
+    font-weight: bold !important;
+    transition: transform 0.2s ease;
+}
+
+.swal2-confirm:hover {
+    transform: scale(1.05);
+}
+
+/* Botón de Cancelar */
+.swal2-cancel {
+    background-color: #fc6dab !important; /* Color 'secondary' */
+    border-radius: 12px !important;
+    font-weight: bold !important;
+    transition: transform 0.2s ease;
+}
+
+.swal2-cancel:hover {
+    transform: scale(1.05);
+}
+
+/* Iconos */
+.swal2-icon.swal2-success .swal2-success-ring {
+    border-color: #17b890 !important; /* Color 'accent' */
+}
+
+.swal2-icon.swal2-error {
+    border-color: #fc6dab !important; /* Color 'secondary' */
+}
+
+.swal2-icon.swal2-warning {
+    border-color: #f8bb86 !important;
+    color: #f8bb86 !important;
+}
+
+/* Clases personalizadas para usar con la opción 'customClass' */
+.pawslove-popup {
+    background: linear-gradient(145deg, #fdf6f9, #f3efff);
+    border: none;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+}
+
+.pawslove-title {
+    color: #fc6dab; /* Color 'secondary' */
+}

@@ -1,13 +1,4 @@
-// Función de formato de precios (reemplaza la importación)
-const formatoPrecios = {
-    formatoPrecio: (precio) => {
-        return new Intl.NumberFormat('es-CO', {
-            style: 'currency',
-            currency: 'COP'
-        }).format(precio);
-    }
-};
-
+import {formatoPrecios} from "../utilidades.js";
 const cartContainer = document.getElementById("cart-container");
 
 // Función para mostrar toast
@@ -92,11 +83,17 @@ function renderCart(cart) {
 
         tr.innerHTML = `
             <td class="py-4 px-4">
+<<<<<<< HEAD:scripts/carrito.js
                 <div class="flex items-center space-x-4">
                     <div class="w-16 h-16 bg-gray-200 rounded flex items-center justify-center flex-shrink-0 overflow-hidden">
                         <img src="${item.image}" alt="${item.name}" class="object-cover w-full h-full">
                     </div>
                     <span class="font-semibold text-dark">${item.name}</span>
+=======
+              <div class="flex items-center space-x-4">
+                <div class="w-16 h-16 bg-gray-200 rounded flex items-center justify-center flex-shrink-0 overflow-hidden">
+                  <img src="${item.image || '../assets/img/marca/Isotipo_2.svg'}" alt="${item.name}" class="h-full w-full object-cover">
+>>>>>>> 2abca662c30f1c2864b5ec0e83bf6642c20ca7d5:scripts/usuario/carrito.js
                 </div>
             </td>
             <td class="py-4 px-4 font-bold text-primary">${formatoPrecios.formatoPrecio(item.price)}</td>
@@ -119,8 +116,25 @@ function renderCart(cart) {
 
         card.innerHTML = `
             <div class="flex items-start space-x-4">
+<<<<<<< HEAD:scripts/carrito.js
                 <div class="w-20 h-20 bg-gray-200 rounded-lg flex items-center justify-center flex-shrink-0 overflow-hidden">
                     <img src="${item.image}" alt="${item.name}" class="object-cover w-full h-full">
+=======
+              <div class="w-20 h-20 bg-gray-200 rounded-lg flex items-center justify-center flex-shrink-0 overflow-hidden">
+                <img src="${item.image || '../assets/img/marca/Isotipo_2.svg'}" alt="${item.name}" class="h-full w-full object-cover">
+              </div>
+              <div class="flex-1 min-w-0">
+                <h3 class="font-semibold text-dark mb-1 text-lg">${item.name}</h3>
+                <p class="text-primary font-bold mb-3 text-xl">${formatoPrecios.formatoPrecio(item.price)}</p>
+                
+                <div class="flex items-center justify-between">
+                  <div class="flex items-center space-x-3 bg-white rounded-full px-3 py-1 border">
+                    <button class="decrease-qty text-gray-600 hover:text-primary font-bold text-xl w-8 h-8 flex items-center justify-center">−</button>
+                    <span class="quantity font-medium px-2 min-w-[2rem] text-center text-lg">${item.quantity}</span>
+                    <button class="increase-qty text-gray-600 hover:text-primary font-bold text-xl w-8 h-8 flex items-center justify-center">+</button>
+                  </div>
+                  <button class="remove-item text-red-500 hover:text-red-700 bg-red-50 hover:bg-red-100 rounded-full w-10 h-10 flex items-center justify-center font-bold text-xl transition-colors">×</button>
+>>>>>>> 2abca662c30f1c2864b5ec0e83bf6642c20ca7d5:scripts/usuario/carrito.js
                 </div>
                 <div class="flex-1 min-w-0">
                     <h3 class="font-semibold text-dark mb-1 text-lg">${item.name}</h3>
