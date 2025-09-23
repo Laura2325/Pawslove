@@ -1,5 +1,5 @@
-import { metodosMascotas } from "./manejoLocalStorage.js";
-import { alertasAdopcion } from "./sweetalert2.min.js";
+import { metodosMascotas } from "../manejoLocalStorage.js";
+import { alertasAdopcion } from "../sweetalert2.min.js";
 
 function renderPetCards() {
   const container = document.getElementById('petsList');

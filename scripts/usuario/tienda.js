@@ -78,8 +78,8 @@ function updateCartUI() {
     const div = document.createElement('div');
     div.className = 'flex items-center mb-4 border-b border-gray-200 pb-4';
     div.innerHTML = `
-            <div class="w-16 h-16 bg-gray-200 rounded mr-4 flex-shrink-0 flex items-center justify-center">
-              <img src="${item.image}" alt="${item.name}" class="object-cover h-10 w-10 rounded">
+            <div class="w-16 h-16 bg-gray-200 rounded mr-4 flex-shrink-0 flex items-center justify-center overflow-hidden">
+              <img src="${item.image || '../assets/img/marca/Isotipo_2.svg'}" alt="${item.name}" class="object-cover h-full w-full">
             </div>
             <div class="flex-1 min-w-0">
               <h4 class="font-semibold text-dark truncate">${item.name}</h4>
@@ -179,28 +179,29 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Botones agregar al carrito
   document.querySelectorAll('.add-to-cart').forEach(button => {
-    button.onclick = (e) => {
+    button.addEventListener('click', (e) => {
       e.preventDefault();
-      console.log('Agregando producto...');
 
       const id = button.dataset.id;
       const name = button.dataset.name;
       const price = parseInt(button.dataset.price);
-      const image = button.dataset.image;
 
-      console.log('Producto:', { id, name, price, image });
+      // Se obtiene la imagen directamente desde la etiqueta <img> de la tarjeta del producto.
+      // Esto es más robusto y evita inconsistencias con el atributo data-image.
+      const productCard = button.closest('.product-card');
+      const image = productCard ? productCard.querySelector('img').src : '';
 
       if (cart[id]) {
         cart[id].quantity++;
       } else {
-        cart[id] = { id, name, price, image, quantity: 1 };
+        cart[id] = { id: id, name: name, price: price, image: image, quantity: 1 };
       }
 
       saveCart();
       updateCartUI();
       showNotification(`"${name}" agregado al carrito`);
       openCart();
-    };
+    });
   });
 
   // Cerrar menú móvil en resize
@@ -220,8 +221,3 @@ document.addEventListener('DOMContentLoaded', () => {
   console.log('Tienda iniciada correctamente');
   console.log('Botones encontrados:', document.querySelectorAll('.add-to-cart').length);
 });
-
-const ingresoUsuario = document.getElementById('imagenUsuario');
-ingresoUsuario.addEventListener('click', () => {
-  window.location.href = '../login.html';
-});  
