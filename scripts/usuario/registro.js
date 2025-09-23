@@ -55,7 +55,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         try {
             // 1. Verificar si el correo ya existe en el backend
-            const checkResponse = await fetch('http://localhost:8080/usuarios/buscarPorEmail?email=' + correo.value.trim(), {
+            const checkResponse = await fetch('https://8mq33rknsp.us-east-1.awsapprunner.com/usuarios/buscarPorEmail?email=' + correo.value.trim(), {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
@@ -79,7 +79,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 telefono: "123456789"
             };
 
-            const registerResponse = await fetch('http://localhost:8080/auth/register', {
+            const registerResponse = await fetch('https://8mq33rknsp.us-east-1.awsapprunner.com/auth/register', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

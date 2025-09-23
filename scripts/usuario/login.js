@@ -29,7 +29,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         try {
             // 3. Enviar credenciales al backend
-            const response = await fetch('http://localhost:8080/auth/loginConDTO', {
+            const response = await fetch('https://8mq33rknsp.us-east-1.awsapprunner.com/auth/loginConDTO', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -56,7 +56,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 if (response.status === 404 || response.status === 401) {
                     try {
-                        const adminResponse = await fetch('http://localhost:8080/administradores');
+                        const adminResponse = await fetch('https://8mq33rknsp.us-east-1.awsapprunner.com/administradores');
                         if (adminResponse.ok) {
                             const administradores = await adminResponse.json();
                             const adminEncontrado = administradores.find(
